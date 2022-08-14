@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    list-style: none;
+    scroll-behavior: smooth;
+    font-family: var(--font-default), sans-serif;
+    font-weight: 500;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    object-fit: contain;
+}
+
+body {
+    width: 100%;
+    font-size: var( --fonSize-regular);
+    min-height: 100vh;
+    background-color: var( --background-color-dark);
+    color: var( --text-color-primary);
+    overflow-x: hidden;
+    cursor: default;
+}
