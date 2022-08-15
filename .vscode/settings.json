@@ -1,0 +1,9 @@
+{"editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+},
+"[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
+}
