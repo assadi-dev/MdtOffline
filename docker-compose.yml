@@ -33,21 +33,19 @@ services:
     restart: always
     networks:
       - dev   
-  www:
-    build: docker
-    container_name: www_mdt_offline
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: mdt_offline
     ports:
       - "3000:80"
-    volumes: 
-      - ./docker/vhosts:/etc/apache2/sites-enabled
-      - ./:/var/www
-    restart: always
+
     environment: 
       DATABASE_URL: mysql://root:@db-mdt-offline:3306/mdt-offline
       APP_ENV: prod
       APP_SECRET: 8f76b5aa095e32129b33d3fdd33691b7
-    networks:
-      - dev
+   
 networks:
   dev:    
 volumes:
