@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const ButtonWithIcon = ({ icon, name, ...props }) => {
   return (
-    <ButtonStyled {...props} onClick={() => onClick()}>
+    <ButtonStyled {...props}>
       {icon}
       {name}
     </ButtonStyled>

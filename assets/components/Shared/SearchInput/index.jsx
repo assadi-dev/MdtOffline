@@ -1,6 +1,6 @@
 import React from "react";
 import { UserSearchIcon } from "../../SVG";
-import { InputWrapper } from "./SearchInput";
+import { InputWrapper } from "./SearchInput.styled";
 
 const SearchInput = ({ icon, ...props }) => {
   return (

@@ -20,13 +20,13 @@ export const InputWrapper = styled.div`
   & input {
     border: 1px solid #2b7de980;
     width: 100%;
-    padding: 10px 10px 10px 45px;
-    border-radius: 10px;
+    padding: 10px 25px;
+    border-radius: 5px;
     width: 100%;
     transition: all 0.35s;
     &:focus {
       border: 1px solid #2b7de9;
-      box-shadow: 0px 0px 10px 0px #2b7de950;
+      box-shadow: 0px 0px 13px 0px #2b7de950;
     }
     outline: #2b7de9;
     color: #fff;
