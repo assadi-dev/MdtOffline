@@ -1,10 +1,12 @@
 :root {
     /* Initialisation des couleurs */
     --background-color-dark: #131B26;
+    --lightBlue-secondary-opacity: #2C374850;
     --lightBlue-secondary: #2C3748;
     --danger-color: #BA5A3C;
     --turquoise-color: #4BDBCA;
     --color-primary-button: #2B7DE9;
+    --color-primary-button-opacity: #2B7DE950;
     --text-color-primary: #fff;
     --blue: #0d6efd;
     --indigo: #6610f2;

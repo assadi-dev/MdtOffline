@@ -8,7 +8,7 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--background-color);
+  background-color: var(--background-color-dark);
   padding: 18px 22px;
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
   box-shadow: 0px -1px 5px 0px rgba(255, 255, 255, 0.5);

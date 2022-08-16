@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const CivilWrapper = styled.div`
-  max-width: 1024px;
+  width: 100%;
 `;
 
 export const ActionRow = styled.div`
   margin: 14px auto;
-  width: 100%;
+
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 18px;
@@ -33,6 +33,61 @@ export const ActionRow = styled.div`
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 180px;
     grid-row-gap: 18px;
-    max-width: 100%;
+    max-width: 550px;
+  }
+`;
+
+export const RowCard = styled.div`
+  padding: 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 350px);
+  grid-gap: 22px;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const CardContainer = styled.div`
+  border-radius: 5px;
+  border: 1px solid var(--color-primary-button);
+  width: 340px;
+  height: 140px;
+  margin: auto;
+  padding: 0 11px;
+  background-color: var(--lightBlue-secondary-opacity);
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  grid-column-gap: 1rem;
+  padding-top: 12px;
+`;
+
+export const CivilPhoto = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  background-image: url(https://cdn.pixabay.com/photo/2022/07/24/23/46/artificial-intelligence-7342613_960_720.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--color-primary-button-opacity);
+`;
+
+export const CivilInfo = styled.div`
+  .text {
+    font-weight: 300;
+    margin: 3px 0;
+    :first-of-type {
+      text-transform: uppercase;
+    }
+    :nth-of-type(2) {
+      :first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    @media (min-width: 992px) {
+      font-size: 18px;
+      line-height: 26px;
+      letter-spacing: 3px;
+    }
   }
 `;

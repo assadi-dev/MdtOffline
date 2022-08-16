@@ -22,7 +22,7 @@ export const MainLayoutWrapper = styled.div`
 
   @media screen and (min-width: 992px) {
     display: grid;
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: 280px 1fr;
     grid-template-areas: "sidebar main";
     padding: calc(var(--navbar-height) + 20px) 22px 22px;
     .left-col {
@@ -31,5 +31,10 @@ export const MainLayoutWrapper = styled.div`
     .right-col {
       padding: 18px 12px;
     }
+  }
+
+  @media screen and (min-width: 1600px) {
+    display: grid;
+    grid-template-columns: 380px 1fr;
   }
 `;

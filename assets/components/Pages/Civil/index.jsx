@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ButtonWithIcon from "../../Shared/Buttons/ButtonWithIcon";
 import SearchInput from "../../Shared/SearchInput";
 import { AddUser } from "../../SVG";
-import { ActionRow, CivilWrapper } from "./Civil.styled";
+import { ActionRow, Card, CivilWrapper, RowCard } from "./Civil.styled";
+import CivilCard from "./CivilCard";
 
 const Civil = () => {
   const [search, setSearch] = useState();
@@ -32,6 +33,14 @@ const Civil = () => {
           name="Encoder un civil"
         />
       </ActionRow>
+
+      <RowCard>
+        <CivilCard />
+        <CivilCard />
+        <CivilCard />
+        <CivilCard />
+        <CivilCard />
+      </RowCard>
     </CivilWrapper>
   );
 };

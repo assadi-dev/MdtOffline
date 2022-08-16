@@ -21,13 +21,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@tanstack/react-table": "^8.5.11",
         "axios": "^0.27.2",
         "prop-types": "^15.8.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.0.2",
         "react-router-dom": "^6.3.0",
+        "react-table": "^7.8.0",
         "redux-thunk": "^2.4.1",
         "styled-components": "^5.3.5",
         "uniqid": "^5.4.0"
