@@ -76,7 +76,7 @@ const MDT = () => {
       </section>
 
       {pathname === "/mdt" && (
-        <section className="row">
+        <section className="row-individus">
           {individus.map((individus, k) => (
             <MDTCard key={k} title={individus.label} lists={individus.lists} />
           ))}

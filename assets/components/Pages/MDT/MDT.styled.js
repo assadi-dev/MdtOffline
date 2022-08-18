@@ -14,6 +14,20 @@ export const MDTwrapper = styled.div`
     width: 100%;
   }
 
+  & .row-individus {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    div:first-child {
+      justify-self: end;
+    }
+    width: 100%;
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 80px;
+    }
+  }
+
   & .mdt-row-nav {
     display: flex;
     justify-content: center;

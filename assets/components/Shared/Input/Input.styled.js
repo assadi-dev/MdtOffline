@@ -28,13 +28,17 @@ export const InputWrapper = styled.div`
       border: 1px solid #2b7de9;
       box-shadow: 0px 0px 13px 0px #2b7de950;
     }
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+      font-style: oblique 180deg;
+    }
     outline: #2b7de9;
     color: #fff;
     font-weight: 300;
     letter-spacing: 1px;
     font-size: 16px;
     @media screen and (min-width: 992px) {
-      min-width: 480px;
+      min-width: 180px;
     }
   }
 `;

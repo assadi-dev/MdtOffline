@@ -15,6 +15,6 @@ export const ButtonStyled = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 5px;
   color: #fff;
 `;

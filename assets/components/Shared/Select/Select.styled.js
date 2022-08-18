@@ -34,7 +34,10 @@ export const SelectInputWrapper = styled.div`
     letter-spacing: 1px;
     font-size: 16px;
     @media screen and (min-width: 992px) {
-      min-width: 480px;
+      min-width: 180px;
+    }
+    option {
+      color: #444;
     }
   }
 `;
