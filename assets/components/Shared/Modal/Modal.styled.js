@@ -5,7 +5,7 @@ export const ModalContainer = styled.div`
   min-height: 120px;
   padding: 12px;
   position: absolute;
-  right: 0;
+  left: 50%;
   top: 50%;
   transform: ${(props) =>
     props.isOpen

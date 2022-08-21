@@ -7,6 +7,7 @@ export const MainLayoutWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+
   .left-col {
     display: none;
     grid-area: sidebar;

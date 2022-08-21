@@ -10,6 +10,8 @@ export const FormContainer = styled.form`
   border-radius: 8px;
   box-shadow: 0px 0px 8px 5px #2b7de920;
   overflow-x: hidden;
+  scrollbar-width: thin;
+
   @media (min-width: 992px) {
     width: 690px;
   }
@@ -44,6 +46,7 @@ export const HeaderModal = styled.div`
 export const InputContainer = styled.div`
   margin: 18px 0;
   width: 100%;
+  max-height: 75vh;
 `;
 
 export const CloseModal = styled(CloseModalBtn)`
@@ -125,4 +128,5 @@ export const ModalFooter = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 18px;
 `;

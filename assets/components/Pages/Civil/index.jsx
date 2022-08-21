@@ -66,12 +66,12 @@ const Civil = () => {
             <CivilCard />
           </Link>
         </RowCard>
+        <EncodeCivil
+          isOpen={modal.encodeCivil}
+          onClose={toggleModal}
+          state={{ name: "NOM Prénom" }}
+        />
       </CivilWrapper>
-      <EncodeCivil
-        isOpen={modal.encodeCivil}
-        onClose={toggleModal}
-        state={{ name: "NOM Prénom" }}
-      />
     </>
   );
 };
