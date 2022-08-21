@@ -1,0 +1,87 @@
+import styled from "styled-components";
+
+export const View = styled.div`
+  min-height: 300px;
+  width: 350px;
+  background: var(--background-color-dark);
+  padding: 13px;
+  border: 0.5px solid #2b7de950;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 5px #2b7de920;
+  overflow-x: hidden;
+  @media (min-width: 992px) {
+    width: 690px;
+  }
+  & .form-control {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    option {
+      color: #444;
+    }
+  }
+
+  & .btn {
+    background-color: #2b7de9;
+    padding: 12px 22px;
+    max-width: fit-content;
+  }
+`;
+
+export const HeadTitleView = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.2rem;
+  padding: 5px 15px;
+  & .closeBtn {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    top: 0;
+
+    :hover {
+      :after,
+      :before {
+        background-color: #fff;
+      }
+    }
+  }
+  & .titleView {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: var(--font-title);
+  }
+`;
+
+export const FooterSectionButton = styled.div`
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.3rem;
+  align-items: flex-end;
+`;
+
+//Style views render
+
+export const BorderZone = styled.div`
+  border-radius: 10px;
+  padding: 12px;
+  height: 100px;
+  border: 1px solid var(--color-blue-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2.2rem;
+  & .label {
+    margin-bottom: 0.5rem;
+  }
+  & .mount {
+    font-family: var(--font-title);
+    font-weight: 200;
+    font-size: 18px;
+  }
+`;

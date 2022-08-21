@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CloseModalBtn from "../../../Shared/Modal/CloseModal";
 
 export const FormContainer = styled.form`
   min-height: 300px;
@@ -45,20 +46,13 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 
-export const CloseModal = styled.span`
-  width: fit-content;
-  height: fit-content;
-  position: absolute;
+export const CloseModal = styled(CloseModalBtn)`
+  width: 20px;
+  height: 20px;
   position: absolute;
   right: 0;
   top: 0;
-  display: grid;
-  justify-content: flex-end;
   cursor: pointer;
-  svg {
-    width: 25px;
-    height: 25px;
-  }
 `;
 
 export const RowModal = styled.div`

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ButtonWithIcon from "../../Shared/Buttons/ButtonWithIcon";
 import SearchInput from "../../Shared/SearchInput";
 import { AddUser } from "../../SVG";
@@ -26,33 +27,52 @@ const Civil = () => {
   };
 
   return (
-    <CivilWrapper>
-      <ActionRow>
-        {" "}
-        <form onSubmit={HandleSubmit}>
-          <SearchInput onChange={handleSearch} value={search} />
-        </form>{" "}
-        <ButtonWithIcon
-          className="add-civil"
-          icon={
-            <span>
-              <AddUser />
-            </span>
-          }
-          name="Encoder un civil"
-          onClick={toggleModal}
-        />
-      </ActionRow>
+    <>
+      <CivilWrapper>
+        <ActionRow>
+          {" "}
+          <form onSubmit={HandleSubmit}>
+            <SearchInput onChange={handleSearch} value={search} />
+          </form>{" "}
+          <ButtonWithIcon
+            className="add-civil"
+            icon={
+              <span>
+                <AddUser />
+              </span>
+            }
+            name="Encoder un civil"
+            onClick={toggleModal}
+          />
+        </ActionRow>
 
-      <RowCard>
-        <CivilCard />
-        <CivilCard />
-        <CivilCard />
-        <CivilCard />
-        <CivilCard />
-      </RowCard>
-      <EncodeCivil isOpen={modal.encodeCivil} onClose={toggleModal} />
-    </CivilWrapper>
+        <RowCard>
+          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
+            <CivilCard />
+          </Link>
+          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
+            <CivilCard />
+          </Link>
+          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
+            <CivilCard />
+          </Link>
+          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
+            <CivilCard />
+          </Link>
+          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
+            <CivilCard />
+          </Link>
+          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
+            <CivilCard />
+          </Link>
+        </RowCard>
+      </CivilWrapper>
+      <EncodeCivil
+        isOpen={modal.encodeCivil}
+        onClose={toggleModal}
+        state={{ name: "NOM Prénom" }}
+      />
+    </>
   );
 };
 

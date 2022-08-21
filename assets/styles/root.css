@@ -1,5 +1,12 @@
 :root {
     /* Initialisation des couleurs */
+    /*Correction*/
+    --color-blue-primary: #2B7DE9;
+    --color-blue-opacity-50: #2B7DE950;
+    --color-blue-dark: #131B26;
+    --color-lightBlue-secondary: #2C3748;
+    --color-lightBlue-secondary-opacity-50: #2C374850;
+    /*Correction*/
     --background-color-dark: #131B26;
     --lightBlue-secondary-opacity: #2C374850;
     --lightBlue-secondary: #2C3748;
@@ -20,6 +27,7 @@
     --cyan: #0dcaf0;
     /* Initialisation des Polices */
     --font-title: 'Azonix';
+    --font-special: 'Azonix';
     --font-default: 'Montserrat';
     /* Taille des textes par default */
     --fontSize-title: 2.5rem;

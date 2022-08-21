@@ -45,13 +45,14 @@ const EncodeCivil = ({ isOpen, onClose }) => {
         <FormContainer>
           <HeaderModal>
             <h2 className="formTitle">Encoder un civil</h2>
-            <CloseModal onClick={() => onClose()}> X</CloseModal>
+
+            <CloseModal onClick={() => onClose()} />
           </HeaderModal>
           <InputContainer>
             <RowModal>
               <div className="col">
                 <div className="form-control">
-                  <Input inputName={"nom"} placeholder="Nom" />
+                  <Input inputName={"nom"} placeholder="Nom" autoFocus={true} />
                 </div>
                 <div className="form-control">
                   <Input inputName={"prénom"} placeholder="Prénom" />
@@ -117,12 +118,12 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                 </div>
                 <div className="form-control">
                   <Select inputName={"ethnie"} placeholder="Ethnie">
-                    <option value="Caucasien">Caucasien</option>
-                    <option value="Afro-Americain">Afro-Americain</option>
-                    <option value="Hispanique">Hispanique</option>
-                    <option value="Asiatique">Asiatique</option>
-                    <option value="Métis">Métis</option>
-                    <option value="Amérindien">Amérindien</option>
+                    <option value="caucasien">Caucasien</option>
+                    <option value="afro-Americain">Afro-Americain</option>
+                    <option value="hispanique">Hispanique</option>
+                    <option value="asiatique">Asiatique</option>
+                    <option value="metis">Métis</option>
+                    <option value="amerindien">Amérindien</option>
                   </Select>
                 </div>
                 <div className="form-control">
@@ -142,7 +143,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                 <div className="form-control">
                   {" "}
                   <Input
-                    inputName={"nom"}
+                    inputName={"numeroIdentification"}
                     placeholder="Numéro d'identification"
                   />
                 </div>

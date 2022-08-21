@@ -10,6 +10,7 @@ import Civil from "../components/Pages/Civil";
 import Documents from "../components/Pages/Documents";
 import PanicButton from "../components/Pages/PanicButton";
 import RapportIncident from "../components/Pages/RapportIncident";
+import CivilSelected from "../components/Pages/Civil/Selected/Selected";
 
 export default [
   { label: "Services", path: "services", element: <Services /> },
@@ -32,6 +33,7 @@ export default [
       },
     ],
   },
+  { label: "Civil", path: "civil/:slug", element: <CivilSelected /> },
   {
     label: "Senior Lead Officier",
     path: "senior-lead-officier",

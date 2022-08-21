@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
 export const ModalContainer = styled.div`
-  min-width: fit-content;
+  width: fit-content;
   min-height: 120px;
   padding: 12px;
   position: absolute;
-  z-index: 999;
+  right: 0;
   top: 50%;
-  left: 50%;
   transform: ${(props) =>
     props.isOpen
       ? "translateX(-50%) translateY(-50%)"
       : "translateX(-50%) translateY(0)"};
-  overflow: hidden;
-
   transition: all 0.5s;
+  @media screen and (min-width: 992px) {
+  }
 `;
 
 export const Overlay = styled.div`

@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalContainer, Overlay } from "./Modal.styled";
+import { ModalContainer, ModalContext, Overlay } from "./Modal.styled";
 
 const Modal = ({ children, onClose, isOpen }) => {
   return (

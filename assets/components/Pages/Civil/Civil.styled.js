@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const CivilWrapper = styled.div`
   width: 100%;
+  min-height: 100vh;
 `;
 
 export const ActionRow = styled.div`

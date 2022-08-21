@@ -24,8 +24,6 @@ const MDT = () => {
 
   const { pathname } = useLocation();
 
-  console.log(pathname);
-
   return (
     <MDTwrapper>
       <section className="row mdt-button-section">
