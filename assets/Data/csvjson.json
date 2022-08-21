@@ -1,0 +1,825 @@
+[{
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Appareil aérien non enregistré",
+        "amende": "$1 000,00",
+        "notes": "Saisie de l'appareil",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Circulation zone maritime interdite",
+        "amende": "$400,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Conduite Dangereuse",
+        "amende": "$800,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Conduite en contre-sens",
+        "amende": "$600,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Conduite sans port de casque",
+        "amende": "$100,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Consommation de cannabis sur la voie publique",
+        "amende": "$300,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Dissimulation du visage",
+        "amende": "$1 000,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Excès de vitesse 1-10km/h",
+        "amende": "$150,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Excès de vitesse 11-20 km/h 1pt",
+        "amende": "$225,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Excès de vitesse 21-30 km/h 2pts",
+        "amende": "$300,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Excès de vitesse 31-50 km/h 3pts",
+        "amende": "$400,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Holster interdit",
+        "amende": "$1 000,00",
+        "notes": "Saisie du Holster",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Ivresse sur la voie publique",
+        "amende": "$300,00",
+        "notes": "Saisie + dégrisement (30 min)",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Mendicité en lieu public",
+        "amende": "$100,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Non dénonciation d'un délit",
+        "amende": "$300,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Non respect d'un arrêté étatique",
+        "amende": "$600,00",
+        "notes": "Saisie + dégrisement (30 min)",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Non respect véhicule prioritaire",
+        "amende": "$700,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Occupation illégale de l'espace public",
+        "amende": "$800,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Outrage à employé d'état",
+        "amende": "$3 000,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Outrage à magistrat",
+        "amende": "$5 000,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Possession importante d'or + de 150 pétites",
+        "amende": "$50,00",
+        "notes": "X quantité\nSaisie du surplus",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Présence piétonne sur une autoroute",
+        "amende": "$200,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Rappel à la loi Grave",
+        "amende": "$150,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Rapport de vol non enregistré",
+        "amende": "$1 000,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Stationnement Génant",
+        "amende": "$100,00",
+        "notes": "Saisie du véhicule",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Stationnement Interdit",
+        "amende": "$800,00",
+        "notes": "Saisie du véhicule",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Trouble a l'ordre public",
+        "amende": "$600,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Véhicule d’entreprise sur zone de pêche",
+        "amende": "$250,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Véhicule Dégradé",
+        "amende": "$200,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 1,
+        "categorie": "Contravention",
+        "infraction": "Violation de propriété privée",
+        "amende": "$850,00",
+        "notes": "",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Agression sur agent (employé d'état ou police)",
+        "amende": "$3 000,00",
+        "notes": "Saisie armes",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Agression sur citoyen",
+        "amende": "$2 500,00",
+        "notes": "Saisie armes",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Atteinte à la pudeur",
+        "amende": "$750,00",
+        "notes": "",
+        "peines": "0:05:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Braconnage (Pêche illégal)",
+        "amende": "$1 500,00",
+        "notes": "Saisie",
+        "peines": "0:25:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Braquage (à main armée) Citoyens",
+        "amende": "$2 000,00",
+        "notes": "Saisie armes / argent\nRetrait PPA",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Braquage (à main armée) Supérette",
+        "amende": "$1 050,00",
+        "notes": "Saisie armes / argent\nRetrait PPA",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Cambriolage",
+        "amende": "$1 000,00",
+        "notes": "Saisie du vol",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Conduite sans permis",
+        "amende": "$400,00",
+        "notes": "Mise en fourrière du véhicule",
+        "peines": "0:15:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Course de rue illegale",
+        "amende": "$2 000,00",
+        "notes": "Mise en fourrière",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Dégradation de bien privés",
+        "amende": "/",
+        "notes": "Procès civil ( dédommagement)",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Dégradation de bien public",
+        "amende": "$700,00",
+        "notes": "",
+        "peines": "0:15:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Délit de fuite",
+        "amende": "$1 000,00",
+        "notes": "Retrait de 6 points",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Excès de vitesse 51+ km/h retrait",
+        "amende": "$850,00",
+        "notes": "Retrait de permis",
+        "peines": "0:15:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Exhibition d’armes",
+        "amende": "$1 500,00",
+        "notes": "Saisie armes",
+        "peines": "0:20:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Harcelement",
+        "amende": "$2 500,00",
+        "notes": "",
+        "peines": "0:35:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Incitation a la haine",
+        "amende": "$300,00",
+        "notes": "",
+        "peines": "0:28:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Menaces de mort",
+        "amende": "$2 100,00",
+        "notes": "",
+        "peines": "2:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Menaces graves",
+        "amende": "$1 700,00",
+        "notes": "",
+        "peines": "1:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Non dénonciation d'un crime",
+        "amende": "$850,00",
+        "notes": "",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Non respect de l'assignation géographique",
+        "amende": "$1 200,00",
+        "notes": "",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Non respect du contrôle judiciaire",
+        "amende": "$1 350,00",
+        "notes": "",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Possession Cannabis",
+        "amende": "$75,00",
+        "notes": "x qté",
+        "peines": "0:25:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Possession Cocaïne",
+        "amende": "$90,00",
+        "notes": "x qté",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Possession d'arme illégale légère",
+        "amende": "$5 500,00",
+        "notes": "Saisie armes et munitions\nRetrait PPA",
+        "peines": "1:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Possession de munitions",
+        "amende": "$2,00",
+        "notes": "x qté",
+        "peines": "0:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Possession Methamphétamine",
+        "amende": "$120,00",
+        "notes": "à partir x qté",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Refus d’obtempérer",
+        "amende": "$500,00",
+        "notes": "Retrait de 6 points",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Refus de comparaitre",
+        "amende": "$2 000,00",
+        "notes": "Multiplication par 2 de la peine finale",
+        "peines": "3:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Refus de se soumettre a une injonction",
+        "amende": "$1 500,00",
+        "notes": "",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Usurpation d'identité",
+        "amende": "$1 500,00",
+        "notes": "",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Vol",
+        "amende": "$750,00",
+        "notes": "Restitution",
+        "peines": "0:30:00"
+    },
+    {
+        "niveau": 2,
+        "categorie": "Délit mineur",
+        "infraction": "Vol de véhicule",
+        "amende": "$750,00",
+        "notes": "Saisie de véhicule",
+        "peines": "0:20:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Agression sur Agent Fédéral",
+        "amende": "$3 500,00",
+        "notes": "Saisie armes",
+        "peines": "1:30:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Agression sur Magistrat/Gourvernement",
+        "amende": "$4 500,00",
+        "notes": "Saisie armes",
+        "peines": "2:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Braquage (à main armée) de Bijouterie",
+        "amende": "$7 500,00",
+        "notes": "",
+        "peines": "3:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Braquage (à main armée) Fleeca/Convoi",
+        "amende": "$10 000,00",
+        "notes": "Saisie armes / argent\nRetrait PPA",
+        "peines": "1:30:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Diffamation",
+        "amende": "$15 000,00",
+        "notes": "Dédommagement",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Discrimination",
+        "amende": "$15 000,00",
+        "notes": "Propos raciste, homophobes, sexiste et toute autres forme de discrimination",
+        "peines": "2:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Entrave à une opération/enquête (police/justice)",
+        "amende": "$5 000,00",
+        "notes": "",
+        "peines": "2:30:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Espionnage",
+        "amende": "$3 200,00",
+        "notes": "",
+        "peines": "2:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Faux témoignage",
+        "amende": "$8 000,00",
+        "notes": "Homicide volontaire non prémédité\nRetrait PPA",
+        "peines": "4:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Fraude Fiscale",
+        "amende": "$8 000,00",
+        "notes": "",
+        "peines": "11:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Homicide involontaire",
+        "amende": "$4 000,00",
+        "notes": "Homicide non prémédité\nSaisie armes\nRetrait PPA",
+        "peines": "3:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Meurtre",
+        "amende": "$15 000,00",
+        "notes": "",
+        "peines": "1:15:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Obstruction de la Justice",
+        "amende": "$10 000,00",
+        "notes": "",
+        "peines": "3:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Parjure",
+        "amende": "$2 500,00",
+        "notes": "",
+        "peines": "1:30:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Possession d'arme illégale lourde",
+        "amende": "$10 000,00",
+        "notes": "Saisie armes et munitions\nRetrait PPA",
+        "peines": "4:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Possession d’argent liquide > 5k sans justificatifs",
+        "amende": "$2,00",
+        "notes": "x qté en surplus ($)\nSaisie du surplus",
+        "peines": "0:45:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Survol de zone interdite",
+        "amende": "$6 000,00",
+        "notes": "Définit par un décret",
+        "peines": "3:20:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Trafic d’armes",
+        "amende": "$2 500,00",
+        "notes": "x poids des armes\nSaisie armes\nRetrait PPA",
+        "peines": "5:00:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Trafic de cannabis",
+        "amende": "$400,00",
+        "notes": "> 75 unités ou preuve du trafic\nx qté",
+        "peines": "1:20:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Trafic de Cocaïne",
+        "amende": "$600,00",
+        "notes": "> 75 unités ou preuve du trafic\nx qté",
+        "peines": "1:50:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Trafic de Methamphétamine",
+        "amende": "$800,00",
+        "notes": "> 75 unités ou preuve du trafic",
+        "peines": "2:20:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Travail illégal",
+        "amende": "$6 500,00",
+        "notes": "Saisie armes / bijoux\nRetrait PPA",
+        "peines": "2:30:00"
+    },
+    {
+        "niveau": 3,
+        "categorie": "Délit majeur",
+        "infraction": "Usages de Faux",
+        "amende": "$3 500,00",
+        "notes": "Retrait et destruction de Faux",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Assassinat",
+        "amende": "$15 000,00",
+        "notes": "Homicide volontaire Prémédité\nSaisie Armes\nRetrait PPA",
+        "peines": "24:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Association de malfaiteur",
+        "amende": "$3 000,00",
+        "notes": "",
+        "peines": "1:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Blanchiment",
+        "amende": "$4,00",
+        "notes": "x $ blanchi",
+        "peines": "8:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Braquage de banque centrale",
+        "amende": "$12 500,00",
+        "notes": "Saisie du butin\nRetrait PPA",
+        "peines": "9:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Cavale",
+        "amende": "$10 000,00",
+        "notes": "",
+        "peines": "4:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Corruption",
+        "amende": "$10 000,00",
+        "notes": "",
+        "peines": "12:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Création de faux",
+        "amende": "$15 000,00",
+        "notes": "Retrait et destruction de Faux",
+        "peines": "2:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Destruction/dissimulation de preuve",
+        "amende": "$10 000,00",
+        "notes": "",
+        "peines": "3:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Evasion/Organisation d’Evasion \n(Prison ou convoi)",
+        "amende": "$10 000,00",
+        "notes": "",
+        "peines": "7:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Haute Trahison",
+        "amende": "$350 000,00",
+        "notes": "Peine capital possible",
+        "peines": "Perpétuité"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Immigration illégal",
+        "amende": "$100 000,00",
+        "notes": "Sortie du territoire par L'USSS",
+        "peines": "/"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Prise d'otage sur Agent d'Etat",
+        "amende": "$10 000,00",
+        "notes": "",
+        "peines": "5:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Prise d'otage sur Magistrat/Gouvernement",
+        "amende": "$50 000,00",
+        "notes": "",
+        "peines": "10:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Prise d’otage",
+        "amende": "$15 000,00",
+        "notes": "x Nb otages (max 10)",
+        "peines": "5:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Séquestration",
+        "amende": "$25 000,00",
+        "notes": "",
+        "peines": "16:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Terrorisme",
+        "amende": "$75 000,00",
+        "notes": "Saisie compte et biens/propriétés\nPeine capitale possible",
+        "peines": "24:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Torture",
+        "amende": "$12 500,00",
+        "notes": "",
+        "peines": "5:00:00"
+    },
+    {
+        "niveau": 4,
+        "categorie": "Crime",
+        "infraction": "Violation du Secret Professionnel",
+        "amende": "$25 000,00",
+        "notes": "Licenciement",
+        "peines": "3:00:00"
+    }
+]

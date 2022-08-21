@@ -4,13 +4,15 @@ export const View = styled.div`
   min-height: 300px;
   width: 350px;
   background: var(--background-color-dark);
-  padding: 13px;
+  padding: 18px 13px;
   border: 0.5px solid #2b7de950;
   border-radius: 8px;
   box-shadow: 0px 0px 8px 5px #2b7de920;
-  overflow-x: hidden;
+  max-height: 80vh;
+  overflow-y: auto;
+
   @media (min-width: 992px) {
-    width: 690px;
+    width: 730px;
   }
   & .form-control {
     margin-top: 1rem;

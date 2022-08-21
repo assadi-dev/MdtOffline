@@ -1,8 +1,13 @@
 import React, { useRef } from "react";
 import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
+import Input from "../../../../Shared/Input";
 import InputTextArea from "../../../../Shared/InputTextArea";
 import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
-import { FooterSectionButton, HeadTitleView } from "./ModalView.styled";
+import {
+  BorderZone,
+  FooterSectionButton,
+  HeadTitleView,
+} from "./ModalView.styled";
 
 const RapportArrestation = ({ onClose }) => {
   const textAreaRef = useRef();
@@ -20,11 +25,10 @@ const RapportArrestation = ({ onClose }) => {
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <div className="form-control" ref={textAreaRef}>
-          <InputTextArea
-            style={{ resize: "none" }}
-            rows={3}
-            placeholder="Lieux de remplissage"
-          />
+          <div>
+            <Input placeholder="Lieu de remplissage" />
+            <input type="date" name="entreeCellule" id="" placeholder="dd" />
+          </div>
         </div>
         <div className="form-control" ref={textAreaRef}>
           <InputTextArea rows={3} placeholder="Ecrivez les avertissements" />
