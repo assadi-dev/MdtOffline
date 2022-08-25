@@ -142,12 +142,13 @@ const TrafficView = ({ onClose }) => {
                   {" "}
                   <td>{chef.label}</td>
                   <td></td>
-                  <td>
+                  <td className="td-center">
                     <input
                       type="number"
                       name={chef.label}
                       value={chef ? chef.qte : 0}
                       onChange={handleQty}
+                      defaultValue={0}
                     />
                   </td>
                   <td>

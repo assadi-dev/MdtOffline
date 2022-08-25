@@ -49,11 +49,23 @@ export const Table = styled.table`
     border-radius: 0 5px 5px 0;
   }
 
-  & tbody tr td input,
   & tbody tr td select {
     width: 100%;
     color: var(--color-white);
     text-align: center;
     background-color: transparent;
+  }
+
+  & tbody tr td input {
+    background-color: var(--color-blue-dark);
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    min-height: 22px;
+    color: var(--color-white);
+  }
+  .td-center {
+    text-align: center;
   }
 `;

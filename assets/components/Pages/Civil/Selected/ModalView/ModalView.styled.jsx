@@ -12,7 +12,7 @@ export const View = styled.div`
   overflow-y: auto;
 
   @media (min-width: 992px) {
-    width: 730px;
+    min-width: 1024px;
   }
   & .form-control {
     margin-top: 1rem;
@@ -85,5 +85,34 @@ export const BorderZone = styled.div`
     font-family: var(--font-title);
     font-weight: 200;
     font-size: 18px;
+  }
+`;
+
+export const TableViewPresentation = styled.table`
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  .lieuxRemplissage {
+    min-width: 100px;
+  }
+
+  input {
+    background-color: var(--color-lightBlue-secondary);
+    width: 90%;
+    border-radius: 5px;
+    min-height: 25px;
+    padding: 5px 15px;
+    color: var(--color-white);
+  }
+
+  td {
+    padding: 5px 12px;
+  }
+
+  .center {
+    text-align: center;
+  }
+  .entreCellule {
+    text-align: center;
   }
 `;

@@ -17,3 +17,6 @@ export const nominal = [
   { label: "Max 2", value: 2 },
   { label: "Max 3", value: 3 },
 ];
+
+export const tentative = 0.25,
+  complicité = 0.6;
