@@ -30,6 +30,7 @@ const RapportArrestation = ({ onClose }) => {
     return {
       label: j.infraction,
       value: j.amende,
+      peine: j.peines,
     };
   });
 
@@ -144,9 +145,17 @@ const RapportArrestation = ({ onClose }) => {
     return 0;
   }, [inputState.chefAcusation]);
 
+  const totalPeine = useMemo(() => {
+    if (inputState.chefAcusation.length > 0) {
+      let sommePeine = inputState.chefAcusation.map((c) => c.peine);
+      return sommeChefAccusation.reduce((a, b) => a + b);
+    }
+    return 0;
+  }, [inputState.chefAcusation]);
+
   const totalUp = useMemo(() => {
     if (inputState.up) {
-      return conversionUP(total, "00:30:00").toFixed(2);
+      return conversionUP(total, "00:30:00");
     }
     return 0;
   }, [total, inputState.chefAcusation, inputState.up]);

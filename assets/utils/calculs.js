@@ -1,3 +1,5 @@
+import numeral from "numeral";
+
 /**
  * Permert d'optenir la vleur en UP
  * @param {number} amende
@@ -7,8 +9,8 @@
 export const conversionUP = (amende, peine) => {
   let result = 0;
   let nominal = 1;
-  peine = new Date(peine).getTime();
-  console.log(peine);
+
+  peine = TimeToUnix(peine);
 
   result = (amende * 30) / 5000;
   result = result / 60;
@@ -17,5 +19,29 @@ export const conversionUP = (amende, peine) => {
 
   result = result * nominal + peine;
 
-  return result;
+  return unixToTime(result);
+};
+
+/**
+ * convertis le temps en chaine de caracteres en format Unix (millisecondes)
+ * @param {string} time
+ * @returns
+ */ 0;
+export const TimeToUnix = (time) => {
+  let [hour, min, sec] = time.split(":");
+
+  let totalTime = parseInt(hour) * 60 * 60;
+  totalTime += parseInt(min) * 60;
+  totalTime += parseInt(sec);
+  return totalTime;
+};
+
+/**
+ * convertis le temps en seconds en format H:m:s ex:00:00:05
+ * @param {number} time
+ * @returns
+ */
+export const unixToTime = (time) => {
+  time = numeral(time);
+  return time.format("00:00:00");
 };
