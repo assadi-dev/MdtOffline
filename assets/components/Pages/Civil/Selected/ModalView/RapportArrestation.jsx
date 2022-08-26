@@ -27,7 +27,7 @@ const RapportArrestation = ({ onClose }) => {
   const closeModal = () => {
     onClose();
     let textInput = textAreaRef.current.querySelector("textarea");
-    textInput.removeAttribute("style");
+    //textInput.removeAttribute("style");
   };
 
   const options = codePenal.map((j) => {
@@ -35,6 +35,8 @@ const RapportArrestation = ({ onClose }) => {
       label: j.infraction,
       value: j.amende,
       peine: j.peines,
+      tentative: 1,
+      complicite: 1,
     };
   });
 
@@ -57,8 +59,6 @@ const RapportArrestation = ({ onClose }) => {
         ...s,
         qte: 1,
         nominal: 1,
-        tentative: 1,
-        complicite: false,
       })),
     }));
   };
@@ -101,14 +101,16 @@ const RapportArrestation = ({ onClose }) => {
 
   const handleTantative = (e) => {
     let name = e.target.name;
-    let value = e.target.value || 1;
+    let value = e.target.checked;
+    console.log(value);
+
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, tentative: parseInt(value) };
+              return { ...cf, tentative: value ? 0.25 : 1 };
             }
           }
           return cf;
@@ -126,7 +128,7 @@ const RapportArrestation = ({ onClose }) => {
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, complicite: !cf.complicite };
+              return { ...cf, complicite: value ? 0.6 : 1 };
             }
           }
           return cf;
@@ -142,12 +144,7 @@ const RapportArrestation = ({ onClose }) => {
   const total = useMemo(() => {
     if (inputState.chefAcusation.length > 0) {
       let sommeChefAccusation = inputState.chefAcusation.map(
-        (c) =>
-          c.value *
-          c.qte *
-          c.nominal *
-          (c.tentative * c.tentative > 1 ? 0.25 : 1) *
-          (c.complicite * c.complicite ? 0.6 : 1)
+        (c) => c.value * c.qte * c.nominal
       );
       return sommeChefAccusation.reduce((a, b) => a + b);
     }
@@ -249,17 +246,18 @@ const RapportArrestation = ({ onClose }) => {
                   <td>{chef.label}</td>
                   <td></td>
                   <td className="td-center">
-                    <input
-                      type="number"
+                    <SwitchButton
+                      sliderOffColor={"var(--color-blue-dark)"}
                       name={chef.label}
-                      value={chef ? chef.tentative : 1}
                       onChange={handleTantative}
-                      defaultValue={1}
-                      min={1}
                     />
                   </td>
                   <td className="td-center">
-                    <SwitchButton sliderOffColor={"var(--color-blue-dark)"} />
+                    <SwitchButton
+                      sliderOffColor={"var(--color-blue-dark)"}
+                      name={chef.label}
+                      onChange={handleComplicite}
+                    />
                   </td>
                   <td className="td-center">
                     <input
@@ -267,7 +265,6 @@ const RapportArrestation = ({ onClose }) => {
                       name={chef.label}
                       value={chef ? chef.qte : 0}
                       onChange={handleQty}
-                      defaultValue={0}
                     />
                   </td>
                   <td>
@@ -276,8 +273,10 @@ const RapportArrestation = ({ onClose }) => {
                       name={chef.label}
                       onChange={handleNominal}
                     >
-                      {nominal.map((n) => (
-                        <option value={n.value}>{n.label}</option>
+                      {nominal.map((n, i) => (
+                        <option key={i} value={n.value}>
+                          {n.label}
+                        </option>
                       ))}
                     </select>
                   </td>

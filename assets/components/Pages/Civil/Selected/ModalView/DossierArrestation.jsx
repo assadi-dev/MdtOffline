@@ -1,5 +1,10 @@
 import React, { useRef, useState, useMemo } from "react";
 import { codePenal, nominal } from "../../../../../Data/FichesCalcule";
+import {
+  conversionUP,
+  TimeToUnix,
+  unixToTime,
+} from "../../../../../utils/calculs";
 import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
 import InputTextArea from "../../../../Shared/InputTextArea";
 import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
@@ -31,6 +36,9 @@ const DossierArrestation = ({ onClose }) => {
     return {
       label: j.infraction,
       value: j.amende,
+      peine: j.peines,
+      tentative: false,
+      complicite: false,
     };
   });
 
@@ -122,18 +130,27 @@ const DossierArrestation = ({ onClose }) => {
   const total = useMemo(() => {
     if (inputState.chefAcusation.length > 0) {
       let sommeChefAccusation = inputState.chefAcusation.map(
-        (c) => c.value * c.qte * c.nominal * c.tentative * c.complicité
+        (c) => c.value * c.qte * c.nominal
       );
       return sommeChefAccusation.reduce((a, b) => a + b);
     }
     return 0;
   }, [inputState.chefAcusation]);
 
-  const totalUp = useMemo(() => {
-    if (inputState.up) {
-      return conversionUP(total, 0.25);
+  const totalPeine = useMemo(() => {
+    if (inputState.chefAcusation.length > 0) {
+      let sommePeine = inputState.chefAcusation.map((c) => TimeToUnix(c.peine));
+      return sommePeine.reduce((a, b) => a + b);
     }
     return 0;
+  }, [inputState.chefAcusation, total, inputState.chefAcusation.peine]);
+
+  const totalUp = useMemo(() => {
+    let totalpeine = unixToTime(totalPeine);
+    if (inputState.up) {
+      return conversionUP(total, totalpeine);
+    }
+    return totalpeine;
   }, [total, inputState.chefAcusation, inputState.up]);
 
   return (
@@ -154,20 +171,24 @@ const DossierArrestation = ({ onClose }) => {
           >
             <TableViewPresentation>
               <thead>
-                <td>Lieux de remplissage</td>
-                <td>Entrée cellule</td>
+                <tr>
+                  <td>Lieux de remplissage</td>
+                  <td>Entrée cellule</td>
+                </tr>
               </thead>
               <tbody>
-                <td className="lieuxRemplissage">
-                  <input type="text" name="lieuxRemplissage" autoFocus />
-                </td>
-                <td>
-                  <input
-                    type="time"
-                    name="entreCellule"
-                    className="entreCellule"
-                  />
-                </td>
+                <tr>
+                  <td className="lieuxRemplissage">
+                    <input type="text" name="lieuxRemplissage" autoFocus />
+                  </td>
+                  <td>
+                    <input
+                      type="time"
+                      name="entreCellule"
+                      className="entreCellule"
+                    />
+                  </td>
+                </tr>
               </tbody>
             </TableViewPresentation>
           </BorderZone>
@@ -184,28 +205,28 @@ const DossierArrestation = ({ onClose }) => {
           >
             <TableViewPresentation>
               <thead>
-                <td>Droit Miranda</td>
-                <td>Soins</td>
-                <td>Nouriture</td>
-                <td>Avocat</td>
+                <tr>
+                  <th>Droit Miranda</th>
+                  <th>Soins</th>
+                  <th>Nouriture</th>
+                  <th>Avocat</th>
+                </tr>
               </thead>
               <tbody>
-                <td>
-                  {" "}
-                  <SwitchButton />
-                </td>
-                <td>
-                  {" "}
-                  <SwitchButton />
-                </td>
-                <td>
-                  {" "}
-                  <SwitchButton />
-                </td>
-                <td>
-                  {" "}
-                  <SwitchButton />
-                </td>
+                <tr>
+                  <td>
+                    <SwitchButton name="droit-miranda" />
+                  </td>
+                  <td>
+                    <SwitchButton name="soins" />
+                  </td>
+                  <td>
+                    <SwitchButton name="nourriture" />
+                  </td>
+                  <td>
+                    <SwitchButton name="avocat" />
+                  </td>
+                </tr>
               </tbody>
             </TableViewPresentation>
           </BorderZone>
@@ -224,7 +245,6 @@ const DossierArrestation = ({ onClose }) => {
           />
         </div>
         <div className="form-control">
-          {" "}
           <EditTable>
             <thead>
               <tr>
@@ -240,16 +260,15 @@ const DossierArrestation = ({ onClose }) => {
             <tbody>
               {inputState.chefAcusation.map((chef, i) => (
                 <tr key={i}>
-                  {" "}
                   <td>{chef.label}</td>
                   <td></td>
                   <td className="td-center">
                     <input
                       type="number"
-                      name={chef.tentative}
+                      name={chef.label}
                       value={chef ? chef.tentative : 1}
                       onChange={handleTantative}
-                      defaultValue={1}
+                      min={1}
                     />
                   </td>
                   <td></td>
@@ -259,7 +278,7 @@ const DossierArrestation = ({ onClose }) => {
                       name={chef.label}
                       value={chef ? chef.qte : 0}
                       onChange={handleQty}
-                      defaultValue={0}
+                      min={1}
                     />
                   </td>
                   <td>
@@ -268,12 +287,14 @@ const DossierArrestation = ({ onClose }) => {
                       name={chef.label}
                       onChange={handleNominal}
                     >
-                      {nominal.map((n) => (
-                        <option value={n.value}>{n.label}</option>
+                      {nominal.map((n, i) => (
+                        <option key={i} value={n.value}>
+                          {n.label}
+                        </option>
                       ))}
                     </select>
                   </td>
-                  <td></td>
+                  <td> {chef.peine} </td>
                 </tr>
               ))}
             </tbody>
