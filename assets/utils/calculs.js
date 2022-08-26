@@ -13,10 +13,7 @@ export const conversionUP = (amende, peine) => {
   peine = TimeToUnix(peine);
 
   result = (amende * 30) / 5000;
-  result = result / 60;
-
-  result = result / 24;
-
+  result = result * 60;
   result = result * nominal + peine;
 
   return unixToTime(result);
