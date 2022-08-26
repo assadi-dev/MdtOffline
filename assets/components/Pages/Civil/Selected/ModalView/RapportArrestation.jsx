@@ -163,12 +163,11 @@ const RapportArrestation = ({ onClose }) => {
   }, [inputState.chefAcusation, total, inputState.chefAcusation.peine]);
 
   const totalUp = useMemo(() => {
+    let totalpeine = unixToTime(totalPeine);
     if (inputState.up) {
-      let totalpeine = unixToTime(totalPeine);
-
       return conversionUP(total, totalpeine);
     }
-    return 0;
+    return totalpeine;
   }, [total, inputState.chefAcusation, inputState.up]);
 
   return (
