@@ -122,13 +122,14 @@ const RapportArrestation = ({ onClose }) => {
   const handleComplicite = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    let checked = e.target.checked;
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, complicite: value ? 0.6 : 1 };
+              return { ...cf, complicite: checked ? 0.6 : 1 };
             }
           }
           return cf;
@@ -144,7 +145,7 @@ const RapportArrestation = ({ onClose }) => {
   const total = useMemo(() => {
     if (inputState.chefAcusation.length > 0) {
       let sommeChefAccusation = inputState.chefAcusation.map(
-        (c) => c.value * c.qte * c.nominal
+        (c) => c.value * c.qte * c.nominal * c.tentative * c.complicite
       );
       return sommeChefAccusation.reduce((a, b) => a + b);
     }
@@ -263,8 +264,9 @@ const RapportArrestation = ({ onClose }) => {
                     <input
                       type="number"
                       name={chef.label}
-                      value={chef ? chef.qte : 0}
+                      value={chef ? chef.qte : 1}
                       onChange={handleQty}
+                      min={1}
                     />
                   </td>
                   <td>

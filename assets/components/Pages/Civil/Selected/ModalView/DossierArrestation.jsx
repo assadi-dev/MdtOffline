@@ -37,8 +37,8 @@ const DossierArrestation = ({ onClose }) => {
       label: j.infraction,
       value: j.amende,
       peine: j.peines,
-      tentative: false,
-      complicite: false,
+      tentative: 1,
+      complicite: 1,
     };
   });
 
@@ -57,7 +57,7 @@ const DossierArrestation = ({ onClose }) => {
 
   const handleQty = (e) => {
     let name = e.target.name;
-    let value = e.target.value;
+    let value = e.target.value || 1;
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
@@ -93,14 +93,16 @@ const DossierArrestation = ({ onClose }) => {
 
   const handleTantative = (e) => {
     let name = e.target.name;
-    let value = e.target.value;
+    let value = e.target.checked;
+    console.log(value);
+
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, tentative: value };
+              return { ...cf, tentative: value ? 0.25 : 1 };
             }
           }
           return cf;
@@ -112,13 +114,14 @@ const DossierArrestation = ({ onClose }) => {
   const handleComplicite = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    let checked = e.target.checked;
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, complicité: value };
+              return { ...cf, complicite: checked ? 0.6 : 1 };
             }
           }
           return cf;
@@ -263,15 +266,20 @@ const DossierArrestation = ({ onClose }) => {
                   <td>{chef.label}</td>
                   <td></td>
                   <td className="td-center">
-                    <input
-                      type="number"
+                    <SwitchButton
                       name={chef.label}
-                      value={chef ? chef.tentative : 1}
                       onChange={handleTantative}
-                      min={1}
+                      sliderOffColor={"var(--color-blue-dark)"}
                     />
                   </td>
-                  <td></td>
+                  <td>
+                    {" "}
+                    <SwitchButton
+                      name={chef.label}
+                      onChange={handleComplicite}
+                      sliderOffColor={"var(--color-blue-dark)"}
+                    />
+                  </td>
                   <td className="td-center">
                     <input
                       type="number"

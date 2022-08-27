@@ -12,7 +12,7 @@ export const View = styled.div`
   overflow-y: auto;
 
   @media (min-width: 992px) {
-    min-width: 1024px;
+    min-width: 1124px;
   }
   & .form-control {
     margin-top: 1rem;

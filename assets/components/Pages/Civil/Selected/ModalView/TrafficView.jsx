@@ -26,6 +26,7 @@ const TrafficView = ({ onClose }) => {
       return {
         label: j.infraction,
         value: j.amende,
+        peine: j.peine,
       };
     });
 
@@ -139,7 +140,6 @@ const TrafficView = ({ onClose }) => {
             <tbody>
               {inputState.chefAcusation.map((chef, i) => (
                 <tr key={i}>
-                  {" "}
                   <td>{chef.label}</td>
                   <td></td>
                   <td className="td-center">

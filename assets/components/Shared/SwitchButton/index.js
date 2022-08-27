@@ -2,6 +2,7 @@ import React from "react";
 import { ButtonContainer, SwitchIcon } from "./SwitchButton.styled";
 
 const SwitchButton = ({
+  name,
   value,
   onChange,
   checked,
@@ -22,6 +23,7 @@ const SwitchButton = ({
         value={value}
         onChange={onChange}
         checked={checked}
+        name={name}
       />
       <SwitchIcon
         className={switch_class.join(" ")}
