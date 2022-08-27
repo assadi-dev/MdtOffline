@@ -320,7 +320,8 @@ const DossierArrestation = ({ onClose }) => {
             {" "}
             <div style={{ textAlign: "center" }}>
               {" "}
-              <p className="label">Ammende</p> <p className="mount">{total}</p>{" "}
+              <p className="label">Ammende</p>{" "}
+              <p className="mount">{total} $</p>{" "}
             </div>
             <div style={{ textAlign: "center" }}>
               {" "}

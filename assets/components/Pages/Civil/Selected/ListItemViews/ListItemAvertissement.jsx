@@ -1,13 +1,14 @@
 import React from "react";
 import {
   AgentItemView,
+  DateItemView,
   ListContainer,
   ListContent,
   NumberView,
   TitleItemView,
-} from "./ListViewItems";
+} from "./ListViewItems.styled";
 
-const ListItemAvertissement = () => {
+const ListItemAvertissement = ({ numero, fait, agent, date }) => {
   return (
     <ListContainer>
       <ListContent>
@@ -18,6 +19,7 @@ const ListItemAvertissement = () => {
         <AgentItemView>
           <span className="agent">Agent : </span> 98-Tommy-Stewart
         </AgentItemView>
+        <DateItemView> 14:07 - 07/08/2022 </DateItemView>
       </ListContent>
     </ListContainer>
   );

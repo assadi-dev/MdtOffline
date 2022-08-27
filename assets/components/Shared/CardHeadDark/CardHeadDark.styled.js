@@ -44,6 +44,7 @@ export const IconButton = styled.span`
   margin-right: 1rem;
   color: var(--color-blue-primary);
   transition: all 0.35s;
+  z-index: 25;
   cursor: pointer;
   :hover {
     transform: scale(1.2);

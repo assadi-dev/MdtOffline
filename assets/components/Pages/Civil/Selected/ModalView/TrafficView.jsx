@@ -17,8 +17,6 @@ const TrafficView = ({ onClose }) => {
   const textAreaRef = useRef();
   const closeModal = () => {
     onClose();
-    let textInput = textAreaRef.current.querySelector("textarea");
-    textInput.removeAttribute("style");
   };
   const options = codePenal
     .filter((j) => j.categorie == "Contravention")

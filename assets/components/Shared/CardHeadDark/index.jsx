@@ -1,10 +1,10 @@
 import React from "react";
-import { CardContainer, CardHeader } from "./CardHeadDark.styled";
+import { CardContainer, CardHeader, ViewContent } from "./CardHeadDark.styled";
 
-const CardHeadDark = ({ title, children, ...props }) => {
+const CardHeadDark = ({ title, children, classNameHeader, ...props }) => {
   return (
     <CardContainer {...props}>
-      <CardHeader>{title}</CardHeader>
+      <CardHeader className={classNameHeader}>{title}</CardHeader>
       {children}
     </CardContainer>
   );

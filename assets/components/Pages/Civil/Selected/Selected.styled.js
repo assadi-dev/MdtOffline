@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   width: 100;
   min-height: 100vh;
+  .headerStyle {
+    font-size: 14px;
+  }
   @media (min-width: 992px) {
     padding: 22px;
   }
@@ -113,6 +116,7 @@ export const CivilInfo = styled.div`
     text-transform: uppercase;
     color: white;
     font-weight: 100;
+    font-size: 10px;
   }
   .personalContact {
     margin-bottom: 0.8rem;
@@ -129,4 +133,9 @@ export const AvertissementCard = styled.div`
 export const TraffiCard = styled.div`
   border: 1px solid var(--color-blue-primary);
   border-radius: 5px;
+`;
+
+export const ViewCardContent = styled.div`
+  height: 220px;
+  overflow-y: auto; ;
 `;

@@ -10,7 +10,7 @@ import {
 import CivilSelectedCard from "./CivilSelectedCard";
 import AvertissementView from "./ModalView/AvertissementView";
 import DossierArrestation from "./ModalView/DossierArrestation";
-import ListItemAvertissement from "./ModalView/ListItemAvertissement";
+import ListItemAvertissement from "./ListItemViews/ListItemAvertissement";
 import { HeadTitleView, View } from "./ModalView/ModalView.styled";
 import RapportArrestation from "./ModalView/RapportArrestation";
 import TrafficView from "./ModalView/TrafficView";
@@ -28,6 +28,9 @@ import {
   HeaderSelect,
   IconButtonTop,
 } from "./Selected.styled";
+import ListItemTraffic from "./ListItemViews/ListItemTraffic";
+import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion";
+import ListItemRapportArrestation from "./ListItemViews/ListItemRapportArrestation";
 
 const CivilSelected = () => {
   const [modalStae, dispatch] = useReducer(ModalReducer, {
@@ -120,6 +123,10 @@ const CivilSelected = () => {
             title="AVERTISSEMENT"
           >
             <ListItemAvertissement />
+            <ListItemAvertissement />
+            <ListItemAvertissement />
+            <ListItemAvertissement />
+            <ListItemAvertissement />
           </CivilSelectedCard>
 
           <CivilSelectedCard
@@ -131,7 +138,10 @@ const CivilSelected = () => {
               })
             }
           >
-            <div>dd</div>
+            <ListItemTraffic />
+            <ListItemTraffic />
+            <ListItemTraffic />
+            <ListItemTraffic />
           </CivilSelectedCard>
         </RowFirst>
         <RowSecond>
@@ -144,7 +154,7 @@ const CivilSelected = () => {
               })
             }
           >
-            test
+            <ListItemRapportArrestation />
           </CivilSelectedCard>
 
           <CivilSelectedCard
@@ -156,7 +166,7 @@ const CivilSelected = () => {
               })
             }
           >
-            <div>dd</div>
+            <ListItemDossierArrestaion />
           </CivilSelectedCard>
         </RowSecond>
       </Wrapper>
