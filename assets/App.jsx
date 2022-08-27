@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import "./styles/global.css";
 import "./styles/root.css";
 import "./styles/fonts.css";
+import "./styles/layout.css";
 import MainLayout from "./components/Layout/MainLayout";
 import PagesRoutes from "./routes/Pages.routes";
 import uniqid from "uniqid";

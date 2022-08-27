@@ -10,6 +10,7 @@ import {
 import CivilSelectedCard from "./CivilSelectedCard";
 import AvertissementView from "./ModalView/AvertissementView";
 import DossierArrestation from "./ModalView/DossierArrestation";
+import ListItemAvertissement from "./ModalView/ListItemAvertissement";
 import { HeadTitleView, View } from "./ModalView/ModalView.styled";
 import RapportArrestation from "./ModalView/RapportArrestation";
 import TrafficView from "./ModalView/TrafficView";
@@ -118,7 +119,7 @@ const CivilSelected = () => {
             }
             title="AVERTISSEMENT"
           >
-            test
+            <ListItemAvertissement />
           </CivilSelectedCard>
 
           <CivilSelectedCard

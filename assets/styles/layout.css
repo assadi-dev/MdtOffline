@@ -1,0 +1,33 @@
+.text-center {
+    text-align: center !important;
+}
+
+.text-star {
+    text-align: left !important;
+}
+
+.text-end {
+    text-align: right !important;
+}
+
+.text-upperCase {
+    text-transform: uppercase !important;
+}
+
+.text-upperCase {
+    text-transform: uppercase !important;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.my-auto {
+    margin-Top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.mx-auto {
+    margin-right: auto;
+    margin-left: auto;
+}

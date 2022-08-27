@@ -133,7 +133,7 @@ const DossierArrestation = ({ onClose }) => {
   const total = useMemo(() => {
     if (inputState.chefAcusation.length > 0) {
       let sommeChefAccusation = inputState.chefAcusation.map(
-        (c) => c.value * c.qte * c.nominal
+        (c) => c.value * c.qte * c.nominal * c.tentative * c.complicite
       );
       return sommeChefAccusation.reduce((a, b) => a + b);
     }
