@@ -16,9 +16,12 @@ import {
   RowModal,
 } from "./EncodeCivile.styled";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { addCivil } from "../../../../redux/actions/Civil.action";
 
 const EncodeCivil = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +42,9 @@ const EncodeCivil = ({ isOpen, onClose }) => {
       file: null,
     },
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(addCivil(values)).then(() => {
+        onClose();
+      });
     },
   });
 

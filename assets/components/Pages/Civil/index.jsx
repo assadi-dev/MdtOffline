@@ -73,6 +73,7 @@ const Civil = () => {
                 <CivilCard
                   nom={civil.nom.toUpperCase()}
                   prenom={ucFirst(civil.prenom)}
+                  telephone={civil.telephone}
                 />
               )}
             </Link>

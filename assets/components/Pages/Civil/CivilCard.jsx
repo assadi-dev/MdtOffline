@@ -6,9 +6,9 @@ const CivilCard = ({ nom, prenom, telephone, photo }) => {
     <CardContainer>
       <CivilPhoto src={photo} />
       <CivilInfo>
-        <p className="text">Northon</p>
-        <p className="text">michelle</p>
-        <p className="text">555-733385</p>
+        <p className="text">{nom}</p>
+        <p className="text">{prenom}</p>
+        <p className="text">{telephone}</p>
       </CivilInfo>
     </CardContainer>
   );

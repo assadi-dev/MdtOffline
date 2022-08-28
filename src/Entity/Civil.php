@@ -106,6 +106,7 @@ class Civil
     {
 
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt =  new DateTimeImmutable();
     }
 
 
