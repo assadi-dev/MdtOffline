@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\CivilRepository;
+use DateTime;
 use DateTimeImmutable;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CivilRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ApiResource()
@@ -68,7 +70,7 @@ class Civil
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $haireColor;
+    private $hairColor;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -91,7 +93,8 @@ class Civil
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $updatedAt;
 
@@ -106,7 +109,7 @@ class Civil
     {
 
         $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt =  new DateTimeImmutable();
+        $this->updatedAt =  new DateTime();
     }
 
 
@@ -224,14 +227,14 @@ class Civil
         return $this;
     }
 
-    public function getHaireColor(): ?string
+    public function getHairColor(): ?string
     {
-        return $this->haireColor;
+        return $this->hairColor;
     }
 
-    public function setHaireColor(string $haireColor): self
+    public function setHairColor(string $hairColor): self
     {
-        $this->haireColor = $haireColor;
+        $this->hairColor = $hairColor;
 
         return $this;
     }
@@ -284,12 +287,12 @@ class Civil
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

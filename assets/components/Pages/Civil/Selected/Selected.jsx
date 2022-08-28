@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Modal from "../../../Shared/Modal";
 import {
@@ -31,6 +31,8 @@ import {
 import ListItemTraffic from "./ListItemViews/ListItemTraffic";
 import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion";
 import ListItemRapportArrestation from "./ListItemViews/ListItemRapportArrestation";
+import { useDispatch, useSelector } from "react-redux";
+import { getOneCivil } from "../../../../redux/actions/Civil.action";
 
 const CivilSelected = () => {
   const [modalStae, dispatch] = useReducer(ModalReducer, {
@@ -42,7 +44,23 @@ const CivilSelected = () => {
     dispatch({ type: TOGGLE_MODAL, payload: "" });
   };
   const location = useLocation();
-  const { name } = location.state;
+  const { name, id } = location.state;
+
+  const [loading, setLoading] = useState(true);
+  const dispatchCivilData = useDispatch();
+  const civilSelectore = useSelector((state) => state.CivilReducer);
+
+  useEffect(() => {
+    dispatchCivilData(getOneCivil(id));
+  }, [id]);
+
+  const civilData = useMemo(() => {
+    if (civilSelectore.selected) {
+      return civilSelectore.selected;
+    }
+
+    return [];
+  }, [civilSelectore.selected, id]);
 
   //Effectue le rendue en fonction du la vue reçu en parametres
   const Render = ({ view }) => {
@@ -84,31 +102,39 @@ const CivilSelected = () => {
 
         <RowFirst>
           <CivilCard>
-            <CivilPhoto />
+            <CivilPhoto src={civilData.photo} />
             <CivilInfo>
               <p>
-                <span className="personalDetail">NE(E) : </span> Halifa
+                <span className="personalDetail">NE(E) : </span>{" "}
+                {civilData ? civilData.nom : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">ADRESSE : </span> Halifa
+                <span className="personalDetail">ADRESSE : </span>{" "}
+                {civilData ? civilData.prenom : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">TELEPHONE : </span> Halifa
+                <span className="personalDetail">TELEPHONE : </span>{" "}
+                {civilData ? civilData.telephone : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">APPARTENANCE : </span> Halifa
+                <span className="personalDetail">APPARTENANCE : </span>{" "}
+                {civilData ? civilData.affiliation : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">EMPLOIE : </span> Halifa
+                <span className="personalDetail">EMPLOIE : </span>{" "}
+                {civilData ? civilData.emploie : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">CHEVEUX : </span> Halifa
+                <span className="personalDetail">CHEVEUX : </span>{" "}
+                {civilData ? civilData.hairColor : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">NATIONALITÉ : </span> Halifa
+                <span className="personalDetail">NATIONALITÉ : </span>{" "}
+                {civilData ? civilData.nationalite : "N/A"}
               </p>
               <p>
-                <span className="personalDetail">SEXE : </span> Halifa
+                <span className="personalDetail">SEXE : </span>{" "}
+                {civilData ? civilData.sexe : "N/A"}
               </p>
             </CivilInfo>
           </CivilCard>

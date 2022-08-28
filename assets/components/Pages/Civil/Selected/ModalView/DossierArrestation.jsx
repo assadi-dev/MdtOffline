@@ -28,8 +28,8 @@ const DossierArrestation = ({ onClose }) => {
 
   const [inputState, setInputState] = useState({
     lieuxRemplissage: "",
+    entreeCellule: "",
     chefAcusation: [],
-    up: false,
   });
 
   const options = codePenal.map((j) => {
@@ -182,13 +182,19 @@ const DossierArrestation = ({ onClose }) => {
               <tbody>
                 <tr>
                   <td className="lieuxRemplissage">
-                    <input type="text" name="lieuxRemplissage" autoFocus />
+                    <input
+                      type="text"
+                      name="lieuxRemplissage"
+                      autoFocus
+                      onChange={handleChangeValue}
+                    />
                   </td>
                   <td>
                     <input
                       type="time"
                       name="entreCellule"
                       className="entreCellule"
+                      onChange={handleChangeValue}
                     />
                   </td>
                 </tr>

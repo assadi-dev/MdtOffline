@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import userImg from "../../../ressources/img/user.jpg";
 
 export const Wrapper = styled.div`
   width: 100;
@@ -84,7 +85,7 @@ export const CivilCard = styled.div`
 `;
 
 export const CivilPhoto = styled.div`
-  background-image: url("https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80");
+  background-image: url(${({ src }) => (src ? src : userImg)});
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
