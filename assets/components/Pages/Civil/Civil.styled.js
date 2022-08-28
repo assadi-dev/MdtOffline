@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import userImg from "../../ressources/img/user.jpg";
 
 export const CivilWrapper = styled.div`
   width: 100%;
@@ -65,7 +66,7 @@ export const CivilPhoto = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 5px;
-  background-image: url(https://cdn.pixabay.com/photo/2022/07/24/23/46/artificial-intelligence-7342613_960_720.jpg);
+  background-image: url(${({ src }) => (src ? src : userImg)});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

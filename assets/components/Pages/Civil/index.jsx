@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getAllCivil } from "../../../redux/actions/Civil.action";
+import { toSlugFormat, ucFirst } from "../../../utils/textFormat";
 import ButtonWithIcon from "../../Shared/Buttons/ButtonWithIcon";
 import SearchInput from "../../Shared/SearchInput";
 import { AddUser } from "../../SVG";
@@ -10,6 +13,9 @@ import EncodeCivil from "./Modal/EncodeCivil";
 const Civil = () => {
   const [search, setSearch] = useState();
   const [modal, setModal] = useState({ encodeCivil: false });
+
+  const dispatch = useDispatch();
+  const civilSelector = useSelector((state) => state.CivilReducer);
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +31,10 @@ const Civil = () => {
       encodeCivil: !prevState.encodeCivil,
     }));
   };
+
+  useEffect(() => {
+    dispatch(getAllCivil());
+  }, [civilSelector.isReady]);
 
   return (
     <>
@@ -47,24 +57,26 @@ const Civil = () => {
         </ActionRow>
 
         <RowCard>
-          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
-            <CivilCard />
-          </Link>
-          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
-            <CivilCard />
-          </Link>
-          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
-            <CivilCard />
-          </Link>
-          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
-            <CivilCard />
-          </Link>
-          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
-            <CivilCard />
-          </Link>
-          <Link to="../../civil/assadi-halifa" state={{ name: "NOM Prénom" }}>
-            <CivilCard />
-          </Link>
+          {civilSelector.collection.map((civil) => (
+            <Link
+              to={`../../civil/${toSlugFormat(
+                `${civil && civil.nom} ${civil && civil.prenom}`
+              )}`}
+              state={{
+                name: `${civil && civil.nom.toUpperCase()} ${
+                  civil && ucFirst(civil.prenom)
+                }`,
+                id: civil && civil.id,
+              }}
+            >
+              {civil && (
+                <CivilCard
+                  nom={civil.nom.toUpperCase()}
+                  prenom={ucFirst(civil.prenom)}
+                />
+              )}
+            </Link>
+          ))}
         </RowCard>
         <EncodeCivil
           isOpen={modal.encodeCivil}

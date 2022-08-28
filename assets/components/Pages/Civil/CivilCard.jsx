@@ -1,10 +1,10 @@
 import React from "react";
 import { CardContainer, CivilInfo, CivilPhoto } from "./Civil.styled";
 
-const CivilCard = () => {
+const CivilCard = ({ nom, prenom, telephone, photo }) => {
   return (
     <CardContainer>
-      <CivilPhoto />
+      <CivilPhoto src={photo} />
       <CivilInfo>
         <p className="text">Northon</p>
         <p className="text">michelle</p>

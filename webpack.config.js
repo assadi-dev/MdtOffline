@@ -1,5 +1,5 @@
 const Encore = require("@symfony/webpack-encore");
-var dotenv = require("dotenv");
+const dotenv = require("dotenv");
 const path = require("path");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -50,6 +50,7 @@ Encore
   .configureBabel((config) => {
     config.plugins.push("@babel/plugin-proposal-class-properties");
     config.plugins.push("@babel/plugin-syntax-jsx");
+    config.plugins.push("@babel/plugin-transform-runtime");
   })
 
   // enables @babel/preset-env polyfills
@@ -81,7 +82,7 @@ Encore
       throw env.error;
     }
 
-    /*  options["process.env"].REACT_APP_URLBACKEND = JSON.stringify(
+    /* options["process.env"].REACT_APP_URLBACKEND = JSON.stringify(
       env.parsed.REACT_APP_URLBACKEND
     ); */
   });
