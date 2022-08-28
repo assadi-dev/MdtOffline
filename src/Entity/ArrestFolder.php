@@ -7,8 +7,10 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\ArrestFolderRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=ArrestFolderRepository::class)
  */
 class ArrestFolder
@@ -31,7 +33,7 @@ class ArrestFolder
     private $entreeCellule;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $infractions;
 
@@ -41,9 +43,15 @@ class ArrestFolder
     private $avocat;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="boolean")
      */
     private $tentative;
+
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $complicite;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -90,6 +98,22 @@ class ArrestFolder
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $agent;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $amend;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $peine;
+
 
     public function __construct()
     {
@@ -151,14 +175,25 @@ class ArrestFolder
         return $this;
     }
 
-    public function getTentative(): ?string
+    public function isTentative(): ?bool
     {
         return $this->tentative;
     }
 
-    public function setTentative(string $tentative): self
+    public function setTentative(bool $tentative): self
     {
         $this->tentative = $tentative;
+
+        return $this;
+    }
+    public function isComplicite(): ?bool
+    {
+        return $this->complicite;
+    }
+
+    public function setComplicite(bool $complicite): self
+    {
+        $this->complicite = $complicite;
 
         return $this;
     }
@@ -267,6 +302,42 @@ class ArrestFolder
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAgent(): ?string
+    {
+        return $this->agent;
+    }
+
+    public function setAgent(string $agent): self
+    {
+        $this->agent = $agent;
+
+        return $this;
+    }
+
+    public function getAmend(): ?int
+    {
+        return $this->amend;
+    }
+
+    public function setAmend(int $amend): self
+    {
+        $this->amend = $amend;
+
+        return $this;
+    }
+
+    public function getPeine(): ?string
+    {
+        return $this->peine;
+    }
+
+    public function setPeine(string $peine): self
+    {
+        $this->peine = $peine;
 
         return $this;
     }

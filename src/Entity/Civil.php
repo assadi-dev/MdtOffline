@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use DateTime;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CivilRepository;
@@ -103,6 +105,11 @@ class Civil
      */
     private $identification;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Avertissement::class, mappedBy="civil")
+     */
+    private $avertissements;
+
 
 
     public function __construct()
@@ -110,6 +117,7 @@ class Civil
 
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt =  new DateTime();
+        $this->avertissements = new ArrayCollection();
     }
 
 
@@ -307,6 +315,36 @@ class Civil
     public function setIdentification(?string $identification): self
     {
         $this->identification = $identification;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avertissement>
+     */
+    public function getAvertissements(): Collection
+    {
+        return $this->avertissements;
+    }
+
+    public function addAvertissement(Avertissement $avertissement): self
+    {
+        if (!$this->avertissements->contains($avertissement)) {
+            $this->avertissements[] = $avertissement;
+            $avertissement->setCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvertissement(Avertissement $avertissement): self
+    {
+        if ($this->avertissements->removeElement($avertissement)) {
+            // set the owning side to null (unless already changed)
+            if ($avertissement->getCivil() === $this) {
+                $avertissement->setCivil(null);
+            }
+        }
 
         return $this;
     }

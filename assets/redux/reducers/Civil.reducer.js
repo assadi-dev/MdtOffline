@@ -4,12 +4,13 @@ const initialState = { collection: [], selected: [], isReady: false };
 
 const CivilReducer = (state = initialState, action) => {
   const { payload, type } = action;
+  state = { ...state, isReady: false };
   switch (type) {
     case GET_ALL_CIVIL:
       return { ...state, collection: payload, isReady: true };
       break;
     case GET_ONE_CIVIL:
-      return { ...state, selected: payload };
+      return { ...state, selected: payload, isReady: true };
       break;
     case ADD_CIVIL:
       return {

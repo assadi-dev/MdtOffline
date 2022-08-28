@@ -35,7 +35,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
       emploie: "",
       adresse: "",
       photo: "",
-      haireColor: "",
+      hairColor: "",
       ethnie: "caucasien",
       permis: "non-valide",
       sexe: "homme",
@@ -43,6 +43,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
     },
     onSubmit: (values) => {
       dispatch(addCivil(values)).then(() => {
+        formik.resetForm();
         onClose();
       });
     },

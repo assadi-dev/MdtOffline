@@ -2,18 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\TrafficTicketRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use App\Repository\AvertissementRepository;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ORM\Entity(repositoryClass=AvertissementRepository::class)
- * @ApiFilter(SearchFilter::class, properties= {"civil.id" : "partial"})
- * @ApiResource()
- * 
+ * @ORM\Entity(repositoryClass=TrafficTicketRepository::class)
  */
-class Avertissement
+class TrafficTicket
 {
     /**
      * @ORM\Id
@@ -23,14 +18,14 @@ class Avertissement
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
-    private $lieux;
+    private $infractions;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
-    private $comments;
+    private $lieux;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -38,7 +33,7 @@ class Avertissement
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -48,13 +43,25 @@ class Avertissement
     private $agent;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="avertissements")
+     * @ORM\Column(type="integer")
      */
-    private $civil;
+    private $amend;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getInfractions(): ?string
+    {
+        return $this->infractions;
+    }
+
+    public function setInfractions(string $infractions): self
+    {
+        $this->infractions = $infractions;
+
+        return $this;
     }
 
     public function getLieux(): ?string
@@ -65,18 +72,6 @@ class Avertissement
     public function setLieux(string $lieux): self
     {
         $this->lieux = $lieux;
-
-        return $this;
-    }
-
-    public function getComments(): ?string
-    {
-        return $this->comments;
-    }
-
-    public function setComments(?string $comments): self
-    {
-        $this->comments = $comments;
 
         return $this;
     }
@@ -98,7 +93,7 @@ class Avertissement
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -117,14 +112,14 @@ class Avertissement
         return $this;
     }
 
-    public function getCivil(): ?Civil
+    public function getAmend(): ?int
     {
-        return $this->civil;
+        return $this->amend;
     }
 
-    public function setCivil(?Civil $civil): self
+    public function setAmend(int $amend): self
     {
-        $this->civil = $civil;
+        $this->amend = $amend;
 
         return $this;
     }

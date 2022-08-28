@@ -59,6 +59,7 @@ const Civil = () => {
         <RowCard>
           {civilSelector.collection.map((civil) => (
             <Link
+              key={civil.id}
               to={`../../civil/${toSlugFormat(
                 `${civil && civil.nom} ${civil && civil.prenom}`
               )}`}
