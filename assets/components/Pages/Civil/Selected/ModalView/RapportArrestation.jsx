@@ -18,9 +18,12 @@ import {
   TimeToUnix,
   unixToTime,
 } from "../../../../../utils/calculs";
+import { useDispatch } from "react-redux";
+import { add_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 
-const RapportArrestation = ({ onClose }) => {
+const RapportArrestation = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
+  const dispatch = useDispatch();
   /**
    * Reset la taille du champs text
    */
@@ -41,8 +44,9 @@ const RapportArrestation = ({ onClose }) => {
   });
 
   const [inputState, setInputState] = useState({
-    lieuxRemplissage: "",
+    lieux: "",
     chefAcusation: [],
+    entreeCellule: "",
     up: false,
   });
 
@@ -168,9 +172,27 @@ const RapportArrestation = ({ onClose }) => {
     return totalpeine;
   }, [total, inputState.chefAcusation, inputState.up]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let infractions = inputState.chefAcusation;
+    let data = {
+      infractions,
+      lieux: inputState.lieux,
+      entreeCellule: inputState.entreeCellule,
+      civil: `api/civils/${idCivil}`,
+      amende: total,
+      peine: totalUp,
+    };
+
+    dispatch(add_rapportArrestation(data)).then(() => {
+      onClose();
+    });
+  };
+
   return (
     <>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <HeadTitleView>
           <h2 className="titleView">RAPPORT D'ARRESTATION</h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
@@ -194,13 +216,22 @@ const RapportArrestation = ({ onClose }) => {
               <tbody>
                 <tr>
                   <td className="lieuxRemplissage">
-                    <input type="text" name="lieuxRemplissage" autoFocus />
+                    <input
+                      type="text"
+                      name="lieuxRemplissage"
+                      autoFocus
+                      name="lieux"
+                      value={inputState.lieux}
+                      onChange={handleChangeValue}
+                    />
                   </td>
                   <td>
                     <input
                       type="time"
-                      name="entreCellule"
+                      name="entreeCellule"
                       className="entreCellule"
+                      value={inputState.entreeCellule}
+                      onChange={handleChangeValue}
                     />
                   </td>
                   <td>

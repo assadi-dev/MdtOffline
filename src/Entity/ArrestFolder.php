@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\ArrestFolderRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -19,77 +20,80 @@ class ArrestFolder
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $lieux;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Groups({"read:civil:item"})
      */
     private $entreeCellule;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="json",nullable=true)
+     * @Groups({"read:civil:item"})
      */
-    private $infractions;
+    private $infractions = [];
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:civil:item"})
      */
     private $avocat;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $tentative;
-
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $complicite;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $rapport;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $media;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:civil:item"})
      */
     private $droitMiranda;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:civil:item"})
      */
     private $soins;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:civil:item"})
      */
     private $nourriture;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:civil:item"})
      */
     private $isEnclose;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $enclosedAt;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
@@ -101,18 +105,26 @@ class ArrestFolder
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $agent;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $amend;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $peine;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="dossierArrestation")
+     */
+    private $civil;
 
 
     public function __construct()
@@ -151,12 +163,12 @@ class ArrestFolder
         return $this;
     }
 
-    public function getInfractions(): ?string
+    public function getInfractions(): ?array
     {
         return $this->infractions;
     }
 
-    public function setInfractions(string $infractions): self
+    public function setInfractions(array $infractions): self
     {
         $this->infractions = $infractions;
 
@@ -175,28 +187,6 @@ class ArrestFolder
         return $this;
     }
 
-    public function isTentative(): ?bool
-    {
-        return $this->tentative;
-    }
-
-    public function setTentative(bool $tentative): self
-    {
-        $this->tentative = $tentative;
-
-        return $this;
-    }
-    public function isComplicite(): ?bool
-    {
-        return $this->complicite;
-    }
-
-    public function setComplicite(bool $complicite): self
-    {
-        $this->complicite = $complicite;
-
-        return $this;
-    }
 
     public function getRapport(): ?string
     {
@@ -338,6 +328,18 @@ class ArrestFolder
     public function setPeine(string $peine): self
     {
         $this->peine = $peine;
+
+        return $this;
+    }
+
+    public function getCivil(): ?Civil
+    {
+        return $this->civil;
+    }
+
+    public function setCivil(?Civil $civil): self
+    {
+        $this->civil = $civil;
 
         return $this;
     }

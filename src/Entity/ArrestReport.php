@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\ArrestReportRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ArrestReportRepository::class)
@@ -16,58 +20,69 @@ class ArrestReport
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $lieux;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $entreeCellule;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="json",nullable=true)
+     * @Groups({"read:civil:item"})
      */
-    private $infractions;
+    private $infractions = [];
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $tentative;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $complicite;
 
     /**
      * @ORM\Column(type="integer")
-     */
-    private $quantite;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $amende;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $peine;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="rapporArrestation")
+     */
+    private $civil;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
+     */
+    private $agent;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -98,53 +113,19 @@ class ArrestReport
         return $this;
     }
 
-    public function getInfractions(): ?string
+    public function getInfractions(): ?array
     {
         return $this->infractions;
     }
 
-    public function setInfractions(string $infractions): self
+    public function setInfractions(array $infractions): self
     {
         $this->infractions = $infractions;
 
         return $this;
     }
 
-    public function isTentative(): ?bool
-    {
-        return $this->tentative;
-    }
 
-    public function setTentative(bool $tentative): self
-    {
-        $this->tentative = $tentative;
-
-        return $this;
-    }
-
-    public function isComplicite(): ?bool
-    {
-        return $this->complicite;
-    }
-
-    public function setComplicite(bool $complicite): self
-    {
-        $this->complicite = $complicite;
-
-        return $this;
-    }
-
-    public function getQuantite(): ?int
-    {
-        return $this->quantite;
-    }
-
-    public function setQuantite(int $quantite): self
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
 
     public function getAmende(): ?int
     {
@@ -190,6 +171,30 @@ class ArrestReport
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCivil(): ?Civil
+    {
+        return $this->civil;
+    }
+
+    public function setCivil(?Civil $civil): self
+    {
+        $this->civil = $civil;
+
+        return $this;
+    }
+
+    public function getAgent(): ?string
+    {
+        return $this->agent;
+    }
+
+    public function setAgent(string $agent): self
+    {
+        $this->agent = $agent;
 
         return $this;
     }

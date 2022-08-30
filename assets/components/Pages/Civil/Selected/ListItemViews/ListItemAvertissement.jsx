@@ -7,19 +7,25 @@ import {
   NumberView,
   TitleItemView,
 } from "./ListViewItems.styled";
+import numeral from "numeral";
+import { dateForCivilListView } from "../../../../../utils/dateFormat";
 
-const ListItemAvertissement = ({ numero, fait, agent, date }) => {
+const ListItemAvertissement = ({ numero, agent, date, comment }) => {
+  let numeroFormat = numeral(numero);
+  date = date || new Date();
   return (
     <ListContainer>
       <ListContent>
-        <NumberView className="text-end">N°606</NumberView>
+        <NumberView className="text-end">
+          N°{numeroFormat.format("000")}
+        </NumberView>
 
         <TitleItemView>Fait :</TitleItemView>
-        <p>Excès de vitesse</p>
+        <p>{comment}</p>
         <AgentItemView>
-          <span className="agent">Agent : </span> 98-Tommy-Stewart
+          <span className="agent">Agent : </span> {agent}
         </AgentItemView>
-        <DateItemView> 14:07 - 07/08/2022 </DateItemView>
+        {<DateItemView> {dateForCivilListView(date)}</DateItemView>}
       </ListContent>
     </ListContainer>
   );

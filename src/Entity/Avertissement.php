@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\AvertissementRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use DateTime;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass=AvertissementRepository::class)
@@ -19,31 +23,38 @@ class Avertissement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $lieux;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $comments;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $agent;
 
@@ -51,6 +62,14 @@ class Avertissement
      * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="avertissements")
      */
     private $civil;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
+    }
+
 
     public function getId(): ?int
     {

@@ -82,6 +82,8 @@ Encore
       throw env.error;
     }
 
+    console.log(options);
+
     /* options["process.env"].REACT_APP_URLBACKEND = JSON.stringify(
       env.parsed.REACT_APP_URLBACKEND
     ); */

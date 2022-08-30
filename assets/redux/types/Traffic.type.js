@@ -1,0 +1,6 @@
+export const GET_ALL_TRAFFIC = "GET_ALL_TRAFFIC";
+export const GET_ONE_TRAFFIC = "GET_ONE_TRAFFIC";
+export const GET_TRAFFIC_BY_CIVIL = "GET_TRAFFIC_BY_CIVIL ";
+export const ADD_TRAFFIC = "ADD_TRAFFIC";
+export const DELETE_TRAFFIC = "DELETE_TRAFFIC";
+export const EDIT_TRAFFIC = "EDIT_TRAFFIC";

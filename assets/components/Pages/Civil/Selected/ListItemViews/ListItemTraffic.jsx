@@ -1,4 +1,6 @@
+import numeral from "numeral";
 import React from "react";
+import { dateForCivilListView } from "../../../../../utils/dateFormat";
 import {
   AgentItemView,
   AmendItemView,
@@ -11,35 +13,53 @@ import {
   TicketView,
   TitleItemView,
 } from "./ListViewItems.styled";
+import PropTypes from "prop-types";
 
-const ListItemTraffic = ({ numero, fait, agent, date }) => {
+const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
+  let numeroFormat = numeral(numero);
+
   return (
     <ListContainer>
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
-          <NumberView className="text-end">N°606</NumberView>
+          <NumberView className="text-end">
+            N°{numeroFormat.format("000")}
+          </NumberView>
         </RowListItemView>
         <ListViewOffence>
           {" "}
           <p>Offence :</p>
           <ul>
-            <li> Excès de vitesse</li>
-            <li> Excès de vitesse</li>
-            <li> Excès de vitesse</li>
+            {offence.length > 0 && offence.map((v, i) => <li key={i}>{v}</li>)}
           </ul>
         </ListViewOffence>
 
         <AgentItemView>
-          <span className="agent">Agent : </span> 98-Tommy-Stewart
+          {" "}
+          <span className="agent">Agent : </span> {agent}
         </AgentItemView>
         <RowListItemView>
-          <AmendItemView> 4200 $ </AmendItemView>
-          <DateItemView> 14:07 - 07/08/2022 </DateItemView>
+          <AmendItemView> {amend} $</AmendItemView>
+          <DateItemView> {dateForCivilListView(date)} </DateItemView>
         </RowListItemView>
       </ListContent>
     </ListContainer>
   );
+};
+
+ListItemTraffic.proptypes = {
+  numero: PropTypes.number,
+  offence: PropTypes.arrayOf(PropTypes.string),
+  agent: PropTypes.string,
+  amend: PropTypes.number,
+};
+
+ListItemTraffic.defaultProps = {
+  amend: 0,
+  numero: 0,
+  date: new Date(),
+  offence: [],
 };
 
 export default ListItemTraffic;

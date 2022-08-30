@@ -4,15 +4,28 @@ namespace App\Entity;
 
 use DateTime;
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CivilRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * 
+ * @ApiResource(normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
+ * 
+ * itemOperations={
+ *       "delete",
+ *       "put",
+ *       "get" = { "normalization_context"={
+ *                      "groups" ={"read:civil:collections", "read:civil:item"},
+ *                      }
+ *              }
+ * }
+ * 
+ * )
  * @ORM\Entity(repositoryClass=CivilRepository::class)
  */
 class Civil
@@ -21,76 +34,91 @@ class Civil
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:collections"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:collections"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:collections"})
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $birthday;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:collections"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $nationalite;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $affiliation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $emploie;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:civil:collections"})
      */
     private $photo;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $hairColor;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $ethnie;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $permis;
 
     /**
      * @ORM\Column(type="string", length=25)
+     * @Groups({"read:civil:item"})
      */
     private $sexe;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
@@ -102,13 +130,34 @@ class Civil
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $identification;
 
     /**
      * @ORM\OneToMany(targetEntity=Avertissement::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
      */
     private $avertissements;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Traffic::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
+     */
+    private $traffics;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ArrestFolder::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
+     */
+    private $dossierArrestation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ArrestReport::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
+     */
+    private $rapportArrestation;
+
 
 
 
@@ -118,6 +167,9 @@ class Civil
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt =  new DateTime();
         $this->avertissements = new ArrayCollection();
+        $this->traffics = new ArrayCollection();
+        $this->dossierArrestation = new ArrayCollection();
+        $this->rapportArrestation = new ArrayCollection();
     }
 
 
@@ -343,6 +395,96 @@ class Civil
             // set the owning side to null (unless already changed)
             if ($avertissement->getCivil() === $this) {
                 $avertissement->setCivil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Traffic>
+     */
+    public function getTraffics(): Collection
+    {
+        return $this->traffics;
+    }
+
+    public function addTraffic(Traffic $traffic): self
+    {
+        if (!$this->traffics->contains($traffic)) {
+            $this->traffics[] = $traffic;
+            $traffic->setCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTraffic(Traffic $traffic): self
+    {
+        if ($this->traffics->removeElement($traffic)) {
+            // set the owning side to null (unless already changed)
+            if ($traffic->getCivil() === $this) {
+                $traffic->setCivil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ArrestFolder>
+     */
+    public function getDossierArrestation(): Collection
+    {
+        return $this->dossierArrestation;
+    }
+
+    public function addDossierArrestation(ArrestFolder $dossierArrestation): self
+    {
+        if (!$this->dossierArrestation->contains($dossierArrestation)) {
+            $this->dossierArrestation[] = $dossierArrestation;
+            $dossierArrestation->setCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDossierArrestation(ArrestFolder $dossierArrestation): self
+    {
+        if ($this->dossierArrestation->removeElement($dossierArrestation)) {
+            // set the owning side to null (unless already changed)
+            if ($dossierArrestation->getCivil() === $this) {
+                $dossierArrestation->setCivil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ArrestReport>
+     */
+    public function getRapportArrestation(): Collection
+    {
+        return $this->rapportArrestation;
+    }
+
+    public function addRapportArrestation(ArrestReport $rapportArrestation): self
+    {
+        if (!$this->rapportArrestation->contains($rapportArrestation)) {
+            $this->rapportArrestation[] = $rapportArrestation;
+            $rapportArrestation->setCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRapporTArrestation(ArrestReport $rapportArrestation): self
+    {
+        if ($this->rapportArrestation->removeElement($rapportArrestation)) {
+            // set the owning side to null (unless already changed)
+            if ($rapportArrestation->getCivil() === $this) {
+                $rapportArrestation->setCivil(null);
             }
         }
 

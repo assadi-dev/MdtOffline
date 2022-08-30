@@ -12,9 +12,13 @@ import {
 import SelectMultiple from "../../../../Shared/SelectMultiple";
 import { codePenal, nominal } from "../../../../../Data/FichesCalcule";
 import EditTable from "../EditTable";
+import { useDispatch } from "react-redux";
+import { add_traffic } from "../../../../../redux/actions/Traffic.action";
 
-const TrafficView = ({ onClose }) => {
+const TrafficView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
+  const dispatch = useDispatch();
+
   const closeModal = () => {
     onClose();
   };
@@ -31,7 +35,6 @@ const TrafficView = ({ onClose }) => {
   const [inputState, setInputState] = useState({
     lieuxRemplissage: "",
     chefAcusation: [],
-    amende: 0,
   });
 
   const handleChangeValue = (e) => {
@@ -93,9 +96,26 @@ const TrafficView = ({ onClose }) => {
     return 0;
   }, [inputState.chefAcusation]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const infractions = inputState.chefAcusation;
+
+    let data = {
+      infractions,
+      lieux: inputState.lieuxRemplissage,
+      agent: "98-Tommy-Stewart",
+      amend: total,
+      civil: `api/civils/${idCivil}`,
+    };
+
+    dispatch(add_traffic(data)).then(() => {
+      onClose();
+    });
+  };
+
   return (
     <>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <HeadTitleView>
           <h2 className="titleView">TRAFFIC</h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
@@ -146,7 +166,6 @@ const TrafficView = ({ onClose }) => {
                       name={chef.label}
                       value={chef ? chef.qte : 0}
                       onChange={handleQty}
-                      defaultValue={0}
                     />
                   </td>
                   <td>
@@ -155,8 +174,10 @@ const TrafficView = ({ onClose }) => {
                       name={chef.label}
                       onChange={handleNominal}
                     >
-                      {nominal.map((n) => (
-                        <option value={n.value}>{n.label}</option>
+                      {nominal.map((n, i) => (
+                        <option key={i} value={n.value}>
+                          {n.label}
+                        </option>
                       ))}
                     </select>
                   </td>

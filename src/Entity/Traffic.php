@@ -2,62 +2,89 @@
 
 namespace App\Entity;
 
-use App\Repository\TrafficTicketRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use App\Repository\TrafficTicketRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use DateTime;
+use DateTimeImmutable;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=TrafficTicketRepository::class)
  */
-class TrafficTicket
+class Traffic
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="json", nullable=true)
+     * @Groups({"read:civil:item"})
      */
-    private $infractions;
+    private $infractions = [];
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read:civil:item"})
      */
     private $lieux;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:civil:item"})
      */
     private $agent;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $amend;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="traffics")
+     */
+    private $civil;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
+    }
+
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getInfractions(): ?string
+    public function getInfractions(): ?array
     {
         return $this->infractions;
     }
 
-    public function setInfractions(string $infractions): self
+    public function setInfractions(array $infractions): self
     {
         $this->infractions = $infractions;
 
@@ -120,6 +147,18 @@ class TrafficTicket
     public function setAmend(int $amend): self
     {
         $this->amend = $amend;
+
+        return $this;
+    }
+
+    public function getCivil(): ?Civil
+    {
+        return $this->civil;
+    }
+
+    public function setCivil(?Civil $civil): self
+    {
+        $this->civil = $civil;
 
         return $this;
     }

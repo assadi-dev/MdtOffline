@@ -66,13 +66,13 @@ const CivilSelected = () => {
   const Render = ({ view }) => {
     switch (view) {
       case "avertissement":
-        return <AvertissementView onClose={closeModal} />;
+        return <AvertissementView idCivil={id} onClose={closeModal} />;
       case "traffic":
-        return <TrafficView onClose={closeModal} />;
+        return <TrafficView idCivil={id} onClose={closeModal} />;
       case "rapport-d-arrestation":
-        return <RapportArrestation onClose={closeModal} />;
+        return <RapportArrestation idCivil={id} onClose={closeModal} />;
       case "dossier-d-arrestation":
-        return <DossierArrestation onClose={closeModal} />;
+        return <DossierArrestation idCivil={id} onClose={closeModal} />;
       default:
         throw Error("Aucun rendu attribuée à cette vue");
         break;
@@ -148,11 +148,17 @@ const CivilSelected = () => {
             }
             title="AVERTISSEMENT"
           >
-            <ListItemAvertissement />
-            <ListItemAvertissement />
-            <ListItemAvertissement />
-            <ListItemAvertissement />
-            <ListItemAvertissement />
+            {civilData.avertissements
+              ? civilData.avertissements.map((avertissement) => (
+                  <ListItemAvertissement
+                    key={avertissement.id}
+                    numero={avertissement.id}
+                    comment={avertissement.comments}
+                    agent={avertissement.agent}
+                    date={avertissement.createdAt}
+                  />
+                ))
+              : null}
           </CivilSelectedCard>
 
           <CivilSelectedCard
@@ -164,10 +170,21 @@ const CivilSelected = () => {
               })
             }
           >
-            <ListItemTraffic />
-            <ListItemTraffic />
-            <ListItemTraffic />
-            <ListItemTraffic />
+            {civilData.traffics
+              ? civilData.traffics.map((traffic) => {
+                  let offences = traffic.infractions.map((v) => v.label) || [];
+                  return (
+                    <ListItemTraffic
+                      key={traffic.id}
+                      numero={traffic.id}
+                      offence={offences}
+                      agent={traffic.agent}
+                      amend={traffic.amend}
+                      date={traffic.createdAt}
+                    />
+                  );
+                })
+              : null}
           </CivilSelectedCard>
         </RowFirst>
         <RowSecond>
@@ -180,7 +197,24 @@ const CivilSelected = () => {
               })
             }
           >
-            <ListItemRapportArrestation />
+            {" "}
+            {civilData.rapportArrestation
+              ? civilData.rapportArrestation.map((rapport) => {
+                  let offence = rapport.infractions.map((r) => r.label);
+
+                  return (
+                    <ListItemRapportArrestation
+                      key={rapport.id}
+                      numero={rapport.id}
+                      offence={offence}
+                      agent={rapport.agent}
+                      date={rapport.createdAt}
+                      amend={rapport.amende}
+                      peine={rapport.peine}
+                    />
+                  );
+                })
+              : null}
           </CivilSelectedCard>
 
           <CivilSelectedCard
