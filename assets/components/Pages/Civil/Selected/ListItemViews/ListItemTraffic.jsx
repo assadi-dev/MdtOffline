@@ -14,6 +14,7 @@ import {
   TitleItemView,
 } from "./ListViewItems.styled";
 import PropTypes from "prop-types";
+import { FluentMoreCircleFill } from "../../../../SVG";
 
 const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
   let numeroFormat = numeral(numero);
@@ -26,6 +27,9 @@ const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
           <NumberView className="text-end">
             N°{numeroFormat.format("000")}
           </NumberView>
+          <span>
+            <FluentMoreCircleFill />
+          </span>
         </RowListItemView>
         <ListViewOffence>
           {" "}

@@ -106,7 +106,6 @@ const RapportArrestation = ({ idCivil, onClose }) => {
   const handleTantative = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
-    console.log(value);
 
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
@@ -180,6 +179,7 @@ const RapportArrestation = ({ idCivil, onClose }) => {
       infractions,
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
+      agent: "98-Tommy-Stewart",
       civil: `api/civils/${idCivil}`,
       amende: total,
       peine: totalUp,

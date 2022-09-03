@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonStyled } from "../../../../Shared/Buttons/Button.styled";
 import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
+import { FluentMoreCircleFill } from "../../../../SVG";
 import {
   AgentItemView,
   AmendItemView,
@@ -9,42 +10,64 @@ import {
   ListContainer,
   ListContent,
   ListViewOffence,
+  MoreIconBtn,
   NumberView,
+  RowIcon,
   RowListItemView,
   TicketView,
   TitleItemView,
   UpListView,
 } from "./ListViewItems.styled";
+import numeral from "numeral";
+import { dateForCivilListView } from "../../../../../utils/dateFormat";
+import PropTypes from "prop-types";
 
-const ListItemDossierArrestaion = ({ numero, fait, agent, date }) => {
+const ListItemDossierArrestaion = ({
+  numero,
+  amend,
+  agent,
+  date,
+  peine,
+  offence,
+}) => {
+  let numeroFormat = numeral(numero);
+
   return (
     <ListContainer>
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
-          <NumberView className="text-end">N°606</NumberView>
+          <RowIcon>
+            <NumberView className="text-end">
+              N°{numeroFormat.format("000")}
+            </NumberView>
+            <MoreIconBtn className="m-left-1 ">
+              <FluentMoreCircleFill />
+            </MoreIconBtn>
+          </RowIcon>
         </RowListItemView>
         <ListViewOffence>
           {" "}
           <p>Offence :</p>
           <ul>
-            <li> Excès de vitesse</li>
-            <li> Excès de vitesse</li>
-            <li> Excès de vitesse</li>
+            <ul>
+              {offence.length > 0 &&
+                offence.map((v, i) => <li key={i}>{v}</li>)}
+            </ul>
           </ul>
         </ListViewOffence>
 
         <RowListItemView>
           {" "}
           <AgentItemView>
-            <span className="agent">Agent : </span> 98-Tommy-Stewart
+            <span className="agent">Agent : </span> {agent}
           </AgentItemView>{" "}
-          <DateItemView> 14:07 - 07/08/2022 </DateItemView>
+          <DateItemView> {dateForCivilListView(date)} </DateItemView>
         </RowListItemView>
 
         <RowListItemView>
-          <AmendItemView> 4200 $ </AmendItemView>
-          <UpListView> 0:05:00</UpListView>
+          <AmendItemView> {amend} $ </AmendItemView>
+          <UpListView>{peine}</UpListView>
         </RowListItemView>
       </ListContent>
       <div className="text-center">
@@ -52,6 +75,21 @@ const ListItemDossierArrestaion = ({ numero, fait, agent, date }) => {
       </div>
     </ListContainer>
   );
+};
+
+ListItemDossierArrestaion.proptypes = {
+  numero: PropTypes.number,
+  offence: PropTypes.arrayOf(PropTypes.string),
+  agent: PropTypes.string,
+  amend: PropTypes.number,
+};
+
+ListItemDossierArrestaion.defaultProps = {
+  amend: 0,
+  numero: 0,
+  date: new Date(),
+  offence: [],
+  peine: "0:00:00",
 };
 
 export default ListItemDossierArrestaion;

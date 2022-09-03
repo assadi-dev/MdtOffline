@@ -7,7 +7,9 @@ import {
   ListContainer,
   ListContent,
   ListViewOffence,
+  MoreIconBtn,
   NumberView,
+  RowIcon,
   RowListItemView,
   TicketView,
   TitleItemView,
@@ -15,6 +17,7 @@ import {
 } from "./ListViewItems.styled";
 import numeral from "numeral";
 import { dateForCivilListView } from "../../../../../utils/dateFormat";
+import { FluentMoreCircleFill } from "../../../../SVG";
 
 const ListItemRapportArrestation = ({
   numero,
@@ -30,9 +33,16 @@ const ListItemRapportArrestation = ({
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
-          <NumberView className="text-end">
-            N°{numeroFormat.format("000")}
-          </NumberView>
+
+          <RowIcon>
+            {" "}
+            <NumberView className="text-end">
+              N°{numeroFormat.format("000")}
+            </NumberView>
+            <MoreIconBtn className="m-left-1 ">
+              <FluentMoreCircleFill />
+            </MoreIconBtn>
+          </RowIcon>
         </RowListItemView>
         <ListViewOffence>
           {" "}

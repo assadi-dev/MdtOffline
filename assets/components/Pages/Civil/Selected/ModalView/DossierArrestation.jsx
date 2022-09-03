@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import { codePenal, nominal } from "../../../../../Data/FichesCalcule";
 import {
   conversionUP,
@@ -11,6 +11,7 @@ import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
 import SelectMultiple from "../../../../Shared/SelectMultiple";
 import SwitchButton from "../../../../Shared/SwitchButton";
 import EditTable from "../EditTable";
+import { useDispatch } from "react-redux";
 import {
   BorderZone,
   FooterSectionButton,
@@ -18,7 +19,7 @@ import {
   TableViewPresentation,
 } from "./ModalView.styled";
 
-const DossierArrestation = ({ onClose }) => {
+const DossierArrestation = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
   const closeModal = () => {
     onClose();
@@ -26,10 +27,17 @@ const DossierArrestation = ({ onClose }) => {
     textInput.removeAttribute("style");
   };
 
+  const dispatch = useDispatch();
+
   const [inputState, setInputState] = useState({
-    lieuxRemplissage: "",
+    lieux: "",
     entreeCellule: "",
     chefAcusation: [],
+    droitMiranda: false,
+    soins: false,
+    nourriture: false,
+    avocat: false,
+    isEnclose: false,
   });
 
   const options = codePenal.map((j) => {
@@ -94,7 +102,6 @@ const DossierArrestation = ({ onClose }) => {
   const handleTantative = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
-    console.log(value);
 
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
@@ -130,6 +137,13 @@ const DossierArrestation = ({ onClose }) => {
     }
   };
 
+  const handleSwitch = (e) => {
+    let name = e.target.name,
+      value = e.target.checked;
+
+    setInputState((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const total = useMemo(() => {
     if (inputState.chefAcusation.length > 0) {
       let sommeChefAccusation = inputState.chefAcusation.map(
@@ -156,9 +170,31 @@ const DossierArrestation = ({ onClose }) => {
     return totalpeine;
   }, [total, inputState.chefAcusation, inputState.up]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let infractions = inputState.chefAcusation;
+    let data = {
+      infractions,
+      lieux: inputState.lieux,
+      entreeCellule: inputState.entreeCellule,
+      civil: `api/civils/${idCivil}`,
+      amende: total,
+      peine: totalUp,
+      droitMiranda: inputState.droitMiranda,
+      soins: inputState.soins,
+      nourriture: inputState.nourriture,
+      isEnclose: inputState.isEnclose,
+    };
+
+    console.log(data);
+
+    //dispatch
+  };
+
   return (
     <>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <HeadTitleView>
           <h2 className="titleView">DOSSIER D'ARRESTATION</h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
@@ -184,17 +220,19 @@ const DossierArrestation = ({ onClose }) => {
                   <td className="lieuxRemplissage">
                     <input
                       type="text"
-                      name="lieuxRemplissage"
+                      name="lieux"
                       autoFocus
                       onChange={handleChangeValue}
+                      value={inputState.lieux}
                     />
                   </td>
                   <td>
                     <input
                       type="time"
-                      name="entreCellule"
+                      name="entreeCellule"
                       className="entreCellule"
                       onChange={handleChangeValue}
+                      value={inputState.entreeCellule}
                     />
                   </td>
                 </tr>
@@ -224,16 +262,32 @@ const DossierArrestation = ({ onClose }) => {
               <tbody>
                 <tr>
                   <td>
-                    <SwitchButton name="droit-miranda" />
+                    <SwitchButton
+                      name="droitMiranda"
+                      checked={inputState.droitMiranda}
+                      onChange={handleSwitch}
+                    />
                   </td>
                   <td>
-                    <SwitchButton name="soins" />
+                    <SwitchButton
+                      name="soins"
+                      checked={inputState.soins}
+                      onChange={handleSwitch}
+                    />
                   </td>
                   <td>
-                    <SwitchButton name="nourriture" />
+                    <SwitchButton
+                      name="nourriture"
+                      checked={inputState.nourriture}
+                      onChange={handleSwitch}
+                    />
                   </td>
                   <td>
-                    <SwitchButton name="avocat" />
+                    <SwitchButton
+                      name="avocat"
+                      checked={inputState.avocat}
+                      onChange={handleSwitch}
+                    />
                   </td>
                 </tr>
               </tbody>

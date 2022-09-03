@@ -103,3 +103,24 @@ export const ClotureButton = styled.button`
     opacity: 0.5;
   }
 `;
+
+export const MoreIconBtn = styled.span`
+  cursor: pointer;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    transition: all 0.3s;
+  }
+  :hover {
+    svg {
+      transform: scale(1.2);
+    }
+  }
+`;
+
+export const RowIcon = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
