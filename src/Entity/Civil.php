@@ -7,16 +7,32 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CivilRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiPlatform\Core\Annotation\ApiFilter;
+use App\Controller\SearchCivilController;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
- * @ApiFilter(SearchFilter::class, properties={"nom":"partial","prenom":"partial","telephone":"partial","nationalite"="partial","affiliation"="partial"  })
  * @ApiResource(normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
+ * 
+ * collectionOperations={
+ *  "post",
+ *  "get",
+ * "search_civil"={
+ * "name"="Search",
+ *  "method"="GET",
+ *  "path"="/civil/search",
+ *  "controller"=SearchCivilController::class,
+ *  "read"=false,
+ * "openapi_context" = {
+ *      "summary"="Recherche Civil",
+ *      "description" = "Retourne les resultats des civils trouvé dans la base données",
+ *       "parameters" = {{"name" = "searchTerm","in" = "query","type" = "string","required" = false, "example"= "Danny"}}
+ * }
+ *  
+ * }
+ * },
  * 
  * itemOperations={
  *       "delete",
@@ -159,6 +175,7 @@ class Civil
      * @Groups({"read:civil:item"})
      */
     private $rapportArrestation;
+
 
 
 

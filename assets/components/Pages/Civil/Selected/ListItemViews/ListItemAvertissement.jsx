@@ -4,11 +4,14 @@ import {
   DateItemView,
   ListContainer,
   ListContent,
+  MoreIconBtn,
   NumberView,
+  RowIcon,
   TitleItemView,
 } from "./ListViewItems.styled";
 import numeral from "numeral";
 import { dateForCivilListView } from "../../../../../utils/dateFormat";
+import { FluentMoreCircleFill } from "../../../../SVG";
 
 const ListItemAvertissement = ({ numero, agent, date, comment }) => {
   let numeroFormat = numeral(numero);
@@ -16,9 +19,15 @@ const ListItemAvertissement = ({ numero, agent, date, comment }) => {
   return (
     <ListContainer>
       <ListContent>
-        <NumberView className="text-end">
-          N°{numeroFormat.format("000")}
-        </NumberView>
+        <RowIcon>
+          {" "}
+          <NumberView className="text-end">
+            N°{numeroFormat.format("000")}
+          </NumberView>
+          <MoreIconBtn className="m-left-1 ">
+            <FluentMoreCircleFill />
+          </MoreIconBtn>
+        </RowIcon>
 
         <TitleItemView>Fait :</TitleItemView>
         <p>{comment}</p>

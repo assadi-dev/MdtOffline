@@ -44,7 +44,7 @@ class ArrestReport
 
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=25)
      * @Groups({"read:civil:item"})
      */
     private $amende;

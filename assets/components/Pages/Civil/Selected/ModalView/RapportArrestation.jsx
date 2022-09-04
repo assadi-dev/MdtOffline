@@ -40,6 +40,8 @@ const RapportArrestation = ({ idCivil, onClose }) => {
       peine: j.peines,
       tentative: 1,
       complicite: 1,
+      nominal: 1,
+      qte: 1,
     };
   });
 
@@ -59,11 +61,7 @@ const RapportArrestation = ({ idCivil, onClose }) => {
   const handleSelectChefAcusation = (select) => {
     setInputState((prevState) => ({
       ...prevState,
-      chefAcusation: select.map((s) => ({
-        ...s,
-        qte: 1,
-        nominal: 1,
-      })),
+      chefAcusation: select,
     }));
   };
 
@@ -150,7 +148,8 @@ const RapportArrestation = ({ idCivil, onClose }) => {
       let sommeChefAccusation = inputState.chefAcusation.map(
         (c) => c.value * c.qte * c.nominal * c.tentative * c.complicite
       );
-      return sommeChefAccusation.reduce((a, b) => a + b);
+      let somme = sommeChefAccusation.reduce((a, b) => a + b);
+      return somme.toFixed(2);
     }
     return 0;
   }, [inputState.chefAcusation]);

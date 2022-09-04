@@ -4,7 +4,7 @@ export const codePenal = justicejson.map((j) => {
   const reg = new RegExp(/[\n\r\s\t]+/g, "g");
   let amend = j.amende.replace("$", "");
   amend = amend.replace(reg, "");
-  amend = parseInt(amend);
+  amend = parseFloat(amend);
   return { ...j, amende: amend };
 });
 

@@ -1,5 +1,11 @@
 import { ADD_AVERTISSEMENT } from "../types/avertissements..type";
-import { ADD_CIVIL, GET_ALL_CIVIL, GET_ONE_CIVIL } from "../types/civil.type";
+import {
+  ADD_CIVIL,
+  ENCLOSE_ARREST_FOLDER,
+  GET_ALL_CIVIL,
+  GET_ONE_CIVIL,
+  GET_SEARCH_CIVIL_RESULT,
+} from "../types/civil.type";
 import {
   ADD_DOSSIERARRESTATION,
   ADD_DOSSIER_ARRESTATION,
@@ -25,7 +31,7 @@ const CivilReducer = (state = initialState, action) => {
     case ADD_CIVIL:
       return {
         ...state,
-        collection: [payload, ...state.collection],
+        collection: [...state.collection, payload],
         isReady: true,
       };
 
@@ -67,11 +73,27 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          rapporArrestation: [...state.selected.rapporArrestation, payload],
+          rapportArrestation: [...state.selected.rapportArrestation, payload],
         },
         isReady: true,
       };
-      break;
+
+    case ENCLOSE_ARREST_FOLDER:
+      let update = state.selected.dossierArrestation.map((d) => {
+        if (d.id == payload) {
+          return { ...d, isEnclose: true };
+        }
+        return d;
+      });
+
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          dossierArrestation: update.filter((d) => d.isEnclose === false),
+        },
+        isReady: true,
+      };
     default:
       return state;
       break;

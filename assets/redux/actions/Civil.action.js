@@ -1,4 +1,9 @@
-import { ADD_CIVIL, GET_ALL_CIVIL, GET_ONE_CIVIL } from "../types/civil.type";
+import {
+  ADD_CIVIL,
+  ENCLOSE_ARREST_FOLDER,
+  GET_ALL_CIVIL,
+  GET_ONE_CIVIL,
+} from "../types/civil.type";
 import Api from "../../service/Api/Api";
 
 export const getAllCivil = () => {
@@ -32,6 +37,14 @@ export const getOneCivil = (id) => {
     try {
       Api.get("/civils/" + id).then((res) => {
         let data = res.data;
+
+        data = {
+          ...data,
+          dossierArrestation: data.dossierArrestation.filter(
+            (d) => d.isEnclose == false
+          ),
+        };
+
         dispatch({ payload: data, type: GET_ONE_CIVIL });
       });
     } catch (error) {

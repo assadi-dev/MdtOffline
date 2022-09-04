@@ -43,7 +43,7 @@ class ArrestFolder
     private $infractions = [];
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      * @Groups({"read:civil:item"})
      */
     private $avocat;
@@ -110,7 +110,7 @@ class ArrestFolder
     private $agent;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=25)
      * @Groups({"read:civil:item"})
      */
     private $amend;

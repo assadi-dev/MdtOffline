@@ -29,6 +29,8 @@ const TrafficView = ({ idCivil, onClose }) => {
         label: j.infraction,
         value: j.amende,
         peine: j.peine,
+        nominal: 1,
+        qte: 1,
       };
     });
 
@@ -46,7 +48,7 @@ const TrafficView = ({ idCivil, onClose }) => {
   const handleSelectChefAcusation = (select) => {
     setInputState((prevState) => ({
       ...prevState,
-      chefAcusation: select.map((s) => ({ ...s, qte: 1, nominal: 1 })),
+      chefAcusation: select,
     }));
   };
 
@@ -91,7 +93,8 @@ const TrafficView = ({ idCivil, onClose }) => {
       let sommeChefAccusation = inputState.chefAcusation.map(
         (c) => c.value * c.qte * c.nominal
       );
-      return sommeChefAccusation.reduce((a, b) => a + b);
+      let somme = sommeChefAccusation.reduce((a, b) => a + b);
+      return somme.toFixed(2);
     }
     return 0;
   }, [inputState.chefAcusation]);

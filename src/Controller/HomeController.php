@@ -2,11 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+
+
+    public function __construct()
+    {
+    }
+
+
+
+
     /**
      * @Route("/{reactRouting}", name="app_home", priority="-1",requirements={"reactRouting"="^(?!api).+"}, defaults={"reactRouting": null})
      */

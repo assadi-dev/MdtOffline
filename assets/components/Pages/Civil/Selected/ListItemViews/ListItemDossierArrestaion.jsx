@@ -21,8 +21,11 @@ import {
 import numeral from "numeral";
 import { dateForCivilListView } from "../../../../../utils/dateFormat";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { enCloseArrestFolder } from "../../../../../redux/actions/DossierArrestation.action";
 
 const ListItemDossierArrestaion = ({
+  id,
   numero,
   amend,
   agent,
@@ -31,6 +34,11 @@ const ListItemDossierArrestaion = ({
   offence,
 }) => {
   let numeroFormat = numeral(numero);
+  const dispatch = useDispatch();
+
+  const onEnclose = () => {
+    dispatch(enCloseArrestFolder(id));
+  };
 
   return (
     <ListContainer>
@@ -71,7 +79,7 @@ const ListItemDossierArrestaion = ({
         </RowListItemView>
       </ListContent>
       <div className="text-center">
-        <ClotureButton>CLOTURER</ClotureButton>
+        <ClotureButton onClick={onEnclose}>CLOTURER</ClotureButton>
       </div>
     </ListContainer>
   );
@@ -81,15 +89,14 @@ ListItemDossierArrestaion.proptypes = {
   numero: PropTypes.number,
   offence: PropTypes.arrayOf(PropTypes.string),
   agent: PropTypes.string,
-  amend: PropTypes.number,
 };
 
 ListItemDossierArrestaion.defaultProps = {
-  amend: 0,
   numero: 0,
   date: new Date(),
   offence: [],
   peine: "0:00:00",
+  agent: "",
 };
 
 export default ListItemDossierArrestaion;

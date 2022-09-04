@@ -8,7 +8,9 @@ import {
   ListContainer,
   ListContent,
   ListViewOffence,
+  MoreIconBtn,
   NumberView,
+  RowIcon,
   RowListItemView,
   TicketView,
   TitleItemView,
@@ -24,12 +26,16 @@ const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
-          <NumberView className="text-end">
-            N°{numeroFormat.format("000")}
-          </NumberView>
-          <span>
-            <FluentMoreCircleFill />
-          </span>
+
+          <RowIcon>
+            {" "}
+            <NumberView className="text-end">
+              N°{numeroFormat.format("000")}
+            </NumberView>
+            <MoreIconBtn className="m-left-1 ">
+              <FluentMoreCircleFill />
+            </MoreIconBtn>
+          </RowIcon>
         </RowListItemView>
         <ListViewOffence>
           {" "}

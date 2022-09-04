@@ -5,6 +5,8 @@ import {
   HandsCuffsOutline,
   JusticeHamerOutline,
   LockOutline,
+  MailConvocIcon,
+  PrisonIcon,
   UserLicenceOutline,
 } from "../../../SVG";
 import CivilSelectedCard from "./CivilSelectedCard";
@@ -83,7 +85,9 @@ const CivilSelected = () => {
     <>
       <Wrapper>
         <HeaderSelect>
-          <IconButtonTop></IconButtonTop>
+          <IconButtonTop>
+            <MailConvocIcon />
+          </IconButtonTop>
           <IconButtonTop>
             <LockOutline />
           </IconButtonTop>
@@ -97,7 +101,9 @@ const CivilSelected = () => {
           <IconButtonTop>
             <JusticeHamerOutline />
           </IconButtonTop>
-          <IconButtonTop></IconButtonTop>
+          <IconButtonTop>
+            <PrisonIcon />
+          </IconButtonTop>
         </HeaderSelect>
 
         <RowFirst>
@@ -226,7 +232,23 @@ const CivilSelected = () => {
               })
             }
           >
-            <ListItemDossierArrestaion />
+            {civilData.dossierArrestation
+              ? civilData.dossierArrestation.map((dossier) => {
+                  let offence = dossier.infractions.map((d) => d.label);
+                  return (
+                    <ListItemDossierArrestaion
+                      key={dossier.id}
+                      id={dossier.id}
+                      numero={dossier.id}
+                      agent={dossier.agent}
+                      amend={dossier.amend}
+                      offence={offence}
+                      date={dossier.createdAt}
+                      peine={dossier.peine}
+                    />
+                  );
+                })
+              : null}
           </CivilSelectedCard>
         </RowSecond>
       </Wrapper>

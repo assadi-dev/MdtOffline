@@ -18,13 +18,14 @@ import {
   HeadTitleView,
   TableViewPresentation,
 } from "./ModalView.styled";
+import { add_dossierArrestation } from "../../../../../redux/actions/DossierArrestation.action";
 
 const DossierArrestation = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
   const closeModal = () => {
     onClose();
     let textInput = textAreaRef.current.querySelector("textarea");
-    textInput.removeAttribute("style");
+    textInput.hasAttribute("style") ? textInput.removeAttribute("style") : null;
   };
 
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ const DossierArrestation = ({ idCivil, onClose }) => {
       peine: j.peines,
       tentative: 1,
       complicite: 1,
+      nominal: 1,
+      qte: 1,
     };
   });
 
@@ -59,7 +62,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
   const handleSelectChefAcusation = (select) => {
     setInputState((prevState) => ({
       ...prevState,
-      chefAcusation: select.map((s) => ({ ...s, qte: 1, nominal: 1 })),
+      chefAcusation: select,
     }));
   };
 
@@ -90,7 +93,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, nominal: value };
+              return { ...cf, nominal: parseFloat(value) };
             }
           }
           return cf;
@@ -149,7 +152,8 @@ const DossierArrestation = ({ idCivil, onClose }) => {
       let sommeChefAccusation = inputState.chefAcusation.map(
         (c) => c.value * c.qte * c.nominal * c.tentative * c.complicite
       );
-      return sommeChefAccusation.reduce((a, b) => a + b);
+      let somme = sommeChefAccusation.reduce((a, b) => a + b);
+      return somme.toFixed(2);
     }
     return 0;
   }, [inputState.chefAcusation]);
@@ -175,19 +179,23 @@ const DossierArrestation = ({ idCivil, onClose }) => {
 
     let infractions = inputState.chefAcusation;
     let data = {
+      agent: "98-Tommy-Stewart",
       infractions,
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
       civil: `api/civils/${idCivil}`,
-      amende: total,
+      amend: total,
       peine: totalUp,
       droitMiranda: inputState.droitMiranda,
       soins: inputState.soins,
       nourriture: inputState.nourriture,
       isEnclose: inputState.isEnclose,
+      avocat: inputState.avocat,
     };
 
-    console.log(data);
+    dispatch(add_dossierArrestation(data)).then(() => {
+      closeModal();
+    });
 
     //dispatch
   };
@@ -241,7 +249,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
           </BorderZone>
         </div>
 
-        <div className="form-control" ref={textAreaRef}>
+        <div>
           <BorderZone
             style={{
               height: "auto",
