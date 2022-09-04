@@ -13,6 +13,20 @@ export const getAllCivil = () => {
   };
 };
 
+export const searchCivil = () => {
+  return async (dispatch) => {
+    try {
+      Api.get("/civils", {
+        params: { nom, prenom, telephone, affiliation },
+      }).then((res) => {
+        dispatch({ payload: res.data, type: GET_ALL_CIVIL });
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 export const getOneCivil = (id) => {
   return async (dispatch) => {
     try {

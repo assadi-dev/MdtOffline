@@ -9,3 +9,5 @@ export const EDIT_CIVIL = "EDIT_CIVIL";
 export const DELETE_CIVIL = "DELETE_CIVIL";
 
 export const SEARCH_CIVIL = "SEARCH_CIVIL";
+
+export const GET_SEARCH_CIVIL_RESULT = "GET_SEARCH_CIVIL_RESULT";

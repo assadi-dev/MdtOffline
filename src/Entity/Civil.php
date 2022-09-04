@@ -7,13 +7,15 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CivilRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
- * 
+ * @ApiFilter(SearchFilter::class, properties={"nom":"partial","prenom":"partial","telephone":"partial","nationalite"="partial","affiliation"="partial"  })
  * @ApiResource(normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
  * 
  * itemOperations={

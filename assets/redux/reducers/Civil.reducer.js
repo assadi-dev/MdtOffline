@@ -16,6 +16,9 @@ const CivilReducer = (state = initialState, action) => {
     case GET_ALL_CIVIL:
       return { ...state, collection: payload, isReady: true };
       break;
+    case GET_SEARCH_CIVIL_RESULT:
+      return { ...state, collection: payload, isReady: true };
+      break;
     case GET_ONE_CIVIL:
       return { ...state, selected: payload, isReady: true };
       break;
