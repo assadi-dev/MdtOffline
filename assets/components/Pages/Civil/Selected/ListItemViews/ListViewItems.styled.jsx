@@ -124,3 +124,23 @@ export const RowIcon = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
+
+//Style Item for modal top button
+
+export const CardTopButtonContainer = styled.div`
+  border: 1px solid var(--color-blue-primary);
+  align-self: center;
+  border-radius: 10px;
+  padding: 15px;
+  font-weight: 300;
+  color: var(--color-white);
+  height: 160px;
+  background-color: var(--color-lightBlue-secondary-opacity-50);
+  & .numeroTitle {
+    font-family: var(--font-title);
+  }
+
+  & .headerlistViewTop {
+    margin-bottom: 1rem;
+  }
+`;

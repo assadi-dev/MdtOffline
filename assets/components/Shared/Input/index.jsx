@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const Input = ({
   className,
   id,
+  idInput,
   inputClass,
   inputValue,
   inputName,
@@ -13,6 +14,7 @@ const Input = ({
   return (
     <InputWrapper id={id} className={className}>
       <input
+        id={idInput}
         className={inputClass}
         value={inputValue}
         name={inputName}

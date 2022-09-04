@@ -35,11 +35,12 @@ import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion
 import ListItemRapportArrestation from "./ListItemViews/ListItemRapportArrestation";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneCivil } from "../../../../redux/actions/Civil.action";
+import ConvocationView from "./ModalView/ConvocationView";
 
 const CivilSelected = () => {
   const [modalStae, dispatch] = useReducer(ModalReducer, {
-    isOpen: false,
-    view: "",
+    isOpen: true,
+    view: "convocation",
   });
 
   const closeModal = () => {
@@ -75,6 +76,8 @@ const CivilSelected = () => {
         return <RapportArrestation idCivil={id} onClose={closeModal} />;
       case "dossier-d-arrestation":
         return <DossierArrestation idCivil={id} onClose={closeModal} />;
+      case "convocation":
+        return <ConvocationView idCivil={id} onClose={closeModal} />;
       default:
         throw Error("Aucun rendu attribuée à cette vue");
         break;
@@ -85,7 +88,14 @@ const CivilSelected = () => {
     <>
       <Wrapper>
         <HeaderSelect>
-          <IconButtonTop>
+          <IconButtonTop
+            onClick={() =>
+              dispatch({
+                type: TOGGLE_MODAL,
+                payload: "convocation",
+              })
+            }
+          >
             <MailConvocIcon />
           </IconButtonTop>
           <IconButtonTop>

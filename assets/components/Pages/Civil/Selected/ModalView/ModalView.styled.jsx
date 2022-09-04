@@ -116,3 +116,43 @@ export const TableViewPresentation = styled.table`
     text-align: center;
   }
 `;
+
+//Style view modal top button
+
+export const RowCardTopButton = styled.div`
+  min-height: 100px;
+  max-height: 380px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  padding: 5px 10px;
+  grid-gap: 18px;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 0.5fr));
+  }
+`;
+
+export const FooterCardTopButton = styled.div`
+  padding: 18px 5px;
+  & .titleFooterTopButton {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: var(--font-title);
+  }
+`;
+
+export const FormBodyTopBtn = styled.div`
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  @media screen and (min-width: 992px) {
+    width: 60%;
+  }
+`;
+
+export const FormLabel = styled.label`
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 1rem;
+`;
