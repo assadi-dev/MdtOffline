@@ -6,12 +6,14 @@ import {
   GET_ONE_CIVIL,
   GET_SEARCH_CIVIL_RESULT,
 } from "../types/civil.type";
+import { ADD_CONVOCATION } from "../types/Convocation.type";
 import {
   ADD_DOSSIERARRESTATION,
   ADD_DOSSIER_ARRESTATION,
 } from "../types/DossierArrestation.type";
 import { ADD_RAPPORT_ARRESTATION } from "../types/RapportArrestation.type";
 import { ADD_TRAFFIC } from "../types/Traffic.type";
+import { ADD_CELLULE } from "../types/Cellule.type";
 
 const initialState = { collection: [], selected: [], isReady: false };
 
@@ -93,6 +95,23 @@ const CivilReducer = (state = initialState, action) => {
           dossierArrestation: update.filter((d) => d.isEnclose === false),
         },
         isReady: true,
+      };
+
+    case ADD_CONVOCATION:
+      return {
+        ...state,
+        selected: {
+          ...selected,
+          convocation: [...state.selected.convocation, payload],
+        },
+      };
+    case ADD_CELLULE:
+      return {
+        ...state,
+        selected: {
+          ...selected,
+          cellule: [...state.selected.cellule, payload],
+        },
       };
     default:
       return state;

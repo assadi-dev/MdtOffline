@@ -6,6 +6,8 @@ import Avertissements from "./reducers/Avertissements.reducer";
 import RapporArrestationReducer from "./reducers/RapportArrestation";
 import TrafficReducer from "./reducers/Traffic.reducer";
 import DossierArrestationReducer from "./reducers/DossierArrestation.reducer";
+import ConvocationReducer from "./reducers/Convocation.reducer";
+import CelluleReducer from "./reducers/Cellule.reducer";
 
 const RootReducers = combineReducers({
   UserReducer,
@@ -15,6 +17,8 @@ const RootReducers = combineReducers({
   RapporArrestationReducer,
   TrafficReducer,
   DossierArrestationReducer,
+  ConvocationReducer,
+  CelluleReducer,
 });
 
 export default RootReducers;

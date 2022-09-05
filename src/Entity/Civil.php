@@ -176,6 +176,18 @@ class Civil
      */
     private $rapportArrestation;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Cellule::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
+     */
+    private $cellule;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Convocation::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
+     */
+    private $convocation;
+
 
 
 
@@ -189,6 +201,8 @@ class Civil
         $this->traffics = new ArrayCollection();
         $this->dossierArrestation = new ArrayCollection();
         $this->rapportArrestation = new ArrayCollection();
+        $this->cellule = new ArrayCollection();
+        $this->convocation = new ArrayCollection();
     }
 
 
@@ -504,6 +518,66 @@ class Civil
             // set the owning side to null (unless already changed)
             if ($rapportArrestation->getCivil() === $this) {
                 $rapportArrestation->setCivil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cellule>
+     */
+    public function getCellule(): Collection
+    {
+        return $this->cellule;
+    }
+
+    public function addCellule(Cellule $cellule): self
+    {
+        if (!$this->cellule->contains($cellule)) {
+            $this->cellule[] = $cellule;
+            $cellule->setCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCellule(Cellule $cellule): self
+    {
+        if ($this->cellule->removeElement($cellule)) {
+            // set the owning side to null (unless already changed)
+            if ($cellule->getCivil() === $this) {
+                $cellule->setCivil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Convocation>
+     */
+    public function getConvocation(): Collection
+    {
+        return $this->convocation;
+    }
+
+    public function addConvocation(Convocation $convocation): self
+    {
+        if (!$this->convocation->contains($convocation)) {
+            $this->convocation[] = $convocation;
+            $convocation->setCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConvocation(Convocation $convocation): self
+    {
+        if ($this->convocation->removeElement($convocation)) {
+            // set the owning side to null (unless already changed)
+            if ($convocation->getCivil() === $this) {
+                $convocation->setCivil(null);
             }
         }
 
