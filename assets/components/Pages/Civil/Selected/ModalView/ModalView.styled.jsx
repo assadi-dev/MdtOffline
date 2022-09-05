@@ -28,6 +28,14 @@ export const View = styled.div`
     background-color: #2b7de9;
     padding: 12px 22px;
     max-width: fit-content;
+    font-family: var(--font-title);
+    font-weight: 100;
+    font-size: 12px;
+    transition: all 0.35s;
+    :active {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
   }
 `;
 
@@ -149,6 +157,10 @@ export const FormBodyTopBtn = styled.div`
   @media screen and (min-width: 992px) {
     width: 60%;
   }
+`;
+
+export const FooterSectionSubmit = styled.div`
+  padding: 18px 0 0 10px;
 `;
 
 export const FormLabel = styled.label`
