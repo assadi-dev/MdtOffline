@@ -14,7 +14,7 @@ import {
   RowCardTopButton,
 } from "./ModalView.styled";
 
-const ConvocationView = ({ onClose, idCivil }) => {
+const CelluleView = ({ onClose, idCivil }) => {
   const closeModal = () => {
     onClose();
   };
@@ -27,7 +27,7 @@ const ConvocationView = ({ onClose, idCivil }) => {
     <>
       <div>
         <HeadTitleView>
-          <h2 className="titleView">CONVOCATION</h2>
+          <h2 className="titleView">CELLULE</h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <RowCardTopButton>
@@ -41,22 +41,25 @@ const ConvocationView = ({ onClose, idCivil }) => {
       </div>
       <FooterCardTopButton>
         <form onSubmit={handleSubmit}>
-          <h2 className="titleFooterTopButton">NOUVELLE CONVOCATION</h2>
           <FormBodyTopBtn>
             <div className="form-control">
-              <FormLabel htmlFor="raison" className="formLabel">
-                Raison
-              </FormLabel>
-              <Input idInput="raison" inputName={"raison"} />
-            </div>
-            <div className="form-control">
-              <FormLabel htmlFor="dateExpiration" className="formLabel">
-                Date d'exoiration
+              <FormLabel htmlFor="entree" className="formLabel">
+                Entrée
               </FormLabel>
               <Input
                 type="datetime-local"
-                idInput="dateExpiration"
-                inputName={"dateExpiration"}
+                idInput="entree"
+                inputName={"entree"}
+              />
+            </div>
+            <div className="form-control">
+              <FormLabel htmlFor="sortie" className="formLabel">
+                Sortie
+              </FormLabel>
+              <Input
+                type="datetime-local"
+                idInput="sortie"
+                inputName={"sortie"}
               />
             </div>
             <FooterSectionSubmit>
@@ -69,4 +72,4 @@ const ConvocationView = ({ onClose, idCivil }) => {
   );
 };
 
-export default ConvocationView;
+export default CelluleView;
