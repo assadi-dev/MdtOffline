@@ -134,13 +134,20 @@ export const CardTopButtonContainer = styled.div`
   padding: 15px;
   font-weight: 300;
   color: var(--color-white);
-  height: 160px;
   background-color: var(--color-lightBlue-secondary-opacity-50);
   & .numeroTitle {
     font-family: var(--font-title);
   }
 
   & .headerlistViewTop {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+  }
+`;
+
+export const TextCardModalTopBtn = styled.p`
+  margin: 10px 0px;
+  font-weight: 300;
+  & .special {
+    font-weight: bold;
   }
 `;

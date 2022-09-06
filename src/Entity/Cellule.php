@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CelluleRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -17,14 +18,21 @@ class Cellule
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      * @Groups({"read:civil:item"})
      */
-    private $motif;
+    private $entree;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read:civil:item"})
+     */
+    private $sortie;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,35 +41,48 @@ class Cellule
     private $agent;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Groups({"read:civil:item"})
-     */
-    private $expiration;
-
-    /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="cellule")
+     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="convocation")
      */
     private $civil;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMotif(): ?string
+    public function getEntree(): ?\DateTimeInterface
     {
-        return $this->motif;
+        return $this->entree;
     }
 
-    public function setMotif(string $motif): self
+    public function setEntree(\DateTimeInterface $entree): self
     {
-        $this->motif = $motif;
+        $this->entree = $entree;
+
+        return $this;
+    }
+
+    public function getSortie(): ?\DateTimeInterface
+    {
+        return $this->sortie;
+    }
+
+    public function setSortie(\DateTimeInterface $sortie): self
+    {
+        $this->sortie = $sortie;
 
         return $this;
     }
@@ -74,18 +95,6 @@ class Cellule
     public function setAgent(string $agent): self
     {
         $this->agent = $agent;
-
-        return $this;
-    }
-
-    public function getExpiration(): ?\DateTimeInterface
-    {
-        return $this->expiration;
-    }
-
-    public function setExpiration(\DateTimeInterface $expiration): self
-    {
-        $this->expiration = $expiration;
 
         return $this;
     }

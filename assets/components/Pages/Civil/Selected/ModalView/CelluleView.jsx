@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { add_cellule } from "../../../../../redux/actions/Cellule.action ";
 import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
 import Input from "../../../../Shared/Input";
 import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
+import ListCelluleItem from "../ListItemViews/ListCelluleItem";
 import ListConvocationItem from "../ListItemViews/ListConvocationItem";
 import {
   FooterCardTopButton,
@@ -14,13 +17,36 @@ import {
   RowCardTopButton,
 } from "./ModalView.styled";
 
-const CelluleView = ({ onClose, idCivil }) => {
+const CelluleView = ({ onClose, idCivil, listCellule }) => {
   const closeModal = () => {
     onClose();
   };
 
+  const dispatch = useDispatch();
+  const [inputState, setInputState] = useState({
+    agent: "98-Tommy-Stewart",
+    entree: "",
+    sortie: "",
+    civil: `api/civil/${idCivil}`,
+  });
+
+  const handleChangeValue = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setInputState((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let data = {
+      entree: inputState.entree,
+      sortie: inputState.sortie,
+      agent: "98-Tommy-Stewart",
+      civil: `api/civils/${idCivil}`,
+    };
+    console.log(data);
+    dispatch(add_cellule(data)).then(() => {});
   };
 
   return (
@@ -31,12 +57,17 @@ const CelluleView = ({ onClose, idCivil }) => {
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <RowCardTopButton>
-          <ListConvocationItem />
-          <ListConvocationItem />
-          <ListConvocationItem />
-          <ListConvocationItem />
-          <ListConvocationItem />
-          <ListConvocationItem />
+          {listCellule.length
+            ? listCellule.map((cellule) => (
+                <ListCelluleItem
+                  key={cellule.id}
+                  numero={cellule.id}
+                  agent={cellule.agent}
+                  entree={cellule.entree}
+                  sortie={cellule.sortie}
+                />
+              ))
+            : null}
         </RowCardTopButton>
       </div>
       <FooterCardTopButton>
@@ -50,6 +81,8 @@ const CelluleView = ({ onClose, idCivil }) => {
                 type="datetime-local"
                 idInput="entree"
                 inputName={"entree"}
+                value={inputState.entree}
+                onChange={handleChangeValue}
               />
             </div>
             <div className="form-control">
@@ -60,6 +93,8 @@ const CelluleView = ({ onClose, idCivil }) => {
                 type="datetime-local"
                 idInput="sortie"
                 inputName={"sortie"}
+                value={inputState.sortie}
+                onChange={handleChangeValue}
               />
             </div>
             <FooterSectionSubmit>

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ConvocationRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -22,16 +23,10 @@ class Convocation
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      * @Groups({"read:civil:item"})
      */
-    private $entree;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @Groups({"read:civil:item"})
-     */
-    private $sortie;
+    private $motif;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -40,41 +35,46 @@ class Convocation
     private $agent;
 
     /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read:civil:item"})
+     */
+    private $expiration;
+
+    /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="convocation")
+     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="cellule")
      */
     private $civil;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read:civil:item"})
+     */
+    private $dateConvocation;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEntree(): ?\DateTimeInterface
+    public function getMotif(): ?string
     {
-        return $this->entree;
+        return $this->motif;
     }
 
-    public function setEntree(\DateTimeInterface $entree): self
+    public function setMotif(string $motif): self
     {
-        $this->entree = $entree;
-
-        return $this;
-    }
-
-    public function getSortie(): ?\DateTimeInterface
-    {
-        return $this->sortie;
-    }
-
-    public function setSortie(\DateTimeInterface $sortie): self
-    {
-        $this->sortie = $sortie;
+        $this->motif = $motif;
 
         return $this;
     }
@@ -87,6 +87,18 @@ class Convocation
     public function setAgent(string $agent): self
     {
         $this->agent = $agent;
+
+        return $this;
+    }
+
+    public function getExpiration(): ?\DateTimeInterface
+    {
+        return $this->expiration;
+    }
+
+    public function setExpiration(\DateTimeInterface $expiration): self
+    {
+        $this->expiration = $expiration;
 
         return $this;
     }
@@ -111,6 +123,18 @@ class Convocation
     public function setCivil(?Civil $civil): self
     {
         $this->civil = $civil;
+
+        return $this;
+    }
+
+    public function getDateConvocation(): ?\DateTimeInterface
+    {
+        return $this->dateConvocation;
+    }
+
+    public function setDateConvocation(\DateTimeInterface $dateConvocation): self
+    {
+        $this->dateConvocation = $dateConvocation;
 
         return $this;
     }

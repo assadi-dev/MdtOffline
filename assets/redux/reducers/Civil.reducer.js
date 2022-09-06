@@ -79,7 +79,22 @@ const CivilReducer = (state = initialState, action) => {
         },
         isReady: true,
       };
-
+    case ADD_CONVOCATION:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          convocation: [...state.selected.convocation, payload],
+        },
+      };
+    case ADD_CELLULE:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          cellule: [...state.selected.cellule, payload],
+        },
+      };
     case ENCLOSE_ARREST_FOLDER:
       let update = state.selected.dossierArrestation.map((d) => {
         if (d.id == payload) {
@@ -97,22 +112,6 @@ const CivilReducer = (state = initialState, action) => {
         isReady: true,
       };
 
-    case ADD_CONVOCATION:
-      return {
-        ...state,
-        selected: {
-          ...selected,
-          convocation: [...state.selected.convocation, payload],
-        },
-      };
-    case ADD_CELLULE:
-      return {
-        ...state,
-        selected: {
-          ...selected,
-          cellule: [...state.selected.cellule, payload],
-        },
-      };
     default:
       return state;
       break;

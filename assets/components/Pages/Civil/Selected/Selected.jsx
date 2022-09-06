@@ -40,8 +40,8 @@ import CelluleView from "./ModalView/CelluleView";
 
 const CivilSelected = () => {
   const [modalStae, dispatch] = useReducer(ModalReducer, {
-    isOpen: true,
-    view: "cellule",
+    isOpen: false,
+    view: "",
   });
 
   const closeModal = () => {
@@ -78,9 +78,21 @@ const CivilSelected = () => {
       case "dossier-d-arrestation":
         return <DossierArrestation idCivil={id} onClose={closeModal} />;
       case "convocation":
-        return <ConvocationView idCivil={id} onClose={closeModal} />;
+        return (
+          <ConvocationView
+            idCivil={id}
+            onClose={closeModal}
+            listConvocation={civilData.convocation}
+          />
+        );
       case "cellule":
-        return <CelluleView idCivil={id} onClose={closeModal} />;
+        return (
+          <CelluleView
+            idCivil={id}
+            onClose={closeModal}
+            listCellule={civilData.cellule}
+          />
+        );
       default:
         throw Error("Aucun rendu attribuée à cette vue");
         break;

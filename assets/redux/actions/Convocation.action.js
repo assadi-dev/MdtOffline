@@ -15,7 +15,7 @@ export const get_all_convocation = () => {
   };
 };
 
-export const add_convocation = () => {
+export const add_convocation = (data) => {
   return async (dispatch) => {
     try {
       Api.post("/convocations", data).then((res) => {
