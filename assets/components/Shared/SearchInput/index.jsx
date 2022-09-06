@@ -8,13 +8,7 @@ const SearchInput = ({ icon, ...props }) => {
       <span>
         <UserSearchIcon />
       </span>{" "}
-      <input
-        onChange={() => props.onChange}
-        value={props.value}
-        name={props.name}
-        placeholder={props.placeholder}
-        id={props.id}
-      />
+      <input {...props} />
     </InputWrapper>
   );
 };

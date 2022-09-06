@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllCivil } from "../../../redux/actions/Civil.action";
+import { getAllCivil, searchCivil } from "../../../redux/actions/Civil.action";
 import { toSlugFormat, ucFirst } from "../../../utils/textFormat";
 import ButtonWithIcon from "../../Shared/Buttons/ButtonWithIcon";
 import SearchInput from "../../Shared/SearchInput";
@@ -22,7 +22,8 @@ const Civil = () => {
   };
   const handleSearch = (e) => {
     let value = e.target.value;
-    setSearch(() => value);
+
+    dispatch(searchCivil(value));
   };
 
   const toggleModal = () => {
@@ -34,7 +35,7 @@ const Civil = () => {
 
   useEffect(() => {
     dispatch(getAllCivil());
-  }, [civilSelector.isReady]);
+  }, []);
 
   return (
     <>
@@ -42,7 +43,7 @@ const Civil = () => {
         <ActionRow>
           {" "}
           <form onSubmit={HandleSubmit}>
-            <SearchInput onChange={handleSearch} value={search} />
+            <SearchInput onChange={handleSearch} />
           </form>{" "}
           <ButtonWithIcon
             className="add-civil"

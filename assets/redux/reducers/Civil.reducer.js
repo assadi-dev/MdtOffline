@@ -15,7 +15,12 @@ import { ADD_RAPPORT_ARRESTATION } from "../types/RapportArrestation.type";
 import { ADD_TRAFFIC } from "../types/Traffic.type";
 import { ADD_CELLULE } from "../types/Cellule.type";
 
-const initialState = { collection: [], selected: [], isReady: false };
+const initialState = {
+  collection: [],
+  selected: [],
+  filter: [],
+  isReady: false,
+};
 
 const CivilReducer = (state = initialState, action) => {
   const { payload, type } = action;

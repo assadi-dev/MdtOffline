@@ -3,6 +3,8 @@ import {
   ENCLOSE_ARREST_FOLDER,
   GET_ALL_CIVIL,
   GET_ONE_CIVIL,
+  GET_SEARCH_CIVIL_RESULT,
+  SEARCH_CIVIL,
 } from "../types/civil.type";
 import Api from "../../service/Api/Api";
 
@@ -18,13 +20,15 @@ export const getAllCivil = () => {
   };
 };
 
-export const searchCivil = () => {
+export const searchCivil = (searchTerm) => {
   return async (dispatch) => {
     try {
-      Api.get("/civils", {
-        params: { nom, prenom, telephone, affiliation },
+      Api.get("/civils/search", {
+        params: {
+          searchTerm: searchTerm,
+        },
       }).then((res) => {
-        dispatch({ payload: res.data, type: GET_ALL_CIVIL });
+        dispatch({ payload: res.data, type: GET_SEARCH_CIVIL_RESULT });
       });
     } catch (error) {
       console.log(error.message);
