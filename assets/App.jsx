@@ -7,6 +7,7 @@ import "./styles/layout.css";
 import MainLayout from "./components/Layout/MainLayout";
 import PagesRoutes from "./routes/Pages.routes";
 import uniqid from "uniqid";
+import Connexion from "./components/Pages/Connexion";
 
 const App = () => {
   const Hello = () => {
@@ -20,7 +21,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Hello />} />
+        <Route element={<Hello />} />
         {PagesRoutes.map((page) =>
           page.subNavigation ? (
             <Route key={uniqid()} path={page.path} element={page.element}>
@@ -37,6 +38,7 @@ const App = () => {
           )
         )}
       </Route>
+      <Route index path="/connexion" element={<Connexion />} />
     </Routes>
   );
 };

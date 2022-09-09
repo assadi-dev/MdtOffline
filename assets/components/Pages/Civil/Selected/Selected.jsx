@@ -279,6 +279,7 @@ const CivilSelected = () => {
                       offence={offence}
                       date={dossier.createdAt}
                       peine={dossier.peine}
+                      isEnclosed={dossier.isEnclose}
                     />
                   );
                 })

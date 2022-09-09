@@ -42,13 +42,6 @@ export const getOneCivil = (id) => {
       Api.get("/civils/" + id).then((res) => {
         let data = res.data;
 
-        data = {
-          ...data,
-          dossierArrestation: data.dossierArrestation.filter(
-            (d) => d.isEnclose == false
-          ),
-        };
-
         dispatch({ payload: data, type: GET_ONE_CIVIL });
       });
     } catch (error) {

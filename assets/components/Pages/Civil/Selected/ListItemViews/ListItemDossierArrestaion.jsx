@@ -32,6 +32,7 @@ const ListItemDossierArrestaion = ({
   date,
   peine,
   offence,
+  isEnclosed,
 }) => {
   let numeroFormat = numeral(numero);
   const dispatch = useDispatch();
@@ -79,7 +80,11 @@ const ListItemDossierArrestaion = ({
         </RowListItemView>
       </ListContent>
       <div className="text-center">
-        <ClotureButton onClick={onEnclose}>CLOTURER</ClotureButton>
+        {isEnclosed ? (
+          <p>Cloturé</p>
+        ) : (
+          <ClotureButton onClick={onEnclose}>CLOTURER</ClotureButton>
+        )}
       </div>
     </ListContainer>
   );

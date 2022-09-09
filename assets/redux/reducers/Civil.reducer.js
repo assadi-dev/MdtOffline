@@ -108,11 +108,13 @@ const CivilReducer = (state = initialState, action) => {
         return d;
       });
 
+      console.log(update);
+
       return {
         ...state,
         selected: {
           ...state.selected,
-          dossierArrestation: update.filter((d) => d.isEnclose === false),
+          dossierArrestation: update,
         },
         isReady: true,
       };
