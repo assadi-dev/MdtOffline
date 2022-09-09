@@ -110,20 +110,21 @@ const CivilSelected = () => {
                 payload: "convocation",
               })
             }
+            title="convocation"
           >
             <MailConvocIcon />
           </IconButtonTop>
-          <IconButtonTop>
+          <IconButtonTop title="Prison">
             <LockOutline />
           </IconButtonTop>
-          <IconButtonTop>
+          <IconButtonTop title="Permis">
             <UserLicenceOutline />
           </IconButtonTop>
           <h2 className="CivilTitle">{location.state ? name : "N/A"}</h2>
-          <IconButtonTop>
+          <IconButtonTop title={"Bracelet"}>
             <HandsCuffsOutline />
           </IconButtonTop>
-          <IconButtonTop>
+          <IconButtonTop title={"Mandat"}>
             <JusticeHamerOutline />
           </IconButtonTop>
           <IconButtonTop
@@ -133,6 +134,7 @@ const CivilSelected = () => {
                 payload: "cellule",
               })
             }
+            title={"Cellule"}
           >
             <PrisonIcon />
           </IconButtonTop>
