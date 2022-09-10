@@ -12,7 +12,8 @@ security:
                 property: username
         jwt:
             lexik_jwt:
-                class: App\Entity\User        
+                class: App\Entity\User  
+                     
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

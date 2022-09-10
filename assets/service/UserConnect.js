@@ -1,0 +1,9 @@
+import Api from "./Api/Api";
+
+export const connect = async (username, password) => {
+  return new Promise((resolve, reject) => {
+    Api.post("/login", { username, password })
+      .then((res) => resolve(res.data))
+      .catch((e) => reject(e.response));
+  });
+};

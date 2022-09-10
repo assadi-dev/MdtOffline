@@ -116,5 +116,11 @@ export const CardFooterConnexion = styled.div`
   margin-top: 15px;
   .action-row {
     display: flex;
+    justify-content: center;
+  }
+  .btn {
+    background-color: var(--color-blue-primary);
+    padding: 10px 15px;
+    width: fit-content;
   }
 `;
