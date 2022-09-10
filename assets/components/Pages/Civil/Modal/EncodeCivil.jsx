@@ -177,10 +177,10 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                 <div className="form-control">
                   {" "}
                   <Input
-                    inputName={"haireColor"}
+                    inputName={"hairColor"}
                     placeholder="Couleur des cheveux"
                     onChange={formik.handleChange}
-                    value={formik.values.haireColor}
+                    value={formik.values.hairColor}
                   />
                 </div>
                 <div className="form-control">

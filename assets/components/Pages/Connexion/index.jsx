@@ -5,16 +5,14 @@ import {
   CardConnexion,
   CardConnexionBody,
   CardConnexionHeader,
+  CardFooterConnexion,
   TextError,
   Wrapper,
 } from "./Connexion.styled";
 import InputConnexion from "./InputConnexion";
+import SingIn from "./SingIn";
 
 const Connexion = () => {
-  const OnSubmitConnexion = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <Wrapper>
       <CardConnexion>
@@ -22,30 +20,7 @@ const Connexion = () => {
           <h2 className="title">CONNEXION</h2>
         </CardConnexionHeader>
         <CardConnexionBody>
-          <form onSubmit={OnSubmitConnexion}>
-            <div className="form-control mb-signIn ">
-              <InputConnexion>
-                <span>
-                  <UserIconOutLined />
-                </span>
-                <input name="username" type="text" placeholder="Nom Prénom" />
-              </InputConnexion>
-              <TextError>{/* <p>dfer"</p> */}</TextError>
-            </div>
-            <div className="form-control mb-signIn">
-              <InputConnexion>
-                <span>
-                  <LockIconOutLined />
-                </span>
-                <input
-                  name="password"
-                  type="password"
-                  placeholder="Mot de passe"
-                />
-              </InputConnexion>
-              <TextError>{/* <p>dfer"</p> */}</TextError>
-            </div>
-          </form>
+          <SingIn />
         </CardConnexionBody>
       </CardConnexion>
     </Wrapper>

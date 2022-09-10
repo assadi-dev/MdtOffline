@@ -111,3 +111,10 @@ export const TextError = styled.div`
     }
   }
 `;
+
+export const CardFooterConnexion = styled.div`
+  margin-top: 15px;
+  .action-row {
+    display: flex;
+  }
+`;
