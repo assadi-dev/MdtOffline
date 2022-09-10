@@ -9,6 +9,7 @@
 /public/bundles/
 /var/
 /vendor/
+migrations/*
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
@@ -30,3 +31,7 @@ package-lock.json
 composer.lock
 yarn.lock
 ###< symfony/webpack-encore-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

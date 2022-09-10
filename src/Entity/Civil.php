@@ -17,8 +17,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiFilter(SearchFilter::class,properties={"sexe":"start","ethnie":"exact","nationalite":"exact"})
- * @ApiResource(normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
- * 
+ * @ApiResource(
+ * security="is_granted('IS_AUTHENTICATED_FULLY')",
+ * normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
  * collectionOperations={
  *  "post",
  *  "get",
