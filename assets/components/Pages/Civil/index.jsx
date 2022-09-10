@@ -58,28 +58,29 @@ const Civil = () => {
         </ActionRow>
 
         <RowCard>
-          {civilSelector.collection.map((civil) => (
-            <Link
-              key={civil.id}
-              to={`../../civil/${toSlugFormat(
-                `${civil && civil.nom} ${civil && civil.prenom}`
-              )}`}
-              state={{
-                name: `${civil && civil.nom.toUpperCase()} ${
-                  civil && ucFirst(civil.prenom)
-                }`,
-                id: civil && civil.id,
-              }}
-            >
-              {civil && (
-                <CivilCard
-                  nom={civil.nom.toUpperCase()}
-                  prenom={ucFirst(civil.prenom)}
-                  telephone={civil.telephone}
-                />
-              )}
-            </Link>
-          ))}
+          {civilSelector.collection.length > 0 &&
+            civilSelector.collection.map((civil) => (
+              <Link
+                key={civil.id}
+                to={`../../civil/${toSlugFormat(
+                  `${civil && civil.nom} ${civil && civil.prenom}`
+                )}`}
+                state={{
+                  name: `${civil && civil.nom.toUpperCase()} ${
+                    civil && ucFirst(civil.prenom)
+                  }`,
+                  id: civil && civil.id,
+                }}
+              >
+                {civil && (
+                  <CivilCard
+                    nom={civil.nom.toUpperCase()}
+                    prenom={ucFirst(civil.prenom)}
+                    telephone={civil.telephone}
+                  />
+                )}
+              </Link>
+            ))}
         </RowCard>
         <EncodeCivil
           isOpen={modal.encodeCivil}
