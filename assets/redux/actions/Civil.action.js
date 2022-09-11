@@ -8,6 +8,8 @@ import {
 } from "../types/civil.type";
 import Api from "../../service/Api/Api";
 
+let getTokenStorage = localStorage.getItem("mdtOfflineToken-999");
+
 export const getAllCivil = () => {
   return async (dispatch) => {
     try {
