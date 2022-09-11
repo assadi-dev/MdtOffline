@@ -7,3 +7,10 @@ export const connect = async (username, password) => {
       .catch((e) => reject(e.response));
   });
 };
+
+export const deconnect = async () => {
+  return new Promise((resolve, reject) => {
+    localStorage.clear();
+    resolve("deconnected !");
+  });
+};

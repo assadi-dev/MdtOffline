@@ -188,3 +188,10 @@ export const NavBarLink = styled(Link)`
   grid-template-columns: 35px 1fr;
   align-items: center;
 `;
+
+export const DeconnectButton = styled.div`
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  align-items: center;
+  cursor: pointer;
+`;

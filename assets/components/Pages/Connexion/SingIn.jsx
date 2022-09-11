@@ -33,7 +33,7 @@ const SingIn = () => {
           const id = decode.id;
           const role = decode.roles.join("-");
           dispatch(userLoged(id, role));
-          navigate("/");
+          navigate("/", { replace: true });
         })
         .catch((e) => {
           setError("Indentifiant Incorrect");

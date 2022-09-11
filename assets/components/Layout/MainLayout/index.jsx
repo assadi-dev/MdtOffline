@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../../Navigations/Navbar";
 import Sidebar from "../../Navigations/Sidebar";
 import { MainLayoutWrapper } from "./MainLayout.styled";

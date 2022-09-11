@@ -8,7 +8,7 @@ import TrafficReducer from "./reducers/Traffic.reducer";
 import DossierArrestationReducer from "./reducers/DossierArrestation.reducer";
 import ConvocationReducer from "./reducers/Convocation.reducer";
 import CelluleReducer from "./reducers/Cellule.reducer";
-import AuthenticateReducer from "./reducers/Authenticate.reucer";
+import AuthenticateReducer from "./reducers/Authenticate.reducer";
 
 const RootReducers = combineReducers({
   UserReducer,
