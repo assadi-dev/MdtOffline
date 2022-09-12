@@ -5,15 +5,43 @@ const errorColor = "var(--red)";
 
 export const Wrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   display: grid;
   place-items: center;
+  overflow-x: hidden;
   & .mb-signIn {
     margin-bottom: 1.8rem;
   }
   & .error {
     border: 1px solid ${errorColor};
     box-shadow: 0px 0px 10px 0px ${errorColor};
+  }
+
+  .slideRight {
+    transform: translateX(-50px);
+    opacity: 0;
+    visibility: hidden;
+    animation: 0.35s slideRight ease-in forwards;
+  }
+
+  @keyframes slideRight {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+`;
+
+export const FooterConnexion = styled.div`
+  margin-top: 2.2rem;
+  & .clikable {
+    cursor: pointer;
+    color: var(--color-blue-primary);
+  }
+  & .row-center {
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -92,13 +120,12 @@ export const TextError = styled.div`
   color: ${errorColor};
 
   font-size: 14px;
-  font-weight: 100;
   overflow: hidden;
   padding: 12px 0 0;
   position: relative;
   p {
     transform: translateY(-100px);
-    animation: 0.4s slideDown forwards;
+    animation: 0.3s slideDown forwards;
     opacity: 0;
     visibility: hidden;
 
@@ -122,5 +149,21 @@ export const CardFooterConnexion = styled.div`
     background-color: var(--color-blue-primary);
     padding: 10px 15px;
     width: fit-content;
+  }
+`;
+
+export const InputAnimation = styled.div`
+  transform: translateX(-50px);
+  opacity: 0;
+  visibility: hidden;
+  animation-delay: ${({ delay }) => delay || 0} !important;
+  animation: 0.35s slideRight linear forwards;
+
+  @keyframes slideRight {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+    }
   }
 `;

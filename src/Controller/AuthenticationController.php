@@ -2,11 +2,24 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationController extends AbstractController
 {
+    private $request;
+    private $entityManager;
+
+    public function __construct(Request $request, EntityManagerInterface $entityManager)
+    {
+        $this->request = $request;
+        $this->entityManager = $entityManager;
+    }
 
     /**
      *@Route("/api/login",name="api_login",methods="POST") 
@@ -22,5 +35,40 @@ class AuthenticationController extends AbstractController
      */
     public function logout()
     {
+    }
+
+
+    /**
+     *@Route("/api/register",name="api_register",methods="POST") 
+     */
+    public function register(UserPasswordHasherInterface $passwordHasher)
+    {
+
+        $user = new User();
+        $manager =  $this->entityManager;
+
+        $body = $this->request->getContent();
+        $body = json_decode($body, true);
+        $plaintextPassword = $body['password'];
+        $username = $body['username'];
+        //dd($plaintextPassword);
+
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $plaintextPassword
+        );
+
+        // dd($hashedPassword);
+        $user->setUsername($username)->setPassword($hashedPassword);
+        $manager->persist($user);
+        $manager->flush();
+
+        $response = new Response();
+        $response->setContent(json_encode([
+            'message' => "compte crée",
+        ]));
+        $response->setStatusCode(201);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

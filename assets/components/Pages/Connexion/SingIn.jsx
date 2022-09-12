@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { ButtonStyled } from "../../Shared/Buttons/Button.styled";
 import { LockIconOutLined, UserIconOutLined } from "../../SVG/Connexion.svg";
-import { CardFooterConnexion, TextError } from "./Connexion.styled";
+import {
+  CardFooterConnexion,
+  InputAnimation,
+  TextError,
+} from "./Connexion.styled";
 import InputConnexion from "./InputConnexion";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
@@ -45,37 +49,42 @@ const SingIn = () => {
     <>
       {" "}
       <form onSubmit={formik.handleSubmit}>
-        <div className="form-control mb-signIn ">
-          <InputConnexion>
-            <span>
-              <UserIconOutLined />
-            </span>
-            <input
-              name="username"
-              type="text"
-              placeholder="Nom Prénom"
-              onChange={formik.handleChange}
-              value={formik.values.username}
-            />
-          </InputConnexion>
-          <TextError>{/* <p>dfer"</p> */}</TextError>
-        </div>
-        <div className="form-control mb-signIn">
-          <InputConnexion>
-            <span>
-              <LockIconOutLined />
-            </span>
-            <input
-              name="password"
-              type="password"
-              placeholder="Mot de passe"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-            />
-          </InputConnexion>
-          {error && <TextError>{/* <p>dfer"</p> */ error}</TextError>}
-        </div>
+        <div>
+          <InputAnimation className="form-control mb-signIn" delay={"50ms"}>
+            <InputConnexion>
+              <span>
+                <UserIconOutLined />
+              </span>
+              <input
+                name="username"
+                type="text"
+                placeholder="Nom Prénom"
+                onChange={formik.handleChange}
+                value={formik.values.username}
+              />
+            </InputConnexion>
+            <TextError>{/* <p>dfer"</p> */}</TextError>
+          </InputAnimation>
+          <InputAnimation className="form-control mb-signIn" delay={"150ms"}>
+            <InputConnexion>
+              <span>
+                <LockIconOutLined />
+              </span>
+              <input
+                name="password"
+                type="password"
+                placeholder="Mot de passe"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+            </InputConnexion>
 
+            <TextError>
+              {error && <p>{error}</p>}
+              {/* <p>dfer"</p> */}
+            </TextError>
+          </InputAnimation>
+        </div>
         <CardFooterConnexion>
           <div className="action-row">
             {" "}
