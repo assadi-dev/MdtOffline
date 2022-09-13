@@ -12,7 +12,10 @@ import { useDispatch } from "react-redux";
 import { connect } from "../../../service/UserConnect";
 import { useLocation, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { userLoged } from "../../../redux/actions/Authentication.action";
+import {
+  get_owner,
+  userLoged,
+} from "../../../redux/actions/Authentication.action";
 
 const SingIn = () => {
   const dispatch = useDispatch();

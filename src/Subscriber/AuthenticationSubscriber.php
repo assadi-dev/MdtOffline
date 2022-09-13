@@ -1,8 +1,9 @@
 <?php
 
+use App\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthenticationSubscriber implements EventSubscriberInterface
 {
@@ -20,9 +21,11 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     {
         // ...
         $data = $event->getData();
-        dd($data);
-        //  $data["username"] = $event->getUser()->getUserIdentifier();
+        $user = $event->getUser();
+        if ($user instanceof UserInterface) {
+            $data["username"] = $user->getUsername();
+        }
 
-        //$event->setData($data);
+        $event->setData($data);
     }
 }

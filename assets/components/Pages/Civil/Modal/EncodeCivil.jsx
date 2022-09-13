@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ButtonStyled } from "../../../Shared/Buttons/Button.styled";
 import Input from "../../../Shared/Input";
 import Modal from "../../../Shared/Modal";
-import Select from "../../../Shared/select";
+import Select from "../../../Shared/Select";
 import {
   CloseModal,
   FormContainer,

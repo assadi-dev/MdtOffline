@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { ChevronDown } from "../../SVG";
 import DropdownItems from "./DropdownItems";
 import {
@@ -13,6 +14,8 @@ import {
 const UserConnect = () => {
   const [show, setShow] = useState(false);
   const userConnectRef = useRef();
+
+  const userAuth = useSelector((state) => state.AuthenticateReducer);
 
   useEffect(() => {
     const closeDropDownMenu = (e) => {
@@ -37,7 +40,7 @@ const UserConnect = () => {
       <div style={{ textAlign: "center" }}>
         <div style={{ display: "flex" }}>
           <UserNameStyle>
-            Nom Prenom <UserGradStyle>555-sergent-II</UserGradStyle>{" "}
+            {userAuth.username} <UserGradStyle>555-sergent-II</UserGradStyle>{" "}
           </UserNameStyle>
           <ChevronContainer alternate={show}>
             <ChevronDown />

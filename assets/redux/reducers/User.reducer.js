@@ -1,4 +1,4 @@
-const initialState = [];
+const initialState = {};
 
 const User = (state = initialState, action) => {
   const { type, payload } = action;

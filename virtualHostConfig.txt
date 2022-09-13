@@ -10,7 +10,7 @@
         AllowOverride None
         Order Allow,Deny
         Allow from All
-		Require All granted
+		
 
         FallbackResource /index.php
     </Directory>
@@ -22,3 +22,7 @@
 	RewriteEngine on
 
 </VirtualHost>
+
+
+
+
