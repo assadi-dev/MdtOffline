@@ -16,7 +16,7 @@ import Register from "./Register";
 import SingIn from "./SingIn";
 
 const Connexion = () => {
-  const [loginPage, setLoginPage] = useState(false);
+  const [loginPage, setLoginPage] = useState(true);
 
   const [process, dispatchProcess] = useReducer(processReducer, {
     step: "",

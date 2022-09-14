@@ -56,7 +56,7 @@ class AuthenticationController extends AbstractController
             $plaintextPassword = $body['password'];
             $telephone = $body['telephone'];
             if (empty($username) || empty($plaintextPassword)) {
-                throw new Exception("Le nom d'utilisateur ou le mot de passe ne doit pas être vide");
+                throw new Exception("Champs Manquants");
             }
 
             $hashedPassword = $passwordHasher->hashPassword(
@@ -64,7 +64,6 @@ class AuthenticationController extends AbstractController
                 $plaintextPassword
             );
 
-            // dd($hashedPassword);
             $user->setUsername($username)->setPassword($hashedPassword);
             $manager->persist($user);
             $manager->flush();

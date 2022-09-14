@@ -1,11 +1,14 @@
 import React from "react";
-import { ErrorContainer, RowAlert } from "./Alert.styled";
+import { DangerIcon } from "../../SVG/Connexion.svg";
+import { CodeAlert, ErrorContainer, IconAlert, RowAlert } from "./Alert.styled";
 const AlertError = ({ code, message }) => {
   return (
     <ErrorContainer>
       <RowAlert>
-        <span>rr</span>
-        <span>code:{code} </span>
+        <IconAlert>
+          <DangerIcon />
+        </IconAlert>
+        <CodeAlert>Erreur {code}: </CodeAlert>
         <p> {message}</p>
       </RowAlert>
     </ErrorContainer>

@@ -4,6 +4,7 @@ import { LockIconOutLined, UserIconOutLined } from "../../SVG/Connexion.svg";
 import {
   CardFooterConnexion,
   InputAnimation,
+  Loadericon,
   TextError,
 } from "./Connexion.styled";
 import InputConnexion from "./InputConnexion";
@@ -16,8 +17,11 @@ import {
   get_owner,
   userLoged,
 } from "../../../redux/actions/Authentication.action";
+import { BarLoading } from "../../SVG/Loader.svg";
+import AlertError from "../../Shared/Alert/AlertError";
+import { sleep } from "../../../utils/timer";
 
-const SingIn = () => {
+const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [error, setError] = useState("");
@@ -30,21 +34,34 @@ const SingIn = () => {
 
     onSubmit: (values) => {
       const { username, password } = values;
-      connect(username, password)
-        .then((res) => {
-          setError("");
-          const token = res.token;
-          localStorage.setItem("mdtOfflineToken-999", token);
-          const decode = jwt_decode(token);
+      dispatchStep({ type: "LOADING" });
 
-          const id = decode.id;
-          const role = decode.roles.join("-");
-          dispatch(userLoged(id, role));
-          navigate("/", { replace: true });
-        })
-        .catch((e) => {
-          setError("Indentifiant Incorrect");
-        });
+      sleep(1000).then(() => {
+        connect(username, password)
+          .then((res) => {
+            const token = res.token;
+            localStorage.setItem("mdtOfflineToken-999", token);
+            const decode = jwt_decode(token);
+
+            const id = decode.id;
+            const role = decode.roles.join("-");
+            dispatch(userLoged(id, role));
+            dispatchStep({
+              type: "START",
+            });
+            navigate("/", { replace: true });
+          })
+          .catch((error) => {
+            let errorMessage = `${
+              error.data.detail ? error.data.detail : error.data.message
+            }`;
+
+            dispatchStep({
+              type: "ERROR",
+              payload: { message: "Identifiants incorrect", code: "" },
+            });
+          });
+      });
     },
   });
 
@@ -81,19 +98,32 @@ const SingIn = () => {
                 value={formik.values.password}
               />
             </InputConnexion>
-
-            <TextError>
-              {error && <p>{error}</p>}
-              {/* <p>dfer"</p> */}
-            </TextError>
           </InputAnimation>
         </div>
         <CardFooterConnexion>
           <div className="action-row">
             {" "}
-            <ButtonStyled type="submit" className="btn">
-              CONNECTER
-            </ButtonStyled>
+            {processStep.step != "loading" && (
+              <ButtonStyled type="submit" className="btn">
+                CONNECTER
+              </ButtonStyled>
+            )}
+          </div>
+          <div className="action-row">
+            {processStep.step == "loading" && (
+              <div>
+                <Loadericon>
+                  <BarLoading />
+                </Loadericon>
+              </div>
+            )}
+
+            {processStep.step == "error" && (
+              <AlertError
+                code={processStep.code}
+                message={processStep.message}
+              />
+            )}
           </div>
         </CardFooterConnexion>
       </form>

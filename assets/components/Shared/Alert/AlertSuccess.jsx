@@ -1,8 +1,20 @@
 import React from "react";
-import { AlertSuccess } from "./Alert.styled";
+import { SuccessIcon } from "../../SVG/Connexion.svg";
+import { IconAlert, RowAlert, SuccessContainer } from "./Alert.styled";
 
-const AlertSuccess = () => {
-  return <AlertSuccess>AlertSuccess</AlertSuccess>;
+const AlertSuccess = ({ message }) => {
+  return (
+    <SuccessContainer>
+      {" "}
+      <RowAlert>
+        <IconAlert>
+          <SuccessIcon />
+        </IconAlert>
+
+        <p>{message}</p>
+      </RowAlert>
+    </SuccessContainer>
+  );
 };
 
 export default AlertSuccess;

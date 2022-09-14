@@ -8,7 +8,12 @@ export const processReducer = (state, action) => {
     case "FINISH":
       return { ...state, message: payload, step: "finish" };
     case "ERROR":
-      return { ...state, message: payload, step: "error" };
+      return {
+        ...state,
+        message: payload.message,
+        code: payload.code,
+        step: "error",
+      };
     default:
       return state;
       break;

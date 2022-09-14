@@ -21,6 +21,7 @@ import { userLoged } from "../../../redux/actions/Authentication.action";
 import { sleep } from "../../../utils/timer";
 import { BarLoading } from "../../SVG/Loader.svg";
 import AlertError from "../../Shared/Alert/AlertError";
+import AlertSuccess from "../../Shared/Alert/AlertSuccess";
 
 const Register = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
@@ -47,15 +48,17 @@ const Register = ({ processStep, dispatchStep }) => {
           .then(() => {
             dispatchStep({
               type: "FINISH",
-              payload: "Compte crée avec succès",
+              payload: "Compte crée avec succès !",
             });
           })
           .catch((error) => {
-            console.log(error);
-            let errorMessage = `code ${error.status}: ${
+            let errorMessage = `${
               error.data.detail ? error.data.detail : error.data.message
             }`;
-            dispatchStep({ type: "ERROR", payload: errorMessage });
+            dispatchStep({
+              type: "ERROR",
+              payload: { message: errorMessage, code: error.status },
+            });
           });
       });
     },
@@ -145,9 +148,17 @@ const Register = ({ processStep, dispatchStep }) => {
                 <p>{processStep.message}</p>
               </div>
             )}
-            {processStep.step == "finish" && <p>{processStep.message}</p>}
-            {processStep.step == "error" && <p>{processStep.message}</p>}
-            <AlertError code={500} message={"Champs manquant"} />
+
+            {processStep.step == "error" && (
+              <AlertError
+                code={processStep.code}
+                message={processStep.message}
+              />
+            )}
+            {/* <AlertError code={500} message={"Champs manquant"} /> */}
+            {processStep.step == "finish" && (
+              <AlertSuccess message={processStep.message} />
+            )}
           </div>
         </CardFooterConnexion>
       </form>
