@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Subscriber;
+
 use App\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
