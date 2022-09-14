@@ -22,6 +22,8 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
   };
 
   const dispatch = useDispatch();
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const token = agent.token;
 
   const [inputState, setInputState] = useState({
     raison: "",
@@ -42,9 +44,9 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
       dateConvocation: inputState.dateConvocation,
       expiration: inputState.dateExpiration,
       civil: `api/civils/${idCivil}`,
-      agent: "98-Tommy-Stewart",
+      agent: `${agent.matricule}-${agent.username}`,
     };
-    dispatch(add_convocation(data));
+    token && dispatch(add_convocation(data, token));
   };
 
   return (

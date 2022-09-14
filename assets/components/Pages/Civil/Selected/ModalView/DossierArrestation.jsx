@@ -11,7 +11,7 @@ import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
 import SelectMultiple from "../../../../Shared/SelectMultiple";
 import SwitchButton from "../../../../Shared/SwitchButton";
 import EditTable from "../EditTable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BorderZone,
   FooterSectionButton,
@@ -29,6 +29,8 @@ const DossierArrestation = ({ idCivil, onClose }) => {
   };
 
   const dispatch = useDispatch();
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const token = agent.token;
 
   const [inputState, setInputState] = useState({
     lieux: "",
@@ -179,7 +181,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
 
     let infractions = inputState.chefAcusation;
     let data = {
-      agent: "98-Tommy-Stewart",
+      agent: `${agent.matricule}-${agent.username}`,
       infractions,
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
@@ -193,9 +195,10 @@ const DossierArrestation = ({ idCivil, onClose }) => {
       avocat: inputState.avocat,
     };
 
-    dispatch(add_dossierArrestation(data)).then(() => {
-      closeModal();
-    });
+    token &&
+      dispatch(add_dossierArrestation(data, token)).then(() => {
+        closeModal();
+      });
 
     //dispatch
   };

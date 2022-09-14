@@ -12,12 +12,14 @@ import {
 import SelectMultiple from "../../../../Shared/SelectMultiple";
 import { codePenal, nominal } from "../../../../../Data/FichesCalcule";
 import EditTable from "../EditTable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add_traffic } from "../../../../../redux/actions/Traffic.action";
 
 const TrafficView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
   const dispatch = useDispatch();
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const token = agent.token;
 
   const closeModal = () => {
     onClose();
@@ -106,14 +108,15 @@ const TrafficView = ({ idCivil, onClose }) => {
     let data = {
       infractions,
       lieux: inputState.lieuxRemplissage,
-      agent: "98-Tommy-Stewart",
+      agent: `${agent.matricule}-${agent.username}`,
       amend: total,
       civil: `api/civils/${idCivil}`,
     };
 
-    dispatch(add_traffic(data)).then(() => {
-      onClose();
-    });
+    token &&
+      dispatch(add_traffic(data, token)).then(() => {
+        onClose();
+      });
   };
 
   return (

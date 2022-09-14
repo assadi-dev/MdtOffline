@@ -53,10 +53,13 @@ const CivilSelected = () => {
   const [loading, setLoading] = useState(true);
   const dispatchCivilData = useDispatch();
   const civilSelectore = useSelector((state) => state.CivilReducer);
+  const token = useSelector((state) => state.AuthenticateReducer.token);
 
   useEffect(() => {
-    dispatchCivilData(getOneCivil(id));
-  }, [id]);
+    {
+      token && dispatchCivilData(getOneCivil(id, token));
+    }
+  }, [id, token]);
 
   const civilData = useMemo(() => {
     if (civilSelectore.selected) {

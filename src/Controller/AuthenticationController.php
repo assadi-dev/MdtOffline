@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Exception;
 use App\Entity\User;
+use App\Entity\Agent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +47,7 @@ class AuthenticationController extends AbstractController
     {
 
         $user = new User();
+        $agent = new Agent();
         $manager =  $this->entityManager;
 
         try {
@@ -55,6 +57,8 @@ class AuthenticationController extends AbstractController
             $username = $body['username'];
             $plaintextPassword = $body['password'];
             $telephone = $body['telephone'];
+
+
             if (empty($username) || empty($plaintextPassword)) {
                 throw new Exception("Champs Manquants");
             }
@@ -63,8 +67,9 @@ class AuthenticationController extends AbstractController
                 $user,
                 $plaintextPassword
             );
-
-            $user->setUsername($username)->setPassword($hashedPassword);
+            $agent->setTelephone($telephone)->setName($username);
+            $user->setUsername($username)->setPassword($hashedPassword)->setAgent($agent);
+            $manager->persist($agent);
             $manager->persist($user);
             $manager->flush();
 

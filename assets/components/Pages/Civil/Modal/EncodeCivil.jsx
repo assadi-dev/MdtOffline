@@ -16,12 +16,13 @@ import {
   RowModal,
 } from "./EncodeCivile.styled";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCivil } from "../../../../redux/actions/Civil.action";
 
 const EncodeCivil = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.AuthenticateReducer.token);
 
   const formik = useFormik({
     initialValues: {
@@ -42,10 +43,11 @@ const EncodeCivil = ({ isOpen, onClose }) => {
       file: null,
     },
     onSubmit: (values) => {
-      dispatch(addCivil(values)).then(() => {
-        formik.resetForm();
-        onClose();
-      });
+      token &&
+        dispatch(addCivil(values, token)).then(() => {
+          formik.resetForm();
+          onClose();
+        });
     },
   });
 

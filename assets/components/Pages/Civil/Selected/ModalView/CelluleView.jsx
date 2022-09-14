@@ -22,9 +22,12 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
     onClose();
   };
 
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const token = agent.token;
+
   const dispatch = useDispatch();
   const [inputState, setInputState] = useState({
-    agent: "98-Tommy-Stewart",
+    agent: `${agent.matricule}-${agent.username}`,
     entree: "",
     sortie: "",
     civil: `api/civil/${idCivil}`,
@@ -42,11 +45,11 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
     let data = {
       entree: inputState.entree,
       sortie: inputState.sortie,
-      agent: "98-Tommy-Stewart",
+      agent: `${agent.matricule}-${agent.username}`,
       civil: `api/civils/${idCivil}`,
     };
-    console.log(data);
-    dispatch(add_cellule(data)).then(() => {});
+
+    token && dispatch(add_cellule(data, token));
   };
 
   return (

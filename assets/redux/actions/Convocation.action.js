@@ -3,10 +3,16 @@ import {
   ADD_CONVOCATION,
   GET_ALL_CONVOCATION,
 } from "../types/Convocation.type";
-export const get_all_convocation = () => {
+export const get_all_convocation = (token) => {
+  const headers = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
   return async (dispatch) => {
     try {
-      Api.get("/convocations").then((res) => {
+      Api.get("/convocations", headers).then((res) => {
         dispatch({ type: GET_ALL_CONVOCATION, payload: res.data });
       });
     } catch (error) {
@@ -15,10 +21,16 @@ export const get_all_convocation = () => {
   };
 };
 
-export const add_convocation = (data) => {
+export const add_convocation = (data, token) => {
   return async (dispatch) => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      Api.post("/convocations", data).then((res) => {
+      Api.post("/convocations", data, headers).then((res) => {
         dispatch({ type: ADD_CONVOCATION, payload: res.data });
       });
     } catch (error) {

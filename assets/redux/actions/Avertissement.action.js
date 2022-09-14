@@ -4,7 +4,7 @@ import {
   DELETE_AVERTISSEMENT,
 } from "../types/avertissements..type";
 
-export const getAvertissementByCivil = (id) => {
+export const getAvertissementByCivil = (id, token) => {
   return async (dispatch) => {
     try {
       Api.get();
@@ -14,10 +14,16 @@ export const getAvertissementByCivil = (id) => {
   };
 };
 
-export const addAvertissement = (data) => {
+export const addAvertissement = (data, token) => {
   return async (dispatch) => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      Api.post("/avertissements", data).then((res) => {
+      Api.post("/avertissements", data, headers).then((res) => {
         let data = res.data;
         dispatch({ type: ADD_AVERTISSEMENT, payload: data });
       });
@@ -25,10 +31,16 @@ export const addAvertissement = (data) => {
   };
 };
 
-export const delete_avertissement = (id) => {
+export const delete_avertissement = (id, token) => {
   return async (dispatch) => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      Api.delete(`/avertissements/${id}`).then((res) => {
+      Api.delete(`/avertissements/${id}`, headers).then((res) => {
         dispatch({ type: DELETE_AVERTISSEMENT, payload: id });
       });
     } catch (error) {}

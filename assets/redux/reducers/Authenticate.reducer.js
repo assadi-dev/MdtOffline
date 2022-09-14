@@ -1,7 +1,15 @@
 import React from "react";
 import { GET_OWNER, LOGIN, LOGOUT } from "../types/Authenticate.type";
 
-const initialState = { role: "", id: "", username: "", isLoggedIn: false };
+const initialState = {
+  role: "",
+  id: "",
+  username: "",
+  matricule: "",
+  grade: "",
+  token: "",
+  isLoggedIn: false,
+};
 const AuthenticateReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
@@ -25,6 +33,9 @@ const AuthenticateReducer = (state = initialState, action) => {
       return {
         ...state,
         username: payload.username,
+        matricule: payload.matricule,
+        grade: payload.grade,
+        token: payload.token,
       };
     default:
       return state;

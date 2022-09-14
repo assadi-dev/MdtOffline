@@ -4,10 +4,12 @@ namespace App\Entity;
 
 
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use App\Controller\OwnerController;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -16,6 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
  * 
+ * normalizationContext={"groups"={"read:user:collections","read:user:item"}},
  * collectionOperations={
  * "get"={"security"="is_granted('IS_AUTHENTICATED_FULLY')","openapi_context" = {"security"={{"bearerAuth"={}}}}},
  * "post",
@@ -37,16 +40,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:user:collections"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true,nullable=false)
+     * @Groups({"read:user:collections"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"read:user:collections"})
      */
     private $roles = [];
 
@@ -55,6 +61,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
      * @ORM\Column(type="string",nullable=false)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read:user:collections"})
+     */
+    private $validate;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:user:collections"})
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Agent::class, cascade={"persist", "remove"})
+     * @Groups({"read:user:collections"})
+     */
+    private $agent;
+
+
+
+    public function __construct()
+    {
+        $this->validate = false;
+        $this->createdAt = new DateTimeImmutable();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -150,5 +184,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
             $payload['roles'], // Added by default
 
         );
+    }
+
+    public function isValidate(): ?bool
+    {
+        return $this->validate;
+    }
+
+    public function setValidate(bool $validate): self
+    {
+        $this->validate = $validate;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAgent(): ?Agent
+    {
+        return $this->agent;
+    }
+
+    public function setAgent(?Agent $agent): self
+    {
+        $this->agent = $agent;
+
+        return $this;
     }
 }

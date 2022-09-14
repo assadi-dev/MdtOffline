@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addAvertissement } from "../../../../../redux/actions/Avertissement.action";
 import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
 import InputTextArea from "../../../../Shared/InputTextArea";
@@ -8,6 +8,7 @@ import { FooterSectionButton, HeadTitleView } from "./ModalView.styled";
 
 const AvertissementView = ({ onClose, idCivil }) => {
   const textAreaRef = useRef();
+  const agent = useSelector((state) => state.AuthenticateReducer);
   const closeModal = () => {
     onClose();
     let textInput = textAreaRef.current.querySelector("textarea");
@@ -18,7 +19,7 @@ const AvertissementView = ({ onClose, idCivil }) => {
   const [inputState, setIputState] = useState({
     lieux: "",
     comments: "",
-    agent: "98-Tommy-Stewart",
+    agent: `${agent.matricule}-${agent.username}`,
     civil: `api/civils/${idCivil}`,
   });
 
@@ -31,9 +32,11 @@ const AvertissementView = ({ onClose, idCivil }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     let data = { ...inputState };
-    dispatch(addAvertissement(data)).then(() => {
-      onClose();
-    });
+    const token = agent.token;
+    token &&
+      dispatch(addAvertissement(data, token)).then(() => {
+        onClose();
+      });
   };
 
   return (

@@ -18,12 +18,14 @@ import {
   TimeToUnix,
   unixToTime,
 } from "../../../../../utils/calculs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 
 const RapportArrestation = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
   const dispatch = useDispatch();
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const token = agent.token;
   /**
    * Reset la taille du champs text
    */
@@ -178,15 +180,16 @@ const RapportArrestation = ({ idCivil, onClose }) => {
       infractions,
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
-      agent: "98-Tommy-Stewart",
+      agent: `${agent.matricule}-${agent.username}`,
       civil: `api/civils/${idCivil}`,
       amende: total,
       peine: totalUp,
     };
 
-    dispatch(add_rapportArrestation(data)).then(() => {
-      onClose();
-    });
+    token &&
+      dispatch(add_rapportArrestation(data, token)).then(() => {
+        onClose();
+      });
   };
 
   return (

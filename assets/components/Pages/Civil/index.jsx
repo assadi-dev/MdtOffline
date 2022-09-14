@@ -16,6 +16,7 @@ const Civil = () => {
 
   const dispatch = useDispatch();
   const civilSelector = useSelector((state) => state.CivilReducer);
+  const userAuth = useSelector((state) => state.AuthenticateReducer);
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Civil = () => {
   const handleSearch = (e) => {
     let value = e.target.value;
 
-    dispatch(searchCivil(value));
+    userAuth.token && dispatch(searchCivil(value, userAuth.token));
   };
 
   const toggleModal = () => {
@@ -34,8 +35,10 @@ const Civil = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllCivil());
-  }, []);
+    {
+      userAuth.token && dispatch(getAllCivil(userAuth.token));
+    }
+  }, [userAuth.token]);
 
   return (
     <>

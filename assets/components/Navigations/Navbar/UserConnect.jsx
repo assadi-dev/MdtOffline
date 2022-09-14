@@ -40,7 +40,10 @@ const UserConnect = () => {
       <div style={{ textAlign: "center" }}>
         <div style={{ display: "flex" }}>
           <UserNameStyle>
-            {userAuth.username} <UserGradStyle>555-sergent-II</UserGradStyle>{" "}
+            {userAuth.username}{" "}
+            <UserGradStyle>{`${
+              userAuth.matricule ? userAuth.matricule : "N/A"
+            }-${userAuth.grade}`}</UserGradStyle>{" "}
           </UserNameStyle>
           <ChevronContainer alternate={show}>
             <ChevronDown />

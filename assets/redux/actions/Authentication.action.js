@@ -36,7 +36,16 @@ export const get_owner = (id, token) => {
         },
       }).then((res) => {
         let username = res.data.username;
-        dispatch({ type: GET_OWNER, payload: { username } });
+        let photo = res.data.agent.photo;
+        let matricule = res.data.agent.matricule
+          ? res.data.agent.matricule
+          : "N/A";
+        let grade = res.data.agent.grade;
+
+        dispatch({
+          type: GET_OWNER,
+          payload: { username, photo, matricule, grade, token },
+        });
       });
     } catch (error) {}
   };

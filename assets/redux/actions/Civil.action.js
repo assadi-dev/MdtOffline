@@ -10,10 +10,15 @@ import Api from "../../service/Api/Api";
 
 let getTokenStorage = localStorage.getItem("mdtOfflineToken-999");
 
-export const getAllCivil = () => {
+export const getAllCivil = (token) => {
   return async (dispatch) => {
     try {
-      Api.get("/civils").then((res) => {
+      Api.get("/civils", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res) => {
         dispatch({ payload: res.data, type: GET_ALL_CIVIL });
       });
     } catch (error) {
@@ -22,10 +27,14 @@ export const getAllCivil = () => {
   };
 };
 
-export const searchCivil = (searchTerm) => {
+export const searchCivil = (searchTerm, token) => {
   return async (dispatch) => {
     try {
       Api.get("/civils/search", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         params: {
           searchTerm: searchTerm,
         },
@@ -38,10 +47,17 @@ export const searchCivil = (searchTerm) => {
   };
 };
 
-export const getOneCivil = (id) => {
+export const getOneCivil = (id, token) => {
   return async (dispatch) => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     try {
-      Api.get("/civils/" + id).then((res) => {
+      Api.get("/civils/" + id, headers).then((res) => {
         let data = res.data;
 
         dispatch({ payload: data, type: GET_ONE_CIVIL });
@@ -52,10 +68,16 @@ export const getOneCivil = (id) => {
   };
 };
 
-export const addCivil = (data) => {
+export const addCivil = (data, token) => {
   return async (dispatch) => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      Api.post("/civils", data).then((res) => {
+      Api.post("/civils", data, headers).then((res) => {
         let data = res.data;
         dispatch({ payload: data, type: ADD_CIVIL });
       });

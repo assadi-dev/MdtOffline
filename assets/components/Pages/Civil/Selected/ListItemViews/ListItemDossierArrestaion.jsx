@@ -21,7 +21,7 @@ import {
 import numeral from "numeral";
 import { dateForCivilListView } from "../../../../../utils/dateFormat";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { enCloseArrestFolder } from "../../../../../redux/actions/DossierArrestation.action";
 
 const ListItemDossierArrestaion = ({
@@ -36,9 +36,10 @@ const ListItemDossierArrestaion = ({
 }) => {
   let numeroFormat = numeral(numero);
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.AuthenticateReducer.token);
 
   const onEnclose = () => {
-    dispatch(enCloseArrestFolder(id));
+    dispatch(enCloseArrestFolder(id, token));
   };
 
   return (
