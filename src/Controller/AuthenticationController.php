@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationController extends AbstractController
 {
@@ -47,28 +48,44 @@ class AuthenticationController extends AbstractController
         $user = new User();
         $manager =  $this->entityManager;
 
-        $body = $this->request->getContent();
-        $body = json_decode($body, true);
-        $plaintextPassword = $body['password'];
-        $username = $body['username'];
-        //dd($plaintextPassword);
+        try {
+            $body = $this->request->getContent();
+            $body = json_decode($body, true);
 
-        $hashedPassword = $passwordHasher->hashPassword(
-            $user,
-            $plaintextPassword
-        );
+            $username = $body['username'];
+            $plaintextPassword = $body['password'];
+            $telephone = $body['telephone'];
+            if (empty($username) || empty($plaintextPassword)) {
+                throw new Exception("Le nom d'utilisateur ou le mot de passe ne doit pas être vide");
+            }
 
-        // dd($hashedPassword);
-        $user->setUsername($username)->setPassword($hashedPassword);
-        $manager->persist($user);
-        $manager->flush();
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
 
-        $response = new Response();
-        $response->setContent(json_encode([
-            'message' => "compte crée",
-        ]));
-        $response->setStatusCode(201);
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
+            // dd($hashedPassword);
+            $user->setUsername($username)->setPassword($hashedPassword);
+            $manager->persist($user);
+            $manager->flush();
+
+            $response = new Response();
+            $response->setContent(json_encode([
+                'message' => "compte crée",
+            ]));
+            $response->setStatusCode(201);
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        } catch (\Throwable $th) {
+            $message = $th->getMessage();
+            $response = new Response();
+            $response->setContent(json_encode([
+                "code" => 500,
+                'message' =>  $message,
+            ]));
+            $response->setStatusCode(500);
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
     }
 }

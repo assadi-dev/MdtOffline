@@ -121,6 +121,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="numero de téléphone"
                     onChange={formik.handleChange}
                     value={formik.values.telephone}
+                    type="tel"
                   />
                 </div>
                 <div className="form-control">

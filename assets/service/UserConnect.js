@@ -14,3 +14,13 @@ export const deconnect = async () => {
     resolve("deconnected !");
   });
 };
+
+export const userRegister = async (username, password, telephone) => {
+  return new Promise((resolve, reject) => {
+    Api.post("/register", { username, password, telephone })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((e) => reject(e.response));
+  });
+};

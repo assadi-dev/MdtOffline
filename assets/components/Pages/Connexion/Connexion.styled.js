@@ -167,3 +167,15 @@ export const InputAnimation = styled.div`
     }
   }
 `;
+
+export const Loadericon = styled.span`
+  width: 50px;
+  height: 50px;
+  svg {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    display: block;
+    shape-rendering: auto;
+  }
+`;

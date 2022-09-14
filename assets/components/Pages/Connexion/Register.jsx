@@ -8,17 +8,21 @@ import {
 import {
   CardFooterConnexion,
   InputAnimation,
+  Loadericon,
   TextError,
 } from "./Connexion.styled";
 import InputConnexion from "./InputConnexion";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { connect } from "../../../service/UserConnect";
+import { connect, userRegister } from "../../../service/UserConnect";
 import { useLocation, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { userLoged } from "../../../redux/actions/Authentication.action";
+import { sleep } from "../../../utils/timer";
+import { BarLoading } from "../../SVG/Loader.svg";
+import AlertError from "../../Shared/Alert/AlertError";
 
-const Register = () => {
+const Register = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [error, setError] = useState("");
@@ -32,6 +36,28 @@ const Register = () => {
 
     onSubmit: (values) => {
       const { username, password, telephone } = values;
+
+      dispatchStep({
+        type: "LOADING",
+        payload: "Compte en cour d'enregistremnt",
+      });
+
+      sleep(3000).then(() => {
+        userRegister(username, password, telephone)
+          .then(() => {
+            dispatchStep({
+              type: "FINISH",
+              payload: "Compte crée avec succès",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            let errorMessage = `code ${error.status}: ${
+              error.data.detail ? error.data.detail : error.data.message
+            }`;
+            dispatchStep({ type: "ERROR", payload: errorMessage });
+          });
+      });
     },
   });
 
@@ -75,7 +101,7 @@ const Register = () => {
             </TextError>
           </InputAnimation>
 
-          <InputAnimation className="form-control mb-signIn" delay="150ms">
+          <InputAnimation className="form-control" delay="150ms">
             <InputConnexion>
               <span>
                 <TelephoneIcon />
@@ -98,9 +124,30 @@ const Register = () => {
         <CardFooterConnexion>
           <div className="action-row">
             {" "}
-            <ButtonStyled type="submit" className="btn">
-              S'INSCRIRE
-            </ButtonStyled>
+            {processStep.step == "" && (
+              <ButtonStyled type="submit" className="btn">
+                S'INSCRIRE
+              </ButtonStyled>
+            )}
+            {processStep.step == "error" && (
+              <ButtonStyled type="submit" className="btn">
+                S'INSCRIRE{" "}
+              </ButtonStyled>
+            )}
+          </div>
+
+          <div className="action-row">
+            {processStep.step == "loading" && (
+              <div>
+                <Loadericon>
+                  <BarLoading />
+                </Loadericon>
+                <p>{processStep.message}</p>
+              </div>
+            )}
+            {processStep.step == "finish" && <p>{processStep.message}</p>}
+            {processStep.step == "error" && <p>{processStep.message}</p>}
+            <AlertError code={500} message={"Champs manquant"} />
           </div>
         </CardFooterConnexion>
       </form>

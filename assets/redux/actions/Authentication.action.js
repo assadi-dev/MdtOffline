@@ -18,13 +18,13 @@ export const userLogout = () => {
   };
 };
 
-export const register = () => {
+/* export const register = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: LOGOUT });
     } catch (error) {}
   };
-};
+}; */
 
 export const get_owner = (id, token) => {
   return async (dispatch) => {
