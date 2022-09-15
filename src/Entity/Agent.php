@@ -17,14 +17,15 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=AgentRepository::class)
  * @Vich\Uploadable()
  * @ApiResource(
+ * normalizationContext={"groups"={"read:agent:collections","read:agent:item"}},
  * itemOperations={
- * "put","patch","delete",
- *  "photo"={
+ * "put","delete","get",
+ *  "upload_photo"={
  *      "method"="POST",
- *      "path"="/agents/{id}/photo",
+ *      "path"="/agent/{id}/photo",
  *      "deserialize"=false,
  *      "controller"=UploadAgentController::class,
- *      "read"=false,
+ *      
  *  }
  * }
  * )
@@ -35,42 +36,50 @@ class Agent
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:agent:collections"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"read:user:collections"})
+     * @Groups({"read:agent:collections"})
      */
     private $photo;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"read:user:collections"})
+     * @Groups({"read:agent:collections"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"read:user:collections"})
+     * @Groups({"read:agent:collections"})
      */
     private $matricule;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:user:collections"})
+     * @Groups({"read:agent:collections"})
      */
     private $grade;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"read:user:collections"})
+     * @Groups({"read:agent:collections"})
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:user:collections"})
+     * @Groups({"read:agent:collections"})
      */
     private $name;
 
@@ -82,8 +91,11 @@ class Agent
 
     /**
      * @ORM\Column(type="datetime",nullable=true)
+     * @Groups({"read:agent:collections"})
      */
     private $updatedAt;
+
+
 
     public function __construct()
     {

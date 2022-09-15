@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import userImg from "../../ressources/img/user.jpg";
 
 const avatarWidth = "50px";
 const chevronWidth = "20px";
@@ -40,7 +41,8 @@ export const Avatar = styled.div`
   width: ${avatarWidth};
   height: ${avatarWidth};
   border-radius: 100%;
-  background-image: url("https://cdn.pixabay.com/photo/2022/06/27/14/38/cat-7287671_960_720.jpg");
+  background-image: ${(props) =>
+    props.img ? `url(${props.img})` : `url(${userImg})`};
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -32,6 +32,9 @@ const AuthenticateReducer = (state = initialState, action) => {
     case GET_OWNER:
       return {
         ...state,
+        id: payload.id,
+        role: payload.role,
+        photo: payload.photo,
         username: payload.username,
         matricule: payload.matricule,
         grade: payload.grade,

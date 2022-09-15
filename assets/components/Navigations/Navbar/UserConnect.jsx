@@ -36,7 +36,7 @@ const UserConnect = () => {
 
   return (
     <UserConnectContainer ref={userConnectRef} onClick={showDropDownMenu}>
-      <Avatar />
+      <Avatar img={userAuth.photo} />
       <div style={{ textAlign: "center" }}>
         <div style={{ display: "flex" }}>
           <UserNameStyle>

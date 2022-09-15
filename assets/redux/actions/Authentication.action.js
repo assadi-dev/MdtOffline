@@ -35,6 +35,8 @@ export const get_owner = (id, token) => {
           Authorization: `Bearer ${token}`,
         },
       }).then((res) => {
+        let role = res.data.roles.join("-");
+        let id = res.data.id;
         let username = res.data.username;
         let photo = res.data.agent.photo;
         let matricule = res.data.agent.matricule
@@ -44,7 +46,7 @@ export const get_owner = (id, token) => {
 
         dispatch({
           type: GET_OWNER,
-          payload: { username, photo, matricule, grade, token },
+          payload: { username, photo, matricule, grade, role, id, token },
         });
       });
     } catch (error) {}
