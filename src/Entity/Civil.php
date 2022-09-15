@@ -14,8 +14,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ * @Vich\Uploadable()
  * @ApiFilter(SearchFilter::class,properties={"sexe":"start","ethnie":"exact","nationalite":"exact"})
  * @ApiResource(
  * security="is_granted('IS_AUTHENTICATED_FULLY')",
@@ -44,7 +46,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *       "get" = { "normalization_context"={
  *                      "groups" ={"read:civil:collections", "read:civil:item"},
  *                      }
- *              }
+ *              },
+ *    "photo"={
+ *      "method"="POST",
+ *      "path"="/civils/{id}/photo",
+ *      "controller"=UploadPhotoController::class,
+ *      "read"=false,
+ *  }
+ * 
  * }
  * 
  * )

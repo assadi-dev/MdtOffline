@@ -1,0 +1,8 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+       agents:
+           uri_prefix: /images/agent
+           upload_destination: '%kernel.project_dir%/uploads/images/agent'
+           namer: Vich\UploaderBundle\Naming\OrignameNamer

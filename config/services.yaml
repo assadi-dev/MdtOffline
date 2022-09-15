@@ -27,6 +27,7 @@ services:
 
 
     Symfony\Component\HttpFoundation\Request:
+        
 
     App\OpenApi\OpenApiFactory:
         decorates: 'api_platform.openapi.factory'

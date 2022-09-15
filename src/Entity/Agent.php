@@ -2,15 +2,32 @@
 
 namespace App\Entity;
 
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AgentRepository;
+use App\Controller\UploadAgentController;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=AgentRepository::class)
- * @ApiResource()
+ * @Vich\Uploadable()
+ * @ApiResource(
+ * itemOperations={
+ * "put","patch","delete",
+ *  "photo"={
+ *      "method"="POST",
+ *      "path"="/agents/{id}/photo",
+ *      "deserialize"=false,
+ *      "controller"=UploadAgentController::class,
+ *      "read"=false,
+ *  }
+ * }
+ * )
  */
 class Agent
 {
@@ -57,11 +74,22 @@ class Agent
      */
     private $name;
 
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="agents",fileNameProperty="photo")
+     */
+    private $file;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
         $this->grade = "Rookie";
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
     }
 
     public function getId(): ?int
@@ -137,6 +165,42 @@ class Agent
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of file
+     *
+     * @return  File|null
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set the value of file
+     *
+     * @param  File|null  $file
+     *
+     * @return  self
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
