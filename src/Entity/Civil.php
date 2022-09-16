@@ -8,13 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CivilRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Controller\SearchCivilController;
+use App\Controller\UploadCivilController;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @Vich\Uploadable()
@@ -50,8 +52,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *    "photo"={
  *      "method"="POST",
  *      "path"="/civils/{id}/photo",
- *      "controller"=UploadPhotoController::class,
- *      "read"=false,
+ *      "deserialize"=false,
+ *      "controller"=UploadCivilController::class,
+ *      
  *  }
  * 
  * }
@@ -158,6 +161,14 @@ class Civil
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="civils",fileNameProperty="photo")
+     */
+    private $file;
+
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -416,6 +427,33 @@ class Civil
 
         return $this;
     }
+
+
+    /**
+     * Get the value of file
+     *
+     * @return  File|null
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set the value of file
+     *
+     * @param  File|null  $file
+     *
+     * @return  self
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+
 
     /**
      * @return Collection<int, Avertissement>
