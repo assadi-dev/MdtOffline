@@ -29,6 +29,9 @@ import {
   RowSecond,
   HeaderSelect,
   IconButtonTop,
+  RowDiv,
+  UploadCivilPhotoBtn,
+  PhotoContainer,
 } from "./Selected.styled";
 import ListItemTraffic from "./ListItemViews/ListItemTraffic";
 import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion";
@@ -54,6 +57,36 @@ const CivilSelected = () => {
   const dispatchCivilData = useDispatch();
   const civilSelectore = useSelector((state) => state.CivilReducer);
   const token = useSelector((state) => state.AuthenticateReducer.token);
+  const [file, setFile] = useState({
+    file: "",
+    preview: "",
+    size: 0,
+    type: "",
+  });
+
+  const handleLoadFile = (e) => {
+    let file = e.target.files[0];
+
+    let blob = URL.createObjectURL(file);
+
+    setFile((prevState) => ({
+      ...prevState,
+      file: file,
+      size: file.size,
+      type: file.type,
+      preview: blob,
+    }));
+  };
+
+  const handleSubmitPhoto = () => {
+    setFile((prevState) => ({
+      ...prevState,
+      file: "",
+      size: "",
+      type: 0,
+      preview: "",
+    }));
+  };
 
   useEffect(() => {
     {
@@ -145,41 +178,65 @@ const CivilSelected = () => {
 
         <RowFirst>
           <CivilCard>
-            <CivilPhoto src={civilData.photo} />
-            <CivilInfo>
-              <p>
-                <span className="personalDetail">NE(E) : </span>{" "}
-                {civilData ? civilData.nom : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">ADRESSE : </span>{" "}
-                {civilData ? civilData.prenom : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">TELEPHONE : </span>{" "}
-                {civilData ? civilData.telephone : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">APPARTENANCE : </span>{" "}
-                {civilData ? civilData.affiliation : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">EMPLOIE : </span>{" "}
-                {civilData ? civilData.emploie : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">CHEVEUX : </span>{" "}
-                {civilData ? civilData.hairColor : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">NATIONALITÉ : </span>{" "}
-                {civilData ? civilData.nationalite : "N/A"}
-              </p>
-              <p>
-                <span className="personalDetail">SEXE : </span>{" "}
-                {civilData ? civilData.sexe : "N/A"}
-              </p>
-            </CivilInfo>
+            <RowDiv>
+              <PhotoContainer>
+                <CivilPhoto
+                  htmlFor={"photo"}
+                  src={file.preview ? file.preview : civilData.photo}
+                >
+                  <input
+                    id="photo"
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleLoadFile}
+                  />
+                </CivilPhoto>
+                {file.preview && (
+                  <UploadCivilPhotoBtn
+                    type="button"
+                    onClick={handleSubmitPhoto}
+                  >
+                    Valider
+                  </UploadCivilPhotoBtn>
+                )}
+              </PhotoContainer>
+
+              <CivilInfo>
+                <p>
+                  <span className="personalDetail">NE(E) : </span>{" "}
+                  {civilData ? civilData.nom : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">ADRESSE : </span>{" "}
+                  {civilData ? civilData.prenom : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">TELEPHONE : </span>{" "}
+                  {civilData ? civilData.telephone : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">APPARTENANCE : </span>{" "}
+                  {civilData ? civilData.affiliation : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">EMPLOIE : </span>{" "}
+                  {civilData ? civilData.emploie : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">CHEVEUX : </span>{" "}
+                  {civilData ? civilData.hairColor : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">NATIONALITÉ : </span>{" "}
+                  {civilData ? civilData.nationalite : "N/A"}
+                </p>
+                <p>
+                  <span className="personalDetail">SEXE : </span>{" "}
+                  {civilData ? civilData.sexe : "N/A"}
+                </p>
+              </CivilInfo>
+            </RowDiv>
           </CivilCard>
 
           <CivilSelectedCard

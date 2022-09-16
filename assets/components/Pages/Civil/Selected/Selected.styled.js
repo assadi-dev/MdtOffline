@@ -81,20 +81,72 @@ export const RowSecond = styled.div`
 `;
 
 export const CivilCard = styled.div`
-  display: flex;
+  min-width: 200px;
+  /* max-height: 320px; */
 `;
 
-export const CivilPhoto = styled.div`
+export const RowDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 992px) {
+    max-height: 210px;
+    flex-direction: row;
+  }
+`;
+
+export const PhotoContainer = styled.div`
+  position: relative;
+  height: 200px;
+  width: 190px;
+  margin: 0 auto;
+  @media screen and (min-width: 992px) {
+    max-height: 80%;
+    width: 190px;
+    margin: 0;
+  }
+`;
+export const CivilPhoto = styled.label`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: inline-block;
   background-image: url(${({ src }) => (src ? src : userImg)});
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  max-height: 80%;
+
   width: 190px;
+  margin: 0 auto;
   border: 1px solid var(--color-blue-primary);
   border-radius: 5px;
   overflow: hidden;
-  filter: drop-shadow(0px 3px 10px var(--color-blue-opacity-50)); ;
+  filter: drop-shadow(0px 3px 10px var(--color-blue-opacity-50));
+  & input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  cursor: pointer;
+`;
+
+export const UploadCivilPhotoBtn = styled.button`
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-blue-primary);
+  color: var(--color-white);
+  padding: 10px 5px;
+  border-radius: 5px;
+  font-family: var(--font-title);
+  font-weight: normal;
+  font-size: 12px;
+  z-index: 50;
+  :active {
+    opacity: 0.5;
+  }
 `;
 
 export const CivilInfo = styled.div`
