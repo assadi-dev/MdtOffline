@@ -20,9 +20,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * normalizationContext={"groups"={"read:agent:collections","read:agent:item"}},
  * itemOperations={
  * "put","delete","get",
- *  "upload_photo"={
+ *  "upload_photo_agent"={
  *      "method"="POST",
- *      "path"="/agent/{id}/photo",
+ *      "path"="/agents/{id}/photo",
  *      "deserialize"=false,
  *      "controller"=UploadAgentController::class,
  *      
