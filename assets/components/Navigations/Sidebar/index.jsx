@@ -11,12 +11,13 @@ import {
 import uniqid from "uniqid";
 
 const navigations = [
-  { path: "", label: "Accueil", selected: true, submenu: [] },
+  { path: "", label: "Accueil", selected: true, submenu: [], end: true },
   {
     path: "services",
     label: "Services",
     selected: false,
     openDropdown: false,
+    end: false,
     submenu: [
       { path: "/", label: "Feuilles d'heures" },
       { path: "/", label: "Notes de frais" },
@@ -30,6 +31,7 @@ const navigations = [
     label: "MDT",
     selected: false,
     openDropdown: false,
+    end: false,
     submenu: [],
   },
   {
@@ -37,6 +39,7 @@ const navigations = [
     label: "Senior Lead Officier",
     selected: false,
     openDropdown: false,
+    end: false,
     submenu: [
       { path: "/", label: "Outil SLO" },
       { path: "/", label: "Avis Senior Leading Officier" },
@@ -47,6 +50,7 @@ const navigations = [
     label: "Police Academy",
     selected: false,
     openDropdown: false,
+    end: false,
     submenu: [{ path: "/", label: "Rapports Rookie" }],
   },
   {
@@ -54,6 +58,7 @@ const navigations = [
     label: "Command Staff / Supervisor",
     selected: false,
     openDropdown: false,
+    end: false,
     submenu: [
       { path: "/", label: "Voir les rapporsts d'incidents" },
       { path: "/", label: "Comptabilités" },
@@ -90,6 +95,7 @@ const Sidebar = () => {
               to={route.path}
               onClick={() => activeRoute(route.label)}
               state={{ title: route.label }}
+              end={route.end}
             >
               <span className="active-icon">
                 <PoliceV1 />
