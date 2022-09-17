@@ -49,7 +49,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *                      "groups" ={"read:civil:collections", "read:civil:item"},
  *                      }
  *              },
- *    "photo"={
+ *    "upload_photo_civil"={
  *      "method"="POST",
  *      "path"="/civils/{id}/photo",
  *      "deserialize"=false,
