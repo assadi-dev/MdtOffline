@@ -77,9 +77,10 @@ const Civil = () => {
               >
                 {civil && (
                   <CivilCard
-                    nom={civil.nom.toUpperCase()}
+                    nom={civil.nom}
                     prenom={ucFirst(civil.prenom)}
                     telephone={civil.telephone}
+                    photo={civil.photo}
                   />
                 )}
               </Link>

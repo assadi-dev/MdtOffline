@@ -11,6 +11,4 @@ const init = axios.create({
   },
 });
 
-console.log(process.env.REACT_APP_URLBACKEND);
-
 export default init;

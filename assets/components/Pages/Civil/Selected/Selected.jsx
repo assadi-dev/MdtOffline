@@ -37,7 +37,10 @@ import ListItemTraffic from "./ListItemViews/ListItemTraffic";
 import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion";
 import ListItemRapportArrestation from "./ListItemViews/ListItemRapportArrestation";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneCivil } from "../../../../redux/actions/Civil.action";
+import {
+  getOneCivil,
+  uploadPhotoCivil,
+} from "../../../../redux/actions/Civil.action";
 import ConvocationView from "./ModalView/ConvocationView";
 import CelluleView from "./ModalView/CelluleView";
 
@@ -79,13 +82,18 @@ const CivilSelected = () => {
   };
 
   const handleSubmitPhoto = () => {
-    setFile((prevState) => ({
-      ...prevState,
-      file: "",
-      size: "",
-      type: 0,
-      preview: "",
-    }));
+    const formData = new FormData();
+    formData.append("photo", file.file);
+
+    dispatchCivilData(uploadPhotoCivil(id, formData, token)).then(() => {
+      setFile((prevState) => ({
+        ...prevState,
+        file: "",
+        size: "",
+        type: 0,
+        preview: "",
+      }));
+    });
   };
 
   useEffect(() => {

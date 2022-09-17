@@ -17,15 +17,25 @@ import {
 } from "./EncodeCivile.styled";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { addCivil } from "../../../../redux/actions/Civil.action";
+import {
+  addCivil,
+  uploadPhotoCivil,
+} from "../../../../redux/actions/Civil.action";
 
 const EncodeCivil = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState({
+    file: null,
+    preview: "",
+    size: 0,
+    type: "",
+  });
   const dispatch = useDispatch();
   const token = useSelector((state) => state.AuthenticateReducer.token);
 
   const formik = useFormik({
     initialValues: {
+      photo: "",
       nom: "",
       prenom: "",
       identification: "",
@@ -35,16 +45,20 @@ const EncodeCivil = ({ isOpen, onClose }) => {
       affiliation: "",
       emploie: "",
       adresse: "",
-      photo: "",
       hairColor: "",
       ethnie: "caucasien",
       permis: "non-valide",
       sexe: "homme",
-      file: null,
     },
     onSubmit: (values) => {
       token &&
-        dispatch(addCivil(values, token)).then(() => {
+        dispatch(addCivil(values, token)).then((res) => {
+          if (file.file) {
+            let id = res.id;
+            let formData = new FormData();
+            formData.append("photo", file.file);
+            dispatch(uploadPhotoCivil(id, formData, token));
+          }
           formik.resetForm();
           onClose();
         });
@@ -54,16 +68,26 @@ const EncodeCivil = ({ isOpen, onClose }) => {
   const handlePreview = (e) => {
     let file = e.target.files[0];
     let src = URL.createObjectURL(file);
-    formik.setFieldValue("file", file);
-    formik.setFieldValue("photo", src);
+    setFile((prevState) => ({
+      ...prevState,
+      file: file,
+      preview: src,
+      size: file.size,
+      type: file.type,
+    }));
   };
   const removePhoto = () => {
-    formik.setFieldValue("file", null);
-    formik.setFieldValue("photo", "");
+    setFile((prevState) => ({
+      ...prevState,
+      file: null,
+      preview: "",
+      size: 0,
+      type: "",
+    }));
   };
 
   const previewStyle = {
-    backgroundImage: `url(${formik.values.photo})`,
+    backgroundImage: `url(${file.preview})`,
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -158,20 +182,20 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                 <PreView>
                   {" "}
                   <PrewiewPhoto style={previewStyle}>
-                    {formik.values.file ? (
+                    {file.file ? (
                       <span onClick={removePhoto} className="remove">
                         X
                       </span>
                     ) : null}
                     <LabelStyled htmlFor="photo">
-                      {!formik.values.file ? <p>Photo d'identité</p> : null}
+                      {!file.file ? <p>Photo d'identité</p> : null}
                     </LabelStyled>
                   </PrewiewPhoto>{" "}
                   <InputPhoto
-                    key={formik.values.file && formik.values.file.name}
+                    key={file.file && file.file.name}
                     type="file"
                     accept="image/*"
-                    name="photo"
+                    name="file"
                     id="photo"
                     onChange={handlePreview}
                     onBlur={formik.handleBlur}

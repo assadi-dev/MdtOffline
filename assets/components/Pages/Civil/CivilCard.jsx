@@ -6,7 +6,7 @@ const CivilCard = ({ nom, prenom, telephone, photo }) => {
     <CardContainer>
       <CivilPhoto src={photo} />
       <CivilInfo>
-        <p className="text">{nom}</p>
+        <p className="text">{nom.toUpperCase()}</p>
         <p className="text">{prenom}</p>
         <p className="text">{telephone}</p>
       </CivilInfo>

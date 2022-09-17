@@ -5,6 +5,7 @@ import {
   GET_ALL_CIVIL,
   GET_ONE_CIVIL,
   GET_SEARCH_CIVIL_RESULT,
+  UPLOAD_PHOTO_CIVIL,
 } from "../types/civil.type";
 import { ADD_CONVOCATION } from "../types/Convocation.type";
 import {
@@ -39,6 +40,20 @@ const CivilReducer = (state = initialState, action) => {
       return {
         ...state,
         collection: [...state.collection, payload],
+        isReady: true,
+      };
+
+    case UPLOAD_PHOTO_CIVIL:
+      let newStateCollection = state.collection;
+      const civilIndex = newStateCollection.findIndex(
+        (c) => c.id == payload.id
+      );
+      newStateCollection[civilIndex].photo = payload.photo;
+
+      return {
+        ...state,
+        collection: newStateCollection,
+        selected: { ...state.selected, photo: payload.photo },
         isReady: true,
       };
 
