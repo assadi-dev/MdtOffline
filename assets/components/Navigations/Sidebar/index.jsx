@@ -97,7 +97,7 @@ const Sidebar = () => {
               state={{ title: route.label }}
               end={route.end}
             >
-              <span className="active-ico">
+              <span className="active-icon">
                 <PoliceV1 />
               </span>
               {route.label}
