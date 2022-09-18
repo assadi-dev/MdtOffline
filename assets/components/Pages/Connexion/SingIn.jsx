@@ -78,7 +78,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
               <input
                 name="username"
                 type="text"
-                placeholder="Nom Prénom"
+                placeholder="Prénom Nom"
                 onChange={formik.handleChange}
                 value={formik.values.username}
               />

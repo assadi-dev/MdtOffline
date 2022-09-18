@@ -11,6 +11,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -29,6 +30,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *  }
  * }
  * )
+ * @UniqueEntity(fields="matricule", message="Ce numero matricule et déjà pris")
+ * 
  */
 class Agent
 {
@@ -36,50 +39,49 @@ class Agent
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:agent:collections"})
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:user:collections"})
-     * @Groups({"read:agent:collections"})
+     * 
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $photo;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:user:collections"})
-     * @Groups({"read:agent:collections"})
+     * 
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:user:collections"})
-     * @Groups({"read:agent:collections"})
+     * @ORM\Column(type="string", length=255, nullable=true,unique=true))
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $matricule;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:user:collections"})
-     * @Groups({"read:agent:collections"})
+     * 
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $grade;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"read:user:collections"})
-     * @Groups({"read:agent:collections"})
+     * 
+     * @Groups({"read:agent:collections","read:user:collections"})
      * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:user:collections"})
-     * @Groups({"read:agent:collections"})
+     * 
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $name;
 
@@ -91,7 +93,7 @@ class Agent
 
     /**
      * @ORM\Column(type="datetime",nullable=true)
-     * @Groups({"read:agent:collections"})
+     * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $updatedAt;
 

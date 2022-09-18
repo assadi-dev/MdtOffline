@@ -2,11 +2,11 @@ import React from "react";
 import { SuccessIcon } from "../../SVG/Connexion.svg";
 import { IconAlert, RowAlert, SuccessContainer } from "./Alert.styled";
 
-const AlertSuccess = ({ message }) => {
+const AlertSuccess = ({ message, ...props }) => {
   return (
     <SuccessContainer>
       {" "}
-      <RowAlert>
+      <RowAlert {...props}>
         <IconAlert>
           <SuccessIcon />
         </IconAlert>

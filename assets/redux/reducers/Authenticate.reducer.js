@@ -1,5 +1,11 @@
 import React from "react";
-import { GET_OWNER, LOGIN, LOGOUT } from "../types/Authenticate.type";
+import {
+  EDIT_OWNER,
+  ERROR_OWNER,
+  GET_OWNER,
+  LOGIN,
+  LOGOUT,
+} from "../types/Authenticate.type";
 
 const initialState = {
   role: "",
@@ -9,6 +15,7 @@ const initialState = {
   grade: "",
   token: "",
   isLoggedIn: false,
+  error: "",
 };
 const AuthenticateReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -32,14 +39,17 @@ const AuthenticateReducer = (state = initialState, action) => {
     case GET_OWNER:
       return {
         ...state,
-        id: payload.id,
-        role: payload.role,
-        photo: payload.photo,
-        username: payload.username,
-        matricule: payload.matricule,
-        grade: payload.grade,
-        token: payload.token,
+        ...payload,
+        isLoggedIn: true,
       };
+    case EDIT_OWNER:
+      return {
+        ...state,
+        ...payload,
+        isLoggedIn: true,
+      };
+    case ERROR_OWNER:
+      return { ...state, error: payload.error };
     default:
       return state;
       break;

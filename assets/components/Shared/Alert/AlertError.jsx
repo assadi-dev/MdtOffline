@@ -1,10 +1,10 @@
 import React from "react";
 import { DangerIcon } from "../../SVG/Connexion.svg";
 import { CodeAlert, ErrorContainer, IconAlert, RowAlert } from "./Alert.styled";
-const AlertError = ({ code, message }) => {
+const AlertError = ({ code, message, ...props }) => {
   return (
     <ErrorContainer>
-      <RowAlert>
+      <RowAlert {...props}>
         <IconAlert>
           <DangerIcon />
         </IconAlert>

@@ -41,6 +41,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
     nourriture: false,
     avocat: false,
     isEnclose: false,
+    rapport: "",
   });
 
   const options = codePenal.map((j) => {
