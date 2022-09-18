@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  CHANGE_PHOTO_OWNER,
   EDIT_OWNER,
   ERROR_OWNER,
   GET_OWNER,
@@ -47,6 +48,11 @@ const AuthenticateReducer = (state = initialState, action) => {
         ...state,
         ...payload,
         isLoggedIn: true,
+      };
+    case CHANGE_PHOTO_OWNER:
+      return {
+        ...state,
+        photo: payload,
       };
     case ERROR_OWNER:
       return { ...state, error: payload.error };

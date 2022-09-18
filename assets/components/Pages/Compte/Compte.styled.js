@@ -29,31 +29,55 @@ export const HeaderContainer = styled.div`
     flex-direction: row;
   }
 `;
-
-export const Photo = styled.label`
+export const PhotoContainer = styled.div`
+  padding: 10px;
+  position: relative;
   width: 100px;
   height: 100px;
+  @media screen and (min-width: 992px) {
+    width: 160px;
+    height: 160px;
+    margin-right: 2.5rem;
+  }
+`;
+export const Photo = styled.label`
   border-radius: 100%;
   border: 1px solid var(--color-blue-primary);
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
   margin-right: 0;
   background-image: url(${({ img }) => (img ? img : userImg)});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  z-index: 10;
   input {
     position: absolute;
-    bottom: 0;
+    bottom: 50%;
     left: 0;
     display: none;
   }
+`;
 
-  @media screen and (min-width: 992px) {
-    width: 160px;
-    height: 160px;
-    margin-right: 2.5rem;
+export const PhotoValidateBtn = styled.button`
+  padding: 8px 10px;
+  background-color: var(--color-blue-primary);
+  color: var(--color-white);
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 10px;
+  font-weight: normal;
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  z-index: 150;
+  transform: translateX(-50%) translateY(25px);
+  :active {
+    opacity: 0.5;
   }
 `;
 

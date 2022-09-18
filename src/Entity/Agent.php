@@ -30,7 +30,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  }
  * }
  * )
- * @UniqueEntity(fields="matricule", message="Ce numero matricule et déjà pris")
+ * @UniqueEntity(fields="matricule", message="Ce numero matricule est déjà pris")
  * 
  */
 class Agent

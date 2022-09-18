@@ -1,4 +1,5 @@
 import {
+  CHANGE_PHOTO_OWNER,
   EDIT_OWNER,
   ERROR_OWNER,
   GET_OWNER,
@@ -82,11 +83,15 @@ export const editAccount = (id, token, data) => {
     return new Promise((resolve, reject) => {
       const { idAgent, matricule, telephone, username } = data;
       try {
-        Api.put("/agents/" + idAgent, {
-          matricule,
-          telephone,
-          name: username,
-        })
+        Api.put(
+          "/agents/" + idAgent,
+          {
+            matricule,
+            telephone,
+            name: username,
+          },
+          headers
+        )
           .then((res) => {
             const data = res.data;
             const { name, matricule, telephone } = data;
@@ -119,5 +124,19 @@ export const editAccount = (id, token, data) => {
         console.log(error);
       }
     });
+  };
+};
+
+export const UploadPhotoOwner = (idAgent, data, token) => {
+  const headers = setHeader(token);
+  return async (dispatch) => {
+    try {
+      Api.post(`/agents/${idAgent}/photo`, data, headers).then((res) => {
+        const { photo } = res.data;
+        dispatch({ type: CHANGE_PHOTO_OWNER, payload: photo });
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 };
