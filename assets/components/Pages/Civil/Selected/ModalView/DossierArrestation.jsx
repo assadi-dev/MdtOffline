@@ -194,14 +194,13 @@ const DossierArrestation = ({ idCivil, onClose }) => {
       nourriture: inputState.nourriture,
       isEnclose: inputState.isEnclose,
       avocat: inputState.avocat,
+      rapport: inputState.rapport,
     };
 
     token &&
       dispatch(add_dossierArrestation(data, token)).then(() => {
         closeModal();
       });
-
-    //dispatch
   };
 
   return (
@@ -402,7 +401,13 @@ const DossierArrestation = ({ idCivil, onClose }) => {
           </BorderZone>
         </div>
         <div className="form-control" ref={textAreaRef}>
-          <InputTextArea rows={3} placeholder="Ecrivez le rapport" />
+          <InputTextArea
+            rows={3}
+            placeholder="Ecrivez le rapport"
+            name="rapport"
+            onChange={handleChangeValue}
+            value={inputState.rapport}
+          />
         </div>
         <FooterSectionButton>
           <ButtonDefault className="btn">Envoyer</ButtonDefault>
