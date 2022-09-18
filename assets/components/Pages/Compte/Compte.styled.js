@@ -90,17 +90,18 @@ export const InfoAgent = styled.div`
   .username {
     font-family: var(--font-title);
     font-weight: normal;
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 0.5rem;
   }
   .grade {
     font-weight: normal;
-    font-size: 28px;
+    font-size: 24px;
     opacity: 0.5;
   }
 `;
 
 export const BodyCompte = styled.div`
+  border: 1px solid var(--color-blue-primary);
   border-radius: 10px;
   padding: 18px;
   background-color: var(--lightBlue-secondary-opacity);
