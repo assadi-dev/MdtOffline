@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import {
   AgentItemView,
@@ -18,6 +18,8 @@ import {
 import numeral from "numeral";
 import { dateForCivilListView } from "../../../../../utils/dateFormat";
 import { FluentMoreCircleFill } from "../../../../SVG";
+import FluentMoreDropDown from "./FluentMoreDropDown";
+import { sleep } from "../../../../../utils/timer";
 
 const ListItemRapportArrestation = ({
   numero,
@@ -28,6 +30,24 @@ const ListItemRapportArrestation = ({
   offence,
 }) => {
   let numeroFormat = numeral(numero);
+
+  const [openMore, setOpenMore] = useState(false);
+  const moreIconBtnRef = useRef();
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      const target = e.target;
+      if (!moreIconBtnRef.current.contains(target)) {
+        sleep(100).then(() => {
+          setOpenMore(false);
+        });
+      }
+    };
+
+    document.addEventListener("mousedown", closeDropDown);
+
+    return () => document.removeEventListener("mousedown", closeDropDown);
+  }, []);
+
   return (
     <ListContainer>
       <ListContent>
@@ -39,9 +59,14 @@ const ListItemRapportArrestation = ({
             <NumberView className="text-end">
               N°{numeroFormat.format("000")}
             </NumberView>
-            <MoreIconBtn className="m-left-1 ">
+            <MoreIconBtn
+              className="m-left-1"
+              onClick={() => setOpenMore(!openMore)}
+              ref={moreIconBtnRef}
+            >
               <FluentMoreCircleFill />
             </MoreIconBtn>
+            <FluentMoreDropDown isOpen={openMore} />
           </RowIcon>
         </RowListItemView>
         <ListViewOffence>

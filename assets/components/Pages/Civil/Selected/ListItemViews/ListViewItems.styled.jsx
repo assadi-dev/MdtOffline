@@ -135,6 +135,7 @@ export const CardTopButtonContainer = styled.div`
   font-weight: 300;
   color: var(--color-white);
   background-color: var(--color-lightBlue-secondary-opacity-50);
+
   & .numeroTitle {
     font-family: var(--font-title);
   }
@@ -149,5 +150,50 @@ export const TextCardModalTopBtn = styled.p`
   font-weight: 300;
   & .special {
     font-weight: bold;
+  }
+`;
+
+//More Action Styles
+
+export const FluentMoreDropDownContainer = styled.div`
+  position: absolute;
+  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  transform: ${({ isOpen }) =>
+    isOpen ? "translateY(50px)" : "translateY(30px)"};
+  background-color: var(--color-white);
+  min-width: fit-content;
+  min-height: fit-content;
+  top: 0;
+  border-radius: 5px;
+  transition: all 0.35s;
+
+  padding: 8px 12px;
+  box-shadow: 0 0 13px 3px rgba(0, 0, 0, 0.5);
+  .edit {
+    color: var(--color-blue-primary);
+  }
+  .delete {
+    color: #ba5a3c;
+  }
+`;
+
+export const FluentMoreActiontext = styled.p`
+  cursor: pointer;
+  :first-of-type {
+    margin-bottom: 0.5rem;
+  }
+  span {
+    margin: 0;
+    margin-right: 3px;
+    color: inherit;
+    width: 12px;
+    height: 12px;
+    color: #444;
+    svg {
+      margin: 0;
+      width: 12px;
+      height: 12px;
+    }
   }
 `;
