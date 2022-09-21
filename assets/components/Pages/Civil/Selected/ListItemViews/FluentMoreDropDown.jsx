@@ -9,16 +9,16 @@ const FluentMoreDropDown = ({ isOpen, editFunc, deleteFunc }) => {
   return (
     <>
       <FluentMoreDropDownContainer isOpen={isOpen}>
-        <FluentMoreActiontext className="edit">
+        <FluentMoreActiontext className="edit" onClick={editFunc}>
           <span className="edit">
-            <EditPencilIcon />{" "}
-          </span>{" "}
+            <EditPencilIcon />
+          </span>
           Editer
         </FluentMoreActiontext>
-        <FluentMoreActiontext className="delete">
+        <FluentMoreActiontext className="delete" onClick={deleteFunc}>
           <span className="delete">
             <TrashIcon />
-          </span>{" "}
+          </span>
           Supprimer
         </FluentMoreActiontext>
       </FluentMoreDropDownContainer>

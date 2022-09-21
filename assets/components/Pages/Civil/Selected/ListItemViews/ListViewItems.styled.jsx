@@ -37,6 +37,10 @@ export const TitleItemView = styled.p`
   color: var(--color-white);
 `;
 
+export const LieuxItemView = styled.span`
+  font-weight: normal;
+`;
+
 export const AgentItemView = styled.p`
   margin-top: 0.3rem;
   margin-bottom: 0.5rem;

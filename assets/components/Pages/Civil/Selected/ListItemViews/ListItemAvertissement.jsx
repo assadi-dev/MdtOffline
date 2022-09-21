@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import {
   AgentItemView,
   DateItemView,
+  LieuxItemView,
   ListContainer,
   ListContent,
   MoreIconBtn,
@@ -15,7 +16,7 @@ import { FluentMoreCircleFill } from "../../../../SVG";
 import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../../utils/timer";
 
-const ListItemAvertissement = ({ numero, agent, date, comment }) => {
+const ListItemAvertissement = ({ id, lieux, numero, agent, date, comment }) => {
   let numeroFormat = numeral(numero);
   date = date || new Date();
   const [openMore, setOpenMore] = useState(false);
@@ -31,7 +32,6 @@ const ListItemAvertissement = ({ numero, agent, date, comment }) => {
     };
 
     document.addEventListener("mousedown", closeDropDown);
-
     return () => document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
@@ -53,7 +53,9 @@ const ListItemAvertissement = ({ numero, agent, date, comment }) => {
           <FluentMoreDropDown isOpen={openMore} />
         </RowIcon>
 
-        <TitleItemView>Fait :</TitleItemView>
+        <TitleItemView>
+          Fait à : <LieuxItemView>{lieux}</LieuxItemView>
+        </TitleItemView>
         <p>{comment}</p>
         <AgentItemView>
           <span className="agent">Agent : </span> {agent}

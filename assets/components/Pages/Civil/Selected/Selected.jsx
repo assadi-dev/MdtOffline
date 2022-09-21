@@ -260,6 +260,7 @@ const CivilSelected = () => {
               ? civilData.avertissements.map((avertissement) => (
                   <ListItemAvertissement
                     key={avertissement.id}
+                    lieux={avertissement.lieux}
                     numero={avertissement.id}
                     comment={avertissement.comments}
                     agent={avertissement.agent}
