@@ -11,6 +11,7 @@ import Connexion from "./components/Pages/Connexion";
 import { useDispatch, useSelector } from "react-redux";
 import { get_owner } from "./redux/actions/Authentication.action";
 import jwt_decode from "jwt-decode";
+import { TOKEN_STORAGE_NAME } from "./constants/localStorage";
 
 const App = () => {
   const Hello = () => {
@@ -21,7 +22,7 @@ const App = () => {
     );
   };
 
-  let tokenStorage = localStorage.getItem("mdtOfflineToken-999");
+  let tokenStorage = localStorage.getItem(TOKEN_STORAGE_NAME);
   const navigate = useNavigate();
   const authSelector = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();

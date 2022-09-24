@@ -20,6 +20,7 @@ import {
 import { BarLoading } from "../../SVG/Loader.svg";
 import AlertError from "../../Shared/Alert/AlertError";
 import { sleep } from "../../../utils/timer";
+import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
 
 const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
         connect(username, password)
           .then((res) => {
             const token = res.token;
-            localStorage.setItem("mdtOfflineToken-999", token);
+            localStorage.setItem(TOKEN_STORAGE_NAME, token);
             const decode = jwt_decode(token);
 
             const id = decode.id;

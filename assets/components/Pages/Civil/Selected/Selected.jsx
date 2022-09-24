@@ -43,15 +43,18 @@ import {
 } from "../../../../redux/actions/Civil.action";
 import ConvocationView from "./ModalView/ConvocationView";
 import CelluleView from "./ModalView/CelluleView";
+import EditAvertissementView from "./ListItemViews/EditView/EditAvertissementView";
+import EditTrafficView from "./ListItemViews/EditView/EditTrafficView";
 
 const CivilSelected = () => {
-  const [modalStae, dispatch] = useReducer(ModalReducer, {
+  const [modaleState, dispatch] = useReducer(ModalReducer, {
     isOpen: false,
     view: "",
+    id: "",
   });
 
   const closeModal = () => {
-    dispatch({ type: TOGGLE_MODAL, payload: "" });
+    dispatch({ type: TOGGLE_MODAL, payload: { view: "", id: "" } });
   };
   const location = useLocation();
   const { name, id } = location.state;
@@ -115,10 +118,16 @@ const CivilSelected = () => {
     switch (view) {
       case "avertissement":
         return <AvertissementView idCivil={id} onClose={closeModal} />;
+      case "edit-avertissement":
+        return (
+          <EditAvertissementView id={modaleState.id} onClose={closeModal} />
+        );
       case "traffic":
         return <TrafficView idCivil={id} onClose={closeModal} />;
+      case "edit-traffic":
+        return <EditTrafficView id={modaleState.id} onClose={closeModal} />;
       case "rapport-d-arrestation":
-        return <RapportArrestation idCivil={id} onClose={closeModal} />;
+        return <RapportArrestation id={id} onClose={closeModal} />;
       case "dossier-d-arrestation":
         return <DossierArrestation idCivil={id} onClose={closeModal} />;
       case "convocation":
@@ -151,7 +160,7 @@ const CivilSelected = () => {
             onClick={() =>
               dispatch({
                 type: TOGGLE_MODAL,
-                payload: "convocation",
+                payload: { view: "convocation" },
               })
             }
             title="convocation"
@@ -175,7 +184,7 @@ const CivilSelected = () => {
             onClick={() =>
               dispatch({
                 type: TOGGLE_MODAL,
-                payload: "cellule",
+                payload: { view: "cellule" },
               })
             }
             title={"Cellule"}
@@ -251,7 +260,7 @@ const CivilSelected = () => {
             openModal={() =>
               dispatch({
                 type: TOGGLE_MODAL,
-                payload: "avertissement",
+                payload: { view: "avertissement" },
               })
             }
             title="AVERTISSEMENT"
@@ -260,11 +269,13 @@ const CivilSelected = () => {
               ? civilData.avertissements.map((avertissement) => (
                   <ListItemAvertissement
                     key={avertissement.id}
+                    id={avertissement.id}
                     lieux={avertissement.lieux}
                     numero={avertissement.id}
                     comment={avertissement.comments}
                     agent={avertissement.agent}
                     date={avertissement.createdAt}
+                    dispatchOpenModal={dispatch}
                   />
                 ))
               : null}
@@ -275,7 +286,7 @@ const CivilSelected = () => {
             openModal={() =>
               dispatch({
                 type: TOGGLE_MODAL,
-                payload: "traffic",
+                payload: { view: "traffic" },
               })
             }
           >
@@ -285,11 +296,13 @@ const CivilSelected = () => {
                   return (
                     <ListItemTraffic
                       key={traffic.id}
+                      id={traffic.id}
                       numero={traffic.id}
                       offence={offences}
                       agent={traffic.agent}
                       amend={traffic.amend}
                       date={traffic.createdAt}
+                      dispatchOpenModal={dispatch}
                     />
                   );
                 })
@@ -302,7 +315,7 @@ const CivilSelected = () => {
             openModal={() =>
               dispatch({
                 type: TOGGLE_MODAL,
-                payload: "rapport-d-arrestation",
+                payload: { view: "rapport-d-arrestation" },
               })
             }
           >
@@ -314,12 +327,14 @@ const CivilSelected = () => {
                   return (
                     <ListItemRapportArrestation
                       key={rapport.id}
+                      id={rapport.id}
                       numero={rapport.id}
                       offence={offence}
                       agent={rapport.agent}
                       date={rapport.createdAt}
                       amend={rapport.amende}
                       peine={rapport.peine}
+                      dispatchOpenModal={dispatch}
                     />
                   );
                 })
@@ -331,7 +346,7 @@ const CivilSelected = () => {
             openModal={() =>
               dispatch({
                 type: TOGGLE_MODAL,
-                payload: "dossier-d-arrestation",
+                payload: { view: "dossier-d-arrestation" },
               })
             }
           >
@@ -349,6 +364,7 @@ const CivilSelected = () => {
                       date={dossier.createdAt}
                       peine={dossier.peine}
                       isEnclosed={dossier.isEnclose}
+                      dispatchOpenModal={dispatch}
                     />
                   );
                 })
@@ -356,8 +372,8 @@ const CivilSelected = () => {
           </CivilSelectedCard>
         </RowSecond>
       </Wrapper>
-      <Modal isOpen={modalStae.isOpen}>
-        <View>{modalStae.view && <Render view={modalStae.view} />}</View>
+      <Modal isOpen={modaleState.isOpen}>
+        <View>{modaleState.view && <Render view={modaleState.view} />}</View>
       </Modal>
     </>
   );

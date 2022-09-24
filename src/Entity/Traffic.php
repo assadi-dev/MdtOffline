@@ -4,15 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use App\Repository\TrafficTicketRepository;
+use App\Repository\TrafficRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=TrafficTicketRepository::class)
+ * 
+ * @ORM\Entity(repositoryClass=TrafficRepository::class)
  */
 class Traffic
 {

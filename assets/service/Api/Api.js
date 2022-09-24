@@ -1,6 +1,7 @@
 import axios from "axios";
+import { TOKEN_STORAGE_NAME } from "../../constants/localStorage";
 
-const getTokenStorage = localStorage.getItem("mdtOfflineToken-999");
+const getTokenStorage = localStorage.getItem(TOKEN_STORAGE_NAME);
 
 const DOMAIN = process.env.REACT_APP_URLBACKEND;
 

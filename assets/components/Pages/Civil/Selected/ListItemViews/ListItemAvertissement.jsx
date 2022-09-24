@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useReducer } from "react";
 import {
   AgentItemView,
   DateItemView,
@@ -15,11 +15,36 @@ import { dateForCivilListView } from "../../../../../utils/dateFormat";
 import { FluentMoreCircleFill } from "../../../../SVG";
 import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../../utils/timer";
+import moreActionReducer from "../Reducer/moreActionReducer";
+import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
 
-const ListItemAvertissement = ({ id, lieux, numero, agent, date, comment }) => {
+const ListItemAvertissement = ({
+  id,
+  lieux,
+  numero,
+  agent,
+  date,
+  comment,
+  dispatchOpenModal,
+}) => {
   let numeroFormat = numeral(numero);
   date = date || new Date();
   const [openMore, setOpenMore] = useState(false);
+
+  const [MoreAction, dispatchMoreAction] = useReducer(moreActionReducer, {
+    id: "",
+    action: "",
+    isOpen: false,
+  });
+
+  const handleEdit = () => {
+    console.log(id);
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-avertissement", id: id },
+    });
+  };
+
   const moreIconBtnRef = useRef();
   useEffect(() => {
     const closeDropDown = (e) => {
@@ -50,7 +75,7 @@ const ListItemAvertissement = ({ id, lieux, numero, agent, date, comment }) => {
           >
             <FluentMoreCircleFill />
           </MoreIconBtn>
-          <FluentMoreDropDown isOpen={openMore} />
+          <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
         </RowIcon>
 
         <TitleItemView>

@@ -6,7 +6,12 @@ export const ModalReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case TOGGLE_MODAL:
-      return { ...state, isOpen: !state.isOpen, view: payload };
+      return {
+        ...state,
+        isOpen: !state.isOpen,
+        view: payload.view,
+        id: payload.id || "",
+      };
 
       break;
 

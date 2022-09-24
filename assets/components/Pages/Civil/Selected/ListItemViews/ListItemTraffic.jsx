@@ -19,8 +19,17 @@ import PropTypes from "prop-types";
 import { FluentMoreCircleFill } from "../../../../SVG";
 import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../../utils/timer";
+import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
 
-const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
+const ListItemTraffic = ({
+  id,
+  numero,
+  offence,
+  agent,
+  date,
+  amend,
+  dispatchOpenModal,
+}) => {
   let numeroFormat = numeral(numero);
 
   const [openMore, setOpenMore] = useState(false);
@@ -40,6 +49,14 @@ const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
     return () => document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
+  const handleEdit = () => {
+    console.log(id);
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-traffic", id: id },
+    });
+  };
+
   return (
     <ListContainer>
       <ListContent>
@@ -58,7 +75,7 @@ const ListItemTraffic = ({ numero, offence, agent, date, amend }) => {
             >
               <FluentMoreCircleFill />
             </MoreIconBtn>
-            <FluentMoreDropDown isOpen={openMore} />
+            <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
           </RowIcon>
         </RowListItemView>
         <ListViewOffence>

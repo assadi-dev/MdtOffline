@@ -10,8 +10,6 @@ import {
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
 
-let getTokenStorage = localStorage.getItem("mdtOfflineToken-999");
-
 export const getAllCivil = (token) => {
   return async (dispatch) => {
     try {
