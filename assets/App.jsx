@@ -7,7 +7,7 @@ import "./styles/layout.css";
 import MainLayout from "./components/Layout/MainLayout";
 import PagesRoutes from "./routes/Pages.routes";
 import uniqid from "uniqid";
-import Connexion from "./components/Pages/Connexion";
+import Connexion from "./Pages/Connexion";
 import { useDispatch, useSelector } from "react-redux";
 import { get_owner } from "./redux/actions/Authentication.action";
 import jwt_decode from "jwt-decode";

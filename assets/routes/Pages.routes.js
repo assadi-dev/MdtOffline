@@ -1,16 +1,16 @@
 import React from "react";
-import Services from "../components/Pages/Services";
-import MDT from "../components/Pages/MDT";
-import SeniorLeadOfficier from "../components/Pages/SeniorLeadOfficier";
-import PoliceAcademy from "../components/Pages/PoliceAcademy";
-import CommandStaffSupervisor from "../components/Pages/CommandStaffSupervisor";
-import Compte from "../components/Pages/Compte";
-import Reglage from "../components/Pages/Reglage";
-import Civil from "../components/Pages/Civil";
-import Documents from "../components/Pages/Documents";
-import PanicButton from "../components/Pages/PanicButton";
-import RapportIncident from "../components/Pages/RapportIncident";
-import CivilSelected from "../components/Pages/Civil/Selected/Selected";
+import Services from "../Pages/Services";
+import MDT from "../Pages/MDT";
+import SeniorLeadOfficier from "../Pages/SeniorLeadOfficier";
+import PoliceAcademy from "../Pages/PoliceAcademy";
+import CommandStaffSupervisor from "../Pages/CommandStaffSupervisor";
+import Compte from "../Pages/Compte";
+import Reglage from "../Pages/Reglage";
+import Civil from "../Pages/Civil";
+import Documents from "../Pages/Documents";
+import PanicButton from "../Pages/PanicButton";
+import RapportIncident from "../Pages/RapportIncident";
+import CivilSelected from "../Pages/Civil/Selected/Selected";
 
 export default [
   { label: "Services", path: "services", element: <Services /> },
