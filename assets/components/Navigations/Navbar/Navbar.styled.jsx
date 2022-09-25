@@ -105,7 +105,7 @@ export const UserNameStyle = styled.h3`
   font-size: 16px;
   font-weight: 600;
   text-align: center;
-  min-width: 125px;
+  min-width: 80px;
   margin: 0 15px;
 `;
 
