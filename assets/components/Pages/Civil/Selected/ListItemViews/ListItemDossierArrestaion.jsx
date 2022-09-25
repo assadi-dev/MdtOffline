@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { enCloseArrestFolder } from "../../../../../redux/actions/DossierArrestation.action";
 import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../../utils/timer";
+import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
 
 const ListItemDossierArrestaion = ({
   id,
@@ -35,6 +36,7 @@ const ListItemDossierArrestaion = ({
   peine,
   offence,
   isEnclosed,
+  dispatchOpenModal,
 }) => {
   let numeroFormat = numeral(numero);
   const dispatch = useDispatch();
@@ -42,6 +44,13 @@ const ListItemDossierArrestaion = ({
 
   const onEnclose = () => {
     dispatch(enCloseArrestFolder(id, token));
+  };
+
+  const handleEdit = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-dossier-d-arrestation", id: id },
+    });
   };
 
   const [openMore, setOpenMore] = useState(false);
@@ -77,7 +86,7 @@ const ListItemDossierArrestaion = ({
             >
               <FluentMoreCircleFill />
             </MoreIconBtn>
-            <FluentMoreDropDown isOpen={openMore} />
+            <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
           </RowIcon>
         </RowListItemView>
         <ListViewOffence>

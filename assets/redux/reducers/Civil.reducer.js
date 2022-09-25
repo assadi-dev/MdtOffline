@@ -1,4 +1,7 @@
-import { ADD_AVERTISSEMENT } from "../types/avertissements..type";
+import {
+  ADD_AVERTISSEMENT,
+  EDIT_AVERTISSEMENT,
+} from "../types/avertissements..type";
 import {
   ADD_CIVIL,
   ENCLOSE_ARREST_FOLDER,
@@ -11,9 +14,13 @@ import { ADD_CONVOCATION } from "../types/Convocation.type";
 import {
   ADD_DOSSIERARRESTATION,
   ADD_DOSSIER_ARRESTATION,
+  EDIT_DOSSIER_ARRESTATION,
 } from "../types/DossierArrestation.type";
-import { ADD_RAPPORT_ARRESTATION } from "../types/RapportArrestation.type";
-import { ADD_TRAFFIC } from "../types/Traffic.type";
+import {
+  ADD_RAPPORT_ARRESTATION,
+  EDIT_RAPPORT_ARRESTATION,
+} from "../types/RapportArrestation.type";
+import { ADD_TRAFFIC, EDIT_TRAFFIC } from "../types/Traffic.type";
 import { ADD_CELLULE } from "../types/Cellule.type";
 
 const initialState = {
@@ -68,6 +75,21 @@ const CivilReducer = (state = initialState, action) => {
         isReady: true,
       };
       break;
+    case EDIT_AVERTISSEMENT:
+      let updateAvertissement = state.selected.avertissements.map(
+        (avertissement) => {
+          if (avertissement.id == payload.id) {
+            return { ...payload };
+          }
+          return avertissement;
+        }
+      );
+
+      return {
+        ...state,
+        selected: { ...state.selected, avertissements: updateAvertissement },
+        isReady: true,
+      };
 
     case ADD_TRAFFIC:
       return {
@@ -78,7 +100,49 @@ const CivilReducer = (state = initialState, action) => {
         },
         isReady: true,
       };
-      break;
+
+    case EDIT_TRAFFIC:
+      let updateTraffic = state.selected.traffics.map((traffic) => {
+        if (traffic.id == payload.id) {
+          return { ...payload };
+        }
+        return traffic;
+      });
+
+      return {
+        ...state,
+        selected: { ...state.selected, traffics: updateTraffic },
+        isReady: true,
+      };
+
+    case ADD_RAPPORT_ARRESTATION:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          rapportArrestation: [...state.selected.rapportArrestation, payload],
+        },
+        isReady: true,
+      };
+
+    case EDIT_RAPPORT_ARRESTATION:
+      let updateRapportArrestation = state.selected.rapportArrestation.map(
+        (rapportArrestation) => {
+          if (rapportArrestation.id == payload.id) {
+            return { ...payload };
+          }
+          return rapportArrestation;
+        }
+      );
+
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          rapportArrestation: updateRapportArrestation,
+        },
+        isReady: true,
+      };
 
     case ADD_DOSSIER_ARRESTATION:
       return {
@@ -89,32 +153,26 @@ const CivilReducer = (state = initialState, action) => {
         },
         isReady: true,
       };
-      break;
-    case ADD_RAPPORT_ARRESTATION:
+
+    case EDIT_DOSSIER_ARRESTATION:
+      let updateDossierArrestation = state.selected.dossierArrestation.map(
+        (dossierArrestation) => {
+          if (dossierArrestation.id == payload.id) {
+            return { ...payload };
+          }
+          return dossierArrestation;
+        }
+      );
+
       return {
         ...state,
         selected: {
           ...state.selected,
-          rapportArrestation: [...state.selected.rapportArrestation, payload],
+          dossierArrestation: updateDossierArrestation,
         },
         isReady: true,
       };
-    case ADD_CONVOCATION:
-      return {
-        ...state,
-        selected: {
-          ...state.selected,
-          convocation: [...state.selected.convocation, payload],
-        },
-      };
-    case ADD_CELLULE:
-      return {
-        ...state,
-        selected: {
-          ...state.selected,
-          cellule: [...state.selected.cellule, payload],
-        },
-      };
+
     case ENCLOSE_ARREST_FOLDER:
       let update = state.selected.dossierArrestation.map((d) => {
         if (d.id == payload) {
@@ -123,8 +181,6 @@ const CivilReducer = (state = initialState, action) => {
         return d;
       });
 
-      console.log(update);
-
       return {
         ...state,
         selected: {
@@ -132,6 +188,24 @@ const CivilReducer = (state = initialState, action) => {
           dossierArrestation: update,
         },
         isReady: true,
+      };
+
+    case ADD_CELLULE:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          cellule: [...state.selected.cellule, payload],
+        },
+      };
+
+    case ADD_CONVOCATION:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          convocation: [...state.selected.convocation, payload],
+        },
       };
 
     default:

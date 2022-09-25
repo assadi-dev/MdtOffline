@@ -1,20 +1,19 @@
 import React, { useEffect, useMemo, useReducer, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../../../Shared/Modal";
 import {
   HandsCuffsOutline,
   JusticeHamerOutline,
   LockOutline,
   MailConvocIcon,
+  PagePreviousOutline,
   PrisonIcon,
   UserLicenceOutline,
 } from "../../../SVG";
 import CivilSelectedCard from "./CivilSelectedCard";
 import AvertissementView from "./ModalView/AvertissementView";
-import DossierArrestation from "./ModalView/DossierArrestation";
 import ListItemAvertissement from "./ListItemViews/ListItemAvertissement";
 import { HeadTitleView, View } from "./ModalView/ModalView.styled";
-import RapportArrestation from "./ModalView/RapportArrestation";
 import TrafficView from "./ModalView/TrafficView";
 import ModalReducer, { TOGGLE_MODAL } from "./Reducer/ModalReducer";
 
@@ -45,6 +44,10 @@ import ConvocationView from "./ModalView/ConvocationView";
 import CelluleView from "./ModalView/CelluleView";
 import EditAvertissementView from "./ListItemViews/EditView/EditAvertissementView";
 import EditTrafficView from "./ListItemViews/EditView/EditTrafficView";
+import EditRapportArrestationView from "./ListItemViews/EditView/EditRapportArrestationView";
+import EditDossierArrestationView from "./ListItemViews/EditView/EditDossierArrestationView";
+import RapportArrestationView from "./ModalView/RapportArrestationView";
+import DossierArrestationView from "./ModalView/DossierArrestationView";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -69,6 +72,12 @@ const CivilSelected = () => {
     size: 0,
     type: "",
   });
+
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const handleLoadFile = (e) => {
     let file = e.target.files[0];
@@ -127,9 +136,23 @@ const CivilSelected = () => {
       case "edit-traffic":
         return <EditTrafficView id={modaleState.id} onClose={closeModal} />;
       case "rapport-d-arrestation":
-        return <RapportArrestation id={id} onClose={closeModal} />;
+        return <RapportArrestationView idCivil={id} onClose={closeModal} />;
+      case "edit-rapport-d-arrestation":
+        return (
+          <EditRapportArrestationView
+            id={modaleState.id}
+            onClose={closeModal}
+          />
+        );
       case "dossier-d-arrestation":
-        return <DossierArrestation idCivil={id} onClose={closeModal} />;
+        return <DossierArrestationView idCivil={id} onClose={closeModal} />;
+      case "edit-dossier-d-arrestation":
+        return (
+          <EditDossierArrestationView
+            id={modaleState.id}
+            onClose={closeModal}
+          />
+        );
       case "convocation":
         return (
           <ConvocationView
@@ -190,6 +213,11 @@ const CivilSelected = () => {
             title={"Cellule"}
           >
             <PrisonIcon />
+          </IconButtonTop>
+
+          <IconButtonTop onClick={goBack} title={"Retour à la page civil"}>
+            {" "}
+            <PagePreviousOutline />
           </IconButtonTop>
         </HeaderSelect>
 

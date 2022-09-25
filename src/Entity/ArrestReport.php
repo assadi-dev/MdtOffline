@@ -78,10 +78,17 @@ class ArrestReport
      */
     private $agent;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read:civil:item"})
+     */
+    private $conversionUp;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTime();
+        $this->conversionUp = false;
     }
 
     public function getId(): ?int
@@ -195,6 +202,18 @@ class ArrestReport
     public function setAgent(string $agent): self
     {
         $this->agent = $agent;
+
+        return $this;
+    }
+
+    public function isConversionUp(): ?bool
+    {
+        return $this->conversionUp;
+    }
+
+    public function setConversionUp(bool $conversionUp): self
+    {
+        $this->conversionUp = $conversionUp;
 
         return $this;
     }

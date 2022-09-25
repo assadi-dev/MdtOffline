@@ -45,12 +45,10 @@ const ListItemTraffic = ({
     };
 
     document.addEventListener("mousedown", closeDropDown);
-
     return () => document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
   const handleEdit = () => {
-    console.log(id);
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "edit-traffic", id: id },

@@ -20,7 +20,7 @@ import {
 } from "./ModalView.styled";
 import { add_dossierArrestation } from "../../../../../redux/actions/DossierArrestation.action";
 
-const DossierArrestation = ({ idCivil, onClose }) => {
+const DossierArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
   const closeModal = () => {
     onClose();
@@ -105,7 +105,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
     }
   };
 
-  const handleTantative = (e) => {
+  const handleTentative = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
 
@@ -339,7 +339,7 @@ const DossierArrestation = ({ idCivil, onClose }) => {
                   <td className="td-center">
                     <SwitchButton
                       name={chef.label}
-                      onChange={handleTantative}
+                      onChange={handleTentative}
                       sliderOffColor={"var(--color-blue-dark)"}
                     />
                   </td>
@@ -417,4 +417,4 @@ const DossierArrestation = ({ idCivil, onClose }) => {
   );
 };
 
-export default DossierArrestation;
+export default DossierArrestationView;

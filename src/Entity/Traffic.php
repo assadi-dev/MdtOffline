@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * 
  * @ORM\Entity(repositoryClass=TrafficRepository::class)
+ * @ApiResource()
  */
 class Traffic
 {

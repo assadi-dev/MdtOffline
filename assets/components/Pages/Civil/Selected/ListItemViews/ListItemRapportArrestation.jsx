@@ -20,14 +20,17 @@ import { dateForCivilListView } from "../../../../../utils/dateFormat";
 import { FluentMoreCircleFill } from "../../../../SVG";
 import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../../utils/timer";
+import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
 
 const ListItemRapportArrestation = ({
+  id,
   numero,
   amend,
   agent,
   date,
   peine,
   offence,
+  dispatchOpenModal,
 }) => {
   let numeroFormat = numeral(numero);
 
@@ -48,6 +51,13 @@ const ListItemRapportArrestation = ({
     return () => document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
+  const handleEdit = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-rapport-d-arrestation", id: id },
+    });
+  };
+
   return (
     <ListContainer>
       <ListContent>
@@ -66,7 +76,7 @@ const ListItemRapportArrestation = ({
             >
               <FluentMoreCircleFill />
             </MoreIconBtn>
-            <FluentMoreDropDown isOpen={openMore} />
+            <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
           </RowIcon>
         </RowListItemView>
         <ListViewOffence>

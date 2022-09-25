@@ -1,6 +1,8 @@
+import numeral from "numeral";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFecthData from "../../../../../../hooks/useFecthData";
+import { edit_Avertissement } from "../../../../../../redux/actions/Avertissement.action";
 import ButtonDefault from "../../../../../Shared/Buttons/ButtonDefault";
 import InputTextArea from "../../../../../Shared/InputTextArea";
 import CloseModalBtn from "../../../../../Shared/Modal/CloseModal";
@@ -10,6 +12,8 @@ import {
 } from "../../ModalView/ModalView.styled";
 
 const EditAvertissementView = ({ id, onClose }) => {
+  let numeroFormat = numeral(id);
+
   const textAreaRef = useRef();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const closeModal = () => {
@@ -39,13 +43,19 @@ const EditAvertissementView = ({ id, onClose }) => {
     e.preventDefault();
     let data = { ...inputState };
     const token = agent.token;
+
+    dispatch(edit_Avertissement(id, data, token)).then(() => {
+      onClose();
+    });
   };
 
   return (
     <>
       <form onSubmit={handleSubmitForm}>
         <HeadTitleView>
-          <h2 className="titleView">EDITER L'AVERTISSEMENT</h2>
+          <h2 className="titleView">
+            EDITER L'AVERTISSEMENT N°{numeroFormat.format("000")}{" "}
+          </h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <div className="form-control" ref={textAreaRef}>

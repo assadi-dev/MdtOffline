@@ -27,7 +27,7 @@ export const HeaderSelect = styled.div`
     }
   }
   @media (min-width: 992px) {
-    grid-template-columns: 50px 50px 50px 1fr 50px 50px 50px;
+    grid-template-columns: 50px 50px 50px 1fr 50px 50px 50px 50px;
     width: fit-content;
     padding-bottom: 25px;
     justify-content: center;

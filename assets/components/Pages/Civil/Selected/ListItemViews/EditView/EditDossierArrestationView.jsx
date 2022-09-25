@@ -1,39 +1,82 @@
-import React, { useMemo, useRef, useState } from "react";
-import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
-import Input from "../../../../Shared/Input";
-import InputTextArea from "../../../../Shared/InputTextArea";
-import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
-import SelectMultiple from "../../../../Shared/SelectMultiple";
+import numeral from "numeral";
+import React, { useRef, useState, useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { codePenal, nominal } from "../../../../../../Data/FichesCalcule";
+import useFecthData from "../../../../../../hooks/useFecthData";
+import { edit_dossierArrestation } from "../../../../../../redux/actions/DossierArrestation.action";
+
+import {
+  conversionUP,
+  TimeToUnix,
+  unixToTime,
+} from "../../../../../../utils/calculs";
+import ButtonDefault from "../../../../../Shared/Buttons/ButtonDefault";
+import InputTextArea from "../../../../../Shared/InputTextArea";
+import CloseModalBtn from "../../../../../Shared/Modal/CloseModal";
+import SelectMultiple from "../../../../../Shared/SelectMultiple";
+import SwitchButton from "../../../../../Shared/SwitchButton";
+import EditTable from "../../EditTable";
 import {
   BorderZone,
   FooterSectionButton,
   HeadTitleView,
   TableViewPresentation,
-} from "./ModalView.styled";
-import { codePenal, nominal } from "../../../../../Data/FichesCalcule";
-import SwitchButton from "../../../../Shared/SwitchButton";
-import EditTable from "../EditTable";
-import {
-  conversionUP,
-  TimeToUnix,
-  unixToTime,
-} from "../../../../../utils/calculs";
-import { useDispatch, useSelector } from "react-redux";
-import { add_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
+} from "../../ModalView/ModalView.styled";
 
-const RapportArrestation = ({ idCivil, onClose }) => {
+const EditDossierArrestationView = ({ id, onClose }) => {
+  let numeroFormat = numeral(id);
+
   const textAreaRef = useRef();
-  const dispatch = useDispatch();
-  const agent = useSelector((state) => state.AuthenticateReducer);
-  const token = agent.token;
-  /**
-   * Reset la taille du champs text
-   */
   const closeModal = () => {
     onClose();
     let textInput = textAreaRef.current.querySelector("textarea");
-    //textInput.removeAttribute("style");
+    textInput.hasAttribute("style") ? textInput.removeAttribute("style") : null;
   };
+
+  const dispatch = useDispatch();
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const token = agent.token;
+  const { data, loading } = useFecthData(`/arrest_folders/${id}`, token);
+
+  const [inputState, setInputState] = useState({
+    lieux: "",
+    entreeCellule: "",
+    chefAcusation: [],
+    droitMiranda: false,
+    soins: false,
+    nourriture: false,
+    avocat: false,
+    isEnclose: false,
+    rapport: "",
+  });
+
+  useEffect(() => {
+    const {
+      infractions,
+      lieux,
+      entreeCellule,
+      droitMiranda,
+      soins,
+      nourriture,
+      avocat,
+      rapport,
+      isEnclose,
+    } = data;
+    console.log(data);
+    infractions &&
+      setInputState((prevState) => ({
+        ...prevState,
+        lieux,
+        entreeCellule,
+        droitMiranda,
+        soins,
+        nourriture,
+        avocat,
+        rapport,
+        isEnclose,
+        chefAcusation: infractions,
+      }));
+  }, [loading]);
 
   const options = codePenal.map((j) => {
     return {
@@ -45,13 +88,6 @@ const RapportArrestation = ({ idCivil, onClose }) => {
       nominal: 1,
       qte: 1,
     };
-  });
-
-  const [inputState, setInputState] = useState({
-    lieux: "",
-    chefAcusation: [],
-    entreeCellule: "",
-    up: false,
   });
 
   const handleChangeValue = (e) => {
@@ -87,7 +123,7 @@ const RapportArrestation = ({ idCivil, onClose }) => {
 
   const handleNominal = (e) => {
     let name = e.target.name;
-    let value = e.target.value || 1;
+    let value = e.target.value;
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
@@ -103,7 +139,7 @@ const RapportArrestation = ({ idCivil, onClose }) => {
     }
   };
 
-  const handleTantative = (e) => {
+  const handleTentative = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
 
@@ -141,8 +177,11 @@ const RapportArrestation = ({ idCivil, onClose }) => {
     }
   };
 
-  const handleToggleUP = () => {
-    setInputState((prevState) => ({ ...prevState, up: !prevState.up }));
+  const handleSwitch = (e) => {
+    let name = e.target.name,
+      value = e.target.checked;
+
+    setInputState((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const total = useMemo(() => {
@@ -177,17 +216,23 @@ const RapportArrestation = ({ idCivil, onClose }) => {
 
     let infractions = inputState.chefAcusation;
     let data = {
+      // agent: `${agent.matricule}-${agent.username}`,
+      // civil: `api/civils/${idCivil}`,
       infractions,
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
-      agent: `${agent.matricule}-${agent.username}`,
-      civil: `api/civils/${idCivil}`,
-      amende: total,
+      amend: total,
       peine: totalUp,
+      droitMiranda: inputState.droitMiranda,
+      soins: inputState.soins,
+      nourriture: inputState.nourriture,
+      isEnclose: inputState.isEnclose,
+      avocat: inputState.avocat,
+      rapport: inputState.rapport,
     };
 
     token &&
-      dispatch(add_rapportArrestation(data, token)).then(() => {
+      dispatch(edit_dossierArrestation(id, data, token)).then(() => {
         onClose();
       });
   };
@@ -196,10 +241,13 @@ const RapportArrestation = ({ idCivil, onClose }) => {
     <>
       <form onSubmit={handleSubmit}>
         <HeadTitleView>
-          <h2 className="titleView">RAPPORT D'ARRESTATION</h2>
+          <h2 className="titleView">
+            EDITER LE DOSSIER D'ARRESTATION N°{numeroFormat.format("000")}{" "}
+          </h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
-        <div className="form-control" ref={textAreaRef}>
+
+        <div className="form-control">
           <BorderZone
             style={{
               height: "auto",
@@ -210,9 +258,8 @@ const RapportArrestation = ({ idCivil, onClose }) => {
             <TableViewPresentation>
               <thead>
                 <tr>
-                  <th>Lieux de remplissage</th>
-                  <th>Entrée cellule</th>
-                  <th>Conversion $ -> UP</th>
+                  <td>Lieux de remplissage</td>
+                  <td>Entrée cellule</td>
                 </tr>
               </thead>
               <tbody>
@@ -220,11 +267,10 @@ const RapportArrestation = ({ idCivil, onClose }) => {
                   <td className="lieuxRemplissage">
                     <input
                       type="text"
-                      name="lieuxRemplissage"
-                      autoFocus
                       name="lieux"
-                      value={inputState.lieux}
+                      autoFocus
                       onChange={handleChangeValue}
+                      value={inputState.lieux}
                     />
                   </td>
                   <td>
@@ -232,14 +278,62 @@ const RapportArrestation = ({ idCivil, onClose }) => {
                       type="time"
                       name="entreeCellule"
                       className="entreCellule"
-                      value={inputState.entreeCellule}
                       onChange={handleChangeValue}
+                      value={inputState.entreeCellule}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </TableViewPresentation>
+          </BorderZone>
+        </div>
+
+        <div>
+          <BorderZone
+            style={{
+              height: "auto",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              marginBottom: "2rem",
+            }}
+          >
+            <TableViewPresentation>
+              <thead>
+                <tr>
+                  <th>Droit Miranda</th>
+                  <th>Soins</th>
+                  <th>Nouriture</th>
+                  <th>Avocat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <SwitchButton
+                      name="droitMiranda"
+                      checked={inputState.droitMiranda}
+                      onChange={handleSwitch}
                     />
                   </td>
                   <td>
                     <SwitchButton
-                      checked={inputState.up}
-                      onChange={handleToggleUP}
+                      name="soins"
+                      checked={inputState.soins}
+                      onChange={handleSwitch}
+                    />
+                  </td>
+                  <td>
+                    <SwitchButton
+                      name="nourriture"
+                      checked={inputState.nourriture}
+                      onChange={handleSwitch}
+                    />
+                  </td>
+                  <td>
+                    <SwitchButton
+                      name="avocat"
+                      checked={inputState.avocat}
+                      onChange={handleSwitch}
                     />
                   </td>
                 </tr>
@@ -261,7 +355,6 @@ const RapportArrestation = ({ idCivil, onClose }) => {
           />
         </div>
         <div className="form-control">
-          {" "}
           <EditTable>
             <thead>
               <tr>
@@ -281,23 +374,26 @@ const RapportArrestation = ({ idCivil, onClose }) => {
                   <td></td>
                   <td className="td-center">
                     <SwitchButton
-                      sliderOffColor={"var(--color-blue-dark)"}
                       name={chef.label}
-                      onChange={handleTantative}
+                      onChange={handleTentative}
+                      sliderOffColor={"var(--color-blue-dark)"}
+                      checked={chef.tentative != 1 ? true : false}
                     />
                   </td>
-                  <td className="td-center">
+                  <td>
+                    {" "}
                     <SwitchButton
-                      sliderOffColor={"var(--color-blue-dark)"}
                       name={chef.label}
                       onChange={handleComplicite}
+                      sliderOffColor={"var(--color-blue-dark)"}
+                      checked={chef.complicite != 1 ? true : false}
                     />
                   </td>
                   <td className="td-center">
                     <input
                       type="number"
                       name={chef.label}
-                      value={chef ? chef.qte : 1}
+                      value={chef ? chef.qte : 0}
                       onChange={handleQty}
                       min={1}
                     />
@@ -315,7 +411,7 @@ const RapportArrestation = ({ idCivil, onClose }) => {
                       ))}
                     </select>
                   </td>
-                  <td>{chef.peine}</td>
+                  <td> {chef.peine} </td>
                 </tr>
               ))}
             </tbody>
@@ -334,15 +430,23 @@ const RapportArrestation = ({ idCivil, onClose }) => {
             <div style={{ textAlign: "center" }}>
               {" "}
               <p className="label">Ammende</p>{" "}
-              <p className="mount">{total} $</p>
+              <p className="mount">{total} $</p>{" "}
             </div>
             <div style={{ textAlign: "center" }}>
               {" "}
-              <p className="label">UP</p> <p className="mount">{totalUp}</p>
+              <p className="label">UP</p> <p className="mount">{totalUp}</p>{" "}
             </div>
           </BorderZone>
         </div>
-
+        <div className="form-control" ref={textAreaRef}>
+          <InputTextArea
+            rows={3}
+            placeholder="Ecrivez le rapport"
+            name="rapport"
+            onChange={handleChangeValue}
+            value={inputState.rapport}
+          />
+        </div>
         <FooterSectionButton>
           <ButtonDefault className="btn">Envoyer</ButtonDefault>
         </FooterSectionButton>
@@ -351,4 +455,4 @@ const RapportArrestation = ({ idCivil, onClose }) => {
   );
 };
 
-export default RapportArrestation;
+export default EditDossierArrestationView;

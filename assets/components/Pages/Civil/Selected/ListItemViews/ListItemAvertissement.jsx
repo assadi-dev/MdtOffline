@@ -38,7 +38,6 @@ const ListItemAvertissement = ({
   });
 
   const handleEdit = () => {
-    console.log(id);
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "edit-avertissement", id: id },

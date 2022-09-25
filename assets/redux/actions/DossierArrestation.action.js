@@ -1,15 +1,14 @@
 import Api from "../../service/Api/Api";
+import { setHeader } from "../../service/Api/options";
 import { ENCLOSE_ARREST_FOLDER } from "../types/civil.type";
-import { ADD_DOSSIER_ARRESTATION } from "../types/DossierArrestation.type";
+import {
+  ADD_DOSSIER_ARRESTATION,
+  EDIT_DOSSIER_ARRESTATION,
+} from "../types/DossierArrestation.type";
 
 export const add_dossierArrestation = (data, token) => {
+  const headers = setHeader(token);
   return async (dispatch) => {
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
     try {
       let res = await Api.post("/arrest_folders", data, headers);
       dispatch({ type: ADD_DOSSIER_ARRESTATION, payload: res.data });
@@ -19,14 +18,22 @@ export const add_dossierArrestation = (data, token) => {
   };
 };
 
-export const enCloseArrestFolder = (id, token) => {
+export const edit_dossierArrestation = (id, data, token) => {
+  const headers = setHeader(token);
   return async (dispatch) => {
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    try {
+      Api.put(`/arrest_folders/${id}`, data, headers).then((res) => {
+        dispatch({ type: EDIT_DOSSIER_ARRESTATION, payload: res.data });
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const enCloseArrestFolder = (id, token) => {
+  const headers = setHeader(token);
+  return async (dispatch) => {
     try {
       Api.put(
         `/arrest_folders/${id}`,

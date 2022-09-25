@@ -14,8 +14,11 @@ import InputTextArea from "../../../../../Shared/InputTextArea";
 import SelectMultiple from "../../../../../Shared/SelectMultiple";
 import EditTable from "../../EditTable";
 import ButtonDefault from "../../../../../Shared/Buttons/ButtonDefault";
+import numeral from "numeral";
+import { edit_traffic } from "../../../../../../redux/actions/Traffic.action";
 
 const EditTrafficView = ({ id, onClose }) => {
+  let numeroFormat = numeral(id);
   const textAreaRef = useRef();
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
@@ -43,7 +46,13 @@ const EditTrafficView = ({ id, onClose }) => {
   const { data } = useFecthData(`/traffic/${id}`, token);
 
   useEffect(() => {
-    console.log(id);
+    const { infractions, lieux } = data;
+    infractions &&
+      setInputState((prevState) => ({
+        ...prevState,
+        lieuxRemplissage: lieux,
+        chefAcusation: infractions,
+      }));
   }, [data]);
 
   const handleChangeValue = (e) => {
@@ -113,22 +122,24 @@ const EditTrafficView = ({ id, onClose }) => {
     let data = {
       infractions,
       lieux: inputState.lieuxRemplissage,
-      agent: `${agent.matricule}-${agent.username}`,
-      // amend: total,
+      amend: total,
+      //agent: `${agent.matricule}-${agent.username}`,
       // civil: `api/civils/${idCivil}`,
     };
 
-    /*  token &&
-      dispatch(add_traffic(data, token)).then(() => {
+    token &&
+      dispatch(edit_traffic(id, data, token)).then(() => {
         onClose();
-      }); */
+      });
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <HeadTitleView>
-          <h2 className="titleView">EDIT TRAFFIC</h2>
+          <h2 className="titleView">
+            EDITER LE TRAFFIC N°{numeroFormat.format("000")}
+          </h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <div className="form-control" ref={textAreaRef}>
