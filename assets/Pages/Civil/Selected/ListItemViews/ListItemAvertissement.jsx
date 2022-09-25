@@ -44,6 +44,13 @@ const ListItemAvertissement = ({
     });
   };
 
+  const handleDelete = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "delete-avertissement", id: id },
+    });
+  };
+
   const moreIconBtnRef = useRef();
   useEffect(() => {
     const closeDropDown = (e) => {
@@ -74,7 +81,11 @@ const ListItemAvertissement = ({
           >
             <FluentMoreCircleFill />
           </MoreIconBtn>
-          <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
+          <FluentMoreDropDown
+            isOpen={openMore}
+            editFunc={handleEdit}
+            deleteFunc={handleDelete}
+          />
         </RowIcon>
 
         <TitleItemView>

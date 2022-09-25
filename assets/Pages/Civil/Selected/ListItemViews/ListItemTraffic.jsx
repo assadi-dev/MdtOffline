@@ -55,6 +55,13 @@ const ListItemTraffic = ({
     });
   };
 
+  const handleDelete = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "delete-traffic", id: id },
+    });
+  };
+
   return (
     <ListContainer>
       <ListContent>
@@ -73,7 +80,11 @@ const ListItemTraffic = ({
             >
               <FluentMoreCircleFill />
             </MoreIconBtn>
-            <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
+            <FluentMoreDropDown
+              isOpen={openMore}
+              editFunc={handleEdit}
+              deleteFunc={handleDelete}
+            />
           </RowIcon>
         </RowListItemView>
         <ListViewOffence>

@@ -189,6 +189,6 @@ export const TraffiCard = styled.div`
 `;
 
 export const ViewCardContent = styled.div`
-  height: 220px;
+  height: 280px;
   overflow-y: auto; ;
 `;

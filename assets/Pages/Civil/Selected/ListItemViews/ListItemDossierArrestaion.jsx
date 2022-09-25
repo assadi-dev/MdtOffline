@@ -49,7 +49,14 @@ const ListItemDossierArrestaion = ({
   const handleEdit = () => {
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
-      payload: { view: "edit-dossier-d-arrestation", id: id },
+      payload: { view: "edit-dossier-d-arrestation", id },
+    });
+  };
+
+  const handleDelete = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "delete-dossier-d-arrestation", id },
     });
   };
 
@@ -86,7 +93,11 @@ const ListItemDossierArrestaion = ({
             >
               <FluentMoreCircleFill />
             </MoreIconBtn>
-            <FluentMoreDropDown isOpen={openMore} editFunc={handleEdit} />
+            <FluentMoreDropDown
+              isOpen={openMore}
+              editFunc={handleEdit}
+              deleteFunc={handleDelete}
+            />
           </RowIcon>
         </RowListItemView>
         <ListViewOffence>

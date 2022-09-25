@@ -49,7 +49,7 @@ export const delete_avertissement = (id, token) => {
     const headers = setHeader(token);
     try {
       Api.delete(`/avertissements/${id}`, headers).then(() => {
-        dispatch({ type: DELETE_AVERTISSEMENT, payload: id });
+        dispatch({ type: DELETE_AVERTISSEMENT, payload: { id } });
       });
     } catch (error) {}
   };

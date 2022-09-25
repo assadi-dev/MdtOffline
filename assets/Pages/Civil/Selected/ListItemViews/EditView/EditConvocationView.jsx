@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add_cellule } from "../../../../../redux/actions/Cellule.action ";
+import { add_convocation } from "../../../../../redux/actions/Convocation.action";
 import ButtonDefault from "../../../../Shared/Buttons/ButtonDefault";
 import Input from "../../../../Shared/Input";
 import CloseModalBtn from "../../../../Shared/Modal/CloseModal";
-import ListCelluleItem from "../ListItemViews/ListCelluleItem";
 import ListConvocationItem from "../ListItemViews/ListConvocationItem";
 import {
   FooterCardTopButton,
@@ -17,20 +16,19 @@ import {
   RowCardTopButton,
 } from "./ModalView.styled";
 
-const CelluleView = ({ onClose, idCivil, listCellule }) => {
+const EditConvocationView = ({ onClose, idCivil, listConvocation }) => {
   const closeModal = () => {
     onClose();
   };
 
+  const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
 
-  const dispatch = useDispatch();
   const [inputState, setInputState] = useState({
-    agent: `${agent.matricule}-${agent.username}`,
-    entree: "",
-    sortie: "",
-    civil: `api/civil/${idCivil}`,
+    raison: "",
+    dateConvocation: "",
+    dateExpiration: "",
   });
 
   const handleChangeValue = (e) => {
@@ -41,33 +39,33 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let data = {
-      entree: inputState.entree,
-      sortie: inputState.sortie,
-      agent: `${agent.matricule}-${agent.username}`,
+      motif: inputState.raison,
+      dateConvocation: inputState.dateConvocation,
+      expiration: inputState.dateExpiration,
       civil: `api/civils/${idCivil}`,
+      agent: `${agent.matricule}-${agent.username}`,
     };
-
-    token && dispatch(add_cellule(data, token));
+    token && dispatch(add_convocation(data, token));
   };
 
   return (
     <>
       <div>
         <HeadTitleView>
-          <h2 className="titleView">CELLULE</h2>
+          <h2 className="titleView">CONVOCATION</h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <RowCardTopButton>
-          {listCellule.length
-            ? listCellule.map((cellule) => (
-                <ListCelluleItem
-                  key={cellule.id}
-                  numero={cellule.id}
-                  agent={cellule.agent}
-                  entree={cellule.entree}
-                  sortie={cellule.sortie}
+          {listConvocation.length
+            ? listConvocation.map((convocation) => (
+                <ListConvocationItem
+                  key={convocation.id}
+                  numero={convocation.id}
+                  agent={convocation.agent}
+                  motif={convocation.motif}
+                  dateConvocation={convocation.dateConvocation}
+                  dateExpiration={convocation.expiration}
                 />
               ))
             : null}
@@ -75,29 +73,41 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       </div>
       <FooterCardTopButton>
         <form onSubmit={handleSubmit}>
+          <h2 className="titleFooterTopButton">NOUVELLE CONVOCATION</h2>
           <FormBodyTopBtn>
             <div className="form-control">
-              <FormLabel htmlFor="entree" className="formLabel">
-                Entrée
+              <FormLabel htmlFor="raison" className="formLabel">
+                Raison
               </FormLabel>
               <Input
-                type="datetime-local"
-                idInput="entree"
-                inputName={"entree"}
-                value={inputState.entree}
+                idInput="raison"
+                inputName={"raison"}
                 onChange={handleChangeValue}
+                value={inputState.raison}
               />
             </div>
             <div className="form-control">
-              <FormLabel htmlFor="sortie" className="formLabel">
-                Sortie
+              <FormLabel htmlFor="dateConvocation" className="formLabel">
+                Date de convocation
               </FormLabel>
               <Input
                 type="datetime-local"
-                idInput="sortie"
-                inputName={"sortie"}
-                value={inputState.sortie}
+                idInput="dateConvocation"
+                inputName={"dateConvocation"}
                 onChange={handleChangeValue}
+                value={inputState.dateConvocation}
+              />
+            </div>
+            <div className="form-control">
+              <FormLabel htmlFor="dateExpiration" className="formLabel">
+                Date d'expiration
+              </FormLabel>
+              <Input
+                type="datetime-local"
+                idInput="dateExpiration"
+                inputName={"dateExpiration"}
+                onChange={handleChangeValue}
+                value={inputState.dateExpiration}
               />
             </div>
             <FooterSectionSubmit>
@@ -110,4 +120,4 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
   );
 };
 
-export default CelluleView;
+export default EditConvocationView;

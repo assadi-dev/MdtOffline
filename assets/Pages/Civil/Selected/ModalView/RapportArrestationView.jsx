@@ -1,7 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
 import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
-import Input from "../../../../components/Shared/Input";
-import InputTextArea from "../../../../components/Shared/InputTextArea";
 import CloseModalBtn from "../../../../components/Shared/Modal/CloseModal";
 import SelectMultiple from "../../../../components/Shared/SelectMultiple";
 import {
@@ -213,7 +211,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
                 <tr>
                   <th>Lieux de remplissage</th>
                   <th>Entrée cellule</th>
-                  <th>Conversion $ -> UP</th>
+                  <th>Conversion $ {"->"} UP</th>
                 </tr>
               </thead>
               <tbody>
@@ -221,7 +219,6 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
                   <td className="lieuxRemplissage">
                     <input
                       type="text"
-                      name="lieuxRemplissage"
                       autoFocus
                       name="lieux"
                       value={inputState.lieux}

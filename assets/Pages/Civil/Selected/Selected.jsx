@@ -13,7 +13,7 @@ import {
 import CivilSelectedCard from "./CivilSelectedCard";
 import AvertissementView from "./ModalView/AvertissementView";
 import ListItemAvertissement from "./ListItemViews/ListItemAvertissement";
-import { HeadTitleView, View } from "./ModalView/ModalView.styled";
+import { DeleteView, HeadTitleView, View } from "./ModalView/ModalView.styled";
 import TrafficView from "./ModalView/TrafficView";
 import ModalReducer, { TOGGLE_MODAL } from "./Reducer/ModalReducer";
 
@@ -48,6 +48,10 @@ import EditRapportArrestationView from "./ListItemViews/EditView/EditRapportArre
 import EditDossierArrestationView from "./ListItemViews/EditView/EditDossierArrestationView";
 import RapportArrestationView from "./ModalView/RapportArrestationView";
 import DossierArrestationView from "./ModalView/DossierArrestationView";
+import DeleteAvertissementView from "./ListItemViews/DeleteView/DeleteAvertissementView";
+import DeleteTrafficView from "./ListItemViews/DeleteView/DeleteTrafficView";
+import DeleteRapportArrestationView from "./ListItemViews/DeleteView/DeleteRapportArrestationView";
+import DeleteDossierArrestationView from "./ListItemViews/DeleteView/DeleteDossierArrestationView";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -131,10 +135,16 @@ const CivilSelected = () => {
         return (
           <EditAvertissementView id={modaleState.id} onClose={closeModal} />
         );
+      case "delete-avertissement":
+        return (
+          <DeleteAvertissementView id={modaleState.id} onClose={closeModal} />
+        );
       case "traffic":
         return <TrafficView idCivil={id} onClose={closeModal} />;
       case "edit-traffic":
         return <EditTrafficView id={modaleState.id} onClose={closeModal} />;
+      case "delete-traffic":
+        return <DeleteTrafficView id={modaleState.id} onClose={closeModal} />;
       case "rapport-d-arrestation":
         return <RapportArrestationView idCivil={id} onClose={closeModal} />;
       case "edit-rapport-d-arrestation":
@@ -144,11 +154,25 @@ const CivilSelected = () => {
             onClose={closeModal}
           />
         );
+      case "delete-rapport-d-arrestation":
+        return (
+          <DeleteRapportArrestationView
+            id={modaleState.id}
+            onClose={closeModal}
+          />
+        );
       case "dossier-d-arrestation":
         return <DossierArrestationView idCivil={id} onClose={closeModal} />;
       case "edit-dossier-d-arrestation":
         return (
           <EditDossierArrestationView
+            id={modaleState.id}
+            onClose={closeModal}
+          />
+        );
+      case "delete-dossier-d-arrestation":
+        return (
+          <DeleteDossierArrestationView
             id={modaleState.id}
             onClose={closeModal}
           />
@@ -401,7 +425,13 @@ const CivilSelected = () => {
         </RowSecond>
       </Wrapper>
       <Modal isOpen={modaleState.isOpen}>
-        <View>{modaleState.view && <Render view={modaleState.view} />}</View>
+        {modaleState.view.includes("delete") ? (
+          <DeleteView>
+            {modaleState.view && <Render view={modaleState.view} />}
+          </DeleteView>
+        ) : (
+          <View>{modaleState.view && <Render view={modaleState.view} />}</View>
+        )}
       </Modal>
     </>
   );

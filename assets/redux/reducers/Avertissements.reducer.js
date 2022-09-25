@@ -2,6 +2,7 @@ import {
   ADD_AVERTISSEMENT,
   GET_AVERTISSEMENT_BY_CIVIL,
   GET_ONE_AVERTISSEMENT,
+  DELETE_AVERTISSEMENT,
 } from "../types/avertissements..type";
 
 const initialState = { collection: [], selected: [], filtered: [] };
@@ -15,6 +16,7 @@ const Avertissements = (state = initialState, action) => {
       return { ...state, selected: payload };
     case ADD_AVERTISSEMENT:
       return { ...state, collection: [payload, ...state.collection] };
+
     default:
       return state;
       break;

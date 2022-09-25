@@ -62,7 +62,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
       rapport,
       isEnclose,
     } = data;
-    console.log(data);
+
     infractions &&
       setInputState((prevState) => ({
         ...prevState,

@@ -1,5 +1,6 @@
 import {
   ADD_AVERTISSEMENT,
+  DELETE_AVERTISSEMENT,
   EDIT_AVERTISSEMENT,
 } from "../types/avertissements..type";
 import {
@@ -14,13 +15,19 @@ import { ADD_CONVOCATION } from "../types/Convocation.type";
 import {
   ADD_DOSSIERARRESTATION,
   ADD_DOSSIER_ARRESTATION,
+  DELETE_DOSSIER_ARRESTATION,
   EDIT_DOSSIER_ARRESTATION,
 } from "../types/DossierArrestation.type";
 import {
   ADD_RAPPORT_ARRESTATION,
+  DELETE_RAPPORT_ARRESTATION,
   EDIT_RAPPORT_ARRESTATION,
 } from "../types/RapportArrestation.type";
-import { ADD_TRAFFIC, EDIT_TRAFFIC } from "../types/Traffic.type";
+import {
+  ADD_TRAFFIC,
+  DELETE_TRAFFIC,
+  EDIT_TRAFFIC,
+} from "../types/Traffic.type";
 import { ADD_CELLULE } from "../types/Cellule.type";
 
 const initialState = {
@@ -91,6 +98,17 @@ const CivilReducer = (state = initialState, action) => {
         isReady: true,
       };
 
+    case DELETE_AVERTISSEMENT:
+      let removeAvertissement = state.selected.avertissements.filter(
+        (a) => a.id != payload.id
+      );
+
+      return {
+        ...state,
+        selected: { ...state.selected, avertissements: removeAvertissement },
+        isReady: true,
+      };
+
     case ADD_TRAFFIC:
       return {
         ...state,
@@ -112,6 +130,16 @@ const CivilReducer = (state = initialState, action) => {
       return {
         ...state,
         selected: { ...state.selected, traffics: updateTraffic },
+        isReady: true,
+      };
+    case DELETE_TRAFFIC:
+      let removeTraffic = state.selected.traffics.filter(
+        (traffic) => traffic.id != payload.id
+      );
+
+      return {
+        ...state,
+        selected: { ...state.selected, traffics: removeTraffic },
         isReady: true,
       };
 
@@ -144,6 +172,20 @@ const CivilReducer = (state = initialState, action) => {
         isReady: true,
       };
 
+    case DELETE_RAPPORT_ARRESTATION:
+      let removeRapporArrestation = state.selected.rapportArrestation.filter(
+        (rapportArrestation) => rapportArrestation.id != payload.id
+      );
+
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          rapportArrestation: removeRapporArrestation,
+        },
+        isReady: true,
+      };
+
     case ADD_DOSSIER_ARRESTATION:
       return {
         ...state,
@@ -169,6 +211,20 @@ const CivilReducer = (state = initialState, action) => {
         selected: {
           ...state.selected,
           dossierArrestation: updateDossierArrestation,
+        },
+        isReady: true,
+      };
+
+    case DELETE_DOSSIER_ARRESTATION:
+      let removeDossierArrestation = state.selected.dossierArrestation.filter(
+        (dossierArrestation) => dossierArrestation.id != payload.id
+      );
+
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          dossierArrestation: removeDossierArrestation,
         },
         isReady: true,
       };

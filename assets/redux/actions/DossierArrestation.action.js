@@ -3,6 +3,7 @@ import { setHeader } from "../../service/Api/options";
 import { ENCLOSE_ARREST_FOLDER } from "../types/civil.type";
 import {
   ADD_DOSSIER_ARRESTATION,
+  DELETE_DOSSIER_ARRESTATION,
   EDIT_DOSSIER_ARRESTATION,
 } from "../types/DossierArrestation.type";
 
@@ -24,6 +25,19 @@ export const edit_dossierArrestation = (id, data, token) => {
     try {
       Api.put(`/arrest_folders/${id}`, data, headers).then((res) => {
         dispatch({ type: EDIT_DOSSIER_ARRESTATION, payload: res.data });
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const delete_dossierArrestation = (id, token) => {
+  const headers = setHeader(token);
+  return async (dispatch) => {
+    try {
+      Api.delete(`/arrest_folders/${id}`, headers).then((res) => {
+        dispatch({ type: DELETE_DOSSIER_ARRESTATION, payload: { id } });
       });
     } catch (error) {
       console.log(error.message);

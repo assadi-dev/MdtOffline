@@ -98,6 +98,7 @@ export const UserConnectContainer = styled.div`
   align-items: center;
   cursor: pointer;
   position: relative;
+  min-width: 250px;
 `;
 
 export const UserNameStyle = styled.h3`
@@ -105,6 +106,7 @@ export const UserNameStyle = styled.h3`
   font-weight: 600;
   text-align: center;
   min-width: 125px;
+  margin: 0 15px;
 `;
 
 export const UserGradStyle = styled.p`
