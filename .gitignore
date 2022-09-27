@@ -9,7 +9,7 @@
 /public/bundles/
 /var/
 /vendor/
-migrations/*
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
