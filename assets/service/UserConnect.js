@@ -11,6 +11,7 @@ export const connect = async (username, password) => {
 export const deconnect = async () => {
   return new Promise((resolve, reject) => {
     localStorage.clear();
+    sessionStorage.clear();
     resolve("deconnected !");
   });
 };
