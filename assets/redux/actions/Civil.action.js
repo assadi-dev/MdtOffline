@@ -21,6 +21,8 @@ export const getAllCivil = (token) => {
       }).then((res) => {
         dispatch({ payload: res.data, type: GET_ALL_CIVIL });
       });
+
+      console.log(Api.arguments);
     } catch (error) {
       console.log(error.message);
     }

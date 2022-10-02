@@ -10,8 +10,9 @@ const ProtectedRoutes = () => {
     const decode = jwt_decode(tokenStorage);
     const expiration = decode.exp;
     if (isTokenExpirate(expiration)) {
-      localStorage.removeItem(TOKEN_STORAGE_NAME);
-      return <Navigate to="/connexion" replace />;
+      console.log("Expirate");
+      // localStorage.removeItem(TOKEN_STORAGE_NAME);
+      // return <Navigate to="/connexion" replace />;
     }
   }
 

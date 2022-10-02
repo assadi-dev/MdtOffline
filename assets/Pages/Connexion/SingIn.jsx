@@ -56,10 +56,6 @@ const SingIn = ({ processStep, dispatchStep }) => {
             navigate("/", { replace: true });
           })
           .catch((error) => {
-            let errorMessage = `${
-              error.data.detail ? error.data.detail : error.data.message
-            }`;
-
             dispatchStep({
               type: "ERROR",
               payload: { message: "Identifiants incorrect", code: "" },

@@ -20,7 +20,7 @@ security:
             security: false
 
         login:
-            pattern: ^/api/login
+            pattern:   ^/api/login
             stateless: true
             provider: app_user_provider
             json_login:
@@ -33,7 +33,10 @@ security:
             provider: jwt
             pattern:   ^/api
             stateless: true
+            entry_point: jwt
             jwt: ~  
+            refresh_jwt:
+                check_path: /api/token/refresh       
 
 
         # main:
@@ -51,6 +54,8 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
+        - { path: /connexion, roles: PUBLIC_ACCESS }
 
 when@test:
     security:

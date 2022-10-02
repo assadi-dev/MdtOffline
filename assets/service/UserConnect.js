@@ -5,7 +5,9 @@ import Api from "./Api/Api";
 export const connect = async (username, password) => {
   return new Promise((resolve, reject) => {
     Api.post("/login", { username, password })
-      .then((res) => resolve(res.data))
+      .then((res) => {
+        resolve(res.data);
+      })
       .catch((e) => reject(e.response));
   });
 };
@@ -28,7 +30,9 @@ export const userRegister = async (username, password, telephone) => {
   });
 };
 
-export const refreshToken = (token) => {};
+export const refreshToken = (token) => {
+  console.log(token);
+};
 
 export const isTokenExpirate = (expiration) => {
   return new Date(expiration * 1000) < new Date();

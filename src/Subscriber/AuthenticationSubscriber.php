@@ -33,17 +33,18 @@ class AuthenticationSubscriber implements EventSubscriberInterface
 
         $data = $event->getData();
         $user = $event->getUser();
-        $id = $data["id"];
+
 
         if ($user instanceof UserInterface) {
-
+            $data["id"] = $user->getId();
             $data["username"] = $user->getUsername();
+            $agent =  $this->agentRepository->findOneBy(["id" => $user->getId()]);
+            if ($agent instanceof Agent) {
+                $data["grade"] = $agent->getGrade();
+                $data["matricule"] = $agent->getMatricule();
+            }
         }
-        $agent =  $this->agentRepository->findOneBy(["id" => $id]);
-        if ($agent instanceof Agent) {
-            $data["grade"] = $agent->getGrade();
-            $data["matricule"] = $agent->getMatricule();
-        }
+
         $event->setData($data);
     }
 }

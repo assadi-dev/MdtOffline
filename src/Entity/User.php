@@ -178,12 +178,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
     public static function createFromPayload($username, array $payload)
     {
 
-
-        return new self(
-            $username,
-            $payload['roles'], // Added by default
-
-        );
+        if (isset($payload['roles'])) {
+            return new self($username, (array) $payload['roles']);
+        }
+        return new self($username);
     }
 
     public function isValidate(): ?bool
