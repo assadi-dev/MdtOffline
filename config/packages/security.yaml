@@ -54,8 +54,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
-        - { path: /connexion, roles: PUBLIC_ACCESS }
+
 
 when@test:
     security:
