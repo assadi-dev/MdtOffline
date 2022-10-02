@@ -1,5 +1,9 @@
 .DEFAULT_GOAL = help
 
+help:
+	echo "Hello";
+.PHONY: help
+
 # demarrage symfony
 symfony-start:
 	symfony server:start
