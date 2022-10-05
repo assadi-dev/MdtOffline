@@ -13,16 +13,10 @@ export const get_all_cellule = () => {
   };
 };
 
-export const add_cellule = (data, token) => {
+export const add_cellule = (data) => {
   return async (dispatch) => {
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
     try {
-      Api.post("/cellules", data, headers).then((res) => {
+      Api.post("/cellules", data).then((res) => {
         dispatch({ type: ADD_CELLULE, payload: res.data });
       });
     } catch (error) {

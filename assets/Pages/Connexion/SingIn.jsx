@@ -23,7 +23,13 @@ import {
 import { BarLoading } from "../../components/SVG/Loader.svg";
 import AlertError from "../../components/Shared/Alert/AlertError";
 import { sleep } from "../../utils/timer";
-import { TOKEN_STORAGE_NAME } from "../../constants/localStorage";
+import {
+  REFRESH_TOKEN_STORAGE_NAME,
+  TOKEN_STORAGE_NAME,
+  USER_DATA_STORAGE,
+} from "../../constants/localStorage";
+import Cookies from "js-cookie";
+import AlertSuccess from "../../components/Shared/Alert/AlertSuccess";
 
 const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
@@ -44,16 +50,24 @@ const SingIn = ({ processStep, dispatchStep }) => {
         connect(username, password)
           .then((res) => {
             const token = res.token;
-            localStorage.setItem(TOKEN_STORAGE_NAME, token);
-            const decode = jwt_decode(token);
+            //const refreshToken = res.refresh_token;
+            /*  localStorage.setItem(TOKEN_STORAGE_NAME, token);
+            localStorage.setItem(REFRESH_TOKEN_STORAGE_NAME, refreshToken); */
+            Cookies.set(TOKEN_STORAGE_NAME, token, {
+              path: "",
+              sameSite: "Lax",
+              secure: true,
+            });
 
+            const decode = jwt_decode(token);
             const id = decode.id;
             const role = decode.roles.join("-");
             dispatch(userLoged(id, role));
             dispatchStep({
-              type: "START",
+              type: "FINISH",
+              payload: "Authentification reussi !",
             });
-            navigate("/", { replace: true });
+            sleep(1000).then(() => window.location.replace("/"));
           })
           .catch((error) => {
             dispatchStep({
@@ -103,7 +117,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
         <CardFooterConnexion>
           <div className="action-row">
             {" "}
-            {processStep.step != "loading" && (
+            {processStep.step != "loading" && processStep.step != "finish" && (
               <ButtonStyled type="submit" className="btn">
                 CONNECTER
               </ButtonStyled>
@@ -116,6 +130,10 @@ const SingIn = ({ processStep, dispatchStep }) => {
                   <BarLoading />
                 </Loadericon>
               </div>
+            )}
+
+            {processStep.step == "finish" && (
+              <AlertSuccess message={processStep.message} />
             )}
 
             {processStep.step == "error" && (

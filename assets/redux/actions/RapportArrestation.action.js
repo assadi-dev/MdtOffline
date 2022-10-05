@@ -6,11 +6,10 @@ import {
   EDIT_RAPPORT_ARRESTATION,
 } from "../types/RapportArrestation.type";
 
-export const add_rapportArrestation = (data, token) => {
-  const headers = setHeader(token);
+export const add_rapportArrestation = (data) => {
   return async (dispatch) => {
     try {
-      const res = await Api.post("/arrest_reports", data, headers);
+      const res = await Api.post("/arrest_reports", data);
       let result = res.data;
       dispatch({ type: ADD_RAPPORT_ARRESTATION, payload: result });
     } catch (error) {
@@ -19,11 +18,10 @@ export const add_rapportArrestation = (data, token) => {
   };
 };
 
-export const edit_rapportArrestation = (id, data, token) => {
-  const headers = setHeader(token);
+export const edit_rapportArrestation = (id, data) => {
   return async (dispatch) => {
     try {
-      const res = await Api.put(`/arrest_reports/${id}`, data, headers);
+      const res = await Api.put(`/arrest_reports/${id}`, data);
       let result = res.data;
       dispatch({ type: EDIT_RAPPORT_ARRESTATION, payload: result });
     } catch (error) {
@@ -32,11 +30,10 @@ export const edit_rapportArrestation = (id, data, token) => {
   };
 };
 
-export const delete_rapportArrestation = (id, token) => {
-  const headers = setHeader(token);
+export const delete_rapportArrestation = (id) => {
   return async (dispatch) => {
     try {
-      const res = await Api.delete(`/arrest_reports/${id}`, headers);
+      const res = await Api.delete(`/arrest_reports/${id}`);
       dispatch({ type: DELETE_RAPPORT_ARRESTATION, payload: { id } });
     } catch (error) {
       console.log(error.message);

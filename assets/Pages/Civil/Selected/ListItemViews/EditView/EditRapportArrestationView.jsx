@@ -55,7 +55,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     up: false,
   });
 
-  const { data, loading } = useFecthData(`/arrest_reports/${id}`, token);
+  const { data, loading } = useFecthData(`/arrest_reports/${id}`);
 
   useEffect(() => {
     const { infractions, lieux, entreeCellule, conversionUp } = data;
@@ -203,7 +203,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     };
 
     token &&
-      dispatch(edit_rapportArrestation(id, data, token)).then(() => {
+      dispatch(edit_rapportArrestation(id, data)).then(() => {
         onClose();
       });
   };

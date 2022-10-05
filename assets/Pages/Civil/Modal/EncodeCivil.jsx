@@ -51,12 +51,12 @@ const EncodeCivil = ({ isOpen, onClose }) => {
     },
     onSubmit: (values) => {
       token &&
-        dispatch(addCivil(values, token)).then((res) => {
+        dispatch(addCivil(values)).then((res) => {
           if (file.file) {
             let id = res.id;
             let formData = new FormData();
             formData.append("photo", file.file);
-            dispatch(uploadPhotoCivil(id, formData, token));
+            dispatch(uploadPhotoCivil(id, formData));
           }
           formik.resetForm();
           onClose();

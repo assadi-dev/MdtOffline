@@ -186,7 +186,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
     };
 
     token &&
-      dispatch(add_rapportArrestation(data, token)).then(() => {
+      dispatch(add_rapportArrestation(data)).then(() => {
         onClose();
       });
   };

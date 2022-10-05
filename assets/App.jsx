@@ -14,6 +14,7 @@ import jwt_decode from "jwt-decode";
 import { TOKEN_STORAGE_NAME } from "./constants/localStorage";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { GET_OWNER } from "./redux/types/Authenticate.type";
+import Cookies from "js-cookie";
 
 const App = () => {
   const Hello = () => {
@@ -24,7 +25,7 @@ const App = () => {
     );
   };
 
-  let tokenStorage = localStorage.getItem(TOKEN_STORAGE_NAME);
+  const tokenStorage = Cookies.get(TOKEN_STORAGE_NAME);
   const authSelector = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
 
@@ -49,7 +50,7 @@ const App = () => {
       };
 
       dispatch({ type: GET_OWNER, payload: data });
-      dispatch(get_owner(id, tokenStorage));
+      dispatch(get_owner(id));
     }
   }, [authSelector.isLoggedIn]);
 

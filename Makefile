@@ -4,6 +4,8 @@ help:
 	echo "Hello";
 .PHONY: help
 
+
+
 # demarrage symfony
 symfony-start:
 	symfony server:start
@@ -36,3 +38,8 @@ sf-start-dev:
 	$(MAKE) symfony-start-dev
 	$(MAKE) dev-client
 .PHONY : sf-start-dev
+
+# Nettoyer le cahche symfony
+sf-cache:
+	php bin/console cache:clear
+.PHONY : sf-cache

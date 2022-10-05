@@ -46,7 +46,7 @@ const EditConvocationView = ({ onClose, idCivil, listConvocation }) => {
       civil: `api/civils/${idCivil}`,
       agent: `${agent.matricule}-${agent.username}`,
     };
-    token && dispatch(add_convocation(data, token));
+    token && dispatch(add_convocation(data));
   };
 
   return (

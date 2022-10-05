@@ -37,12 +37,7 @@ export const userLogout = () => {
 export const get_owner = (id, token) => {
   return async (dispatch) => {
     try {
-      Api.get(`/users/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((res) => {
+      Api.get(`/users/${id}`).then((res) => {
         let role = res.data.roles.join("-");
         let id = res.data.id;
         let username = res.data.username;
@@ -66,7 +61,7 @@ export const get_owner = (id, token) => {
             telephone,
             role,
             id,
-            token,
+
             idAgent,
             nameAgent,
             createdAt,
@@ -77,21 +72,16 @@ export const get_owner = (id, token) => {
   };
 };
 
-export const editAccount = (id, token, data) => {
-  const headers = setHeader(token);
+export const editAccount = (id, data) => {
   return async (dispatch) => {
     return new Promise((resolve, reject) => {
       const { idAgent, matricule, telephone, username } = data;
       try {
-        Api.put(
-          "/agents/" + idAgent,
-          {
-            matricule,
-            telephone,
-            name: username,
-          },
-          headers
-        )
+        Api.put("/agents/" + idAgent, {
+          matricule,
+          telephone,
+          name: username,
+        })
           .then((res) => {
             const data = res.data;
             const { name, matricule, telephone } = data;
@@ -100,7 +90,7 @@ export const editAccount = (id, token, data) => {
               payload: { name, matricule, telephone },
             });
             resolve(res.data);
-            Api.put("/users/" + id, { username }, headers).then((res) => {
+            Api.put("/users/" + id, { username }).then((res) => {
               const data = res.data;
               const { username } = data;
               dispatch({
@@ -127,11 +117,10 @@ export const editAccount = (id, token, data) => {
   };
 };
 
-export const UploadPhotoOwner = (idAgent, data, token) => {
-  const headers = setHeader(token);
+export const UploadPhotoOwner = (idAgent, data) => {
   return async (dispatch) => {
     try {
-      Api.post(`/agents/${idAgent}/photo`, data, headers).then((res) => {
+      Api.post(`/agents/${idAgent}/photo`, data).then((res) => {
         const { photo } = res.data;
         dispatch({ type: CHANGE_PHOTO_OWNER, payload: photo });
       });

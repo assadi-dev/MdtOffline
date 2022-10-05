@@ -24,7 +24,7 @@ const DeleteTrafficView = ({ id, onClose }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     token &&
-      dispatch(deletet_traffic(id, token)).then(() => {
+      dispatch(deletet_traffic(id)).then(() => {
         onClose();
       });
   };

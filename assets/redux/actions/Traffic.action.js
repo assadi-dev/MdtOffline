@@ -6,11 +6,10 @@ import {
 } from "../types/Traffic.type";
 import { setHeader } from "../../service/Api/options";
 
-export const add_traffic = (data, token) => {
-  const headers = setHeader(token);
+export const add_traffic = (data) => {
   return async (dispatch) => {
     try {
-      const rest = await Api.post("/traffic", data, headers);
+      const rest = await Api.post("/traffic", data);
       let result = rest.data;
       dispatch({ type: ADD_TRAFFIC, payload: result });
     } catch (error) {
@@ -19,11 +18,10 @@ export const add_traffic = (data, token) => {
   };
 };
 
-export const edit_traffic = (id, data, token) => {
-  const headers = setHeader(token);
+export const edit_traffic = (id, data) => {
   return async (dispatch) => {
     try {
-      const rest = await Api.put(`/traffic/${id}`, data, headers);
+      const rest = await Api.put(`/traffic/${id}`, data);
       let result = rest.data;
       dispatch({ type: EDIT_TRAFFIC, payload: result });
     } catch (error) {
@@ -32,11 +30,10 @@ export const edit_traffic = (id, data, token) => {
   };
 };
 
-export const deletet_traffic = (id, token) => {
-  const headers = setHeader(token);
+export const deletet_traffic = (id) => {
   return async (dispatch) => {
     try {
-      Api.delete(`/traffic/${id}`, headers).then(() =>
+      Api.delete(`/traffic/${id}`).then(() =>
         dispatch({ type: DELETE_TRAFFIC, payload: { id } })
       );
     } catch (error) {

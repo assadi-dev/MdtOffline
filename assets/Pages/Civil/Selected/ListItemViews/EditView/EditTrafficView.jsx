@@ -43,7 +43,7 @@ const EditTrafficView = ({ id, onClose }) => {
     lieuxRemplissage: "",
     chefAcusation: [],
   });
-  const { data } = useFecthData(`/traffic/${id}`, token);
+  const { data } = useFecthData(`/traffic/${id}`);
 
   useEffect(() => {
     const { infractions, lieux } = data;
@@ -128,7 +128,7 @@ const EditTrafficView = ({ id, onClose }) => {
     };
 
     token &&
-      dispatch(edit_traffic(id, data, token)).then(() => {
+      dispatch(edit_traffic(id, data)).then(() => {
         onClose();
       });
   };

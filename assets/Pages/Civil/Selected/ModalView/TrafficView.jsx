@@ -114,7 +114,7 @@ const TrafficView = ({ idCivil, onClose }) => {
     };
 
     token &&
-      dispatch(add_traffic(data, token)).then(() => {
+      dispatch(add_traffic(data)).then(() => {
         onClose();
       });
   };

@@ -10,33 +10,22 @@ import {
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
 
-export const getAllCivil = (token) => {
+export const getAllCivil = () => {
   return async (dispatch) => {
     try {
-      Api.get("/civils", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((res) => {
+      Api.get("/civils", {}).then((res) => {
         dispatch({ payload: res.data, type: GET_ALL_CIVIL });
       });
-
-      console.log(Api.arguments);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 };
 
-export const searchCivil = (searchTerm, token) => {
+export const searchCivil = (searchTerm) => {
   return async (dispatch) => {
     try {
       Api.get("/civils/search", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         params: {
           searchTerm: searchTerm,
         },
@@ -49,14 +38,11 @@ export const searchCivil = (searchTerm, token) => {
   };
 };
 
-export const getOneCivil = (id, token) => {
+export const getOneCivil = (id) => {
   return async (dispatch) => {
-    const headers = setHeader(token);
-
     try {
-      Api.get("/civils/" + id, headers).then((res) => {
+      Api.get("/civils/" + id).then((res) => {
         let data = res.data;
-
         dispatch({ payload: data, type: GET_ONE_CIVIL });
       });
     } catch (error) {
@@ -65,12 +51,11 @@ export const getOneCivil = (id, token) => {
   };
 };
 
-export const addCivil = (data, token) => {
+export const addCivil = (data) => {
   return async (dispatch) => {
-    const headers = setHeader(token);
     return new Promise((resolve, reject) => {
       try {
-        Api.post("/civils", data, headers).then((res) => {
+        Api.post("/civils", data).then((res) => {
           let data = res.data;
           dispatch({ payload: data, type: ADD_CIVIL });
           resolve(res.data);
@@ -83,12 +68,11 @@ export const addCivil = (data, token) => {
   };
 };
 
-export const editCivil = (data, token) => {
+export const editCivil = (data) => {
   return async (dispatch) => {
-    const headers = setHeader(token);
     return new Promise((resolve, reject) => {
       try {
-        Api.put(`/civils/${data.id}`, data, headers).then((res) => {
+        Api.put(`/civils/${data.id}`, data).then((res) => {
           let data = res.data;
           dispatch({ payload: data, type: EDIT_CIVIL });
           resolve(res.data);
@@ -101,11 +85,10 @@ export const editCivil = (data, token) => {
   };
 };
 
-export const uploadPhotoCivil = (id, data, token) => {
-  const headers = setHeader(token);
+export const uploadPhotoCivil = (id, data) => {
   return async (dispatch) => {
     try {
-      Api.post(`/civils/${id}/photo`, data, headers).then((res) => {
+      Api.post(`/civils/${id}/photo`, data).then((res) => {
         let data = res.data;
         dispatch({ payload: data, type: UPLOAD_PHOTO_CIVIL });
       });

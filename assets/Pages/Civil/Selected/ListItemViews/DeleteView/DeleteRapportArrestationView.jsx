@@ -27,7 +27,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     e.preventDefault();
 
     token &&
-      dispatch(delete_rapportArrestation(id, token)).then(() => {
+      dispatch(delete_rapportArrestation(id)).then(() => {
         onClose();
       });
   };

@@ -36,7 +36,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
-  const { data, loading } = useFecthData(`/arrest_folders/${id}`, token);
+  const { data, loading } = useFecthData(`/arrest_folders/${id}`);
 
   const [inputState, setInputState] = useState({
     lieux: "",
@@ -232,7 +232,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
     };
 
     token &&
-      dispatch(edit_dossierArrestation(id, data, token)).then(() => {
+      dispatch(edit_dossierArrestation(id, data)).then(() => {
         onClose();
       });
   };

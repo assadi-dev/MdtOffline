@@ -36,8 +36,10 @@ security:
             entry_point: jwt
             jwt: ~  
             refresh_jwt:
-                check_path: /api/token/refresh       
-
+                check_path: /api/token/refresh 
+                provider: app_user_provider    
+            logout:
+                path: api_token_invalidate
 
         # main:
         #     lazy: true

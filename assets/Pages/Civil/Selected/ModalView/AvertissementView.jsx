@@ -34,7 +34,7 @@ const AvertissementView = ({ onClose, idCivil }) => {
     let data = { ...inputState };
     const token = agent.token;
     token &&
-      dispatch(addAvertissement(data, token)).then(() => {
+      dispatch(addAvertissement(data)).then(() => {
         onClose();
       });
   };

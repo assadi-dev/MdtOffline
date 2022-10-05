@@ -49,7 +49,7 @@ const DeleteCelluleView = ({ onClose, idCivil, listCellule }) => {
       civil: `api/civils/${idCivil}`,
     };
 
-    token && dispatch(add_cellule(data, token));
+    token && dispatch(add_cellule(data));
   };
 
   return (

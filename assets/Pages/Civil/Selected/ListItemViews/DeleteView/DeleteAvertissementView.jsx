@@ -28,7 +28,7 @@ const DeleteAvertissementView = ({ id, onClose }) => {
 
     const token = agent.token;
 
-    dispatch(delete_avertissement(id, token)).then(() => {
+    dispatch(delete_avertissement(id)).then(() => {
       onClose();
     });
   };

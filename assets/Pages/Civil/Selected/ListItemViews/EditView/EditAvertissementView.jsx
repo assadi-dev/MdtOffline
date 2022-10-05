@@ -22,7 +22,7 @@ const EditAvertissementView = ({ id, onClose }) => {
     textInput.removeAttribute("style");
   };
   const dispatch = useDispatch();
-  const { data } = useFecthData(`/avertissements/${id}`, agent.token);
+  const { data } = useFecthData(`/avertissements/${id}`);
 
   const [inputState, setIputState] = useState({
     lieux: "",
@@ -44,7 +44,7 @@ const EditAvertissementView = ({ id, onClose }) => {
     let data = { ...inputState };
     const token = agent.token;
 
-    dispatch(edit_Avertissement(id, data, token)).then(() => {
+    dispatch(edit_Avertissement(id, data)).then(() => {
       onClose();
     });
   };

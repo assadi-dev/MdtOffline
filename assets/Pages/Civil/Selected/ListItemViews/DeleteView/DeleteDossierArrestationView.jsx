@@ -28,7 +28,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
     e.preventDefault();
 
     token &&
-      dispatch(delete_dossierArrestation(id, token)).then(() => {
+      dispatch(delete_dossierArrestation(id)).then(() => {
         onClose();
       });
   };

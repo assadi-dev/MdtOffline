@@ -1,5 +1,8 @@
 import Cookies from "js-cookie";
-import { TOKEN_STORAGE_NAME } from "../constants/localStorage";
+import {
+  REFRESH_TOKEN_STORAGE_NAME,
+  TOKEN_STORAGE_NAME,
+} from "../constants/localStorage";
 import Api from "./Api/Api";
 
 export const connect = async (username, password) => {
@@ -15,7 +18,12 @@ export const connect = async (username, password) => {
 export const deconnect = async () => {
   return new Promise((resolve, reject) => {
     localStorage.clear();
-    Cookies.remove(TOKEN_STORAGE_NAME);
+    Cookies.remove(TOKEN_STORAGE_NAME, {
+      path: "",
+      sameSite: "Lax",
+      secure: true,
+    });
+    Cookies.remove(REFRESH_TOKEN_STORAGE_NAME, { path: "" });
     resolve("deconnected !");
   });
 };

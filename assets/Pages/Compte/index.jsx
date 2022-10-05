@@ -44,17 +44,15 @@ const Compte = () => {
     let formData = new FormData();
     formData.append("photo", file.file);
     file.preview &&
-      dispatch(UploadPhotoOwner(User.idAgent, formData, User.token)).then(
-        () => {
-          setFile((prevState) => ({
-            ...prevState,
-            file: "",
-            type: "",
-            size: "",
-            preview: "",
-          }));
-        }
-      );
+      dispatch(UploadPhotoOwner(User.idAgent, formData)).then(() => {
+        setFile((prevState) => ({
+          ...prevState,
+          file: "",
+          type: "",
+          size: "",
+          preview: "",
+        }));
+      });
   };
 
   return (
@@ -86,7 +84,7 @@ const Compte = () => {
           )}
         </InfoAgent>
       </HeaderContainer>
-      {User.isLoggedIn && (
+      {User.idAgent && (
         <BodyCompte>
           <FormUser
             idUser={User.id}

@@ -60,7 +60,7 @@ const FormUser = ({
         matricule: values.matricule,
         telephone: values.telephone,
       };
-      dispatch(editAccount(idUser, token, data))
+      dispatch(editAccount(idUser, data))
         .then((res) => {
           sleep(3000).then(() => {
             stepDispatch({

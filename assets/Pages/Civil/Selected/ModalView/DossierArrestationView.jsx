@@ -198,7 +198,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
     };
 
     token &&
-      dispatch(add_dossierArrestation(data, token)).then(() => {
+      dispatch(add_dossierArrestation(data)).then(() => {
         closeModal();
       });
   };

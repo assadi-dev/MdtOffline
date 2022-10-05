@@ -52,6 +52,8 @@ import DeleteAvertissementView from "./ListItemViews/DeleteView/DeleteAvertissem
 import DeleteTrafficView from "./ListItemViews/DeleteView/DeleteTrafficView";
 import DeleteRapportArrestationView from "./ListItemViews/DeleteView/DeleteRapportArrestationView";
 import DeleteDossierArrestationView from "./ListItemViews/DeleteView/DeleteDossierArrestationView";
+import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
+import Cookies from "js-cookie";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -69,7 +71,7 @@ const CivilSelected = () => {
   const [loading, setLoading] = useState(true);
   const dispatchCivilData = useDispatch();
   const civilSelectore = useSelector((state) => state.CivilReducer);
-  const token = useSelector((state) => state.AuthenticateReducer.token);
+  const token = Cookies.get(TOKEN_STORAGE_NAME);
   const [file, setFile] = useState({
     file: "",
     preview: "",
@@ -101,7 +103,7 @@ const CivilSelected = () => {
     const formData = new FormData();
     formData.append("photo", file.file);
 
-    dispatchCivilData(uploadPhotoCivil(id, formData, token)).then(() => {
+    dispatchCivilData(uploadPhotoCivil(id, formData)).then(() => {
       setFile((prevState) => ({
         ...prevState,
         file: "",
@@ -114,7 +116,7 @@ const CivilSelected = () => {
 
   useEffect(() => {
     {
-      token && dispatchCivilData(getOneCivil(id, token));
+      token && dispatchCivilData(getOneCivil(id));
     }
   }, [id, token]);
 

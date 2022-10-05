@@ -11,7 +11,7 @@ const DropdownItems = () => {
   const dispatch = useDispatch();
   const handleDeconnect = () => {
     deconnect().then((res) => {
-      dispatch(userLogout());
+      // dispatch(userLogout());
       navigation("/connexion");
     });
   };
