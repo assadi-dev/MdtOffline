@@ -15,6 +15,8 @@ import { TOKEN_STORAGE_NAME } from "./constants/localStorage";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { GET_OWNER } from "./redux/types/Authenticate.type";
 import Cookies from "js-cookie";
+import MDT from "./Pages/MDT";
+import NoFoundPage from "./Pages/NoFoundPage";
 
 const App = () => {
   const Hello = () => {
@@ -77,6 +79,7 @@ const App = () => {
         </Route>
       </Route>
       <Route index path="/connexion" element={<Connexion />} />
+      <Route index path="/*" element={<NoFoundPage />} />
     </Routes>
   );
 };
