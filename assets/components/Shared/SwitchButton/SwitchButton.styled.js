@@ -23,7 +23,8 @@ export const ButtonContainer = styled.label`
   }
 
   input:checked + .switch {
-    background-color: var(--color-blue-primary);
+    background-color: ${({ sliderOnColor }) =>
+      sliderOnColor ? sliderOnColor : "var(--color-blue-primary)"};
   }
   input:checked + .switch:before {
     transform: translateX(20px);

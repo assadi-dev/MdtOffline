@@ -22,3 +22,14 @@ export const dateForModalTop = (date) => {
   const result = format(dt, "dd/MM/yyyy à HH:mm", { locale: fr });
   return result;
 };
+
+/**
+ * Date au format  05-08-2022 22:30
+ * @param {datetime} date
+ * @returns
+ */
+export const dateFrenchFormat = (date) => {
+  const dt = new Date(date);
+  const result = format(dt, "dd-MM-yyyy HH:mm", { locale: fr });
+  return result;
+};

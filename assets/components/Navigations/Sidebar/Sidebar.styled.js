@@ -94,6 +94,34 @@ export const SideNavlink = styled(NavLink)`
   }
 `;
 
+export const SubMenuNavLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  grid-template-columns: 45px 1fr;
+  transition: 0.35s ease-in-out;
+  line-height: 20px;
+  transition: 0.35s ease-in-out;
+  cursor: pointer;
+  span,
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  font-size: 13px;
+  min-width: 130px;
+  max-width: 100%;
+  /* Media Queries */
+
+  @media screen and (min-width: 992px) {
+    max-width: 190px;
+  }
+
+  @media screen and (min-width: 1920px) {
+    max-width: 240px;
+  }
+`;
+
 export const SubMenuList = styled.ul`
   padding: 10px;
   margin-left: 50px;

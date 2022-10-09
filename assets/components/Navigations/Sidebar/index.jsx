@@ -7,8 +7,10 @@ import {
   SideNavlink,
   SubMenuList,
   SubMenuListItem,
+  SubMenuNavLink,
 } from "./Sidebar.styled";
 import uniqid from "uniqid";
+import { Link } from "react-router-dom";
 
 const navigations = [
   { path: "", label: "Accueil", selected: true, submenu: [], end: true },
@@ -19,11 +21,11 @@ const navigations = [
     openDropdown: false,
     end: false,
     submenu: [
-      { path: "/", label: "Feuilles d'heures" },
-      { path: "/", label: "Notes de frais" },
-      { path: "/", label: "Trombinoscop" },
-      { path: "/", label: "Feuille de calcul" },
-      { path: "/", label: "Demande de comptabilité" },
+      { path: "/feuilles-d'heures", label: "Feuilles d'heures" },
+      { path: "/note-de-frais", label: "Notes de frais" },
+      { path: "/trombinoscop", label: "Trombinoscop" },
+      { path: "/feuille-de-calcul", label: "Feuille de calcul" },
+      { path: "/demande-de-compatibilite", label: "Demande de comptabilité" },
     ],
   },
   {
@@ -51,7 +53,7 @@ const navigations = [
     selected: false,
     openDropdown: false,
     end: false,
-    submenu: [{ path: "/", label: "Rapports Rookie" }],
+    submenu: [{ path: "/rapport-rookie", label: "Rapports Rookie" }],
   },
   {
     path: "command-staff-supervisor",
@@ -60,11 +62,14 @@ const navigations = [
     openDropdown: false,
     end: false,
     submenu: [
-      { path: "/", label: "Voir les rapporsts d'incidents" },
-      { path: "/", label: "Comptabilités" },
-      { path: "/", label: "Effectif" },
-      { path: "/", label: "Gestion" },
-      { path: "/", label: "Avis promotions" },
+      {
+        path: "/voir-rappor-d-incidents",
+        label: "Voir les rapporsts d'incidents",
+      },
+      { path: "/comptabilites", label: "Comptabilités" },
+      { path: "/effectifs", label: "Effectif" },
+      { path: "/gestion-des-comptes", label: "Gestion des comptes" },
+      { path: "/avis-promotions", label: "Avis promotions" },
     ],
   },
 ];
@@ -110,7 +115,12 @@ const Sidebar = () => {
               {route.submenu.length > 0 &&
                 route.submenu.map((submenu) => (
                   <SubMenuListItem key={uniqid()}>
-                    {submenu.label}
+                    <SubMenuNavLink
+                      to={route.path + submenu.path}
+                      state={{ title: submenu.label }}
+                    >
+                      {submenu.label}{" "}
+                    </SubMenuNavLink>
                   </SubMenuListItem>
                 ))}
             </SubMenuList>

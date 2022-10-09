@@ -18,7 +18,7 @@ const useFecthDataWithParams = (url, params) => {
       .finally(() =>
         setState((prevState) => ({ ...prevState, loading: false }))
       );
-  }, [url]);
+  }, []);
 
   const { data, error, loading } = state;
   return { data, error, loading };
