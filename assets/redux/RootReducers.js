@@ -9,6 +9,7 @@ import DossierArrestationReducer from "./reducers/DossierArrestation.reducer";
 import ConvocationReducer from "./reducers/Convocation.reducer";
 import CelluleReducer from "./reducers/Cellule.reducer";
 import AuthenticateReducer from "./reducers/Authenticate.reducer";
+import AgentsReducer from "./reducers/Agents.reducer";
 
 const RootReducers = combineReducers({
   UserReducer,
@@ -21,6 +22,7 @@ const RootReducers = combineReducers({
   ConvocationReducer,
   CelluleReducer,
   AuthenticateReducer,
+  AgentsReducer,
 });
 
 export default RootReducers;

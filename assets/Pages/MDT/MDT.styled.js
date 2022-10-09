@@ -56,6 +56,7 @@ export const MDTwrapper = styled.div`
       }
       :active {
         filter: opacity(0.5);
+        transform: scale(0.6);
       }
     }
 

@@ -1,7 +1,12 @@
 import React from "react";
+import HoursSheet from "./HoursSheet";
 
 const Services = () => {
-  return <div>Services</div>;
+  return (
+    <div>
+      <HoursSheet />
+    </div>
+  );
 };
 
 export default Services;

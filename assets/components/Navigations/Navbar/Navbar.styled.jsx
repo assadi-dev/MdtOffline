@@ -12,7 +12,7 @@ export const NavContainer = styled.div`
   background-color: var(--background-color-dark);
   padding: 18px 22px;
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
-  box-shadow: 0px -1px 5px 0px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px -10px 15px 5px rgba(255, 255, 255, 0.25);
   max-height: var(--navbar-height);
   position: fixed;
   top: 0;

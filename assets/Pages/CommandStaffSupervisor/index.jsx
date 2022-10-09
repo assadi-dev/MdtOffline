@@ -1,7 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const CommandStaffSupervisor = () => {
-  return <div>Command Staff Supervisor</div>;
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 };
 
 export default CommandStaffSupervisor;

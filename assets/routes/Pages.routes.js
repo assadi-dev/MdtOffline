@@ -11,6 +11,7 @@ import Documents from "../Pages/Documents";
 import PanicButton from "../Pages/PanicButton";
 import RapportIncident from "../Pages/RapportIncident";
 import CivilSelected from "../Pages/Civil/Selected/Selected";
+import AccountManager from "../Pages/CommandStaffSupervisor/AcountManager";
 
 export default [
   { label: "Services", path: "services", element: <Services /> },
@@ -48,7 +49,15 @@ export default [
     label: "Command Staff Supervisor",
     path: "command-staff-supervisor",
     element: <CommandStaffSupervisor />,
+    subNavigation: [
+      {
+        label: "Gestion des Comptes",
+        path: "gestion-des-comptes",
+        element: <AccountManager />,
+      },
+    ],
   },
+
   {
     label: "Mon Compte",
     path: "compte",

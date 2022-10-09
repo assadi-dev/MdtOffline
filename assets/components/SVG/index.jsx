@@ -63,6 +63,44 @@ export const ChevronDown = () => {
   );
 };
 
+export const ChevronLeft = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m15 4l-8 8l8 8"
+      />
+    </svg>
+  );
+};
+
+export const ChevronRight = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m8 4l8 8l-8 8"
+      />
+    </svg>
+  );
+};
+
 export const UserOutline = () => {
   return (
     <svg
