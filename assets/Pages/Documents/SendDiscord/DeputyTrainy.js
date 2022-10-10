@@ -8,10 +8,8 @@ export const sendDeputyTrainy = (data) => {
     content: null,
     embeds: [
       {
-        description: `**Rapport concernant le Rookie / Deputy :**  ${deputyTrainyAgent} \n 
-         **Date de patrouille: ** ${datePatrouille} \n 
-         **Type de patrouille: ** ${typePatrouille} \n 
-         **rapport: ** ${rapport}  \n\n\n 
+        title: "Rapport Rookie / Deputy",
+        description: `**Rapport concernant le Rookie / Deputy :**  ${deputyTrainyAgent} \n **Date de patrouille: ** ${datePatrouille} \n **Type de patrouille:** ${typePatrouille} \n**rapport: ** ${rapport}  \n\n\n 
          **Agent concerné:** ${agent}
          `,
         color: 5144500,

@@ -9,11 +9,7 @@ export const sendCelluleToDiscord = (data) => {
     embeds: [
       {
         title: "Mise en cellule",
-        description: `**Prénom Nom  :**  ${name}  
-         **Heure d'entrée : ** ${entree} 
-         **Heure de sortie : ** ${sortie} \n\n\n\n 
-         **Agent concerné:** ${agent}
-         `,
+        description: `**Prénom Nom  :**  ${name} \n **Heure d'entrée : ** ${entree} \n**Heure de sortie : ** ${sortie} \n\n\n\n **Agent concerné:** ${agent}`,
         color: 5144500,
         thumbnail: {
           url: photo,
