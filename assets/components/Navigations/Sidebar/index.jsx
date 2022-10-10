@@ -21,7 +21,7 @@ const navigations = [
     openDropdown: false,
     end: false,
     submenu: [
-      { path: "/feuilles-d'heures", label: "Feuilles d'heures" },
+      { path: "/feuilles-d-heures", label: "Feuilles d'heures" },
       { path: "/note-de-frais", label: "Notes de frais" },
       { path: "/trombinoscop", label: "Trombinoscop" },
       { path: "/feuille-de-calcul", label: "Feuille de calcul" },

@@ -15,6 +15,8 @@ import {
   SubmitButton,
 } from "../../Document.styled";
 import { useDispatch, useSelector } from "react-redux";
+import { sendDeputyTrainy } from "../../SendDiscord/DeputyTrainy";
+import { dateFrenchFormat } from "../../../../utils/dateFormat";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
   const { isReady, collection } = useSelector((state) => state.AgentsReducer);
@@ -25,16 +27,31 @@ const RapportDeputyTrainyView = ({ onClose }) => {
     return [];
   }, [isReady]);
 
+  const agent = useSelector((state) => state.AuthenticateReducer);
+
   const formik = useFormik({
     initialValues: {
       deputyTrainyAgent: "",
       datePatrouille: "",
       typePatrouille: "",
       rapport: "",
+      agent: `${agent.matricule}-${agent.username}`,
     },
     onSubmit: (values) => {
       //formik.resetForm();
       // onClose();
+
+      let data = {
+        deputyTrainyAgent: values.deputyTrainyAgent,
+        datePatrouille: dateFrenchFormat(values.datePatrouille),
+        typePatrouille: values.typePatrouille,
+        rapport: values.rapport,
+        agent: values.agent,
+      };
+
+      //console.log(data);
+
+      sendDeputyTrainy(data);
     },
   });
 
@@ -59,7 +76,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
               <option></option>
               {listOfRookies.length > 0 &&
                 listOfRookies.map((agent) => (
-                  <option value={agent.id} key={agent.id}>
+                  <option value={agent.name} key={agent.id}>
                     {agent.name}
                   </option>
                 ))}

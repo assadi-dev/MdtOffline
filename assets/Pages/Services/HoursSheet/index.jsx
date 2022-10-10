@@ -60,10 +60,10 @@ const HoursSheet = () => {
             </thead>
             <tbody>
               <tr>
+                <td>10-10-2022 00:30</td>
+                <td>10-10-2022 00:45</td>
                 <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
+                <td>00:15</td>
                 <td>
                   <HoursSheetTableAction>
                     <OutlineBtnAction className="edit">

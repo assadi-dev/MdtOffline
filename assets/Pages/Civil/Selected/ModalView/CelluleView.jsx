@@ -16,6 +16,7 @@ import {
   HeadTitleView,
   RowCardTopButton,
 } from "./ModalView.styled";
+import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
 
 const CelluleView = ({ onClose, idCivil, listCellule }) => {
   const closeModal = () => {
@@ -23,6 +24,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
   };
 
   const agent = useSelector((state) => state.AuthenticateReducer);
+  const civilSelectore = useSelector((state) => state.CivilReducer);
   const token = agent.token;
 
   const dispatch = useDispatch();
@@ -49,7 +51,17 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       civil: `api/civils/${idCivil}`,
     };
 
-    token && dispatch(add_cellule(data));
+    dispatch(add_cellule(data));
+    let discordData = {
+      titre: "Mise en cellule",
+      name: `${civilSelectore.selected.prenom} ${civilSelectore.selected.nom}`,
+      entree: inputState.entree,
+      sortie: inputState.sortie,
+      agent: `${agent.matricule}-${agent.username}`,
+      photo: `${process.env.REACT_APP_URLBACKEND}${civilSelectore.selected.photo}`,
+    };
+
+    sendCelluleToDiscord(discordData);
   };
 
   return (

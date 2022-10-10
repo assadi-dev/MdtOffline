@@ -16,6 +16,11 @@ import AccountManager from "../Pages/CommandStaffSupervisor/AcountManager";
 export default [
   { label: "Services", path: "services", element: <Services /> },
   {
+    label: "Services",
+    path: "services/feuilles-d-heures",
+    element: <Services />,
+  },
+  {
     label: "MDT",
     path: "mdt",
     element: <MDT />,
