@@ -1,8 +1,10 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../../../components/Shared/Input";
 import InputTextArea from "../../../components/Shared/InputTextArea";
 import Select from "../../../components/Shared/Select";
+import { get_allAgent } from "../../../redux/actions/Agents.action";
 import {
   FormBottomRow,
   FormControl,
@@ -14,11 +16,15 @@ import {
 import { typeIncident } from "./dataList";
 
 const RapportIncidentForm = () => {
+  const dispatch = useDispatch();
+  const agents = useSelector((state) => state.AgentsReducer);
+
   const formik = useFormik({
     initialValues: {
       rapport: "",
       typeIncident: "",
       localisationIncident: "",
+      agentConcerne: "",
       agent: "",
     },
     onSubmit: (values) => {
@@ -26,6 +32,10 @@ const RapportIncidentForm = () => {
       formik.resetForm();
     },
   });
+
+  useEffect(() => {
+    dispatch(get_allAgent());
+  }, []);
 
   return (
     <RapportIncidentFormContent onSubmit={formik.handleSubmit}>
@@ -69,11 +79,19 @@ const RapportIncidentForm = () => {
       <FormControl>
         <FormLabel>Agent concerné</FormLabel>
         <Select
-          inputName={"agent"}
+          inputName={"agentConcerne"}
           placeholder="Agent concerné"
           onChange={formik.handleChange}
-          value={formik.values.typeIncident}
-        ></Select>
+          value={formik.values.agentConcerne}
+        >
+          <option value=""></option>
+          {agents.collections.length > 0 &&
+            agents.collections.map((agent) => (
+              <option key={agent.id} value={agent.id}>
+                {agent.name}
+              </option>
+            ))}
+        </Select>
       </FormControl>
       <FormBottomRow>
         <FormControl>

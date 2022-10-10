@@ -11,9 +11,9 @@ const AgentsReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case GET_ALL_AGENTS:
-      return { ...state, collection: payload, isReady: true };
+      return { ...state, collections: payload, isReady: true };
     case GET_ALL_ROOKIES:
-      return { ...state, collection: payload, isReady: true };
+      return { ...state, collections: payload, isReady: true };
 
     default:
       return state;

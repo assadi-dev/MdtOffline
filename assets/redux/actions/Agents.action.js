@@ -1,5 +1,5 @@
 import Api from "../../service/Api/Api";
-import { GET_ALL_ROOKIES } from "../types/Agent.types";
+import { GET_ALL_AGENTS, GET_ALL_ROOKIES } from "../types/Agent.types";
 
 export const get_allAgent = () => {
   return async (dispatch) => {

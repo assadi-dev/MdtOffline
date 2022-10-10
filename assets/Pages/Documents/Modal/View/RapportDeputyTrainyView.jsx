@@ -19,10 +19,10 @@ import { sendDeputyTrainy } from "../../SendDiscord/DeputyTrainy";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
-  const { isReady, collection } = useSelector((state) => state.AgentsReducer);
+  const { isReady, collections } = useSelector((state) => state.AgentsReducer);
   const listOfRookies = useMemo(() => {
     if (isReady) {
-      return collection;
+      return collections;
     }
     return [];
   }, [isReady]);
