@@ -1,7 +1,7 @@
-const CASCHE_NAME = "MDT-Offline-static-v1";
+const CACHE_NAME = "MDT-Offline-static-v1";
 
 const app_shell_files = [
-  "../public/build/manifest.json",
+  "../public/manifest.json",
   "../public/index.php",
   "../public/build",
 ];
@@ -13,7 +13,7 @@ if ("serviceWorker" in navigator) {
 
     event.waitUntil(
       caches
-        .open(CASCHE_NAME)
+        .open(CACHE_NAME)
         .then((cache) => cache.addAll(app_shell_files))
         .then(() => self.skipWaiting())
     );

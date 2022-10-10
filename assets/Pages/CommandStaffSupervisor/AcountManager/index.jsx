@@ -1,7 +1,13 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import SwitchButton from "../../../components/Shared/SwitchButton";
 import { EditPencilIcon, TrashIcon } from "../../../components/SVG";
 import useFecthData from "../../../hooks/useFecthData";
+import {
+  get_allUsers,
+  validation_user,
+} from "../../../redux/actions/User.action";
 import { dateFrenchFormat } from "../../../utils/dateFormat";
 import { getUserRole } from "../../../utils/userData";
 import {
@@ -17,7 +23,18 @@ import {
 } from "./AcountManager.styled";
 
 const AccountManager = () => {
-  const { data, loading } = useFecthData("users");
+  const dispatch = useDispatch();
+  const userSelector = useSelector((state) => state.UserReducer);
+
+  const handleCheckValidate = (id, e) => {
+    let checkState = e.target.checked;
+    let data = { validate: checkState };
+    dispatch(validation_user(id, data));
+  };
+
+  useEffect(() => {
+    dispatch(get_allUsers());
+  }, []);
 
   return (
     <AccountManagerWrapper>
@@ -37,8 +54,8 @@ const AccountManager = () => {
             </tr>
           </thead>
           <tbody>
-            {!loading &&
-              data.map((user) => (
+            {userSelector.isReady &&
+              userSelector.collection.map((user) => (
                 <tr key={user.id}>
                   <td>{user.username}</td>
                   <td>{getUserRole(user.roles)}</td>
@@ -47,8 +64,10 @@ const AccountManager = () => {
                   </td>
                   <td className="td-center">
                     <SwitchButton
+                      checked={user.validate}
                       sliderOffColor={"var( --danger-color)"}
                       sliderClass="validatSwitchBtn"
+                      onChange={(e) => handleCheckValidate(user.id, e)}
                     />
                   </td>
                   <td>

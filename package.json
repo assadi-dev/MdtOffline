@@ -13,6 +13,7 @@
         "regenerator-runtime": "^0.13.9",
         "webpack-notifier": "^1.15.0"
     },
+    "homepage": "",
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
