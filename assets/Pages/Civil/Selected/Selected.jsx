@@ -54,6 +54,8 @@ import DeleteRapportArrestationView from "./ListItemViews/DeleteView/DeleteRappo
 import DeleteDossierArrestationView from "./ListItemViews/DeleteView/DeleteDossierArrestationView";
 import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
 import Cookies from "js-cookie";
+import useListAgent from "../../../hooks/useListAgent";
+import { getAgentNameById } from "../../../utils/userData";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -70,6 +72,7 @@ const CivilSelected = () => {
 
   const [loading, setLoading] = useState(true);
   const dispatchCivilData = useDispatch();
+  const listAgent = useListAgent();
   const civilSelectore = useSelector((state) => state.CivilReducer);
   const token = Cookies.get(TOKEN_STORAGE_NAME);
   const [file, setFile] = useState({
@@ -327,7 +330,10 @@ const CivilSelected = () => {
                     lieux={avertissement.lieux}
                     numero={avertissement.id}
                     comment={avertissement.comments}
-                    agent={avertissement.agent}
+                    agent={
+                      listAgent.length > 0 &&
+                      getAgentNameById(listAgent, avertissement.idAgent)
+                    }
                     date={avertissement.createdAt}
                     dispatchOpenModal={dispatch}
                   />
@@ -353,7 +359,10 @@ const CivilSelected = () => {
                       id={traffic.id}
                       numero={traffic.id}
                       offence={offences}
-                      agent={traffic.agent}
+                      agent={
+                        listAgent.length > 0 &&
+                        getAgentNameById(listAgent, traffic.idAgent)
+                      }
                       amend={traffic.amend}
                       date={traffic.createdAt}
                       dispatchOpenModal={dispatch}
@@ -384,7 +393,10 @@ const CivilSelected = () => {
                       id={rapport.id}
                       numero={rapport.id}
                       offence={offence}
-                      agent={rapport.agent}
+                      agent={
+                        listAgent.length > 0 &&
+                        getAgentNameById(listAgent, rapport.idAgent)
+                      }
                       date={rapport.createdAt}
                       amend={rapport.amende}
                       peine={rapport.peine}
@@ -412,7 +424,10 @@ const CivilSelected = () => {
                       key={dossier.id}
                       id={dossier.id}
                       numero={dossier.id}
-                      agent={dossier.agent}
+                      agent={
+                        listAgent.length > 0 &&
+                        getAgentNameById(listAgent, dossier.idAgent)
+                      }
                       amend={dossier.amend}
                       offence={offence}
                       date={dossier.createdAt}

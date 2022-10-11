@@ -22,7 +22,7 @@ class UploadAgentController extends AbstractController
         $file = $request->files->get("photo");
         $agent->setFile($file);
         $agent->setUpdatedAt(new DateTime());
-        $filePath = $project_dir . "/uploads/images/agents/";
+        $filePath = $project_dir . "/uploads/images/agents";
 
         return  $agent;
     }

@@ -18,6 +18,8 @@ import {
 } from "./ModalView.styled";
 import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
+import { getAgentNameById } from "../../../../utils/userData";
+import useListAgent from "../../../../hooks/useListAgent";
 
 const CelluleView = ({ onClose, idCivil, listCellule }) => {
   const closeModal = () => {
@@ -27,6 +29,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
   const agent = useSelector((state) => state.AuthenticateReducer);
   const civilSelectore = useSelector((state) => state.CivilReducer);
   const token = agent.token;
+  const listAgent = useListAgent();
 
   const dispatch = useDispatch();
   const [inputState, setInputState] = useState({
@@ -60,7 +63,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       name: `${civilSelectore.selected.prenom} ${civilSelectore.selected.nom}`,
       entree: dateFrenchFormat(inputState.entree),
       sortie: dateFrenchFormat(inputState.sortie),
-      agent: `${agent.matricule}-${agent.username}`,
+      agent: getAgentNameById(listAgent, agent.id),
       photo: `${process.env.REACT_APP_URLBACKEND}${civilSelectore.selected.photo}`,
     };
 

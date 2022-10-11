@@ -104,12 +104,6 @@ class ArrestFolder
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
-     */
-    private $agent;
-
-    /**
      * @ORM\Column(type="string", length=25)
      * @Groups({"read:civil:item"})
      */
@@ -301,18 +295,6 @@ class ArrestFolder
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getAgent(): ?string
-    {
-        return $this->agent;
-    }
-
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
 
         return $this;
     }

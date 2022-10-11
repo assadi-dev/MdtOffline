@@ -28,11 +28,7 @@ class Convocation
      */
     private $motif;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
-     */
-    private $agent;
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -85,17 +81,7 @@ class Convocation
         return $this;
     }
 
-    public function getAgent(): ?string
-    {
-        return $this->agent;
-    }
 
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
-
-        return $this;
-    }
 
     public function getExpiration(): ?\DateTimeInterface
     {

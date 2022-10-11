@@ -52,11 +52,6 @@ class Avertissement
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
-     */
-    private $agent;
 
     /**
      * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="avertissements")
@@ -130,17 +125,7 @@ class Avertissement
         return $this;
     }
 
-    public function getAgent(): ?string
-    {
-        return $this->agent;
-    }
 
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
-
-        return $this;
-    }
 
     public function getCivil(): ?Civil
     {

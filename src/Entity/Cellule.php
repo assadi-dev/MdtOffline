@@ -34,11 +34,7 @@ class Cellule
      */
     private $sortie;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
-     */
-    private $agent;
+
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -93,17 +89,7 @@ class Cellule
         return $this;
     }
 
-    public function getAgent(): ?string
-    {
-        return $this->agent;
-    }
 
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {

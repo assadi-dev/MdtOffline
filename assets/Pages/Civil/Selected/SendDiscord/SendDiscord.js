@@ -2,7 +2,6 @@ import sendDiscord from "../../../../service/Api/SendDiscord";
 
 export const sendCelluleToDiscord = (data) => {
   const { name, entree, sortie, agent, photo } = data;
-  console.log(photo);
 
   let payload = (data = {
     content: null,

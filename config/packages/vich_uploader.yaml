@@ -3,13 +3,13 @@ vich_uploader:
 
     mappings:
         agents:
-           uri_prefix: '/uploads/images/agents/'
+           uri_prefix: '/uploads/images/agents'
            upload_destination: '%kernel.project_dir%/public/uploads/images/agents'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
            delete_on_remove: true
 
         civils:
-            uri_prefix: '/uploads/images/civils/'
+            uri_prefix: '/uploads/images/civils'
             upload_destination: '%kernel.project_dir%/public/uploads/images/civils'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_remove: true

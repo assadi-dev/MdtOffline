@@ -17,6 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { sendDeputyTrainy } from "../../SendDiscord/DeputyTrainy";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
+import { getAgentNameById } from "../../../../utils/userData";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
   const { isReady, collections } = useSelector((state) => state.AgentsReducer);
@@ -49,7 +50,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
         datePatrouille: dateFrenchFormat(values.datePatrouille),
         typePatrouille: values.typePatrouille,
         rapport: values.rapport,
-        agent: `${agent.matricule}-${agent.username}`,
+        agent: getAgentNameById(collections, agent.id),
         idAgent: agent.id,
       };
 

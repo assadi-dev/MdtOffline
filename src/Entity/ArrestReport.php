@@ -72,11 +72,6 @@ class ArrestReport
      */
     private $civil;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
-     */
-    private $agent;
 
     /**
      * @ORM\Column(type="boolean")

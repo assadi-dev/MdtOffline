@@ -49,11 +49,7 @@ class Traffic
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
-     */
-    private $agent;
+
 
     /**
      * @ORM\Column(type="string", length=25)
@@ -134,17 +130,6 @@ class Traffic
         return $this;
     }
 
-    public function getAgent(): ?string
-    {
-        return $this->agent;
-    }
-
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
-
-        return $this;
-    }
 
     public function getAmend(): ?int
     {
