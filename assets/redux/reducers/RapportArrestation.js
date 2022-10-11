@@ -11,10 +11,9 @@ const RapporArrestationReducer = (state = initialState, action) => {
     case GET_ALL_RAPPORT_ARRESTATION:
       return { ...state, collection: payload };
     case ADD_RAPPORT_ARRESTATION:
-      return { ...state, collection: payload };
+      return { ...state, collection: [payload, ...state.collection] };
     default:
       return state;
-      break;
   }
 };
 

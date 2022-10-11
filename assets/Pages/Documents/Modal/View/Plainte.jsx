@@ -14,13 +14,29 @@ import {
 import Input from "../../../../components/Shared/Input";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import { useDispatch, useSelector } from "react-redux";
+import { add_plainte } from "../../../../redux/actions/Plainte.action";
 
 const PlainteView = ({ onClose }) => {
+  const agent = useSelector((state) => state.AuthenticateReducer);
+  const dispatch = useDispatch();
+
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      nomDepositaire: "",
+      telephoneDepositaire: "",
+      nomIncrimine: "",
+      telephoneIncrimine: "",
+      raisonDepot: "",
+      corpsPlainte: "",
+      idAgent: agent.id,
+    },
     onSubmit: (values) => {
-      formik.resetForm();
-      onClose();
+      let plainteData = { ...values, idAgent: agent.id };
+
+      dispatch(add_plainte(plainteData)).then(() => {
+        formik.resetForm();
+        onClose();
+      });
     },
   });
 
@@ -37,37 +53,37 @@ const PlainteView = ({ onClose }) => {
           <FormControl>
             <FormLabel>Dépositaire: </FormLabel>
             <Input
-              inputName={"typePatrouille"}
+              inputName={"nomDepositaire"}
               placeholder="Prénom Nom"
               onChange={formik.handleChange}
-              value={formik.values.depositaire}
+              value={formik.values.nomDepositaire}
             />
           </FormControl>
           <FormControl>
             <FormLabel>Numéro du dépositaire</FormLabel>
             <InputDateTime
-              inputName={"numeroDepositaire"}
+              inputName={"telephoneDepositaire"}
               placeholder="555-XXXX"
               onChange={formik.handleChange}
-              value={formik.values.numeroDepositaire}
+              value={formik.values.telephoneDepositaire}
             />
           </FormControl>
           <FormControl>
             <FormLabel>Incriminé: </FormLabel>
             <Input
-              inputName={"typePatrouille"}
+              inputName={"nomIncrimine"}
               placeholder="Prénom Nom"
               onChange={formik.handleChange}
-              value={formik.values.depositaire}
+              value={formik.values.nomIncrimine}
             />
           </FormControl>
           <FormControl>
             <FormLabel>Numéro du Incriminé</FormLabel>
             <InputDateTime
-              inputName={"numeroIncrimine"}
+              inputName={"telephoneIncrimine"}
               placeholder="555-XXXX"
               onChange={formik.handleChange}
-              value={formik.values.numeroIncrimine}
+              value={formik.values.telephoneIncrimine}
             />
           </FormControl>
           <FormControl>
@@ -75,8 +91,8 @@ const PlainteView = ({ onClose }) => {
             <InputTextArea
               rows={3}
               placeholder=""
-              name="raisonPlainte"
-              value={formik.values.raisonPlainte}
+              name="raisonDepot"
+              value={formik.values.raisonDepot}
               onChange={formik.handleChange}
             />
           </FormControl>

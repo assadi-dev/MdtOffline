@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendDeputyTrainy } from "../../SendDiscord/DeputyTrainy";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
 import { getAgentNameById } from "../../../../utils/userData";
+import { add_rapportDeputyTrainy } from "../../../../redux/actions/RapporDeputyTrainy.action";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
   const { isReady, collections } = useSelector((state) => state.AgentsReducer);
@@ -29,23 +30,22 @@ const RapportDeputyTrainyView = ({ onClose }) => {
   }, [isReady]);
 
   const agent = useSelector((state) => state.AuthenticateReducer);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
       deputyTrainyConcerned: "",
-      datePatrouille: "",
+      datePatrouille: new Date(),
       typePatrouille: "",
       rapport: "",
-      agent: `${agent.matricule}-${agent.username}`,
+      idAgent: agent.id,
     },
     onSubmit: (values) => {
-      //formik.resetForm();
-      // onClose();
       let findAgent = listOfRookies.find(
         (rookie) => rookie.id == values.deputyTrainyConcerned
       );
 
-      let data = {
+      let sendDiscordData = {
         deputyTrainyConcerned: findAgent.name,
         datePatrouille: dateFrenchFormat(values.datePatrouille),
         typePatrouille: values.typePatrouille,
@@ -54,9 +54,13 @@ const RapportDeputyTrainyView = ({ onClose }) => {
         idAgent: agent.id,
       };
 
-      //console.log(data);
+      let rapportDeputyTrainy = { ...values, idAgent: agent.id };
 
-      sendDeputyTrainy(data);
+      dispatch(add_rapportDeputyTrainy(rapportDeputyTrainy)).then(() => {
+        formik.resetForm();
+        onClose();
+        sendDeputyTrainy(sendDiscordData);
+      });
     },
   });
 
@@ -73,7 +77,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
           <FormControl>
             <FormLabel>Deputy Trainy concerné</FormLabel>
             <Select
-              inputName={"deputyTrainyAgent"}
+              inputName={"deputyTrainyConcerned"}
               placeholder="Deputy Trainy Concerné"
               onChange={formik.handleChange}
               value={formik.values.deputyTrainyConcerned}

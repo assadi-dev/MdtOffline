@@ -5,6 +5,7 @@ import Input from "../../../components/Shared/Input";
 import InputTextArea from "../../../components/Shared/InputTextArea";
 import Select from "../../../components/Shared/Select";
 import { get_allAgent } from "../../../redux/actions/Agents.action";
+import { add_rapportIncident } from "../../../redux/actions/RapportIncident.action";
 import {
   FormBottomRow,
   FormControl,
@@ -18,18 +19,25 @@ import { typeIncident } from "./dataList";
 const RapportIncidentForm = () => {
   const dispatch = useDispatch();
   const agents = useSelector((state) => state.AgentsReducer);
+  const agent = useSelector((state) => state.AuthenticateReducer);
 
   const formik = useFormik({
     initialValues: {
       rapport: "",
       typeIncident: "",
-      localisationIncident: "",
-      agentConcerne: "",
-      agent: "",
+      idAgentConcerned: "",
+      lieuxIncident: "",
+      idAgent: agent.id,
     },
     onSubmit: (values) => {
-      console.log(values);
-      formik.resetForm();
+      let formData = {
+        ...values,
+        idAgentConcerned: parseInt(values.idAgentConcerned),
+        idAgent: agent.id,
+      };
+      dispatch(add_rapportIncident(formData)).then(() => {
+        formik.resetForm();
+      });
     },
   });
 
@@ -58,6 +66,7 @@ const RapportIncidentForm = () => {
           onChange={formik.handleChange}
           value={formik.values.typeIncident}
         >
+          <option value=""></option>
           {typeIncident.map((incident) => (
             <option key={incident.id} value={incident.name}>
               {incident.name}
@@ -69,20 +78,20 @@ const RapportIncidentForm = () => {
       <FormControl>
         <FormLabel>Localisation de l'incident</FormLabel>
         <Input
-          inputName={"localisationIncident"}
+          inputName={"lieuxIncident"}
           placeholder="ex: Vinewood Boulevard"
           onChange={formik.handleChange}
-          value={formik.values.localisationIncident}
+          value={formik.values.lieuxIncident}
         />
       </FormControl>
 
       <FormControl>
         <FormLabel>Agent concerné</FormLabel>
         <Select
-          inputName={"agentConcerne"}
+          inputName={"idAgentConcerned"}
           placeholder="Agent concerné"
           onChange={formik.handleChange}
-          value={formik.values.agentConcerne}
+          value={formik.values.idAgentConcerned}
         >
           <option value=""></option>
           {agents.collections.length > 0 &&
@@ -95,7 +104,7 @@ const RapportIncidentForm = () => {
       </FormControl>
       <FormBottomRow>
         <FormControl>
-          <SubmitButton>Envoyer</SubmitButton>
+          <SubmitButton style={{ margin: "auto" }}>Envoyer</SubmitButton>
         </FormControl>
       </FormBottomRow>
     </RapportIncidentFormContent>

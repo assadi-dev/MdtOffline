@@ -77,7 +77,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          avertissements: [...state.selected.avertissements, payload],
+          avertissements: [payload, ...state.selected.avertissements],
         },
         isReady: true,
       };
@@ -114,7 +114,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          traffics: [...state.selected.traffics, payload],
+          traffics: [payload, ...state.selected.traffics],
         },
         isReady: true,
       };
@@ -148,7 +148,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          rapportArrestation: [...state.selected.rapportArrestation, payload],
+          rapportArrestation: [payload, ...state.selected.rapportArrestation],
         },
         isReady: true,
       };
@@ -191,7 +191,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          dossierArrestation: [...state.selected.dossierArrestation, payload],
+          dossierArrestation: [payload, ...state.selected.dossierArrestation],
         },
         isReady: true,
       };
@@ -251,7 +251,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          cellule: [...state.selected.cellule, payload],
+          cellule: [payload, ...state.selected.cellule],
         },
       };
 
@@ -260,7 +260,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          convocation: [...state.selected.convocation, payload],
+          convocation: [payload, ...state.selected.convocation],
         },
       };
 

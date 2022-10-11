@@ -127,6 +127,7 @@ export const SubmitButton = styled.button`
   justify-content: center;
   border-radius: 5px;
   color: #fff;
+  margin: auto;
 `;
 
 export const InputDateTime = styled(Input)``;

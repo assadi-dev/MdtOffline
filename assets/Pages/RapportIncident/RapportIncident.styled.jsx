@@ -14,6 +14,7 @@ export const WrapperContent = styled.div`
 
   @media screen and (min-width: 992px) {
     max-width: 960px;
+    margin: 10px auto;
   }
 `;
 
@@ -22,6 +23,8 @@ export const RapportIncidentFormContent = styled.form`
   color: #fff;
   border: 1px solid var(--color-blue-primary);
   border-radius: 5px;
+  width: 68%;
+  margin: 10px auto;
 `;
 
 export const FormLabel = styled.label`
@@ -38,13 +41,15 @@ export const FormControl = styled.div`
   }
 
   @media (min-width: 768px) {
-    width: 68%;
+    width: 100%;
   }
 `;
 
 export const FormBottomRow = styled.div`
   margin-top: 1rem;
-  height: 80px;
+  min-height: 20px;
+  display: flex;
+  justify-content: center;
 `;
 
 export const SubmitButton = styled.button`
@@ -56,4 +61,6 @@ export const SubmitButton = styled.button`
   justify-content: center;
   border-radius: 5px;
   color: #fff;
+  display: block;
+  margin: auto;
 `;

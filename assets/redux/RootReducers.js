@@ -10,6 +10,9 @@ import ConvocationReducer from "./reducers/Convocation.reducer";
 import CelluleReducer from "./reducers/Cellule.reducer";
 import AuthenticateReducer from "./reducers/Authenticate.reducer";
 import AgentsReducer from "./reducers/Agents.reducer";
+import PlainteReducer from "./reducers/Plainte.reducer";
+import RapportIncidentReducer from "./reducers/RapportIncident.reducer";
+import RapportDeputyTrainyReducer from "./reducers/RapportDeputyTrainy.reducer";
 
 const RootReducers = combineReducers({
   UserReducer,
@@ -23,6 +26,9 @@ const RootReducers = combineReducers({
   CelluleReducer,
   AuthenticateReducer,
   AgentsReducer,
+  RapportDeputyTrainyReducer,
+  PlainteReducer,
+  RapportIncidentReducer,
 });
 
 export default RootReducers;

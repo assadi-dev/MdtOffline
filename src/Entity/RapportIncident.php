@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RapportIncidentRepository;
+use DateTime;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass=RapportIncidentRepository::class)
@@ -48,6 +50,20 @@ class RapportIncident
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lieuxIncident;
+
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
+    }
+
 
     public function getId(): ?int
     {
@@ -122,6 +138,18 @@ class RapportIncident
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getLieuxIncident(): ?string
+    {
+        return $this->lieuxIncident;
+    }
+
+    public function setLieuxIncident(string $lieuxIncident): self
+    {
+        $this->lieuxIncident = $lieuxIncident;
 
         return $this;
     }
