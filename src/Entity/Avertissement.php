@@ -14,7 +14,7 @@ use DateTimeImmutable;
 /**
  * @ORM\Entity(repositoryClass=AvertissementRepository::class)
  * @ApiFilter(SearchFilter::class, properties= {"civil.id" : "partial"})
- * @ApiResource()
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
  * 
  */
 class Avertissement

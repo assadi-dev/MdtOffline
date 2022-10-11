@@ -32,7 +32,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      deputyTrainyAgent: "",
+      deputyTrainyConcerned: "",
       datePatrouille: "",
       typePatrouille: "",
       rapport: "",
@@ -42,11 +42,11 @@ const RapportDeputyTrainyView = ({ onClose }) => {
       //formik.resetForm();
       // onClose();
       let findAgent = listOfRookies.find(
-        (rookie) => rookie.id == values.deputyTrainyAgent
+        (rookie) => rookie.id == values.deputyTrainyConcerned
       );
 
       let data = {
-        deputyTrainyAgent: findAgent.name,
+        deputyTrainyConcerned: findAgent.name,
         datePatrouille: dateFrenchFormat(values.datePatrouille),
         typePatrouille: values.typePatrouille,
         rapport: values.rapport,
@@ -76,7 +76,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
               inputName={"deputyTrainyAgent"}
               placeholder="Deputy Trainy Concerné"
               onChange={formik.handleChange}
-              value={formik.values.deputyTrainyAgent}
+              value={formik.values.deputyTrainyConcerned}
             >
               <option></option>
               {listOfRookies.length > 0 &&

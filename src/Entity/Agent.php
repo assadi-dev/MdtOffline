@@ -19,7 +19,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 /**
  * @ORM\Entity(repositoryClass=AgentRepository::class)
  * @Vich\Uploadable()
- * @ApiResource(
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')",
  * normalizationContext={"groups"={"read:agent:collections","read:agent:item"}},
  * itemOperations={
  * "put","delete","get",

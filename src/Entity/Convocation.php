@@ -9,7 +9,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
  * @ORM\Entity(repositoryClass=ConvocationRepository::class)
  */
 class Convocation

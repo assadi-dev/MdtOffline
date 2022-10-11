@@ -15,6 +15,8 @@ import {
   HeadTitleView,
   RowCardTopButton,
 } from "./ModalView.styled";
+import useListAgent from "../../../../hooks/useListAgent";
+import { getAgentNameById } from "../../../../utils/userData";
 
 const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
   const closeModal = () => {
@@ -24,6 +26,7 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
+  const listAgent = useListAgent();
 
   const [inputState, setInputState] = useState({
     raison: "",
@@ -63,7 +66,7 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
                 <ListConvocationItem
                   key={convocation.id}
                   numero={convocation.id}
-                  agent={convocation.agent}
+                  agent={getAgentNameById(listAgent, convocation.idAgent)}
                   motif={convocation.motif}
                   dateConvocation={convocation.dateConvocation}
                   dateExpiration={convocation.expiration}

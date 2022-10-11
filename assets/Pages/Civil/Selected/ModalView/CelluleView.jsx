@@ -83,7 +83,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
                 <ListCelluleItem
                   key={cellule.id}
                   numero={cellule.id}
-                  agent={cellule.agent}
+                  agent={getAgentNameById(listAgent, cellule.idAgent)}
                   entree={cellule.entree}
                   sortie={cellule.sortie}
                 />

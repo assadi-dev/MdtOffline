@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ArrestReportRepository::class)
- * @ApiResource()
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
  */
 class ArrestReport
 {
