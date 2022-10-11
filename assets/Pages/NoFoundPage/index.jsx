@@ -22,7 +22,7 @@ const NoFoundPage = () => {
       </HeaderRowPage>
       <DescriptionRow style={{ marginBottom: "2.5rem" }}>
         {" "}
-        <p style={{ fontSize: "18px" }}>Page introuvable</p>
+        <p style={{ fontSize: "18px" }}>Désolé cette page n'existe pas</p>
       </DescriptionRow>
 
       <DescriptionRow>
