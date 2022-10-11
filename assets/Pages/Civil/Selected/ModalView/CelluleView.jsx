@@ -17,6 +17,7 @@ import {
   RowCardTopButton,
 } from "./ModalView.styled";
 import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
+import { dateFrenchFormat } from "../../../../utils/dateFormat";
 
 const CelluleView = ({ onClose, idCivil, listCellule }) => {
   const closeModal = () => {
@@ -33,6 +34,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
     entree: "",
     sortie: "",
     civil: `api/civil/${idCivil}`,
+    idAgent: agent.id,
   });
 
   const handleChangeValue = (e) => {
@@ -49,14 +51,15 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       sortie: inputState.sortie,
       agent: `${agent.matricule}-${agent.username}`,
       civil: `api/civils/${idCivil}`,
+      idAgent: agent.id,
     };
 
     dispatch(add_cellule(data));
     let discordData = {
       titre: "Mise en cellule",
       name: `${civilSelectore.selected.prenom} ${civilSelectore.selected.nom}`,
-      entree: inputState.entree,
-      sortie: inputState.sortie,
+      entree: dateFrenchFormat(inputState.entree),
+      sortie: dateFrenchFormat(inputState.sortie),
       agent: `${agent.matricule}-${agent.username}`,
       photo: `${process.env.REACT_APP_URLBACKEND}${civilSelectore.selected.photo}`,
     };

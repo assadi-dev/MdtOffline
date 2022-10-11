@@ -45,6 +45,7 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
       expiration: inputState.dateExpiration,
       civil: `api/civils/${idCivil}`,
       agent: `${agent.matricule}-${agent.username}`,
+      idAgent: agent.id,
     };
     token && dispatch(add_convocation(data));
   };

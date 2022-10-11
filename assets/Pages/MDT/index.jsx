@@ -14,11 +14,13 @@ const MDT = () => {
   const [individus, setIndividus] = useState([
     {
       label: "Individus convoqués par vous",
-      lists: ["MARCHAL Huges", "MARCHAL Huges", "MARCHAL Huges"],
+      lists: [],
+      emptyMessage: "Vous avez pas de convocation",
     },
     {
       label: "Individus Recherché",
-      lists: ["MARCHAL Huges", "MARCHAL Huges", "MARCHAL Huges"],
+      lists: [],
+      emptyMessage: "Aucun individus recherché",
     },
   ]);
 
@@ -76,7 +78,12 @@ const MDT = () => {
       {pathname === "/mdt" && (
         <section className="row-individus">
           {individus.map((individus, k) => (
-            <MDTCard key={k} title={individus.label} lists={individus.lists} />
+            <MDTCard
+              key={k}
+              title={individus.label}
+              lists={individus.lists}
+              emptyMessage={individus.emptyMessage}
+            />
           ))}
         </section>
       )}

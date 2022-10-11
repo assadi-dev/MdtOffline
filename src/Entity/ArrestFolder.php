@@ -126,6 +126,15 @@ class ArrestFolder
      */
     private $civil;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
+     * 
+     */
+    private $idAgent;
+
+
+
 
     public function __construct()
     {
@@ -340,6 +349,18 @@ class ArrestFolder
     public function setCivil(?Civil $civil): self
     {
         $this->civil = $civil;
+
+        return $this;
+    }
+
+    public function getIdAgent(): ?string
+    {
+        return $this->idAgent;
+    }
+
+    public function setIdAgent(string $idAgent): self
+    {
+        $this->idAgent = $idAgent;
 
         return $this;
     }

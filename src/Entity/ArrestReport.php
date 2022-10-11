@@ -84,6 +84,12 @@ class ArrestReport
      */
     private $conversionUp;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
+     */
+    private $idAgent;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -214,6 +220,18 @@ class ArrestReport
     public function setConversionUp(bool $conversionUp): self
     {
         $this->conversionUp = $conversionUp;
+
+        return $this;
+    }
+
+    public function getIdAgent(): ?string
+    {
+        return $this->idAgent;
+    }
+
+    public function setIdAgent(string $idAgent): self
+    {
+        $this->idAgent = $idAgent;
 
         return $this;
     }

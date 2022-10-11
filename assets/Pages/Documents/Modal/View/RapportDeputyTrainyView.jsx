@@ -40,13 +40,17 @@ const RapportDeputyTrainyView = ({ onClose }) => {
     onSubmit: (values) => {
       //formik.resetForm();
       // onClose();
+      let findAgent = listOfRookies.find(
+        (rookie) => rookie.id == values.deputyTrainyAgent
+      );
 
       let data = {
-        deputyTrainyAgent: values.deputyTrainyAgent,
+        deputyTrainyAgent: findAgent.name,
         datePatrouille: dateFrenchFormat(values.datePatrouille),
         typePatrouille: values.typePatrouille,
         rapport: values.rapport,
-        agent: values.agent,
+        agent: `${agent.matricule}-${agent.username}`,
+        idAgent: agent.id,
       };
 
       //console.log(data);
@@ -76,7 +80,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
               <option></option>
               {listOfRookies.length > 0 &&
                 listOfRookies.map((agent) => (
-                  <option value={agent.name} key={agent.id}>
+                  <option value={agent.id} key={agent.id}>
                     {agent.name}
                   </option>
                 ))}

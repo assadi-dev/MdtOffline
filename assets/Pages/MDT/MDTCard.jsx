@@ -1,21 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
+  EmptyMessage,
   MDTCardBody,
   MDTCardHeader,
   MDTCardwrapper,
   MDTlist,
 } from "./MDT.styled";
 
-const MDTCard = ({ title, lists }) => {
+const MDTCard = ({ title, lists, emptyMessage }) => {
   return (
     <MDTCardwrapper>
       <MDTCardHeader>{title}</MDTCardHeader>
       <MDTCardBody>
         <MDTlist>
-          {lists.map((list, k) => (
-            <li key={k}>{list}</li>
-          ))}
+          {lists.length > 0 ? (
+            lists.map((list, k) => <li key={k}>{list}</li>)
+          ) : (
+            <EmptyMessage>{emptyMessage}</EmptyMessage>
+          )}
         </MDTlist>
       </MDTCardBody>
     </MDTCardwrapper>

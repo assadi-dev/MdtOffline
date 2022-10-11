@@ -195,6 +195,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
       isEnclose: inputState.isEnclose,
       avocat: inputState.avocat,
       rapport: inputState.rapport,
+      idAgent: agent.id,
     };
 
     token &&

@@ -124,6 +124,11 @@ export const MDTlist = styled.ul`
     margin-top: 0;
   }
 `;
+export const EmptyMessage = styled.p`
+  width: fit-content;
+  margin: 1.2rem auto;
+`;
+
 // Card Style
 
 // Button Style

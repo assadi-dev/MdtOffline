@@ -183,6 +183,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
       amende: total,
       peine: totalUp,
       conversionUp: inputState.up,
+      idAgent: agent.id,
     };
 
     token &&

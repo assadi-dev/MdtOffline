@@ -57,6 +57,12 @@ class Convocation
      */
     private $dateConvocation;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
+     */
+    private $idAgent;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -135,6 +141,18 @@ class Convocation
     public function setDateConvocation(\DateTimeInterface $dateConvocation): self
     {
         $this->dateConvocation = $dateConvocation;
+
+        return $this;
+    }
+
+    public function getIdAgent(): ?string
+    {
+        return $this->idAgent;
+    }
+
+    public function setIdAgent(string $idAgent): self
+    {
+        $this->idAgent = $idAgent;
 
         return $this;
     }
