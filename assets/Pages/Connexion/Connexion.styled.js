@@ -62,6 +62,7 @@ export const CardConnexion = styled.div`
   border-radius: 10px;
   background: rgba(23, 23, 23, 0.8);
   box-shadow: 0px 0px 15px 1px ${colorDefault};
+  position: relative;
 `;
 
 export const CardConnexionHeader = styled.div`
@@ -189,5 +190,31 @@ export const Loadericon = styled.span`
     margin: auto;
     display: block;
     shape-rendering: auto;
+  }
+`;
+
+export const SloganContainer = styled.div`
+  position: relative;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  text-align: center;
+`;
+
+export const Slogan = styled.div`
+  position: absolute;
+  font-size: 40px;
+  bottom: 50px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-35%);
+  line-height: 10x;
+  width: 100%;
+  font-family: var(--font-alexandra);
+  word-spacing: 12px;
+  letter-spacing: 5px;
+
+  @media screen and (min-width: 992px) {
+    font-size: 65px;
   }
 `;

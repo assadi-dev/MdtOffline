@@ -18,9 +18,9 @@ const AccountNoActivate = () => {
         <div>
           <AlertCircleIconOutlined />
         </div>
-        <ImportantMessage>Votre compte n'est pas disponnible</ImportantMessage>
+        <ImportantMessage>Votre compte n'est pas disponible</ImportantMessage>
         <Paragraph>
-          Veuillez contactez un membre du staff pour procéder à la validation de
+          Veuillez contacter un command staff pour procéder à la validation de
           votre compte
         </Paragraph>
       </AccountNoActivateHeader>

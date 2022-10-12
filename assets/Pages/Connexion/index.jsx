@@ -14,6 +14,8 @@ import {
   CardConnexionHeader,
   CardFooterConnexion,
   FooterConnexion,
+  Slogan,
+  SloganContainer,
   TextError,
   Wrapper,
 } from "./Connexion.styled";
@@ -45,43 +47,47 @@ const Connexion = () => {
 
   return (
     <Wrapper>
-      <div>
-        <CardConnexion>
-          <CardConnexionHeader>
+      <CardConnexion>
+        <CardConnexionHeader>
+          {loginPage ? (
+            <h2 className="title">CONNEXION</h2>
+          ) : (
+            <h2 className="title">CREER UN COMPTE</h2>
+          )}
+        </CardConnexionHeader>
+        <CardConnexionBody>
+          {loginPage ? (
+            <SingIn processStep={process} dispatchStep={dispatchProcess} />
+          ) : (
+            <Register processStep={process} dispatchStep={dispatchProcess} />
+          )}
+        </CardConnexionBody>
+        <FooterConnexion className="mb-signIn">
+          <div className="row-center">
             {loginPage ? (
-              <h2 className="title">CONNEXION</h2>
+              <p>
+                Vous n'avez pas de compte ?{" "}
+                <span className="clikable" onClick={togglePage}>
+                  Créer un compte
+                </span>
+              </p>
             ) : (
-              <h2 className="title">CREER UN COMPTE</h2>
+              <p>
+                Vous avez un compte ?{" "}
+                <span className="clikable" onClick={togglePage}>
+                  se connecter
+                </span>
+              </p>
             )}
-          </CardConnexionHeader>
-          <CardConnexionBody>
-            {loginPage ? (
-              <SingIn processStep={process} dispatchStep={dispatchProcess} />
-            ) : (
-              <Register processStep={process} dispatchStep={dispatchProcess} />
-            )}
-          </CardConnexionBody>
-          <FooterConnexion className="mb-signIn">
-            <div className="row-center">
-              {loginPage ? (
-                <p>
-                  Vous n'avez pas de compte ?{" "}
-                  <span className="clikable" onClick={togglePage}>
-                    Créer un compte
-                  </span>
-                </p>
-              ) : (
-                <p>
-                  Vous avez un compte ?{" "}
-                  <span className="clikable" onClick={togglePage}>
-                    se connecter
-                  </span>
-                </p>
-              )}
-            </div>
-          </FooterConnexion>
-        </CardConnexion>
-      </div>
+          </div>
+        </FooterConnexion>
+      </CardConnexion>
+
+      <SloganContainer>
+        <Slogan>
+          To Protect And To Serve <br /> Obey And Survive
+        </Slogan>
+      </SloganContainer>
     </Wrapper>
   );
 };
