@@ -3,6 +3,8 @@ import {
   ADD_PRISE_DE_SERVICES,
   DELETE_PRISE_DE_SERVICES,
   GET_ALL_PRISE_DE_SERVICES,
+  GET_PRISE_DE_SERVICES_BY_WEEK,
+  GET_SINGLE_PRISE_DE_SERVICES,
 } from "../types/PriseDeService.type";
 
 const initialState = { collections: [], selected: {}, isReady: false };
@@ -12,6 +14,10 @@ const PriseDeServiceReducer = (state = initialState, action) => {
   switch (type) {
     case GET_ALL_PRISE_DE_SERVICES:
       return { ...state, collections: payload, isReady: true };
+    case GET_PRISE_DE_SERVICES_BY_WEEK:
+      return { ...state, collections: payload, isReady: true };
+    case GET_SINGLE_PRISE_DE_SERVICES:
+      return { ...state, selected: payload, isReady: true };
     case ADD_PRISE_DE_SERVICES:
       return {
         ...state,

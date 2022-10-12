@@ -7,6 +7,8 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PriseDeServiceRepository;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use DateTime;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass=PriseDeServiceRepository::class)
@@ -56,6 +58,17 @@ class PriseDeService
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
+    }
+
+
+
 
     public function getId(): ?int
     {

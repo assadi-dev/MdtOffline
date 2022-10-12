@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Input from "../../../components/Shared/Input";
+import CloseModalBtn from "../../../components/Shared/Modal/CloseModal";
 
 export const HoursSheetWrapper = styled.div`
   padding: 15px;
@@ -159,6 +161,13 @@ export const HoursSheetTable = styled.table`
   .td-center {
     text-align: center;
   }
+
+  .emptyRow td {
+    border-radius: 5px !important;
+    text-align: center;
+    font-size: 18px !important;
+    padding: 14px 0;
+  }
 `;
 
 export const HoursSheetTableAction = styled.div`
@@ -188,4 +197,96 @@ export const OutlineBtnAction = styled.button`
     width: 20px;
     height: 20px;
   }
+`;
+
+export const ModalViewContainer = styled.form`
+  width: 35rem;
+  min-height: 200px;
+  background: var(--background-color-dark);
+  padding: 13px;
+  border: 0.5px solid #2b7de950;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 5px #2b7de920;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  @media (min-width: 992px) {
+    width: 690px;
+  }
+  .form-control {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    option {
+      color: #444;
+    }
+  }
+
+  .btn {
+    background-color: #2b7de9;
+    padding: 15px 22px;
+    width: fit-content;
+  }
+`;
+
+export const HeaderModal = styled.div`
+  width: 100%;
+  padding: 10px 10px 10px 48px;
+  position: relative;
+  .formTitle {
+    font-size: 18px;
+    font-family: var(--font-title);
+    font-weight: normal;
+  }
+`;
+
+export const CloseModal = styled(CloseModalBtn)`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+`;
+
+export const FormBodyContainer = styled.div`
+  padding: 2rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+`;
+
+export const FormLabel = styled.label`
+  display: block;
+  margin-bottom: 1rem;
+`;
+
+export const FormControl = styled.div`
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 2.3rem;
+  :last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+export const FormBottomRow = styled.div`
+  margin-top: 1rem;
+  height: 80px;
+`;
+
+export const SubmitButton = styled.button`
+  background-color: #2b7de9;
+  padding: 15px 22px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  margin: auto;
+  font-family: var(--font-title);
+`;
+
+export const InputDateTime = styled(Input)`
+  color: #fff;
 `;
