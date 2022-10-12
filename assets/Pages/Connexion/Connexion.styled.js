@@ -154,11 +154,13 @@ export const CardFooterConnexion = styled.div`
   .action-row {
     display: flex;
     justify-content: center;
+    min-height: 30px;
   }
   .btn {
     background-color: var(--color-blue-primary);
     padding: 10px 15px;
     width: fit-content;
+    height: fit-content;
   }
 `;
 

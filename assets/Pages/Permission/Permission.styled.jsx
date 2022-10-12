@@ -26,8 +26,8 @@ export const AccountNoActivateHeader = styled.div`
   padding: 1.8rem 3em;
 
   svg {
-    width: 200px;
-    height: 200px;
+    width: 110px;
+    height: 110px;
   }
 `;
 
@@ -54,7 +54,15 @@ export const BackBtn = styled(Link)`
   width: fit-content;
   padding: 12px 15px;
   border-radius: 5px;
+
   background-color: var(--color-blue-primary);
   color: var(--white);
   margin: 1.2rem auto;
+  transition: all 0.35s;
+  :hover {
+    box-shadow: 0px 0px 15px 3px rgba(43, 125, 233, 0.5);
+  }
+  :active {
+    background-color: rgba(43, 125, 233, 0.5);
+  }
 `;

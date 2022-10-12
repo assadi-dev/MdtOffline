@@ -52,12 +52,16 @@ const Register = ({ processStep, dispatchStep }) => {
             });
           })
           .catch((error) => {
-            let errorMessage = `${
+            /*     let errorMessage = `${
               error.data.detail ? error.data.detail : error.data.message
-            }`;
+            }`; */
             dispatchStep({
               type: "ERROR",
-              payload: { message: errorMessage, code: error.status },
+              payload: {
+                message:
+                  "Une erreur survenue lors de la création de votre compte veuillez reessayer",
+                code: 500,
+              },
             });
           });
       });

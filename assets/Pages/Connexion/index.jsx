@@ -49,26 +49,26 @@ const Connexion = () => {
               <Register processStep={process} dispatchStep={dispatchProcess} />
             )}
           </CardConnexionBody>
+          <FooterConnexion className="mb-signIn">
+            <div className="row-center">
+              {loginPage ? (
+                <p>
+                  Vous n'avez pas de compte ?{" "}
+                  <span className="clikable" onClick={togglePage}>
+                    Créer un compte
+                  </span>
+                </p>
+              ) : (
+                <p>
+                  Vous avez un compte ?{" "}
+                  <span className="clikable" onClick={togglePage}>
+                    se connecter
+                  </span>
+                </p>
+              )}
+            </div>
+          </FooterConnexion>
         </CardConnexion>
-        <FooterConnexion className="mb-signIn">
-          <div className="row-center">
-            {loginPage ? (
-              <p>
-                Vous n'avez pas de compte ?{" "}
-                <span className="clikable" onClick={togglePage}>
-                  Créer un compte
-                </span>
-              </p>
-            ) : (
-              <p>
-                Vous avez un compte ?{" "}
-                <span className="clikable" onClick={togglePage}>
-                  se connecter
-                </span>
-              </p>
-            )}
-          </div>
-        </FooterConnexion>
       </div>
     </Wrapper>
   );
