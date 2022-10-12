@@ -208,13 +208,15 @@ export const Slogan = styled.div`
   top: 0;
   left: 50%;
   transform: translateX(-50%) translateY(-35%);
-  line-height: 10x;
   width: 100%;
   font-family: var(--font-alexandra);
   word-spacing: 12px;
   letter-spacing: 5px;
-
+  @media screen and (min-width: 1900px) {
+    font-size: 85px;
+    transform: translateX(-50%) translateY(0);
+  }
   @media screen and (min-width: 992px) {
-    font-size: 65px;
+    font-size: 55px;
   }
 `;
