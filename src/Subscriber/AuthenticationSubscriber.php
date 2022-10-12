@@ -42,6 +42,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
             if ($agent instanceof Agent) {
                 $data["grade"] = $agent->getGrade();
                 $data["matricule"] = $agent->getMatricule();
+                $data["validate"] = $user->isValidate();
             }
         }
 
