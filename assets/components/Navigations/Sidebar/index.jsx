@@ -64,7 +64,7 @@ const navigations = [
     submenu: [
       {
         path: "/voir-rappor-d-incidents",
-        label: "Voir les rapporsts d'incidents",
+        label: "Voir les rapports d'incidents",
       },
       { path: "/comptabilites", label: "Comptabilités" },
       { path: "/effectifs", label: "Effectif" },

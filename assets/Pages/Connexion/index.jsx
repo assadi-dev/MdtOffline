@@ -1,9 +1,13 @@
+import Cookies from "js-cookie";
 import React, { useState, useReducer } from "react";
+import { useEffect } from "react";
 import Input from "../../components/Shared/Input";
 import {
   LockIconOutLined,
   UserIconOutLined,
 } from "../../components/SVG/Connexion.svg";
+import { TOKEN_STORAGE_NAME } from "../../constants/localStorage";
+import { deconnect } from "../../service/UserConnect";
 import {
   CardConnexion,
   CardConnexionBody,
@@ -30,6 +34,14 @@ const Connexion = () => {
     setLoginPage(!loginPage);
     dispatchProcess({ type: "START" });
   };
+
+  useEffect(() => {
+    let storage = Cookies.get(TOKEN_STORAGE_NAME);
+
+    if (storage) {
+      deconnect();
+    }
+  }, []);
 
   return (
     <Wrapper>
