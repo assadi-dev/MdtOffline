@@ -1,14 +1,24 @@
 import styled from "styled-components";
+import backgroundImage from "../../components/ressources/img/backgroundConnexion.jpg";
 
 const colorDefault = "rgba(255, 255, 255, 0.3)";
 const errorColor = "var(--red)";
 
 export const Wrapper = styled.div`
   width: 100%;
-  min-height: 80vh;
+  min-height: 100vh;
   display: grid;
   place-items: center;
   overflow-x: hidden;
+  background-image: linear-gradient(
+      rgba(19, 27, 38, 0.3),
+      rgba(19, 27, 38, 0.8)
+    ),
+    url(${backgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
   & .mb-signIn {
     margin-bottom: 1.8rem;
   }
@@ -50,7 +60,7 @@ export const CardConnexion = styled.div`
   min-height: 400px;
   padding: 18px;
   border-radius: 10px;
-  background: rgba(23, 23, 23, 0.57);
+  background: rgba(23, 23, 23, 0.8);
   box-shadow: 0px 0px 15px 1px ${colorDefault};
 `;
 
