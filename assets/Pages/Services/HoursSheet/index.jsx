@@ -167,7 +167,7 @@ const HoursSheet = () => {
                 ))
               ) : (
                 <EmptyRow
-                  text={"Vous n'avez en service durant cette semaine"}
+                  text={"Vous n'etiez pas en service durant cette semaine"}
                   colSpan={5}
                 />
               )}
