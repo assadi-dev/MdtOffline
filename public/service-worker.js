@@ -1,6 +1,13 @@
 const CACHE_NAME = "MDT-Offline-static-v1";
 
-const app_shell_files = ["./index.php", "./build/", "./.htaccess"];
+const app_shell_files = [
+  "./index.php",
+  "./build/",
+  "./.htaccess",
+  "./logo192.png",
+  "./logo512.png",
+  "./favicon.ico",
+];
 
 self.addEventListener("install", (event) => {
   console.log("new Service Worker installé !");
