@@ -41,8 +41,5 @@ export const InputWrapper = styled.div`
         font-size: 18px;
       }
     }
-    @media screen and (min-width: 992px) {
-      min-width: 480px;
-    }
   }
 `;
