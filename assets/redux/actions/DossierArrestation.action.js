@@ -6,6 +6,7 @@ import {
   DELETE_DOSSIER_ARRESTATION,
   EDIT_DOSSIER_ARRESTATION,
 } from "../types/DossierArrestation.type";
+import { add_rapportArrestation } from "./RapportArrestation.action";
 
 export const add_dossierArrestation = (data) => {
   return async (dispatch) => {
@@ -49,7 +50,30 @@ export const enCloseArrestFolder = (id) => {
         isEnclose: true,
         enclosedAt: new Date(),
       }).then((res) => {
+        const {
+          infractions,
+          lieux,
+          entreeCellule,
+          civil,
+          amend,
+          peine,
+          idAgent,
+        } = res.data;
+
         dispatch({ payload: id, type: ENCLOSE_ARREST_FOLDER });
+        let createArrestReaport = {
+          infractions,
+          lieux,
+          entreeCellule,
+          infractions,
+          civil,
+          amend: amend.toString(),
+          peine,
+          idAgent: Number(idAgent),
+          arrestFolder: `api/arrest_folders/${id}`,
+          conversionUp: false,
+        };
+        dispatch(add_rapportArrestation(createArrestReaport));
       });
     } catch (error) {
       console.log(error.message);

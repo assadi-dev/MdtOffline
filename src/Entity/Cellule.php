@@ -53,10 +53,7 @@ class Cellule
      */
     private $idAgent;
 
-    /**
-     * @ORM\OneToOne(targetEntity=ArrestFolder::class, mappedBy="cellule", cascade={"persist", "remove"})
-     */
-    private $arrestFolder;
+
 
 
     public function __construct()
@@ -128,28 +125,6 @@ class Cellule
     public function setIdAgent(string $idAgent): self
     {
         $this->idAgent = $idAgent;
-
-        return $this;
-    }
-
-    public function getArrestFolder(): ?ArrestFolder
-    {
-        return $this->arrestFolder;
-    }
-
-    public function setArrestFolder(?ArrestFolder $arrestFolder): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($arrestFolder === null && $this->arrestFolder !== null) {
-            $this->arrestFolder->setCellule(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($arrestFolder !== null && $arrestFolder->getCellule() !== $this) {
-            $arrestFolder->setCellule($this);
-        }
-
-        $this->arrestFolder = $arrestFolder;
 
         return $this;
     }

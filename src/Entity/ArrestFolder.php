@@ -11,7 +11,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')"   )
  * @ORM\Entity(repositoryClass=ArrestFolderRepository::class)
  */
 class ArrestFolder
@@ -20,80 +20,80 @@ class ArrestFolder
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $lieux;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $entreeCellule;
 
     /**
      * @ORM\Column(type="json",nullable=true)
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $infractions = [];
 
     /**
      * @ORM\Column(type="boolean",nullable=true)
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $avocat;
 
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $rapport;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $media;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $droitMiranda;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $soins;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $nourriture;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $isEnclose;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $enclosedAt;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"read:civil:item"})
+     *@Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $createdAt;
 
@@ -105,13 +105,13 @@ class ArrestFolder
 
     /**
      * @ORM\Column(type="string", length=25)
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $amend;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
     private $peine;
 
@@ -122,20 +122,20 @@ class ArrestFolder
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections"})
      * 
      */
     private $idAgent;
 
     /**
-     * @ORM\OneToOne(targetEntity=Cellule::class, inversedBy="arrestFolder", cascade={"persist", "remove"})
-     */
-    private $cellule;
-
-    /**
-     * @ORM\OneToOne(targetEntity=ArrestReport::class, inversedBy="arrestFolder", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=ArrestReport::class, cascade={"persist", "remove"})
+     * 
      */
     private $arrestReport;
+
+
+
+
 
 
 
@@ -357,17 +357,7 @@ class ArrestFolder
         return $this;
     }
 
-    public function getCellule(): ?Cellule
-    {
-        return $this->cellule;
-    }
 
-    public function setCellule(?Cellule $cellule): self
-    {
-        $this->cellule = $cellule;
-
-        return $this;
-    }
 
     public function getArrestReport(): ?ArrestReport
     {

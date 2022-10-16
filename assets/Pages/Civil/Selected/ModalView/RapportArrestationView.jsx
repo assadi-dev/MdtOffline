@@ -161,10 +161,10 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
   }, [inputState.chefAcusation]);
 
   const totalPeine = useMemo(() => {
-    /*   if (inputState.chefAcusation.length > 0) {
+    if (inputState.chefAcusation.length > 0) {
       let sommePeine = inputState.chefAcusation.map((c) => TimeToUnix(c.peine));
       return sommePeine.reduce((a, b) => a + b);
-    } */
+    }
     return 0;
   }, [inputState.chefAcusation, total, inputState.chefAcusation.peine]);
 
@@ -186,7 +186,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
       entreeCellule: inputState.entreeCellule,
       agent: `${agent.matricule}-${agent.username}`,
       civil: `api/civils/${idCivil}`,
-      amende: total,
+      amend: total,
       peine: totalUp,
       conversionUp: inputState.up,
       idAgent: agent.idAgent,
