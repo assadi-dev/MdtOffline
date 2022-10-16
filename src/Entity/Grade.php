@@ -32,7 +32,8 @@ class Grade
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $departement;
+    private $rang;
+
 
     public function getId(): ?int
     {
@@ -63,14 +64,14 @@ class Grade
         return $this;
     }
 
-    public function getDepartement(): ?string
+    public function getRang(): ?string
     {
-        return $this->departement;
+        return $this->rang;
     }
 
-    public function setDepartement(string $departement): self
+    public function setRang(string $rang): self
     {
-        $this->departement = $departement;
+        $this->rang = $rang;
 
         return $this;
     }
