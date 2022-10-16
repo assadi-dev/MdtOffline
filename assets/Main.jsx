@@ -16,4 +16,4 @@ root.render(
   </ReduxProvider>
 );
 
-registerServiceWorker();
+//registerServiceWorker();

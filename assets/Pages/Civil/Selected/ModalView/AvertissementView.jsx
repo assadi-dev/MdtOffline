@@ -21,7 +21,7 @@ const AvertissementView = ({ onClose, idCivil }) => {
     comments: "",
     agent: `${agent.matricule}-${agent.username}`,
     civil: `api/civils/${idCivil}`,
-    idAgent: agent.id,
+    idAgent: agent.idAgent,
   });
 
   const handleChangeInput = (e) => {

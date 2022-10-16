@@ -7,7 +7,10 @@ import {
   EditPencilIcon,
   TrashIcon,
 } from "../../../components/SVG";
-import { get_priseServiceByWeek } from "../../../redux/actions/PriseDeService.action";
+import {
+  get_priseServiceByWeek,
+  get_userPriseServiceByWeek,
+} from "../../../redux/actions/PriseDeService.action";
 import {
   dateFrenchFormat,
   FormatDuration,
@@ -44,6 +47,8 @@ const HoursSheet = () => {
     (state) => state.PriseDeServiceReducer
   );
 
+  const agent = useSelector((state) => state.AuthenticateReducer);
+
   const setWeekCounter = (type) => {
     type == "increment"
       ? setWeek((prevState) => (prevState += 1))
@@ -51,23 +56,28 @@ const HoursSheet = () => {
   };
 
   useEffect(() => {
-    dispatch(get_priseServiceByWeek(week));
-  }, [week]);
+    {
+      agent.idAgent &&
+        dispatch(get_userPriseServiceByWeek(agent.idAgent, week));
+    }
+  }, [week, agent.idAgent]);
 
   const listeServices = useMemo(() => {
-    if (priseServiceByWeek.collections.length > 0) {
+    if (priseServiceByWeek.collections) {
       return priseServiceByWeek.collections.map((service) => {
         return {
           ...service,
           start: dateFrenchFormat(service.start),
-          end: dateFrenchFormat(service.end),
+          end: service.isActive
+            ? "Service en cours"
+            : dateFrenchFormat(service.end),
           duration: FormatDuration(service.duration),
         };
       });
     }
 
     return [];
-  }, [priseServiceByWeek.collections.length]);
+  }, [priseServiceByWeek.collections]);
 
   const totalhours = useMemo(() => {
     let totalhoursArray = [];
@@ -138,7 +148,6 @@ const HoursSheet = () => {
               <tr>
                 <th>Prise de service</th>
                 <th>Fin de service</th>
-                <th>Activité</th>
                 <th>Durée</th>
                 <th>Action</th>
               </tr>
@@ -148,8 +157,11 @@ const HoursSheet = () => {
                 listeServices.map((service) => (
                   <tr key={service.id}>
                     <td>{service.start}</td>
-                    <td>{service.end}</td>
-                    <td>{service.activity}</td>
+                    <td
+                      className={`${service.isActive ? "serviceActive" : null}`}
+                    >
+                      {service.end}
+                    </td>
                     <td>{service.duration}</td>
                     <td>
                       <HoursSheetTableAction>

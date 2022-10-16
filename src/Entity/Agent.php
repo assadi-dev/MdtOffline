@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use DateTime;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AgentRepository;
 use App\Controller\UploadAgentController;
@@ -100,6 +102,12 @@ class Agent
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PriseDeService::class, mappedBy="agent", orphanRemoval=true)
+     * @groups({"read:agent:item"})
+     */
+    private $priseDeServices;
+
 
 
     public function __construct()
@@ -107,6 +115,7 @@ class Agent
         $this->grade = "Rookie";
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTime();
+        $this->priseDeServices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,6 +227,36 @@ class Agent
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PriseDeService>
+     */
+    public function getPriseDeServices(): Collection
+    {
+        return $this->priseDeServices;
+    }
+
+    public function addPriseDeService(PriseDeService $priseDeService): self
+    {
+        if (!$this->priseDeServices->contains($priseDeService)) {
+            $this->priseDeServices[] = $priseDeService;
+            $priseDeService->setAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removePriseDeService(PriseDeService $priseDeService): self
+    {
+        if ($this->priseDeServices->removeElement($priseDeService)) {
+            // set the owning side to null (unless already changed)
+            if ($priseDeService->getAgent() === $this) {
+                $priseDeService->setAgent(null);
+            }
+        }
 
         return $this;
     }

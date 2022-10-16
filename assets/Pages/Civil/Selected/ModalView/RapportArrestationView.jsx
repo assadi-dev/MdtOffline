@@ -111,7 +111,13 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, tentative: value ? 0.25 : 1 };
+              let currentPeine = cf.peine;
+              let tentative = value ? 0.25 : 1;
+              let peine = value
+                ? TimeToUnix(cf.peine) * tentative
+                : currentPeine;
+              peine = unixToTime(peine);
+              return { ...cf, tentative, peine };
             }
           }
           return cf;
@@ -155,10 +161,10 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
   }, [inputState.chefAcusation]);
 
   const totalPeine = useMemo(() => {
-    if (inputState.chefAcusation.length > 0) {
+    /*   if (inputState.chefAcusation.length > 0) {
       let sommePeine = inputState.chefAcusation.map((c) => TimeToUnix(c.peine));
       return sommePeine.reduce((a, b) => a + b);
-    }
+    } */
     return 0;
   }, [inputState.chefAcusation, total, inputState.chefAcusation.peine]);
 
@@ -183,7 +189,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
       amende: total,
       peine: totalUp,
       conversionUp: inputState.up,
-      idAgent: agent.id,
+      idAgent: agent.idAgent,
     };
 
     token &&

@@ -27,13 +27,13 @@ const RapportIncidentForm = () => {
       typeIncident: "",
       idAgentConcerned: "",
       lieuxIncident: "",
-      idAgent: agent.id,
+      idAgent: agent.idAgent,
     },
     onSubmit: (values) => {
       let formData = {
         ...values,
         idAgentConcerned: parseInt(values.idAgentConcerned),
-        idAgent: agent.id,
+        idAgent: agent.idAgent,
       };
       dispatch(add_rapportIncident(formData)).then(() => {
         formik.resetForm();
@@ -97,7 +97,7 @@ const RapportIncidentForm = () => {
           {agents.collections.length > 0 &&
             agents.collections.map((agent) => (
               <option key={agent.id} value={agent.id}>
-                {agent.name}
+                {agent.matricule ? agent.matricule : "N/A"}-{agent.name}
               </option>
             ))}
         </Select>

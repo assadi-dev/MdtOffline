@@ -85,6 +85,11 @@ class ArrestReport
      */
     private $idAgent;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ArrestFolder::class, mappedBy="arrestReport", cascade={"persist", "remove"})
+     */
+    private $arrestFolder;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -195,17 +200,6 @@ class ArrestReport
         return $this;
     }
 
-    public function getAgent(): ?string
-    {
-        return $this->agent;
-    }
-
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
-
-        return $this;
-    }
 
     public function isConversionUp(): ?bool
     {
@@ -227,6 +221,28 @@ class ArrestReport
     public function setIdAgent(string $idAgent): self
     {
         $this->idAgent = $idAgent;
+
+        return $this;
+    }
+
+    public function getArrestFolder(): ?ArrestFolder
+    {
+        return $this->arrestFolder;
+    }
+
+    public function setArrestFolder(?ArrestFolder $arrestFolder): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($arrestFolder === null && $this->arrestFolder !== null) {
+            $this->arrestFolder->setArrestReport(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($arrestFolder !== null && $arrestFolder->getArrestReport() !== $this) {
+            $arrestFolder->setArrestReport($this);
+        }
+
+        $this->arrestFolder = $arrestFolder;
 
         return $this;
     }

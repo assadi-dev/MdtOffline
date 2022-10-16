@@ -111,7 +111,7 @@ const TrafficView = ({ idCivil, onClose }) => {
       agent: `${agent.matricule}-${agent.username}`,
       amend: total,
       civil: `api/civils/${idCivil}`,
-      idAgent: agent.id,
+      idAgent: agent.idAgent,
     };
 
     token &&

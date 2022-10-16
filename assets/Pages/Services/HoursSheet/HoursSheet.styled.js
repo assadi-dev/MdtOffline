@@ -5,6 +5,9 @@ import CloseModalBtn from "../../../components/Shared/Modal/CloseModal";
 
 export const HoursSheetWrapper = styled.div`
   padding: 15px;
+  .serviceActive {
+    color: #59ce8f;
+  }
 `;
 
 export const HoursSheetpageHeader = styled.div`

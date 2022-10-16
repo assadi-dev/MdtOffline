@@ -28,10 +28,10 @@ const PlainteView = ({ onClose }) => {
       telephoneIncrimine: "",
       raisonDepot: "",
       corpsPlainte: "",
-      idAgent: agent.id,
+      idAgent: agent.idAgent,
     },
     onSubmit: (values) => {
-      let plainteData = { ...values, idAgent: agent.id };
+      let plainteData = { ...values, idAgent: agent.idAgent };
 
       dispatch(add_plainte(plainteData)).then(() => {
         formik.resetForm();

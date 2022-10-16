@@ -1,11 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import {
+  DOMAIN,
   REFRESH_TOKEN_STORAGE_NAME,
   TOKEN_STORAGE_NAME,
 } from "../../constants/localStorage";
-
-const DOMAIN = process.env.REACT_APP_URLBACKEND;
 
 let refresh_token = Cookies.get(REFRESH_TOKEN_STORAGE_NAME);
 

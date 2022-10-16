@@ -20,6 +20,7 @@ import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
 import { getAgentNameById } from "../../../../utils/userData";
 import useListAgent from "../../../../hooks/useListAgent";
+import { DOMAIN } from "../../../../constants/localStorage";
 
 const CelluleView = ({ onClose, idCivil, listCellule }) => {
   const closeModal = () => {
@@ -37,7 +38,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
     entree: "",
     sortie: "",
     civil: `api/civil/${idCivil}`,
-    idAgent: agent.id,
+    idAgent: agent.idAgent,
   });
 
   const handleChangeValue = (e) => {
@@ -54,7 +55,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       sortie: inputState.sortie,
       agent: `${agent.matricule}-${agent.username}`,
       civil: `api/civils/${idCivil}`,
-      idAgent: agent.id,
+      idAgent: agent.idAgent,
     };
 
     dispatch(add_cellule(data));
@@ -63,8 +64,8 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       name: `${civilSelectore.selected.prenom} ${civilSelectore.selected.nom}`,
       entree: dateFrenchFormat(inputState.entree),
       sortie: dateFrenchFormat(inputState.sortie),
-      agent: getAgentNameById(listAgent, agent.id),
-      photo: `${process.env.REACT_APP_URLBACKEND}${civilSelectore.selected.photo}`,
+      agent: getAgentNameById(listAgent, agent.idAgent),
+      photo: `${DOMAIN}${civilSelectore.selected.photo}`,
     };
 
     sendCelluleToDiscord(discordData);

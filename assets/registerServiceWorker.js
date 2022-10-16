@@ -8,6 +8,8 @@
  */
 // In production, we register a service worker to serve assets from local cache.
 
+import { DOMAIN } from "./constants/localStorage";
+
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
 // will only see deployed updates on the "N+1" visit to a page, since previously
@@ -31,7 +33,7 @@ export default function registerServiceWorker() {
     // The URL constructor is available in all browsers that support SW.
 
     window.addEventListener("load", () => {
-      const swUrl = `${process.env.REACT_APP_URLBACKEND}/service-worker.js`;
+      const swUrl = `${DOMAIN}/service-worker.js`;
 
       if (isLocalhost) {
         // This is running on localhost. Lets check if a service worker still exists or not.

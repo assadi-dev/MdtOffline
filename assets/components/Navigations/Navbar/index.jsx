@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { PlayFilled, PlayOutline } from "../../SVG";
 import {
   LeftCol,
   NavContainer,
   PageTitle,
   PanicButton,
   RightCol,
-  ServiceButton,
 } from "./Navbar.styled";
 import UserConnect from "./UserConnect";
+import ServicesBtn from "./ServicesBtn/ServicesBtn";
 
 const Navbar = ({ name }) => {
   const [toggleButton, setToggleButton] = useState({
     service: false,
     panic: false,
   });
-
-  const toggleOnService = () => {
-    setToggleButton((prevState) => {
-      return { ...prevState, service: !prevState.service };
-    });
-  };
 
   const toggleOnPanic = () => {
     setToggleButton((prevState) => {
@@ -39,9 +32,8 @@ const Navbar = ({ name }) => {
         <PanicButton active={toggleButton.panic} onClick={toggleOnPanic}>
           CODE-99
         </PanicButton>
-        <ServiceButton active={toggleButton.service} onClick={toggleOnService}>
-          {toggleButton.service ? <PlayFilled /> : <PlayOutline />}
-        </ServiceButton>
+
+        <ServicesBtn />
         <UserConnect />
       </RightCol>
     </NavContainer>

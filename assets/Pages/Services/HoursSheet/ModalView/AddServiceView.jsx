@@ -25,7 +25,6 @@ const AddServiceView = ({ onClose }) => {
       week: "",
       start: "",
       end: "",
-      activity: "",
       idAgent: 0,
     },
     onSubmit: (values) => {
@@ -33,7 +32,8 @@ const AddServiceView = ({ onClose }) => {
         ...values,
         week: getWeekNumber(values.start).toString(),
         duration: getDuration(values.start, values.end),
-        idAgent: agent.id,
+        idAgent: agent.idAgent,
+        agent: `/api/agents/${agent.idAgent}`,
       };
 
       dispatch(add_priseServices(servicesValues)).then(() => {
@@ -70,15 +70,7 @@ const AddServiceView = ({ onClose }) => {
             type={"datetime-local"}
           />
         </FormControl>
-        <FormControl>
-          <FormLabel>Activité</FormLabel>
-          <InputDateTime
-            inputName={"activity"}
-            placeholder="Activity"
-            onChange={formik.handleChange}
-            value={formik.values.activity}
-          />
-        </FormControl>
+
         <FormBottomRow>
           <FormControl>
             <SubmitButton type="submit" style={{ margin: "auto" }}>

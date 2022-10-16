@@ -38,7 +38,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
       datePatrouille: new Date(),
       typePatrouille: "",
       rapport: "",
-      idAgent: agent.id,
+      idAgent: agent.idAgent,
     },
     onSubmit: (values) => {
       let findAgent = listOfRookies.find(
@@ -50,11 +50,11 @@ const RapportDeputyTrainyView = ({ onClose }) => {
         datePatrouille: dateFrenchFormat(values.datePatrouille),
         typePatrouille: values.typePatrouille,
         rapport: values.rapport,
-        agent: getAgentNameById(collections, agent.id),
-        idAgent: agent.id,
+        agent: getAgentNameById(collections, agent.idAgent),
+        idAgent: agent.idAgent,
       };
 
-      let rapportDeputyTrainy = { ...values, idAgent: agent.id };
+      let rapportDeputyTrainy = { ...values, idAgent: agent.idAgent };
 
       dispatch(add_rapportDeputyTrainy(rapportDeputyTrainy)).then(() => {
         formik.resetForm();
@@ -86,7 +86,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
               {listOfRookies.length > 0 &&
                 listOfRookies.map((agent) => (
                   <option value={agent.id} key={agent.id}>
-                    {agent.name}
+                    {agent.matricule ? agent.matricule : "N/A"}-{agent.name}
                   </option>
                 ))}
             </Select>

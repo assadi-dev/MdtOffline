@@ -127,6 +127,16 @@ class ArrestFolder
      */
     private $idAgent;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Cellule::class, inversedBy="arrestFolder", cascade={"persist", "remove"})
+     */
+    private $cellule;
+
+    /**
+     * @ORM\OneToOne(targetEntity=ArrestReport::class, inversedBy="arrestFolder", cascade={"persist", "remove"})
+     */
+    private $arrestReport;
+
 
 
 
@@ -343,6 +353,30 @@ class ArrestFolder
     public function setIdAgent(string $idAgent): self
     {
         $this->idAgent = $idAgent;
+
+        return $this;
+    }
+
+    public function getCellule(): ?Cellule
+    {
+        return $this->cellule;
+    }
+
+    public function setCellule(?Cellule $cellule): self
+    {
+        $this->cellule = $cellule;
+
+        return $this;
+    }
+
+    public function getArrestReport(): ?ArrestReport
+    {
+        return $this->arrestReport;
+    }
+
+    public function setArrestReport(?ArrestReport $arrestReport): self
+    {
+        $this->arrestReport = $arrestReport;
 
         return $this;
     }
