@@ -1,6 +1,7 @@
 import Api from "../../service/Api/Api";
 import {
   ADD_PRISE_DE_SERVICES,
+  DELETE_PRISE_DE_SERVICES,
   EDIT_PRISE_DE_SERVICES,
   GET_ALL_PRISE_DE_SERVICES,
   GET_PRISE_DE_SERVICES_BY_WEEK,
@@ -77,6 +78,16 @@ export const edit_priseServices = (id, data) => {
       Api.put(`/prise_de_services/${id}`, data).then((res) => {
         const data = res.data;
         dispatch({ type: EDIT_PRISE_DE_SERVICES, payload: data });
+      });
+    } catch (error) {}
+  };
+};
+
+export const delete_priseServices = (id) => {
+  return async (dispatch) => {
+    try {
+      Api.delete(`/prise_de_services/${id}`).then(() => {
+        dispatch({ type: DELETE_PRISE_DE_SERVICES, payload: { id } });
       });
     } catch (error) {}
   };

@@ -8,6 +8,7 @@ import {
   TrashIcon,
 } from "../../../components/SVG";
 import {
+  delete_priseServices,
   get_priseServiceByWeek,
   get_userPriseServiceByWeek,
 } from "../../../redux/actions/PriseDeService.action";
@@ -119,6 +120,10 @@ const HoursSheet = () => {
     });
   };
 
+  const handleDeletService = (id) => {
+    dispatch(delete_priseServices(id));
+  };
+
   return (
     <>
       <HoursSheetWrapper>
@@ -169,7 +174,10 @@ const HoursSheet = () => {
                           {" "}
                           <EditPencilIcon />
                         </OutlineBtnAction>
-                        <OutlineBtnAction className="delete">
+                        <OutlineBtnAction
+                          className="delete"
+                          onClick={() => handleDeletService(service.id)}
+                        >
                           {" "}
                           <TrashIcon />
                         </OutlineBtnAction>
