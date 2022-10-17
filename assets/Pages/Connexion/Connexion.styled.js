@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backgroundImage from "../../components/ressources/img/backgroundConnexion.jpg";
+import backgroundImage from "../../ressources/img/backgroundConnexion.jpg";
 
 const colorDefault = "rgba(255, 255, 255, 0.3)";
 const errorColor = "var(--red)";

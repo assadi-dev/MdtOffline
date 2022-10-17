@@ -11,7 +11,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')"   )
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')" ,normalizationContext={"groups"={"read:arrestFolder:collections","read:arrestFolder:item"}}  )
  * @ORM\Entity(repositoryClass=ArrestFolderRepository::class)
  */
 class ArrestFolder
@@ -128,10 +128,12 @@ class ArrestFolder
     private $idAgent;
 
     /**
-     * @ORM\OneToOne(targetEntity=ArrestReport::class, cascade={"persist", "remove"})
-     * 
+     * @ORM\OneToOne(targetEntity=ArrestReport::class, mappedBy="arrestFolder", cascade={"persist", "remove"})
+     * @Groups({"read:arrestFolder:item"})
      */
     private $arrestReport;
+
+
 
 
 
@@ -357,8 +359,6 @@ class ArrestFolder
         return $this;
     }
 
-
-
     public function getArrestReport(): ?ArrestReport
     {
         return $this->arrestReport;
@@ -366,6 +366,16 @@ class ArrestFolder
 
     public function setArrestReport(?ArrestReport $arrestReport): self
     {
+        // unset the owning side of the relation if necessary
+        if ($arrestReport === null && $this->arrestReport !== null) {
+            $this->arrestReport->setArrestFolder(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($arrestReport !== null && $arrestReport->getArrestFolder() !== $this) {
+            $arrestReport->setArrestFolder($this);
+        }
+
         $this->arrestReport = $arrestReport;
 
         return $this;

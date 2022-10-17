@@ -113,11 +113,11 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
             if (cf.label == name) {
               let currentPeine = cf.peine;
               let tentative = value ? 0.25 : 1;
-              let peine = value
+              /*          let peine = value
                 ? TimeToUnix(cf.peine) * tentative
                 : currentPeine;
-              peine = unixToTime(peine);
-              return { ...cf, tentative, peine };
+              peine = unixToTime(peine); */
+              return { ...cf, tentative, currentPeine };
             }
           }
           return cf;
@@ -338,8 +338,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
             {" "}
             <div style={{ textAlign: "center" }}>
               {" "}
-              <p className="label">Ammende</p>{" "}
-              <p className="mount">{total} $</p>
+              <p className="label">Amende</p> <p className="mount">{total} $</p>
             </div>
             <div style={{ textAlign: "center" }}>
               {" "}

@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ArrestReportRepository::class)
- * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')",normalizationContext={"groups"={"read:arrestFolder:collections","read:arrestFolder:item"}},)
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')",normalizationContext={"groups"={"read:arrestReport:collections","read:arrestReport:item"}})
  */
 class ArrestReport
 {
@@ -20,44 +20,44 @@ class ArrestReport
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections","read:arrestFolder:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections"})
      */
     private $lieux;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections"})
      */
     private $entreeCellule;
 
     /**
      * @ORM\Column(type="json",nullable=true)
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections"})
      */
     private $infractions = [];
 
 
     /**
      * @ORM\Column(type="string", length=25)
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections","read:arrestFolder:item"})
      */
     private $amend;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections","read:arrestFolder:item"})
      */
     private $peine;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections"})
      */
     private $createdAt;
 
@@ -76,22 +76,23 @@ class ArrestReport
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections"})
      * 
      */
     private $conversionUp;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestReport:collections","read:arrestFolder:item"})
      */
     private $idAgent;
 
     /**
-     * @ORM\OneToOne(targetEntity=ArrestFolder::class, cascade={"persist", "remove"})
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @ORM\OneToOne(targetEntity=ArrestFolder::class, inversedBy="arrestReport", cascade={"persist", "remove"})
      */
     private $arrestFolder;
+
+
 
 
 

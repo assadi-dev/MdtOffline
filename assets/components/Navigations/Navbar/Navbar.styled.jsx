@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import userImg from "../../ressources/img/user.jpg";
+import userImg from "../../../ressources/img/user.jpg";
 
 const avatarWidth = "50px";
 const chevronWidth = "20px";
