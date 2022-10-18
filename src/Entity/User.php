@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\UserRepository;
 use App\Controller\OwnerController;
 use ApiPlatform\Core\Annotation\ApiResource;

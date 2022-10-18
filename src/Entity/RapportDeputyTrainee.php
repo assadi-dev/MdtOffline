@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RapportDeputyTraineeRepository;
 use DateTime;
@@ -53,6 +54,7 @@ class RapportDeputyTrainee
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *  @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 

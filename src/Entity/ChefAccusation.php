@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ChefAccusationRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ChefAccusationRepository::class)
@@ -35,9 +38,9 @@ class ChefAccusation
     private $niveau;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $amende;
+    private $amendes;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -48,6 +51,26 @@ class ChefAccusation
      * @ORM\Column(type="string", length=255)
      */
     private $peines;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -90,14 +113,14 @@ class ChefAccusation
         return $this;
     }
 
-    public function getAmende(): ?string
+    public function getAmendes(): ?int
     {
-        return $this->amende;
+        return $this->amendes;
     }
 
-    public function setAmende(string $amende): self
+    public function setAmendes(int $amendes): self
     {
-        $this->amende = $amende;
+        $this->amendes = $amendes;
 
         return $this;
     }
@@ -122,6 +145,30 @@ class ChefAccusation
     public function setPeines(string $peines): self
     {
         $this->peines = $peines;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

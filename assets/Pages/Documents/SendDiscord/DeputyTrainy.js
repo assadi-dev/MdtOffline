@@ -1,4 +1,5 @@
 import sendDiscord from "../../../service/Api/SendDiscord";
+import iconSAPD from "../../../ressources/img/logoSapd.png";
 
 export const sendDeputyTrainy = (data) => {
   const { deputyTrainyAgent, datePatrouille, typePatrouille, rapport, agent } =
@@ -14,12 +15,11 @@ export const sendDeputyTrainy = (data) => {
          `,
         color: 5144500,
         thumbnail: {
-          url: "https://cdn.discordapp.com/attachments/947977481930018859/1025877645809958922/logo-sapd.jpg",
+          url: iconSAPD,
         },
         footer: {
           text: "SAN ANDREAS POLICE DEPARTMENT",
-          icon_url:
-            "https://cdn.discordapp.com/attachments/947977481930018859/1025877645809958922/logo-sapd.jpg",
+          icon_url: iconSAPD,
         },
       },
     ],

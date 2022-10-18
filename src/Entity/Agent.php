@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\AgentRepository;
 use App\Controller\UploadAgentController;
 use ApiPlatform\Core\Annotation\ApiFilter;
@@ -99,6 +100,7 @@ class Agent
     /**
      * @ORM\Column(type="datetime",nullable=true)
      * @Groups({"read:agent:collections","read:user:collections"})
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 

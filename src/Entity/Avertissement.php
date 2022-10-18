@@ -8,6 +8,7 @@ use App\Repository\AvertissementRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 use DateTimeImmutable;
 
@@ -48,6 +49,7 @@ class Avertissement
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      * 
      */
     private $updatedAt;
