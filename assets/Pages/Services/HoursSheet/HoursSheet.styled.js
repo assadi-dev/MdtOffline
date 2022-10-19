@@ -62,7 +62,7 @@ export const HoursSheetBody = styled.div`
 
 export const HoursSheetRowAction = styled.div`
   display: grid;
-  grid-template-columns: 1fr minmax(50px, 150px);
+  grid-template-columns: 1fr minmax(50px, 250px);
   height: 80px;
   align-items: center;
   width: 90%;
@@ -76,7 +76,8 @@ export const HoursSheetRowAction = styled.div`
 export const Button = styled.button`
   background-color: #2b7de9;
   padding: 15px 22px;
-  width: fit-content;
+  min-width: fit-content;
+  max-width: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,6 +86,10 @@ export const Button = styled.button`
   font-family: var(--font-title);
   :active {
     opacity: 0.5;
+  }
+  :disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;
 

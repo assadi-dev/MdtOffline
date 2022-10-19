@@ -57,10 +57,7 @@ const HoursSheet = () => {
   };
 
   useEffect(() => {
-    {
-      agent.idAgent &&
-        dispatch(get_userPriseServiceByWeek(agent.idAgent, week));
-    }
+    agent.idAgent && dispatch(get_userPriseServiceByWeek(agent.idAgent, week));
   }, [week, agent.idAgent]);
 
   const listeServices = useMemo(() => {
@@ -93,6 +90,17 @@ const HoursSheet = () => {
     return 0;
   }, [priseServiceByWeek.collections]);
 
+  const currentService = useMemo(() => {
+    if (
+      priseServiceByWeek.selected !== undefined ||
+      priseServiceByWeek.selected != null
+    ) {
+      if (priseServiceByWeek.selected.isActive) return true;
+    }
+
+    return false;
+  }, [priseServiceByWeek.selected]);
+
   const Render = ({ view }) => {
     switch (view) {
       case "add_services":
@@ -121,7 +129,11 @@ const HoursSheet = () => {
   };
 
   const handleDeletService = (id) => {
-    dispatch(delete_priseServices(id));
+    currentService
+      ? alert(
+          "Vous avez un service en cours ,veuillez mettre fin à votre service avant d'effectué cette action"
+        )
+      : dispatch(delete_priseServices(id));
   };
 
   return (
@@ -144,8 +156,12 @@ const HoursSheet = () => {
         <HoursSheetBody>
           <HoursSheetRowAction>
             <div></div>
-            <Button className="addBtn" onClick={handleAddServices}>
-              Ajouter
+            <Button
+              className="addBtn"
+              onClick={handleAddServices}
+              disabled={currentService}
+            >
+              {currentService ? "Service en cours" : "Ajouter"}
             </Button>
           </HoursSheetRowAction>
           <HoursSheetTable>

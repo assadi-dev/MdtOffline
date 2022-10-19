@@ -45,7 +45,7 @@ const ServicesBtn = () => {
       end: dt,
       isActive: false,
     };
-    console.log(servicesValues);
+
     dispatch(edit_priseServices(currentService.id, servicesValues));
   };
 

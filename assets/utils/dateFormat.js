@@ -33,7 +33,7 @@ export const dateForModalTop = (date) => {
  */
 export const dateFrenchFormat = (date) => {
   const dt = new Date(date);
-  const result = format(dt, "dd-MM-yyyy HH:mm", { locale: fr });
+  const result = format(dt, "dd-MM-yyyy HH:mm:ss", { locale: fr });
   return result;
 };
 
