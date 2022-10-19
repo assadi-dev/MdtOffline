@@ -14,6 +14,7 @@ import {
 } from "../../../redux/actions/PriseDeService.action";
 import {
   dateFrenchFormat,
+  dateFrenchFormatWithSecond,
   FormatDuration,
   getCurrentWeekNumber,
 } from "../../../utils/dateFormat";
@@ -65,10 +66,10 @@ const HoursSheet = () => {
       return priseServiceByWeek.collections.map((service) => {
         return {
           ...service,
-          start: dateFrenchFormat(service.start),
+          start: dateFrenchFormatWithSecond(service.start),
           end: service.isActive
             ? "Service en cours"
-            : dateFrenchFormat(service.end),
+            : dateFrenchFormatWithSecond(service.end),
           duration: FormatDuration(service.duration),
         };
       });
