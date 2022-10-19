@@ -22,7 +22,7 @@ const ServicesBtn = () => {
 
   useEffect(() => {
     dispatch(get_lastActiveService(agent.idAgent));
-  }, [toggleButton]);
+  }, []);
 
   const activeService = () => {
     const dt = new Date();
@@ -59,13 +59,17 @@ const ServicesBtn = () => {
   };
 
   const currentService = useMemo(() => {
-    if (serviceSelector.selected.length > 0) {
-      setToggleButton(true);
-      return serviceSelector.selected[0];
+    if (
+      serviceSelector.selected !== undefined ||
+      serviceSelector.selected != null
+    ) {
+      if (serviceSelector.selected.isActive) setToggleButton(true);
+
+      return serviceSelector.selected;
     }
 
     return [];
-  }, [serviceSelector.selected, agent]);
+  }, [serviceSelector.selected]);
 
   return (
     <>

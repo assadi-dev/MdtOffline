@@ -35,6 +35,7 @@ const PriseDeServiceReducer = (state = initialState, action) => {
       return {
         ...state,
         collections: [payload, ...state.collections],
+        selected: payload,
         isReady: true,
       };
 

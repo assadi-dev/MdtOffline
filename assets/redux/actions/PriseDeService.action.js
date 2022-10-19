@@ -65,7 +65,7 @@ export const get_lastActiveService = (agent) => {
       Api.get("/prise_de_services", {
         params: { agent, "order[createdAt]": "desc", isActive: true },
       }).then((res) => {
-        let data = res.data;
+        let data = res.data[0];
         dispatch({ type: GET_USER_LAST_ACTIVE_SERVICE, payload: data });
       });
     } catch (error) {}
