@@ -23,3 +23,15 @@ export const getAgentNameById = (listOfAgents, id) => {
     }
   }
 };
+
+export const getGradeById = (id, listOfGrades) => {
+  if (Array.isArray(listOfGrades)) {
+    if (listOfGrades.length > 0) {
+      let grade = listOfGrades.find((grade) => grade.id == id);
+      const { nom } = grade;
+      return nom;
+    } else {
+      return "";
+    }
+  }
+};
