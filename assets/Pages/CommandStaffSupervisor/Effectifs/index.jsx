@@ -31,7 +31,7 @@ const Effectifs = () => {
     view: "",
     params: [],
   });
-  const listGrades = useFecthData("/grades");
+
   useEffect(() => {
     dispatch(get_allAgent());
   }, []);
@@ -52,7 +52,7 @@ const Effectifs = () => {
       <EffectifWrapper>
         <HeaderRowAction>
           <div></div>
-          <Button className="addBtn">Ajouter</Button>
+          {/* <Button className="addBtn">Ajouter</Button> */}
         </HeaderRowAction>
         <EffectifBody>
           <Table>
@@ -72,9 +72,7 @@ const Effectifs = () => {
                     <td scope="col">{agent.matricule}</td>
                     <td>{agent.name}</td>
                     <td>{agent.telephone}</td>
-                    <td className="td-center">
-                      {getGradeById(parseInt(agent.grade), listGrades.data)}
-                    </td>
+                    <td className="td-center">{agent.grade.nom}</td>
 
                     <td>
                       <TableAction>

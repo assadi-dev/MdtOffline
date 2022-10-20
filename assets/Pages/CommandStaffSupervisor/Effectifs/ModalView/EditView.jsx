@@ -35,7 +35,7 @@ const EditView = ({ agentId, onClose }) => {
     initialValues: {
       name: name ? name : "",
       matricule: matricule ? matricule : "",
-      grade: grade ? grade : "",
+      grade: grade ? grade.id : "",
       telephone: telephone ? telephone : "",
     },
     onSubmit: (values) => {

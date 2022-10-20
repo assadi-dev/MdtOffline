@@ -70,12 +70,7 @@ class Agent
      */
     private $matricule;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * 
-     * @Groups({"read:agent:collections","read:user:collections"})
-     */
-    private $grade;
+
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -110,6 +105,12 @@ class Agent
      * @groups({"read:agent:item"})
      */
     private $priseDeServices;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Grade::class, inversedBy="agents")
+     * @Groups({"read:agent:collections","read:user:collections"})
+     */
+    private $grade;
 
 
 
@@ -162,17 +163,7 @@ class Agent
         return $this;
     }
 
-    public function getGrade(): ?string
-    {
-        return $this->grade;
-    }
 
-    public function setGrade(string $grade): self
-    {
-        $this->grade = $grade;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -260,6 +251,18 @@ class Agent
                 $priseDeService->setAgent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGrade(): ?Grade
+    {
+        return $this->grade;
+    }
+
+    public function setGrade(?Grade $grade): self
+    {
+        $this->grade = $grade;
 
         return $this;
     }

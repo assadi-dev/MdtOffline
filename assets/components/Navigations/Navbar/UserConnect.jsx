@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import useFecthData from "../../../hooks/useFecthData";
+import { sleep } from "../../../utils/timer";
 import { getGradeById } from "../../../utils/userData";
 import { ChevronDown } from "../../SVG";
 import DropdownItems from "./DropdownItems";
@@ -16,11 +17,13 @@ import {
 const UserConnect = () => {
   const [show, setShow] = useState(false);
   const userConnectRef = useRef();
+  const [ready, setReady] = useState(false);
 
   const userAuth = useSelector((state) => state.AuthenticateReducer);
-  const { data } = useFecthData("/grades");
 
   useEffect(() => {
+    sleep(1500).then(() => setReady(true));
+
     const closeDropDownMenu = (e) => {
       if (!userConnectRef.current.contains(e.target)) {
         setShow(false);
@@ -37,10 +40,6 @@ const UserConnect = () => {
     setShow(!show);
   };
 
-  const userGrade = userAuth.grade
-    ? getGradeById(parseInt(userAuth.grade), data)
-    : "";
-
   return (
     <UserConnectContainer ref={userConnectRef} onClick={showDropDownMenu}>
       <Avatar img={userAuth.photo} />
@@ -48,9 +47,11 @@ const UserConnect = () => {
         <div style={{ display: "flex" }}>
           <UserNameStyle>
             {userAuth.username}{" "}
-            <UserGradStyle>{`${
-              userAuth.matricule ? userAuth.matricule : "N/A"
-            }-${userGrade}`}</UserGradStyle>{" "}
+            {ready ? (
+              <UserGradStyle>{`${
+                userAuth.matricule ? userAuth.matricule : "N/A"
+              }-${userAuth.grade ? userAuth.grade.nom : ""}`}</UserGradStyle>
+            ) : null}
           </UserNameStyle>
           <ChevronContainer alternate={show}>
             <ChevronDown />
