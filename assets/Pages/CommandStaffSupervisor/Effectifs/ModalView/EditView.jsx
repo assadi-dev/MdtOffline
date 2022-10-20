@@ -19,7 +19,7 @@ import Select from "../../../../components/Shared/Select";
 const EditView = ({ agentId, onClose }) => {
   const dispatch = useDispatch();
   const agentSelector = useSelector((state) => state.AgentsReducer);
-  const listGrades = useFecthData("/grades");
+  const listGrades = useSelector((state) => state.GradesReducer);
 
   useEffect(() => {
     agentId && dispatch(get_singleAgent(agentId));
@@ -54,11 +54,23 @@ const EditView = ({ agentId, onClose }) => {
   return (
     <ModalViewContainer onSubmit={formik.handleSubmit}>
       <HeaderModal>
-        <h2 className="formTitle"> Agent: {name}</h2>
+        <h2 className="formTitle">
+          {" "}
+          Agent {matricule ? matricule : "N/A"}-{name}
+        </h2>
         <CloseModal onClick={() => onClose()} />
       </HeaderModal>
 
       <FormBodyContainer>
+        <FormControl>
+          <FormLabel>Matricule</FormLabel>
+          <Input
+            inputName={"matricule"}
+            placeholder="Matricule Ex: 92"
+            inputValue={formik.values.matricule}
+            onChange={formik.handleChange}
+          />
+        </FormControl>
         <FormControl>
           <FormLabel>Identité</FormLabel>
           <Input
@@ -76,8 +88,7 @@ const EditView = ({ agentId, onClose }) => {
             inputValue={formik.values.grade}
             onChange={formik.handleChange}
           >
-            {<option>Selectionnez un grade</option>}
-            {listGrades.data.map((grade) => (
+            {listGrades.collections.map((grade) => (
               <option key={grade.id} value={grade.id}>
                 {grade.nom}
               </option>

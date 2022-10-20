@@ -14,6 +14,7 @@ import PlainteReducer from "./reducers/Plainte.reducer";
 import RapportIncidentReducer from "./reducers/RapportIncident.reducer";
 import RapportDeputyTrainyReducer from "./reducers/RapportDeputyTrainy.reducer";
 import PriseDeServiceReducer from "./reducers/PriseDeService.reducer";
+import GradesReducer from "./reducers/Grades.reducer";
 
 const RootReducers = combineReducers({
   UserReducer,
@@ -31,6 +32,7 @@ const RootReducers = combineReducers({
   PlainteReducer,
   RapportIncidentReducer,
   PriseDeServiceReducer,
+  GradesReducer,
 });
 
 export default RootReducers;

@@ -6,6 +6,7 @@ import SwitchButton from "../../../components/Shared/SwitchButton";
 import { EditPencilIcon, TrashIcon } from "../../../components/SVG";
 import useFecthData from "../../../hooks/useFecthData";
 import { get_allAgent } from "../../../redux/actions/Agents.action";
+import { get_allGrades } from "../../../redux/actions/Grades.action";
 import {
   get_allUsers,
   validation_user,
@@ -34,6 +35,7 @@ const Effectifs = () => {
 
   useEffect(() => {
     dispatch(get_allAgent());
+    dispatch(get_allGrades());
   }, []);
 
   const handlEditAgent = (agentId) => {
