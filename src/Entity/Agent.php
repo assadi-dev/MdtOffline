@@ -116,7 +116,7 @@ class Agent
 
     public function __construct()
     {
-        $this->grade = "Rookie";
+
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTime();
         $this->priseDeServices = new ArrayCollection();

@@ -5,6 +5,8 @@ namespace App\Controller;
 use Exception;
 use App\Entity\User;
 use App\Entity\Agent;
+use App\Entity\Grade;
+use App\Repository\GradeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,12 +45,15 @@ class AuthenticationController extends AbstractController
     /**
      *@Route("/api/register",name="api_register",methods="POST") 
      */
-    public function register(UserPasswordHasherInterface $passwordHasher)
+    public function register(UserPasswordHasherInterface $passwordHasher, GradeRepository $gradeRepository)
     {
 
         $user = new User();
         $agent = new Agent();
         $manager =  $this->entityManager;
+        $getRookieGrade = $gradeRepository->findOneBy(["nom" => "Rookie"]);
+
+
 
         try {
             $body = $this->request->getContent();
@@ -68,6 +73,10 @@ class AuthenticationController extends AbstractController
                 $plaintextPassword
             );
             $agent->setTelephone($telephone)->setName($username);
+            if ($getRookieGrade instanceof Grade) {
+                $agent->setGrade($getRookieGrade);
+            }
+
             $user->setUsername($username)->setPassword($hashedPassword)->setAgent($agent);
             $manager->persist($agent);
             $manager->persist($user);

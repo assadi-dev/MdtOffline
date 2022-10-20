@@ -22,7 +22,7 @@ const UserConnect = () => {
   const userAuth = useSelector((state) => state.AuthenticateReducer);
 
   useEffect(() => {
-    sleep(1500).then(() => setReady(true));
+    sleep(2500).then(() => setReady(true));
 
     const closeDropDownMenu = (e) => {
       if (!userConnectRef.current.contains(e.target)) {
@@ -50,7 +50,13 @@ const UserConnect = () => {
             {ready ? (
               <UserGradStyle>{`${
                 userAuth.matricule ? userAuth.matricule : "N/A"
-              }-${userAuth.grade ? userAuth.grade.nom : ""}`}</UserGradStyle>
+              }-${
+                userAuth.grade
+                  ? userAuth.grade.hasOwnProperty("nom")
+                    ? userAuth.grade.nom
+                    : ""
+                  : "Non gradé"
+              }`}</UserGradStyle>
             ) : null}
           </UserNameStyle>
           <ChevronContainer alternate={show}>

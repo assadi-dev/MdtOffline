@@ -115,6 +115,7 @@ export const UserGradStyle = styled.p`
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-top: 5px;
 `;
 
 export const ChevronContainer = styled.span`
