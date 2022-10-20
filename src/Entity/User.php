@@ -4,14 +4,16 @@ namespace App\Entity;
 
 
 
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\UserRepository;
 use App\Controller\OwnerController;
+use Gedmo\Mapping\Annotation as Gedmo;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -32,7 +34,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *  
  * },
  * )
- * 
+ * @UniqueEntity(fields="username", message="Cette identifiant est déjà pris")
  * 
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
@@ -46,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true,nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true,nullable=false)
      * @Groups({"read:user:collections"})
      */
     private $username;
@@ -76,6 +78,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
     private $createdAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\OneToOne(targetEntity=Agent::class, cascade={"persist", "remove"})
      * @Groups({"read:user:collections"})
      */
@@ -83,10 +91,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
 
 
 
+
+
     public function __construct()
     {
         $this->validate = false;
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTime();
     }
 
 
@@ -205,6 +216,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

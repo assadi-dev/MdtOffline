@@ -1,2 +1,3 @@
 export const GET_ALL_AGENTS = "GET_ALL_AGENTS";
+export const GET_SINGLEL_AGENT = "GET_SINGLEL_AGENT";
 export const GET_ALL_ROOKIES = "GET_ALL_ROOKIES";

@@ -12,6 +12,7 @@ import PanicButton from "../Pages/PanicButton";
 import RapportIncident from "../Pages/RapportIncident";
 import CivilSelected from "../Pages/Civil/Selected/Selected";
 import AccountManager from "../Pages/CommandStaffSupervisor/AcountManager";
+import Effectifs from "../Pages/CommandStaffSupervisor/Effectifs";
 
 export default [
   { label: "Services", path: "services", element: <Services /> },
@@ -59,6 +60,11 @@ export default [
         label: "Gestion des Comptes",
         path: "gestion-des-comptes",
         element: <AccountManager />,
+      },
+      {
+        label: "Effectifs",
+        path: "effectifs",
+        element: <Effectifs />,
       },
     ],
   },
