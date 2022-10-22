@@ -79,8 +79,8 @@ const Compte = () => {
 
         <InfoAgent>
           <p className="username">{User.username}</p>
-          {User.matricule && (
-            <p className="grade">{`${User.matricule}-${User.grade}`}</p>
+          {User.matricule && User.grade.nom && (
+            <p className="grade">{`${User.matricule}-${User.grade.nom}`}</p>
           )}
         </InfoAgent>
       </HeaderContainer>

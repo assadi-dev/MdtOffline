@@ -13,58 +13,128 @@ import RapportIncident from "../Pages/RapportIncident";
 import CivilSelected from "../Pages/Civil/Selected/Selected";
 import AccountManager from "../Pages/CommandStaffSupervisor/AcountManager";
 import Effectifs from "../Pages/CommandStaffSupervisor/Effectifs";
+import RedirectRoutes from "./RedirectRoutes";
 
 export default [
-  { label: "Services", path: "services", element: <Services /> },
   {
     label: "Services",
-    path: "services/feuilles-d-heures",
-    element: <Services />,
+    path: "services",
+    element: <RedirectRoutes />,
+    subNavigation: [
+      {
+        label: "Services",
+        path: "",
+        element: <Services />,
+        index: true,
+        subNavigation: [],
+      },
+      {
+        label: "Services",
+        path: "feuilles-d-heures",
+        element: <Services />,
+        index: false,
+        subNavigation: [],
+      },
+    ],
   },
+
   {
     label: "MDT",
     path: "mdt",
     element: <MDT />,
     subNavigation: [
-      { label: "Civil", path: "civil", element: <Civil /> },
-      { label: "Documents", path: "documents", element: <Documents /> },
+      {
+        label: "Civil",
+        path: "civil",
+        element: <Civil />,
+        index: true,
+        subNavigation: [],
+      },
+      {
+        label: "Documents",
+        path: "documents",
+        element: <Documents />,
+        index: false,
+        subNavigation: [],
+      },
       {
         label: "Pannic Button",
         path: "panic-button",
         element: <PanicButton />,
+        index: false,
+        subNavigation: [],
       },
       {
         label: "Rapport d'incident",
         path: "rapport-d-incident",
         element: <RapportIncident />,
+        index: false,
+        subNavigation: [],
       },
     ],
   },
-  { label: "Civil", path: "civil/:slug", element: <CivilSelected /> },
+  {
+    label: "Civil",
+    path: "civil/:slug",
+    element: <CivilSelected />,
+    index: false,
+    subNavigation: [],
+  },
   {
     label: "Senior Lead Officier",
     path: "senior-lead-officier",
     element: <SeniorLeadOfficier />,
+    index: false,
+    subNavigation: [],
   },
   {
     label: "Police Academy",
     path: "police-academy",
     element: <PoliceAcademy />,
+    index: false,
+    subNavigation: [],
   },
   {
     label: "Command Staff Supervisor",
     path: "command-staff-supervisor",
-    element: <CommandStaffSupervisor />,
+    element: <RedirectRoutes />,
     subNavigation: [
       {
         label: "Gestion des Comptes",
         path: "gestion-des-comptes",
         element: <AccountManager />,
+        index: false,
+        subNavigation: [],
       },
       {
         label: "Effectifs",
         path: "effectifs",
         element: <Effectifs />,
+        index: false,
+        subNavigation: [],
+      },
+    ],
+  },
+
+  {
+    label: "Gestion des ressources",
+    path: "gestion-des-ressources",
+    element: () => <Outlet />,
+    index: false,
+    subNavigation: [
+      {
+        label: "Gestion des Comptes",
+        path: "gestion-des-comptes",
+        element: <AccountManager />,
+        index: true,
+        subNavigation: [],
+      },
+      {
+        label: "Effectifs",
+        path: "effectifs",
+        element: <Effectifs />,
+        index: false,
+        subNavigation: [],
       },
     ],
   },
@@ -73,10 +143,14 @@ export default [
     label: "Mon Compte",
     path: "compte",
     element: <Compte />,
+    index: false,
+    subNavigation: [],
   },
   {
     label: "Mes Reglages",
     path: "reglages",
     element: <Reglage />,
+    index: false,
+    subNavigation: [],
   },
 ];

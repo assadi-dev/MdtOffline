@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 import MDT from "./Pages/MDT";
 import NoFoundPage from "./Pages/NoFoundPage";
 import { get_allAgent } from "./redux/actions/Agents.action";
+import { GenerateRoutes, GenerateSubNavRoutes } from "./routes/GenerateRoutes";
 
 const App = () => {
   const Hello = () => {
@@ -64,15 +65,9 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route element={<Hello />} />
           {PagesRoutes.map((page) =>
-            page.subNavigation ? (
+            page.subNavigation || page.subNavigation.length > 0 ? (
               <Route key={uniqid()} path={page.path} element={page.element}>
-                {page.subNavigation.map((subnav) => (
-                  <Route
-                    key={uniqid()}
-                    path={subnav.path}
-                    element={subnav.element}
-                  />
-                ))}
+                {GenerateSubNavRoutes(page)}
               </Route>
             ) : (
               <Route key={uniqid()} path={page.path} element={page.element} />
