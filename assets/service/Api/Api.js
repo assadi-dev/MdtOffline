@@ -11,17 +11,18 @@ let refresh_token = Cookies.get(REFRESH_TOKEN_STORAGE_NAME);
 const instance = axios.create({
   baseURL: `${DOMAIN}/api`,
   headers: {
-    "Content-type": "application/json",
+    "Content-type": "application/json;charset=UTF-8",
+    Accept: "application/json",
     Authorization: `Bearer ${Cookies.get(TOKEN_STORAGE_NAME)}`,
   },
 });
 
 instance.interceptors.response.use(
-  (response) => {
+  async (response) => {
     return response;
   },
   async (error) => {
-    if (error) {
+    if (error.response.status == 401) {
       const status = error.response.status;
       const originalRequest = error.config;
       const urlRequest = error.config.url;
@@ -64,8 +65,17 @@ instance.interceptors.response.use(
           return instance(originalRequest);
         }
       }
+    } else {
+      return Promise.reject(error);
     }
   }
 );
+
+export const AuthenticateInstance = axios.create({
+  baseURL: `${DOMAIN}/api`,
+  headers: {
+    "Content-type": "application/json",
+  },
+});
 
 export default instance;

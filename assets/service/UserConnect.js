@@ -1,13 +1,14 @@
+import axios from "axios";
 import Cookies from "js-cookie";
 import {
   REFRESH_TOKEN_STORAGE_NAME,
   TOKEN_STORAGE_NAME,
 } from "../constants/localStorage";
-import Api from "./Api/Api";
+import { AuthenticateInstance } from "./Api/Api";
 
 export const connect = async (username, password) => {
   return new Promise((resolve, reject) => {
-    Api.post("/login", { username, password })
+    AuthenticateInstance.post("/login", { username, password })
       .then((res) => {
         resolve(res.data);
       })
@@ -30,7 +31,7 @@ export const deconnect = async () => {
 
 export const userRegister = async (username, password, telephone) => {
   return new Promise((resolve, reject) => {
-    Api.post("/register", { username, password, telephone })
+    AuthenticateInstance.post("/register", { username, password, telephone })
       .then((res) => {
         resolve(res.data);
       })

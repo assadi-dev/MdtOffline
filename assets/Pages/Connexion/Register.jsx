@@ -55,6 +55,7 @@ const Register = ({ processStep, dispatchStep }) => {
             /*     let errorMessage = `${
               error.data.detail ? error.data.detail : error.data.message
             }`; */
+            console.log(error);
             dispatchStep({
               type: "ERROR",
               payload: {

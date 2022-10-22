@@ -70,10 +70,8 @@ const FormUser = ({
           });
         })
         .catch((err) => {
-          let violations = err.response.data.violations;
-          let details = err.response.data.detail;
-
-          if (violations) {
+          if (err.response) {
+            let violations = err.response.data.violations;
             stepDispatch({
               type: FINISH,
               payload: { message: violations[0].message, error: true },
@@ -81,7 +79,11 @@ const FormUser = ({
           } else {
             stepDispatch({
               type: FINISH,
-              payload: { message: details, error: true },
+              payload: {
+                message:
+                  "une erreur est survenue lors de la mise à jours de votre compte",
+                error: true,
+              },
             });
           }
         });

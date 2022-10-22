@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CloseModalBtn from "../../../components/Shared/Modal/CloseModal";
+import userImg from "../../../ressources/img/user.jpg";
 
 export const EffectifWrapper = styled.div`
   padding: 1.2rem 2.3rem;
@@ -82,6 +83,12 @@ export const FormControl = styled.div`
   :last-of-type {
     margin-bottom: 0;
   }
+
+  input {
+    :disabled {
+      cursor: not-allowed;
+    }
+  }
 `;
 
 export const FormBottomRow = styled.div`
@@ -100,4 +107,70 @@ export const SubmitButton = styled.button`
   color: #fff;
   margin: auto;
   font-family: var(--font-title);
+`;
+
+export const RowInput = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  justify-content: flex-end;
+  grid-template-areas: "b" "a";
+  margin-bottom: 2.3rem;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    justify-content: flex-start;
+    grid-template-areas: "a b";
+  }
+`;
+
+export const ColStart = styled.div`
+  grid-area: a;
+`;
+
+export const ColEnd = styled.div`
+  grid-area: b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PhotoAgentContainer = styled.div`
+  position: relative;
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+  @media screen and (min-width: 992px) {
+    max-height: 80%;
+    width: 200px;
+    margin: 0;
+  }
+  background-position: center;
+  position: relative;
+`;
+
+export const PhotoAgent = styled.label`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: inline-block;
+  background-image: url(${({ src }) => (src ? src : userImg)});
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid var(--color-blue-primary);
+  border-radius: 5px;
+  overflow: hidden;
+  filter: drop-shadow(0px 3px 10px var(--color-blue-opacity-50));
+  & input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  cursor: pointer;
 `;

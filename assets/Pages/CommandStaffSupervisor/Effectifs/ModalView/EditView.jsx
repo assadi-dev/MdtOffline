@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_singleAgent } from "../../../../redux/actions/Agents.action";
 import {
   CloseModal,
+  ColEnd,
+  ColStart,
   FormBodyContainer,
   FormBottomRow,
   FormControl,
   FormLabel,
   HeaderModal,
   ModalViewContainer,
+  PhotoAgent,
+  PhotoAgentContainer,
+  RowInput,
   SubmitButton,
 } from "../Effectifs.styled";
 import { useFormik } from "formik";
@@ -62,24 +67,34 @@ const EditView = ({ agentId, onClose }) => {
       </HeaderModal>
 
       <FormBodyContainer>
-        <FormControl>
-          <FormLabel>Matricule</FormLabel>
-          <Input
-            inputName={"matricule"}
-            placeholder="Matricule Ex: 92"
-            inputValue={formik.values.matricule}
-            onChange={formik.handleChange}
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Identité</FormLabel>
-          <Input
-            inputName={"name"}
-            placeholder="Prénom Nom"
-            inputValue={formik.values.name}
-            onChange={formik.handleChange}
-          />
-        </FormControl>
+        <RowInput>
+          <ColStart>
+            <FormControl>
+              <FormLabel>Matricule</FormLabel>
+              <Input
+                inputName={"matricule"}
+                placeholder="Matricule Ex: 92"
+                inputValue={formik.values.matricule}
+                onChange={formik.handleChange}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Identité</FormLabel>
+              <Input
+                inputName={"name"}
+                placeholder="Prénom Nom"
+                inputValue={formik.values.name}
+                onChange={formik.handleChange}
+                disabled={true}
+              />
+            </FormControl>
+          </ColStart>
+          <ColEnd>
+            <PhotoAgentContainer>
+              <PhotoAgent src={photo}></PhotoAgent>
+            </PhotoAgentContainer>
+          </ColEnd>
+        </RowInput>
         <FormControl>
           <FormLabel>Grade</FormLabel>
           <Select
