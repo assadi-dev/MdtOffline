@@ -36,7 +36,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * }
  * )
  * @UniqueEntity(fields="matricule", message="Ce numero matricule est déjà pris")
- * @UniqueEntity(fields="name", message="Cette Prénom et Nom est déjà pris")
+ * @UniqueEntity(fields="name", message="Ce Prénom et Nom est déjà pris")
  * @ApiFilter(SearchFilter::class, properties={"grade" : "exact"})
  * 
  */
