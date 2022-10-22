@@ -111,18 +111,16 @@ export const editAccount = (id, data) => {
             }
           })
           .catch((err) => {
-            console.log(err);
             reject(err);
           });
       } catch (error) {
-        console.log(error);
-        /*      if (error.response) {
+        if (error.response) {
           let errorData = err.response.data.violations;
           dispatch({
             type: ERROR_OWNER,
             payload: { error: errorData[0].message },
           });
-        } */
+        }
       }
     });
   };
