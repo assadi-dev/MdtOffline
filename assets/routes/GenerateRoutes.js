@@ -5,12 +5,6 @@ import uniqid from "uniqid";
 import { Route } from "react-router-dom";
 
 export const GenerateSubNavRoutes = (route) => {
-  /*   if (route.subNavigation.length > 0) {
-    route.subNavigation.forEach((subRoute) => {
-     GenerateSubNavRoutes(subRoute);
-    });
-  }
- */
   return (
     <>
       {route.subNavigation || route.subNavigation.length > 0 ? (
