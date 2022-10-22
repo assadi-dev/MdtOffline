@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   collections: [],
+  filtered: [],
   selected: [],
   isReady: false,
 };
@@ -17,7 +18,7 @@ const AgentsReducer = (state = initialState, action) => {
     case GET_ALL_AGENTS:
       return { ...state, collections: payload, isReady: true };
     case GET_ALL_ROOKIES:
-      return { ...state, collections: payload, isReady: true };
+      return { ...state, filtered: payload, isReady: true };
     case GET_SINGLEL_AGENT:
       return { ...state, selected: payload, isReady: true };
 

@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import Input from "../../../../components/Shared/Input";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import Select from "../../../../components/Shared/Select";
@@ -19,18 +19,25 @@ import { sendDeputyTrainy } from "../../SendDiscord/DeputyTrainy";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
 import { getAgentNameById } from "../../../../utils/userData";
 import { add_rapportDeputyTrainy } from "../../../../redux/actions/RapporDeputyTrainy.action";
+import { get_allRookie } from "../../../../redux/actions/Agents.action";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
-  const { isReady, collections } = useSelector((state) => state.AgentsReducer);
+  const { isReady, collections, filtered } = useSelector(
+    (state) => state.AgentsReducer
+  );
   const listOfRookies = useMemo(() => {
-    if (isReady) {
-      return collections;
+    if (filtered.length > 0) {
+      return filtered;
     }
     return [];
-  }, [isReady]);
+  }, [filtered]);
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(get_allRookie());
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -41,12 +48,14 @@ const RapportDeputyTrainyView = ({ onClose }) => {
       idAgent: agent.idAgent,
     },
     onSubmit: (values) => {
-      let findAgent = listOfRookies.find(
+      const findAgent = listOfRookies.find(
         (rookie) => rookie.id == values.deputyTrainyConcerned
       );
 
       let sendDiscordData = {
-        deputyTrainyConcerned: findAgent.name,
+        deputyTrainyConcerned: `${
+          findAgent.matricule ? findAgent.matricule : "N/A"
+        }-${findAgent.name}`,
         datePatrouille: dateFrenchFormat(values.datePatrouille),
         typePatrouille: values.typePatrouille,
         rapport: values.rapport,

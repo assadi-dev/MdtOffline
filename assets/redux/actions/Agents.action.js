@@ -30,7 +30,7 @@ export const get_singleAgent = (agentId) => {
 export const get_allRookie = () => {
   return async (dispatch) => {
     try {
-      Api.get("agents", { params: { grade: "Rookie" } }).then((res) => {
+      Api.get("agents", { params: { "grade.nom": "Rookie" } }).then((res) => {
         let data = res.data;
         dispatch({ type: GET_ALL_ROOKIES, payload: data });
       });

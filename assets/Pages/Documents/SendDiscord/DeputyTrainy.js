@@ -1,16 +1,22 @@
 import sendDiscord from "../../../service/Api/SendDiscord";
 import iconSAPD from "../../../ressources/img/logoSapd.png";
+import { SEND_DISCORD_RAPPORT_DEPUTY_TRAINY } from "../../../constants/Webhooks";
 
 export const sendDeputyTrainy = (data) => {
-  const { deputyTrainyAgent, datePatrouille, typePatrouille, rapport, agent } =
-    data;
+  const {
+    deputyTrainyConcerned,
+    datePatrouille,
+    typePatrouille,
+    rapport,
+    agent,
+  } = data;
 
   let payload = (data = {
     content: null,
     embeds: [
       {
         title: "Rapport Rookie / Deputy",
-        description: `**Rapport concernant le Rookie / Deputy :**  ${deputyTrainyAgent} \n **Date de patrouille: ** ${datePatrouille} \n **Type de patrouille:** ${typePatrouille} \n**rapport: ** ${rapport}  \n\n\n 
+        description: `**Rapport concernant le Rookie / Deputy :**  ${deputyTrainyConcerned} \n **Date de patrouille: ** ${datePatrouille} \n **Type de patrouille:** ${typePatrouille} \n**rapport: ** ${rapport}  \n\n\n 
          **Agent concerné:** ${agent}
          `,
         color: 5144500,
@@ -25,8 +31,5 @@ export const sendDeputyTrainy = (data) => {
     ],
   });
 
-  return sendDiscord.post(
-    "1025722030127054959/12G1oIstJviZm6cBmX2sbUwePhjr_H6HOn7l7sB4Oduqy99LnsRwCpZkxijo_L46zuFZ",
-    payload
-  );
+  return sendDiscord.post(SEND_DISCORD_RAPPORT_DEPUTY_TRAINY, payload);
 };
