@@ -67,7 +67,7 @@ const navigations = [
         label: "Voir les rapports d'incidents",
       },
       { path: "/comptabilites", label: "Comptabilités" },
-      { path: "/effectifs", label: "Effectif" },
+      { path: "/effectifs", label: "Effectifs" },
       { path: "/gestion-des-comptes", label: "Gestion des comptes" },
       { path: "/avis-promotions", label: "Avis promotions" },
     ],
