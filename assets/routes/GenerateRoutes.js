@@ -7,7 +7,7 @@ import { Route } from "react-router-dom";
 export const GenerateSubNavRoutes = (route) => {
   return (
     <>
-      {route.subNavigation || route.subNavigation.length > 0 ? (
+      {route.subNavigation !== undefined || route.subNavigation.length > 0 ? (
         route.subNavigation.map((subnav) =>
           subnav.subNavigation ? (
             <Route
