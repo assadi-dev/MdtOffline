@@ -31,6 +31,9 @@ const Effectifs = () => {
     isOpen: false,
     view: "",
     params: [],
+    step: "",
+    succsess: "",
+    error: "",
   });
 
   useEffect(() => {

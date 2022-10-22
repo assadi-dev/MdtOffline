@@ -1,3 +1,5 @@
 export const GET_ALL_AGENTS = "GET_ALL_AGENTS";
 export const GET_SINGLEL_AGENT = "GET_SINGLEL_AGENT";
 export const GET_ALL_ROOKIES = "GET_ALL_ROOKIES";
+export const EDIT_AGENT = "EDIT_AGENT";
+export const DELETE_AGENT = "DELETE_AGENT";

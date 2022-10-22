@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_singleAgent } from "../../../../redux/actions/Agents.action";
+import {
+  edit_agent,
+  get_singleAgent,
+} from "../../../../redux/actions/Agents.action";
 import {
   CloseModal,
   ColEnd,
   ColStart,
+  ErrorCustomAlert,
   FormBodyContainer,
   FormBottomRow,
   FormControl,
@@ -25,6 +29,7 @@ const EditView = ({ agentId, onClose }) => {
   const dispatch = useDispatch();
   const agentSelector = useSelector((state) => state.AgentsReducer);
   const listGrades = useSelector((state) => state.GradesReducer);
+  const [requestState, setRequestState] = useState({ success: "", error: "" });
 
   useEffect(() => {
     agentId && dispatch(get_singleAgent(agentId));
@@ -46,13 +51,28 @@ const EditView = ({ agentId, onClose }) => {
     onSubmit: (values) => {
       let agentsValues = {
         ...values,
+        grade: `api/grades/${values.grade}`,
       };
-      formik.resetForm();
-      onClose();
-      /*     dispatch(add_priseServices(servicesValues)).then(() => {
-                formik.resetForm();
-                onClose();
-              }); */
+
+      dispatch(edit_agent(agentId, agentsValues))
+        .then((res) => {
+          formik.resetForm();
+          setRequestState({ success: "", error: "" });
+
+          onClose();
+        })
+        .catch((error) => {
+          let message = error.message;
+
+          if (error.response) {
+            let violations = error.response.data
+              ? error.response.data.violations
+              : error.message;
+            message = violations[0].message;
+          }
+
+          setRequestState({ success: "", error: message });
+        });
     },
   });
 
@@ -121,6 +141,12 @@ const EditView = ({ agentId, onClose }) => {
         </FormControl>
 
         <FormBottomRow>
+          <FormControl>
+            {requestState.error && (
+              <ErrorCustomAlert message={requestState.error} />
+            )}
+          </FormControl>
+
           <FormControl>
             <SubmitButton type="submit" style={{ margin: "auto" }}>
               Mettre à jour

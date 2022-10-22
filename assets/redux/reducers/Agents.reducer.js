@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  EDIT_AGENT,
   GET_ALL_AGENTS,
   GET_ALL_ROOKIES,
   GET_SINGLEL_AGENT,
@@ -21,6 +22,15 @@ const AgentsReducer = (state = initialState, action) => {
       return { ...state, filtered: payload, isReady: true };
     case GET_SINGLEL_AGENT:
       return { ...state, selected: payload, isReady: true };
+    case EDIT_AGENT:
+      let updateAgent = state.collections.map((agent) => {
+        if (agent.id == payload.id) {
+          return { ...payload };
+        }
+        return agent;
+      });
+
+      return { ...state, collections: updateAgent, isReady: true };
 
     default:
       return state;

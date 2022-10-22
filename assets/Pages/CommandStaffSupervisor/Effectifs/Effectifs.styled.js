@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AlertError from "../../../components/Shared/Alert/AlertError";
 import CloseModalBtn from "../../../components/Shared/Modal/CloseModal";
 import userImg from "../../../ressources/img/user.jpg";
 
@@ -173,4 +174,11 @@ export const PhotoAgent = styled.label`
     display: none;
   }
   cursor: pointer;
+`;
+
+export const ErrorCustomAlert = styled(AlertError)`
+  min-height: 35px;
+  align-items: center;
+  max-height: 45px;
+  margin: 0 auto;
 `;

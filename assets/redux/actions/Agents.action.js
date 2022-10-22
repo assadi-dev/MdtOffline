@@ -1,5 +1,6 @@
 import Api from "../../service/Api/Api";
 import {
+  EDIT_AGENT,
   GET_ALL_AGENTS,
   GET_ALL_ROOKIES,
   GET_SINGLEL_AGENT,
@@ -35,5 +36,25 @@ export const get_allRookie = () => {
         dispatch({ type: GET_ALL_ROOKIES, payload: data });
       });
     } catch (error) {}
+  };
+};
+
+export const edit_agent = (id, data) => {
+  return async (dispatch) => {
+    return new Promise((resolve, reject) => {
+      try {
+        Api.put(`agents/${id}`, data)
+          .then((res) => {
+            let data = res.data;
+            dispatch({ type: EDIT_AGENT, payload: data });
+            resolve(data);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
 };

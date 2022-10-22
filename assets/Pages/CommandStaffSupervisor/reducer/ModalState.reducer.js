@@ -8,6 +8,9 @@ const ModalStateReducer = (state, action) => {
     case "CLOSE_MODAL":
       return { ...state, isOpen: false, params: [] };
 
+    case "ERROR":
+      return { ...state, error: payload.message };
+
     default:
       return state;
   }
