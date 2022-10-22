@@ -40,7 +40,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
             $data["username"] = $user->getUsername();
             $agent =  $this->agentRepository->findOneBy(["id" => $user->getId()]);
             if ($agent instanceof Agent) {
-                $data["grade"] = $agent->getGrade();
+                $data["grade"] = $agent->getGrade()->getNom();
                 $data["matricule"] = $agent->getMatricule();
                 $data["validate"] = $user->isValidate();
             }
