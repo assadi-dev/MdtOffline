@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const SidebarContainer = styled.div`
   display: flex;
@@ -63,7 +63,7 @@ export const SideNavItem = styled.li`
   font-family: var(--font-title);
 `;
 
-export const SideNavlink = styled(NavLink)`
+export const SideNavlink = styled(Link)`
   min-height: 22px;
   display: grid;
   font-family: var(--font-title);
