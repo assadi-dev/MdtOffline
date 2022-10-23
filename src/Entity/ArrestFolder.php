@@ -117,6 +117,7 @@ class ArrestFolder
 
     /**
      * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="dossierArrestation")
+     * @Groups({"read:arrestFolder:collections"})
      */
     private $civil;
 

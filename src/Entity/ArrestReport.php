@@ -70,6 +70,7 @@ class ArrestReport
 
     /**
      * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="rapporArrestation")
+     * @Groups({"read:arrestReport:collections"})
      */
     private $civil;
 

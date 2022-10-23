@@ -59,20 +59,20 @@ export const enCloseArrestFolder = (id) => {
           peine,
           idAgent,
         } = res.data;
-
         dispatch({ payload: id, type: ENCLOSE_ARREST_FOLDER });
         let createArrestReaport = {
           infractions,
           lieux,
           entreeCellule,
           infractions,
-          civil,
+          civil: `api/civils/${civil.id}`,
           amend: amend.toString(),
           peine,
           idAgent: Number(idAgent),
           arrestFolder: `api/arrest_folders/${id}`,
           conversionUp: false,
         };
+
         dispatch(add_rapportArrestation(createArrestReaport));
       });
     } catch (error) {
