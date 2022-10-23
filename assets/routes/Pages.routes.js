@@ -14,6 +14,7 @@ import CivilSelected from "../Pages/Civil/Selected/Selected";
 import AccountManager from "../Pages/CommandStaffSupervisor/AcountManager";
 import Effectifs from "../Pages/CommandStaffSupervisor/Effectifs";
 import RedirectRoutes from "./RedirectRoutes";
+import ChefAccusation from "../Pages/CommandStaffSupervisor/Ressources/ChefAccusations";
 
 export default [
   {
@@ -115,23 +116,22 @@ export default [
       },
     ],
   },
-
   {
     label: "Gestion des ressources",
     path: "gestion-des-ressources",
-    element: () => <Outlet />,
+    element: <RedirectRoutes />,
     index: false,
     subNavigation: [
       {
-        label: "Gestion des Comptes",
-        path: "gestion-des-comptes",
-        element: <AccountManager />,
+        label: "Gestion des Chef d'accusations",
+        path: "gestion-des-chef-d-accusations",
+        element: <ChefAccusation />,
         index: true,
         subNavigation: [],
       },
       {
-        label: "Effectifs",
-        path: "effectifs",
+        label: "Gestion des Grades",
+        path: "gestion-des-grades",
         element: <Effectifs />,
         index: false,
         subNavigation: [],

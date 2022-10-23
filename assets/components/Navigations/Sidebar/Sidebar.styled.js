@@ -94,6 +94,37 @@ export const SideNavlink = styled(NavLink)`
   }
 `;
 
+export const SideNavlinkButton = styled.div`
+  min-height: 22px;
+  display: grid;
+  font-family: var(--font-title);
+  align-items: center;
+  grid-template-columns: 45px 1fr;
+  transition: 0.35s ease-in-out;
+  line-height: 20px;
+  transition: 0.35s ease-in-out;
+  cursor: pointer;
+  span,
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  font-size: 13px;
+  text-transform: uppercase;
+  min-width: 130px;
+  max-width: 100%;
+  /* Media Queries */
+
+  @media screen and (min-width: 992px) {
+    max-width: 182px;
+  }
+
+  @media screen and (min-width: 1920px) {
+    max-width: 220px;
+  }
+`;
+
 export const SubMenuNavLink = styled(NavLink)`
   display: flex;
   align-items: center;
