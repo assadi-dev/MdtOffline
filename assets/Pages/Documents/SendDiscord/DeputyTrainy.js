@@ -1,6 +1,7 @@
 import sendDiscord from "../../../service/Api/SendDiscord";
 import iconSAPD from "../../../ressources/img/logoSapd.png";
 import { SEND_DISCORD_RAPPORT_DEPUTY_TRAINY } from "../../../constants/Webhooks";
+import { DOMAIN } from "../../../constants/localStorage";
 
 export const sendDeputyTrainy = (data) => {
   const {
@@ -25,7 +26,7 @@ export const sendDeputyTrainy = (data) => {
         },
         footer: {
           text: "SAN ANDREAS POLICE DEPARTMENT",
-          icon_url: iconSAPD,
+          icon_url: `${DOMAIN}/ ${iconSAPD}`,
         },
       },
     ],
