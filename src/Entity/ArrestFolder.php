@@ -20,7 +20,7 @@ class ArrestFolder
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item","read:arrestFolder:collections"})
+     * @Groups({"read:civil:item","read:arrestFolder:collections","read:arrestReport:collections"})
      */
     private $id;
 
@@ -130,7 +130,7 @@ class ArrestFolder
 
     /**
      * @ORM\OneToOne(targetEntity=ArrestReport::class, mappedBy="arrestFolder", cascade={"persist", "remove"})
-     * @Groups({"read:arrestFolder:item"})
+     * @Groups({"read:arrestFolder:collections"})
      */
     private $arrestReport;
 
