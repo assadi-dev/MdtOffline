@@ -22,11 +22,11 @@ export const sendDeputyTrainy = (data) => {
          `,
         color: 5144500,
         thumbnail: {
-          url: iconSAPD,
+          url: `${DOMAIN}${iconSAPD}`,
         },
         footer: {
           text: "SAN ANDREAS POLICE DEPARTMENT",
-          icon_url: `${DOMAIN}/ ${iconSAPD}`,
+          icon_url: `${DOMAIN}${iconSAPD}`,
         },
       },
     ],
