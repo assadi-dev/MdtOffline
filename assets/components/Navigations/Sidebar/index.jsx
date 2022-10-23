@@ -47,7 +47,6 @@ const Sidebar = () => {
                   activeRoute(route.label);
                 }}
                 state={{ title: route.label }}
-                end={route.end}
               >
                 <span className="active-icon">
                   <PoliceV1 />

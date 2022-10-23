@@ -12,6 +12,7 @@ export default [
         label: "Feuilles d'heures",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -19,6 +20,7 @@ export default [
         label: "Notes de frais",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -26,6 +28,7 @@ export default [
         label: "Trombinoscop",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -33,6 +36,7 @@ export default [
         label: "Feuille de calcul",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -40,6 +44,7 @@ export default [
         label: "Demande de comptabilité",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -47,6 +52,7 @@ export default [
         label: "Plaintes",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
     ],
@@ -71,6 +77,7 @@ export default [
         label: "Outil SLO",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -78,6 +85,7 @@ export default [
         label: "Avis Senior Leading Officier",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
     ],
@@ -94,6 +102,7 @@ export default [
         label: "Rapports Rookie",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
     ],
@@ -111,6 +120,7 @@ export default [
         selected: false,
         openDropdown: false,
         submenu: [],
+        end: false,
       },
       {
         path: "/comptabilites",
@@ -124,6 +134,7 @@ export default [
         label: "Effectifs",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -131,6 +142,7 @@ export default [
         label: "Gestion des comptes",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
       {
@@ -138,6 +150,7 @@ export default [
         label: "Avis promotions",
         selected: false,
         openDropdown: false,
+        end: false,
         submenu: [],
       },
     ],
@@ -155,6 +168,7 @@ export default [
         selected: false,
         openDropdown: false,
         submenu: [],
+        end: false,
       },
       {
         path: "/gestion-des-grades",
@@ -162,6 +176,7 @@ export default [
         selected: false,
         openDropdown: false,
         submenu: [],
+        end: false,
       },
     ],
     end: false,
