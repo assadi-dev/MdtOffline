@@ -12,6 +12,7 @@ import {
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
 import { delete_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
+import { getOneCivil } from "../../../../../redux/actions/Civil.action";
 
 const DeleteDossierArrestationView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -29,6 +30,8 @@ const DeleteDossierArrestationView = ({ id, onClose }) => {
 
     token &&
       dispatch(delete_dossierArrestation(id)).then(() => {
+        const { id } = civil;
+        dispatch(getOneCivil(id));
         onClose();
       });
   };
