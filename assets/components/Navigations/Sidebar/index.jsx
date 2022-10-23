@@ -42,6 +42,7 @@ const Sidebar = () => {
           <SideNavItem key={uniqid()}>
             {route.submenu.length > 0 ? (
               <SideNavlinkButton
+                className={route.selected && "active"}
                 to={route.path}
                 onClick={() => {
                   activeRoute(route.label);
@@ -55,6 +56,7 @@ const Sidebar = () => {
               </SideNavlinkButton>
             ) : (
               <SideNavlink
+                className={route.selected && "active"}
                 to={route.path}
                 onClick={() => activeRoute(route.label)}
                 state={{ title: route.label }}
