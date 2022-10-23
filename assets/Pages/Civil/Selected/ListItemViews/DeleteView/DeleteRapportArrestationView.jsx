@@ -10,7 +10,7 @@ import {
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
 
-const EditRapportArrestationView = ({ id, onClose }) => {
+const DeleteRapportArrestationView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
 
   const dispatch = useDispatch();
@@ -60,4 +60,4 @@ const EditRapportArrestationView = ({ id, onClose }) => {
   );
 };
 
-export default EditRapportArrestationView;
+export default DeleteRapportArrestationView;

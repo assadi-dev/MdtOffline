@@ -16,7 +16,7 @@ import {
   RowCardTopButton,
 } from "./ModalView.styled";
 
-const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
+const DeleteConvocationView = ({ onClose, idCivil, listConvocation }) => {
   const closeModal = () => {
     onClose();
   };
@@ -120,4 +120,4 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
   );
 };
 
-export default ConvocationView;
+export default DeleteConvocationView;

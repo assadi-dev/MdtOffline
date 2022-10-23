@@ -68,19 +68,19 @@ class Civil
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:collections","read:arrestReport:collections","read:arrestFolder:collections"})
+     * @Groups({"read:civil:collections","read:arrestFolder:collections"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:collections","read:arrestFolder:collections","read:arrestReport:collections"})
+     * @Groups({"read:civil:collections","read:arrestFolder:collections"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:civil:collections","read:arrestFolder:collections","read:arrestReport:collections"})
+     * @Groups({"read:civil:collections","read:arrestFolder:collections"})
      */
     private $prenom;
 

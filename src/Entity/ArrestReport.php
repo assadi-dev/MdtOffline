@@ -70,7 +70,8 @@ class ArrestReport
 
     /**
      * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="rapporArrestation")
-     * @Groups({"read:arrestReport:collections"})
+     *
+     * 
      */
     private $civil;
 
@@ -90,7 +91,7 @@ class ArrestReport
 
     /**
      * @ORM\OneToOne(targetEntity=ArrestFolder::class, inversedBy="arrestReport", cascade={"persist", "remove"})
-     * @Groups({"read:arrestReport:collections"})
+     * 
      * 
      */
     private $arrestFolder;

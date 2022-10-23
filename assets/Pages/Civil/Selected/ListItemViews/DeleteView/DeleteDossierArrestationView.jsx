@@ -13,7 +13,7 @@ import {
 } from "../../ModalView/ModalView.styled";
 import { delete_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 
-const EditDossierArrestationView = ({ id, onClose }) => {
+const DeleteDossierArrestationView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
 
   const closeModal = () => {
@@ -61,4 +61,4 @@ const EditDossierArrestationView = ({ id, onClose }) => {
   );
 };
 
-export default EditDossierArrestationView;
+export default DeleteDossierArrestationView;
