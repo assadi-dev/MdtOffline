@@ -14,7 +14,8 @@ import CivilSelected from "../Pages/Civil/Selected/Selected";
 import AccountManager from "../Pages/CommandStaffSupervisor/AcountManager";
 import Effectifs from "../Pages/CommandStaffSupervisor/Effectifs";
 import RedirectRoutes from "./RedirectRoutes";
-import ChefAccusation from "../Pages/CommandStaffSupervisor/Ressources/ChefAccusations";
+import ChefAccusation from "../Pages/Ressources/ChefAccusations";
+import Grades from "../Pages/Ressources/Grades";
 
 export default [
   {
@@ -84,7 +85,7 @@ export default [
   {
     label: "Senior Lead Officier",
     path: "senior-lead-officier",
-    element: <SeniorLeadOfficier />,
+    element: <RedirectRoutes />,
     index: false,
     subNavigation: [],
   },
@@ -132,7 +133,7 @@ export default [
       {
         label: "Gestion des Grades",
         path: "gestion-des-grades",
-        element: <Effectifs />,
+        element: <Grades />,
         index: false,
         subNavigation: [],
       },

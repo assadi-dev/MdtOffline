@@ -42,6 +42,13 @@ export default [
         openDropdown: false,
         submenu: [],
       },
+      {
+        path: "/plaintes",
+        label: "Plaintes",
+        selected: false,
+        openDropdown: false,
+        submenu: [],
+      },
     ],
   },
   {
@@ -60,14 +67,14 @@ export default [
     end: false,
     submenu: [
       {
-        path: "/",
+        path: "/outil-slo",
         label: "Outil SLO",
         selected: false,
         openDropdown: false,
         submenu: [],
       },
       {
-        path: "/",
+        path: "/avis-senior-leading-officier",
         label: "Avis Senior Leading Officier",
         selected: false,
         openDropdown: false,

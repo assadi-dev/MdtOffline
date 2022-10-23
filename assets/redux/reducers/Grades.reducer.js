@@ -1,6 +1,11 @@
 import React from "react";
 import { GET_ALL_GRADES } from "../types/Grades.type";
-const initialState = { collections: [], selected: [], isReady: false };
+const initialState = {
+  collections: [],
+  selected: [],
+  filtered: [],
+  isReady: false,
+};
 
 const GradesReducer = (state = initialState, action) => {
   const { type, payload } = action;
