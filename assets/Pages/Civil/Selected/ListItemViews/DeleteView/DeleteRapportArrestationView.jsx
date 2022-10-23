@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
+import { getOneCivil } from "../../../../../redux/actions/Civil.action";
 import { delete_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 
 import {
@@ -10,7 +11,7 @@ import {
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
 
-const DeleteRapportArrestationView = ({ id, onClose }) => {
+const DeleteRapportArrestationView = ({ id, onClose, civil }) => {
   let numeroFormat = numeral(id);
 
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ const DeleteRapportArrestationView = ({ id, onClose }) => {
 
     token &&
       dispatch(delete_rapportArrestation(id)).then(() => {
+        const { id } = civil;
+        dispatch(getOneCivil(id));
         onClose();
       });
   };
