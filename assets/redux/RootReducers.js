@@ -15,6 +15,7 @@ import RapportIncidentReducer from "./reducers/RapportIncident.reducer";
 import RapportDeputyTrainyReducer from "./reducers/RapportDeputyTrainy.reducer";
 import PriseDeServiceReducer from "./reducers/PriseDeService.reducer";
 import GradesReducer from "./reducers/Grades.reducer";
+import ChefAccusationReducer from "./reducers/ChefAccusation.reducer";
 
 const RootReducers = combineReducers({
   UserReducer,
@@ -33,6 +34,7 @@ const RootReducers = combineReducers({
   RapportIncidentReducer,
   PriseDeServiceReducer,
   GradesReducer,
+  ChefAccusationReducer,
 });
 
 export default RootReducers;
