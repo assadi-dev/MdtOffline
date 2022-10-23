@@ -12,6 +12,10 @@ export const sendDeputyTrainy = (data) => {
     agent,
   } = data;
 
+  const icon = DOMAIN.includes("localhost")
+    ? iconSAPD
+    : `${DOMAIN}/${iconSAPD}`;
+
   let payload = (data = {
     content: null,
     embeds: [
@@ -22,11 +26,11 @@ export const sendDeputyTrainy = (data) => {
          `,
         color: 5144500,
         thumbnail: {
-          url: `${DOMAIN}${iconSAPD}`,
+          url: icon,
         },
         footer: {
           text: "SAN ANDREAS POLICE DEPARTMENT",
-          icon_url: `${DOMAIN}${iconSAPD}`,
+          icon_url: icon,
         },
       },
     ],
