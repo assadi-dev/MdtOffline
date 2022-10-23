@@ -149,7 +149,13 @@ const CivilSelected = () => {
       case "edit-traffic":
         return <EditTrafficView id={modaleState.id} onClose={closeModal} />;
       case "delete-traffic":
-        return <DeleteTrafficView id={modaleState.id} onClose={closeModal} />;
+        return (
+          <DeleteTrafficView
+            id={modaleState.id}
+            onClose={closeModal}
+            civil={civilData}
+          />
+        );
       case "rapport-d-arrestation":
         return <RapportArrestationView idCivil={id} onClose={closeModal} />;
       case "edit-rapport-d-arrestation":
@@ -164,6 +170,7 @@ const CivilSelected = () => {
           <DeleteRapportArrestationView
             id={modaleState.id}
             onClose={closeModal}
+            civil={civilData}
           />
         );
       case "dossier-d-arrestation":
