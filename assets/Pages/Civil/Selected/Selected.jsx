@@ -56,6 +56,7 @@ import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
 import Cookies from "js-cookie";
 import useListAgent from "../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../utils/userData";
+import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -118,10 +119,8 @@ const CivilSelected = () => {
   };
 
   useEffect(() => {
-    {
-      token && dispatchCivilData(getOneCivil(id));
-    }
-  }, [id, token]);
+    dispatchCivilData(getOneCivil(id));
+  }, [id]);
 
   const civilData = useMemo(() => {
     if (civilSelectore.selected) {

@@ -5,12 +5,15 @@ namespace App\Entity;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ChefAccusationRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Repository\ChefAccusationRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ChefAccusationRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"categorie" : "exact"})
  * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
  */
 class ChefAccusation

@@ -18,12 +18,17 @@ import {
 } from "../../../../utils/calculs";
 import { useDispatch, useSelector } from "react-redux";
 import { add_rapportArrestation } from "../../../../redux/actions/RapportArrestation.action";
+import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 
 const RapportArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
+
+  const fetchContravention = useFecthDataWithParams("chef_accusations", {
+    categorie: "Contravention",
+  });
   /**
    * Reset la taille du champs text
    */
@@ -33,7 +38,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
     //textInput.removeAttribute("style");
   };
 
-  const options = codePenal.map((j) => {
+  const options = fetchContravention.data.map((j) => {
     return {
       label: j.infraction,
       value: j.amende,

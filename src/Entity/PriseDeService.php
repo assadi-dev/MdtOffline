@@ -17,7 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 /**
  * @ORM\Entity(repositoryClass=PriseDeServiceRepository::class)
  * @ApiResource()
- * @ApiFilter(SearchFilter::class, properties={"week" : "exact","agent"})
+ * @ApiFilter(SearchFilter::class, properties={"week" : "exact","agent":"exact"})
  * @ApiFilter(OrderFilter::class, properties= {"createdAt":"DESC"})
  * @ApiFilter(BooleanFilter::class, properties={"isActive"})
  *

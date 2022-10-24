@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
 import Input from "../../../../components/Shared/Input";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
@@ -14,6 +14,12 @@ import { codePenal, nominal } from "../../../../Data/FichesCalcule";
 import EditTable from "../EditTable";
 import { useDispatch, useSelector } from "react-redux";
 import { add_traffic } from "../../../../redux/actions/Traffic.action";
+import {
+  get_filltedChefAccusations,
+  get_filteredChefAccusations,
+} from "../../../../redux/actions/ChefAccusation.action";
+import useFecthData from "../../../../hooks/useFecthData";
+import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 
 const TrafficView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -21,20 +27,22 @@ const TrafficView = ({ idCivil, onClose }) => {
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
 
+  const fetchContravention = useFecthDataWithParams("chef_accusations", {
+    categorie: "Contravention",
+  });
+
   const closeModal = () => {
     onClose();
   };
-  const options = codePenal
-    .filter((j) => j.categorie == "Contravention")
-    .map((j) => {
-      return {
-        label: j.infraction,
-        value: j.amende,
-        peine: j.peine,
-        nominal: 1,
-        qte: 1,
-      };
-    });
+  const options = fetchContravention.data.map((j) => {
+    return {
+      label: j.infraction,
+      value: j.amendes,
+      peine: j.peines,
+      nominal: 1,
+      qte: 1,
+    };
+  });
 
   const [inputState, setInputState] = useState({
     lieuxRemplissage: "",

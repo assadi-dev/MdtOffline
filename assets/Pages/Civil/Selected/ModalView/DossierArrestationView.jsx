@@ -19,9 +19,13 @@ import {
   TableViewPresentation,
 } from "./ModalView.styled";
 import { add_dossierArrestation } from "../../../../redux/actions/DossierArrestation.action";
+import useFecthData from "../../../../hooks/useFecthData";
 
 const DossierArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
+
+  const fetchInfractions = useFecthData("/chef_accusations");
+
   const closeModal = () => {
     onClose();
     let textInput = textAreaRef.current.querySelector("textarea");
@@ -30,6 +34,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
 
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
+
   const token = agent.token;
 
   const [inputState, setInputState] = useState({
@@ -44,17 +49,19 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
     rapport: "",
   });
 
-  const options = codePenal.map((j) => {
-    return {
-      label: j.infraction,
-      value: j.amende,
-      peine: j.peines,
-      tentative: 1,
-      complicite: 1,
-      nominal: 1,
-      qte: 1,
-    };
-  });
+  const options = !fetchInfractions.loading
+    ? fetchInfractions.data.map((j) => {
+        return {
+          label: j.infraction,
+          value: j.amendes,
+          peine: j.peines,
+          tentative: 1,
+          complicite: 1,
+          nominal: 1,
+          qte: 1,
+        };
+      })
+    : [];
 
   const handleChangeValue = (e) => {
     let name = e.target.name;

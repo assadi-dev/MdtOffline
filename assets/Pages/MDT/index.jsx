@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Outlet, useLocation, NavLink } from "react-router-dom";
 import CircleButtonIcon from "../../components/Shared/Buttons/CircleButtonIcon";
 import {
@@ -7,6 +8,7 @@ import {
   AlertOutline,
   ClipBoardOutline,
 } from "../../components/SVG";
+import { get_allChefAccusations } from "../../redux/actions/ChefAccusation.action";
 import { IconButton, MDTwrapper } from "./MDT.styled";
 import MDTCard from "./MDTCard";
 
@@ -25,6 +27,7 @@ const MDT = () => {
   ]);
 
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <MDTwrapper>

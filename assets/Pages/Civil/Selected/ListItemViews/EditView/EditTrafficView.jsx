@@ -16,6 +16,7 @@ import EditTable from "../../EditTable";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import numeral from "numeral";
 import { edit_traffic } from "../../../../../redux/actions/Traffic.action";
+import useFecthDataWithParams from "../../../../../hooks/useFecthDataWithParams";
 
 const EditTrafficView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -23,21 +24,22 @@ const EditTrafficView = ({ id, onClose }) => {
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
+  const fetchContravention = useFecthDataWithParams("chef_accusations", {
+    categorie: "Contravention",
+  });
 
   const closeModal = () => {
     onClose();
   };
-  const options = codePenal
-    .filter((j) => j.categorie == "Contravention")
-    .map((j) => {
-      return {
-        label: j.infraction,
-        value: j.amende,
-        peine: j.peine,
-        nominal: 1,
-        qte: 1,
-      };
-    });
+  const options = fetchContravention.data.map((j) => {
+    return {
+      label: j.infraction,
+      value: j.amendes,
+      peine: j.peines,
+      nominal: 1,
+      qte: 1,
+    };
+  });
 
   const [inputState, setInputState] = useState({
     lieuxRemplissage: "",

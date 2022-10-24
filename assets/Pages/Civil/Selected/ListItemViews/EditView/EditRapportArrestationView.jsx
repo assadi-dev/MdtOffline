@@ -20,6 +20,7 @@ import {
   HeadTitleView,
   TableViewPresentation,
 } from "../../ModalView/ModalView.styled";
+import useFecthDataWithParams from "../../../../../hooks/useFecthDataWithParams";
 
 const EditRapportArrestationView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -27,6 +28,10 @@ const EditRapportArrestationView = ({ id, onClose }) => {
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
+  const fetchContravention = useFecthDataWithParams("chef_accusations", {
+    categorie: "Contravention",
+  });
+
   /**
    * Reset la taille du champs text
    */
@@ -36,17 +41,19 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     //textInput.removeAttribute("style");
   };
 
-  const options = codePenal.map((j) => {
-    return {
-      label: j.infraction,
-      value: j.amende,
-      peine: j.peines,
-      tentative: 1,
-      complicite: 1,
-      nominal: 1,
-      qte: 1,
-    };
-  });
+  const options = !fetchContravention.loading
+    ? fetchContravention.data.map((j) => {
+        return {
+          label: j.infraction,
+          value: j.amende,
+          peine: j.peines,
+          tentative: 1,
+          complicite: 1,
+          nominal: 1,
+          qte: 1,
+        };
+      })
+    : [];
 
   const [inputState, setInputState] = useState({
     lieux: "",

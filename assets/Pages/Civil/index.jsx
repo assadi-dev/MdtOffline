@@ -9,6 +9,7 @@ import { AddUser } from "../../components/SVG";
 import { ActionRow, Card, CivilWrapper, RowCard } from "./Civil.styled";
 import CivilCard from "./CivilCard";
 import EncodeCivil from "./Modal/EncodeCivil";
+import { get_allChefAccusations } from "../../redux/actions/ChefAccusation.action";
 
 const Civil = () => {
   const [search, setSearch] = useState();
@@ -36,7 +37,7 @@ const Civil = () => {
 
   useEffect(() => {
     {
-      userAuth.token && dispatch(getAllCivil(userAuth.token));
+      dispatch(getAllCivil(userAuth.token));
     }
   }, [userAuth.token]);
 

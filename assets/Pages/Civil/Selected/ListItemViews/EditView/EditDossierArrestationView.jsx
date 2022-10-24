@@ -37,6 +37,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
   const { data, loading } = useFecthData(`/arrest_folders/${id}`);
+  const fetchInfractions = useFecthData("/chef_accusations");
 
   const [inputState, setInputState] = useState({
     lieux: "",
@@ -78,18 +79,19 @@ const EditDossierArrestationView = ({ id, onClose }) => {
       }));
   }, [loading]);
 
-  const options = codePenal.map((j) => {
-    return {
-      label: j.infraction,
-      value: j.amende,
-      peine: j.peines,
-      tentative: 1,
-      complicite: 1,
-      nominal: 1,
-      qte: 1,
-    };
-  });
-
+  const options = !fetchInfractions.loading
+    ? fetchInfractions.data.map((j) => {
+        return {
+          label: j.infraction,
+          value: j.amendes,
+          peine: j.peines,
+          tentative: 1,
+          complicite: 1,
+          nominal: 1,
+          qte: 1,
+        };
+      })
+    : [];
   const handleChangeValue = (e) => {
     let name = e.target.name;
     let value = e.target.value;
