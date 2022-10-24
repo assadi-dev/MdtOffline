@@ -109,12 +109,25 @@ const EditDossierArrestationView = ({ id, onClose }) => {
     let name = e.target.name;
     let value = e.target.value || 1;
     if (inputState.chefAcusation.length > 0) {
+      let qte = parseInt(value);
+      let currentPeine = findChefAccusationByName(
+        fetchInfractions.data,
+        name
+      ).peines;
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
+            let peine = unixToTime(
+              TimeToUnix(currentPeine) *
+                qte *
+                cf.complicite *
+                cf.tentative *
+                cf.nominal
+            );
+
             if (cf.label == name) {
-              return { ...cf, qte: parseInt(value) };
+              return { ...cf, qte, peine };
             }
           }
           return cf;
@@ -126,13 +139,26 @@ const EditDossierArrestationView = ({ id, onClose }) => {
   const handleNominal = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    let currentPeine = findChefAccusationByName(
+      fetchInfractions.data,
+      name
+    ).peines;
+    let nominal = parseFloat(value);
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, nominal: parseFloat(value) };
+              let peine = unixToTime(
+                TimeToUnix(currentPeine) *
+                  cf.complicite *
+                  cf.tentative *
+                  cf.qte *
+                  nominal
+              );
+
+              return { ...cf, nominal, peine };
             }
           }
           return cf;
@@ -144,6 +170,11 @@ const EditDossierArrestationView = ({ id, onClose }) => {
   const handleTentative = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
+    let currentPeine = findChefAccusationByName(
+      fetchInfractions.data,
+      name
+    ).peines;
+    let tentative = value ? 0.25 : 1;
 
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
@@ -151,7 +182,14 @@ const EditDossierArrestationView = ({ id, onClose }) => {
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, tentative: value ? 0.25 : 1 };
+              let peine = unixToTime(
+                TimeToUnix(currentPeine) *
+                  tentative *
+                  cf.complicite *
+                  cf.nominal *
+                  cf.qte
+              );
+              return { ...cf, tentative, peine };
             }
           }
           return cf;
@@ -162,15 +200,27 @@ const EditDossierArrestationView = ({ id, onClose }) => {
 
   const handleComplicite = (e) => {
     let name = e.target.name;
-    let value = e.target.value;
     let checked = e.target.checked;
+    let currentPeine = findChefAccusationByName(
+      fetchInfractions.data,
+      name
+    ).peines;
+    let complicite = checked ? 0.6 : 1;
+
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, complicite: checked ? 0.6 : 1 };
+              let peine = unixToTime(
+                TimeToUnix(currentPeine) *
+                  complicite *
+                  cf.tentative *
+                  cf.nominal *
+                  cf.qte
+              );
+              return { ...cf, complicite, peine };
             }
           }
           return cf;
@@ -431,8 +481,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
             {" "}
             <div style={{ textAlign: "center" }}>
               {" "}
-              <p className="label">Ammende</p>{" "}
-              <p className="mount">{total} $</p>{" "}
+              <p className="label">Amende</p> <p className="mount">{total} $</p>{" "}
             </div>
             <div style={{ textAlign: "center" }}>
               {" "}

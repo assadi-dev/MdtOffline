@@ -23,7 +23,7 @@ export const conversionUP = (amende, peine) => {
  * convertis le temps en chaine de caracteres en format Unix (millisecondes)
  * @param {string} time
  * @returns
- */ 0;
+ */
 export const TimeToUnix = (time) => {
   let [hour, min, sec] = time.split(":");
 
@@ -41,4 +41,17 @@ export const TimeToUnix = (time) => {
 export const unixToTime = (time) => {
   time = numeral(time);
   return time.format("00:00:00");
+};
+
+/**
+ * obtenir le chef d'accusation courrante à partir du nom
+ * @param {Array} lists Listes des chef d'accusations
+ * @param {String} infractions nom de l'infraction
+ */
+export const findChefAccusationByName = (lists, infractions) => {
+  if (!Array.isArray(lists)) {
+    throw new Error("Le parametre lists doit etre un tableau");
+  }
+
+  return lists.find((cf) => cf.infraction === infractions);
 };

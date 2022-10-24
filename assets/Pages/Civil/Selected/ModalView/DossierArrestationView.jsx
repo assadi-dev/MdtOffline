@@ -2,6 +2,7 @@ import React, { useRef, useState, useMemo, useEffect } from "react";
 import { codePenal, nominal } from "../../../../Data/FichesCalcule";
 import {
   conversionUP,
+  findChefAccusationByName,
   TimeToUnix,
   unixToTime,
 } from "../../../../utils/calculs";
@@ -80,12 +81,25 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
     let name = e.target.name;
     let value = e.target.value || 1;
     if (inputState.chefAcusation.length > 0) {
+      let qte = parseInt(value);
+      let currentPeine = findChefAccusationByName(
+        fetchInfractions.data,
+        name
+      ).peines;
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
+            let peine = unixToTime(
+              TimeToUnix(currentPeine) *
+                qte *
+                cf.complicite *
+                cf.tentative *
+                cf.nominal
+            );
+
             if (cf.label == name) {
-              return { ...cf, qte: parseInt(value) };
+              return { ...cf, qte, peine };
             }
           }
           return cf;
@@ -97,13 +111,26 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
   const handleNominal = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    let currentPeine = findChefAccusationByName(
+      fetchInfractions.data,
+      name
+    ).peines;
+    let nominal = parseFloat(value);
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, nominal: parseFloat(value) };
+              let peine = unixToTime(
+                TimeToUnix(currentPeine) *
+                  cf.complicite *
+                  cf.tentative *
+                  cf.qte *
+                  nominal
+              );
+
+              return { ...cf, nominal, peine };
             }
           }
           return cf;
@@ -115,6 +142,11 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
   const handleTentative = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
+    let currentPeine = findChefAccusationByName(
+      fetchInfractions.data,
+      name
+    ).peines;
+    let tentative = value ? 0.25 : 1;
 
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
@@ -122,7 +154,14 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, tentative: value ? 0.25 : 1 };
+              let peine = unixToTime(
+                TimeToUnix(currentPeine) *
+                  tentative *
+                  cf.complicite *
+                  cf.nominal *
+                  cf.qte
+              );
+              return { ...cf, tentative, peine };
             }
           }
           return cf;
@@ -133,15 +172,27 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
 
   const handleComplicite = (e) => {
     let name = e.target.name;
-    let value = e.target.value;
     let checked = e.target.checked;
+    let currentPeine = findChefAccusationByName(
+      fetchInfractions.data,
+      name
+    ).peines;
+    let complicite = checked ? 0.6 : 1;
+
     if (inputState.chefAcusation.length > 0) {
       setInputState((prevState) => ({
         ...prevState,
         chefAcusation: prevState.chefAcusation.map((cf) => {
           {
             if (cf.label == name) {
-              return { ...cf, complicite: checked ? 0.6 : 1 };
+              let peine = unixToTime(
+                TimeToUnix(currentPeine) *
+                  complicite *
+                  cf.tentative *
+                  cf.nominal *
+                  cf.qte
+              );
+              return { ...cf, complicite, peine };
             }
           }
           return cf;
