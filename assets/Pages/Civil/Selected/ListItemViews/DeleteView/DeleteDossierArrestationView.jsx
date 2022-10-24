@@ -14,7 +14,7 @@ import {
 import { delete_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 import { getOneCivil } from "../../../../../redux/actions/Civil.action";
 
-const DeleteDossierArrestationView = ({ id, onClose }) => {
+const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
   let numeroFormat = numeral(id);
 
   const closeModal = () => {

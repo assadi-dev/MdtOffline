@@ -45,7 +45,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     ? fetchContravention.data.map((j) => {
         return {
           label: j.infraction,
-          value: j.amende,
+          value: j.amendes,
           peine: j.peines,
           tentative: 1,
           complicite: 1,

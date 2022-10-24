@@ -194,7 +194,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
       civil: `api/civils/${idCivil}`,
-      amend: total,
+      amende: total,
       peine: totalUp,
       droitMiranda: inputState.droitMiranda,
       soins: inputState.soins,
@@ -399,8 +399,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
             {" "}
             <div style={{ textAlign: "center" }}>
               {" "}
-              <p className="label">Ammende</p>{" "}
-              <p className="mount">{total} $</p>{" "}
+              <p className="label">Amende</p> <p className="mount">{total} $</p>{" "}
             </div>
             <div style={{ textAlign: "center" }}>
               {" "}

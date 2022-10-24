@@ -55,7 +55,7 @@ class Traffic
      * @ORM\Column(type="string", length=25)
      * @Groups({"read:civil:item"})
      */
-    private $amend;
+    private $amende;
 
     /**
      * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="traffics")
@@ -131,14 +131,14 @@ class Traffic
     }
 
 
-    public function getAmend(): ?int
+    public function getAmende(): ?int
     {
-        return $this->amend;
+        return $this->amende;
     }
 
-    public function setAmend(int $amend): self
+    public function setAmende(int $amende): self
     {
-        $this->amend = $amend;
+        $this->amende = $amende;
 
         return $this;
     }

@@ -107,7 +107,7 @@ class ArrestFolder
      * @ORM\Column(type="string", length=25)
      * @Groups({"read:civil:item","read:arrestFolder:collections"})
      */
-    private $amend;
+    private $amende;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -312,14 +312,14 @@ class ArrestFolder
         return $this;
     }
 
-    public function getAmend(): ?int
+    public function getAmende(): ?int
     {
-        return $this->amend;
+        return $this->amende;
     }
 
-    public function setAmend(int $amend): self
+    public function setAmende(int $amende): self
     {
-        $this->amend = $amend;
+        $this->amende = $amende;
 
         return $this;
     }

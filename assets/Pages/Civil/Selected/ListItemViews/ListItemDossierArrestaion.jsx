@@ -30,7 +30,7 @@ import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
 const ListItemDossierArrestaion = ({
   id,
   numero,
-  amend,
+  amende,
   agent,
   date,
   peine,
@@ -120,7 +120,7 @@ const ListItemDossierArrestaion = ({
         </RowListItemView>
 
         <RowListItemView>
-          <AmendItemView> {amend} $ </AmendItemView>
+          <AmendItemView> {amende} $ </AmendItemView>
           <UpListView>{peine}</UpListView>
         </RowListItemView>
       </ListContent>

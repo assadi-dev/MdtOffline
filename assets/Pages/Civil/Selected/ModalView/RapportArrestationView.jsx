@@ -191,7 +191,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
       entreeCellule: inputState.entreeCellule,
       agent: `${agent.matricule}-${agent.username}`,
       civil: `api/civils/${idCivil}`,
-      amend: total,
+      amende: total,
       peine: totalUp,
       conversionUp: inputState.up,
       idAgent: agent.idAgent,

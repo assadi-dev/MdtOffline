@@ -124,7 +124,7 @@ const EditTrafficView = ({ id, onClose }) => {
     let data = {
       infractions,
       lieux: inputState.lieuxRemplissage,
-      amend: total,
+      amende: total,
       //agent: `${agent.matricule}-${agent.username}`,
       // civil: `api/civils/${idCivil}`,
     };

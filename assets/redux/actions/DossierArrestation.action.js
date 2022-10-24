@@ -55,7 +55,7 @@ export const enCloseArrestFolder = (id) => {
           lieux,
           entreeCellule,
           civil,
-          amend,
+          amende,
           peine,
           idAgent,
         } = res.data;
@@ -66,7 +66,7 @@ export const enCloseArrestFolder = (id) => {
           entreeCellule,
           infractions,
           civil: `api/civils/${civil.id}`,
-          amend: amend.toString(),
+          amende: amende.toString(),
           peine,
           idAgent: Number(idAgent),
           arrestFolder: `api/arrest_folders/${id}`,

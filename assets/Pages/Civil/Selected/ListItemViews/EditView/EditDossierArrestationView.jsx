@@ -223,7 +223,7 @@ const EditDossierArrestationView = ({ id, onClose }) => {
       infractions,
       lieux: inputState.lieux,
       entreeCellule: inputState.entreeCellule,
-      amend: total,
+      amende: total,
       peine: totalUp,
       droitMiranda: inputState.droitMiranda,
       soins: inputState.soins,

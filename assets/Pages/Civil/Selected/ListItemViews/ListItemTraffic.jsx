@@ -27,7 +27,7 @@ const ListItemTraffic = ({
   offence,
   agent,
   date,
-  amend,
+  amende,
   dispatchOpenModal,
 }) => {
   let numeroFormat = numeral(numero);
@@ -100,7 +100,7 @@ const ListItemTraffic = ({
           <span className="agent">Agent : </span> {agent}
         </AgentItemView>
         <RowListItemView>
-          <AmendItemView> {amend} $</AmendItemView>
+          <AmendItemView> {amende} $</AmendItemView>
           <DateItemView> {dateForCivilListView(date)} </DateItemView>
         </RowListItemView>
       </ListContent>
@@ -112,11 +112,11 @@ ListItemTraffic.proptypes = {
   numero: PropTypes.number,
   offence: PropTypes.arrayOf(PropTypes.string),
   agent: PropTypes.string,
-  amend: PropTypes.number,
+  amende: PropTypes.number,
 };
 
 ListItemTraffic.defaultProps = {
-  amend: 0,
+  amende: 0,
   numero: 0,
   date: new Date(),
   offence: [],

@@ -186,6 +186,7 @@ const CivilSelected = () => {
           <DeleteDossierArrestationView
             id={modaleState.id}
             onClose={closeModal}
+            civil={civilData}
           />
         );
       case "convocation":
@@ -369,7 +370,7 @@ const CivilSelected = () => {
                         listAgent.length > 0 &&
                         getAgentNameById(listAgent, traffic.idAgent)
                       }
-                      amend={traffic.amend}
+                      amende={traffic.amende}
                       date={traffic.createdAt}
                       dispatchOpenModal={dispatch}
                     />
@@ -404,7 +405,7 @@ const CivilSelected = () => {
                         getAgentNameById(listAgent, rapport.idAgent)
                       }
                       date={rapport.createdAt}
-                      amend={rapport.amende}
+                      amende={rapport.amende}
                       peine={rapport.peine}
                       dispatchOpenModal={dispatch}
                     />
@@ -434,7 +435,7 @@ const CivilSelected = () => {
                         listAgent.length > 0 &&
                         getAgentNameById(listAgent, dossier.idAgent)
                       }
-                      amend={dossier.amend}
+                      amende={dossier.amende}
                       offence={offence}
                       date={dossier.createdAt}
                       peine={dossier.peine}

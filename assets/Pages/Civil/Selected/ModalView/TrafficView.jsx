@@ -117,7 +117,7 @@ const TrafficView = ({ idCivil, onClose }) => {
       infractions,
       lieux: inputState.lieuxRemplissage,
       agent: `${agent.matricule}-${agent.username}`,
-      amend: total,
+      amende: total,
       civil: `api/civils/${idCivil}`,
       idAgent: agent.idAgent,
     };
