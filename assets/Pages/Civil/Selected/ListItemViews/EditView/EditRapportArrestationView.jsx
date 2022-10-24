@@ -6,6 +6,7 @@ import useFecthData from "../../../../../hooks/useFecthData";
 import { edit_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 import {
   conversionUP,
+  findChefAccusationByName,
   TimeToUnix,
   unixToTime,
 } from "../../../../../utils/calculs";
