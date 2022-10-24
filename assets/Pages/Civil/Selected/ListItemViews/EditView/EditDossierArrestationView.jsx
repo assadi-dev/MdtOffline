@@ -7,6 +7,7 @@ import { edit_dossierArrestation } from "../../../../../redux/actions/DossierArr
 
 import {
   conversionUP,
+  findChefAccusationByName,
   TimeToUnix,
   unixToTime,
 } from "../../../../../utils/calculs";
