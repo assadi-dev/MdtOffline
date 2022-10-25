@@ -32,6 +32,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
   const fetchContravention = useFecthDataWithParams("chef_accusations", {
     categorie: "Contravention",
   });
+  const fetchInfractions = useFecthData("/chef_accusations");
 
   /**
    * Reset la taille du champs text
@@ -43,7 +44,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
   };
 
   const options = !fetchContravention.loading
-    ? fetchContravention.data.map((j) => {
+    ? fetchInfractions.data.map((j) => {
         return {
           label: j.infraction,
           value: j.amendes,
@@ -94,7 +95,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     let name = e.target.name;
     let value = e.target.value || 1;
     let currentPeine = findChefAccusationByName(
-      fetchContravention.data,
+      fetchInfractions.data,
       name
     ).peines;
     let qte = parseInt(value);
@@ -124,7 +125,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     let name = e.target.name;
     let value = e.target.value || 1;
     let currentPeine = findChefAccusationByName(
-      fetchContravention.data,
+      fetchInfractions.data,
       name
     ).peines;
     let nominal = parseFloat(value);
@@ -155,7 +156,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     let value = e.target.checked;
     let tentative = value ? 0.25 : 1;
     let currentPeine = findChefAccusationByName(
-      fetchContravention.data,
+      fetchInfractions.data,
       name
     ).peines;
 
@@ -187,7 +188,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
     let checked = e.target.checked;
     let complicite = checked ? 0.6 : 1;
     let currentPeine = findChefAccusationByName(
-      fetchContravention.data,
+      fetchInfractions.data,
       name
     ).peines;
     if (inputState.chefAcusation.length > 0) {
