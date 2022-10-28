@@ -30,6 +30,7 @@ const ListItemRapportArrestation = ({
   date,
   peine,
   offence,
+  conversionUp,
   dispatchOpenModal,
 }) => {
   let numeroFormat = numeral(numero);
@@ -109,7 +110,7 @@ const ListItemRapportArrestation = ({
         </RowListItemView>
 
         <RowListItemView>
-          <AmendItemView> {amende} $ </AmendItemView>
+          <AmendItemView> {conversionUp ? 0 : amende} $ </AmendItemView>
           <UpListView> {peine}</UpListView>
         </RowListItemView>
       </ListContent>

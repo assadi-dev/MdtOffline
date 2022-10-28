@@ -1,5 +1,6 @@
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
+import { addDate } from "../../utils/dateFormat";
 import { ENCLOSE_ARREST_FOLDER } from "../types/civil.type";
 import {
   ADD_DOSSIER_ARRESTATION,
@@ -47,7 +48,7 @@ export const enCloseArrestFolder = (id) => {
   return async (dispatch) => {
     try {
       Api.put(`/arrest_folders/${id}`, {
-        isEnclose: true,
+        isEnclose: false,
         enclosedAt: new Date(),
       }).then((res) => {
         const {
@@ -58,8 +59,9 @@ export const enCloseArrestFolder = (id) => {
           amende,
           peine,
           idAgent,
+          rapport,
         } = res.data;
-        dispatch({ payload: id, type: ENCLOSE_ARREST_FOLDER });
+        // dispatch({ payload: id, type: ENCLOSE_ARREST_FOLDER });
         let createArrestReaport = {
           infractions,
           lieux,
@@ -73,7 +75,9 @@ export const enCloseArrestFolder = (id) => {
           conversionUp: false,
         };
 
-        dispatch(add_rapportArrestation(createArrestReaport));
+        // dispatch(add_rapportArrestation(createArrestReaport));
+
+        console.log(addDate("2022-10-29 20:02", peine));
       });
     } catch (error) {
       console.log(error.message);

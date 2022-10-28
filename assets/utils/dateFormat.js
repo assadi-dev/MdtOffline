@@ -3,6 +3,7 @@ import { fr } from "date-fns/locale";
 import numeral from "numeral";
 import formatDistanceStrict from "date-fns/formatDistanceStrict";
 import getISOWeek from "date-fns/getISOWeek";
+import { add } from "date-fns";
 
 /**
  * Date au format 15:00 - 05/08/2022
@@ -86,9 +87,27 @@ export const getDuration = (start, end) => {
 
 /**
  * Retourne la duree en format 0:00:15
+ * @param {String} time Ex 15:02:30
  */
 
 export const FormatDuration = (time) => {
   let number = numeral(Number(time));
   return number.format("00:00:00");
+};
+
+/**
+ *
+ * @param {String} time Ex 15:02:30
+ */
+export const addDate = (date, time) => {
+  const dt = new Date(date);
+  const [hour, min, sec] = time.split(":");
+
+  let result = add(dt, {
+    hours: parseInt(hour),
+    minutes: parseInt(min),
+    seconds: parseInt(sec),
+  });
+
+  return result;
 };

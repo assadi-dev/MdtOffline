@@ -407,6 +407,7 @@ const CivilSelected = () => {
                       date={rapport.createdAt}
                       amende={rapport.amende}
                       peine={rapport.peine}
+                      conversionUp={rapport.conversionUp}
                       dispatchOpenModal={dispatch}
                     />
                   );
