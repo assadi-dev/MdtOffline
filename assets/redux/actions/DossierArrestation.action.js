@@ -1,6 +1,6 @@
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
-import { addDate } from "../../utils/dateFormat";
+import { addDateByHour, obtainDate } from "../../utils/dateFormat";
 import { ENCLOSE_ARREST_FOLDER } from "../types/civil.type";
 import {
   ADD_DOSSIER_ARRESTATION,
@@ -76,8 +76,8 @@ export const enCloseArrestFolder = (id) => {
         };
 
         // dispatch(add_rapportArrestation(createArrestReaport));
-
-        console.log(addDate("2022-10-29 20:02", peine));
+        let dateEntree = `${obtainDate()} ${entreeCellule}`;
+        let dateSortie = addDateByHour(entreeDateFormat, peine);
       });
     } catch (error) {
       console.log(error.message);

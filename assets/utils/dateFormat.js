@@ -99,7 +99,7 @@ export const FormatDuration = (time) => {
  *
  * @param {String} time Ex 15:02:30
  */
-export const addDate = (date, time) => {
+export const addDateByHour = (date, time) => {
   const dt = new Date(date);
   const [hour, min, sec] = time.split(":");
 
@@ -109,5 +109,15 @@ export const addDate = (date, time) => {
     seconds: parseInt(sec),
   });
 
+  return result;
+};
+
+/**
+ * Retourne la Date du jour au format 22-10-2022
+ * @returns
+ */
+export const obtainDate = () => {
+  const dt = new Date();
+  const result = format(dt, "yyyy-MM-dd", { locale: fr });
   return result;
 };

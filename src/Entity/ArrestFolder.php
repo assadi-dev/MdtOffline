@@ -134,6 +134,11 @@ class ArrestFolder
      */
     private $arrestReport;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numeroDossier;
+
 
 
 
@@ -378,6 +383,18 @@ class ArrestFolder
         }
 
         $this->arrestReport = $arrestReport;
+
+        return $this;
+    }
+
+    public function getNumeroDossier(): ?string
+    {
+        return $this->numeroDossier;
+    }
+
+    public function setNumeroDossier(string $numeroDossier): self
+    {
+        $this->numeroDossier = $numeroDossier;
 
         return $this;
     }
