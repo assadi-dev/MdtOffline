@@ -68,10 +68,6 @@ class Traffic
      */
     private $idAgent;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $numeroDossier;
 
 
     public function __construct()
@@ -168,18 +164,6 @@ class Traffic
     public function setIdAgent(string $idAgent): self
     {
         $this->idAgent = $idAgent;
-
-        return $this;
-    }
-
-    public function getNumeroDossier(): ?string
-    {
-        return $this->numeroDossier;
-    }
-
-    public function setNumeroDossier(string $numeroDossier): self
-    {
-        $this->numeroDossier = $numeroDossier;
 
         return $this;
     }

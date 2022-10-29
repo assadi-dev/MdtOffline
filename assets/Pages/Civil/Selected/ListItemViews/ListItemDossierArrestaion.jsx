@@ -26,6 +26,8 @@ import { enCloseArrestFolder } from "../../../../redux/actions/DossierArrestatio
 import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../utils/timer";
 import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
+import useListAgent from "../../../../hooks/useListAgent";
+import { getAgentNameById } from "../../../../utils/userData";
 
 const ListItemDossierArrestaion = ({
   id,
@@ -41,9 +43,18 @@ const ListItemDossierArrestaion = ({
   let numeroFormat = numeral(numero);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.AuthenticateReducer.token);
+  const civilSelectore = useSelector((state) => state.CivilReducer);
+  const listAgent = useListAgent();
+  const agentData = useSelector((state) => state.AuthenticateReducer);
 
   const onEnclose = () => {
-    dispatch(enCloseArrestFolder(id, token));
+    dispatch(
+      enCloseArrestFolder(
+        id,
+        civilSelectore.selected,
+        getAgentNameById(listAgent, agentData.idAgent)
+      )
+    );
   };
 
   const handleEdit = () => {

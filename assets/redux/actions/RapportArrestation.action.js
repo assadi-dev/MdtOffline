@@ -9,9 +9,17 @@ import {
 export const add_rapportArrestation = (data) => {
   return async (dispatch) => {
     try {
-      const res = await Api.post("/arrest_reports", data);
-      let result = res.data;
-      dispatch({ type: ADD_RAPPORT_ARRESTATION, payload: result });
+      return new Promise((resolve, reject) => {
+        Api.post("/arrest_reports", data)
+          .then((res) => {
+            let result = res.data;
+            dispatch({ type: ADD_RAPPORT_ARRESTATION, payload: result });
+            resolve(result);
+          })
+          .catch((e) => {
+            reject(e);
+          });
+      });
     } catch (error) {
       console.log(error.message);
     }

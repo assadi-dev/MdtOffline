@@ -1,29 +1,34 @@
+import { DOMAIN } from "../../../../constants/localStorage";
 import sendDiscord from "../../../../service/Api/SendDiscord";
+import iconSAPD from "../../../../ressources/img/logoSapd.png";
+import { SEND_DISCORD_CELLS } from "../../../../constants/Webhooks";
 
 export const sendCelluleToDiscord = (data) => {
-  const { name, entree, sortie, agent, photo } = data;
+  const { name, entree, sortie, agent, photo, arrestReport, arrestFolder } =
+    data;
+
+  const icon = DOMAIN.includes("localhost") ? "" : `${DOMAIN}/${iconSAPD}`;
+  const photoCivil = DOMAIN.includes("localhost") ? "" : `${DOMAIN}/${photo}`;
 
   let payload = (data = {
     content: null,
     embeds: [
       {
         title: "Mise en cellule",
-        description: `**Prénom Nom  :**  ${name} \n **Heure d'entrée : ** ${entree} \n**Heure de sortie : ** ${sortie} \n\n\n\n **Agent concerné:** ${agent}`,
+        description: `**Prénom Nom  :**  ${name} \n\n 
+        **Numéro de rapport : ** ${arrestReport}\n**Numéro de dossier : ** ${arrestFolder}\n**Heure d'entrée : ** ${entree} \n**Heure de sortie : ** ${sortie}
+        \n\n\n **Agent concerné:** ${agent}`,
         color: 5144500,
         thumbnail: {
-          url: photo,
+          url: photoCivil,
         },
         footer: {
           text: "SAN ANDREAS POLICE DEPARTMENT",
-          icon_url:
-            "https://cdn.discordapp.com/attachments/947977481930018859/1025877645809958922/logo-sapd.jpg",
+          icon_url: icon,
         },
       },
     ],
   });
 
-  return sendDiscord.post(
-    "1025722030127054959/12G1oIstJviZm6cBmX2sbUwePhjr_H6HOn7l7sB4Oduqy99LnsRwCpZkxijo_L46zuFZ",
-    payload
-  );
+  return sendDiscord.post(SEND_DISCORD_CELLS, payload);
 };

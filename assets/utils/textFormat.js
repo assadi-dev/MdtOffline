@@ -1,3 +1,4 @@
+import numeral from "numeral";
 import slugify from "slugify";
 
 export const ucFirst = (text) => {

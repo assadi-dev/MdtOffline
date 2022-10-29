@@ -57,6 +57,7 @@ import Cookies from "js-cookie";
 import useListAgent from "../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../utils/userData";
 import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
+import { get_allAgent } from "../../../redux/actions/Agents.action";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -120,6 +121,7 @@ const CivilSelected = () => {
 
   useEffect(() => {
     dispatchCivilData(getOneCivil(id));
+    dispatch(get_allAgent());
   }, [id]);
 
   const civilData = useMemo(() => {

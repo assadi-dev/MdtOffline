@@ -19,6 +19,7 @@ import MDT from "./Pages/MDT";
 import NoFoundPage from "./Pages/NoFoundPage";
 import { get_allAgent } from "./redux/actions/Agents.action";
 import { GenerateRoutes, GenerateSubNavRoutes } from "./routes/GenerateRoutes";
+import { getAllCivil } from "./redux/actions/Civil.action";
 
 const App = () => {
   const Hello = () => {
@@ -56,6 +57,7 @@ const App = () => {
       dispatch({ type: GET_OWNER, payload: data });
       dispatch(get_owner(id));
       dispatch(get_allAgent());
+      dispatch(getAllCivil());
     }
   }, [authSelector.isLoggedIn]);
 

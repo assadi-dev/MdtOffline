@@ -54,9 +54,16 @@ class Cellule
     private $idAgent;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
-    private $numeroDossier;
+    private $arrestReport;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
+     */
+    private $arrestFolder;
 
 
 
@@ -134,14 +141,28 @@ class Cellule
         return $this;
     }
 
-    public function getNumeroDossier(): ?string
+
+
+    public function getArrestReport(): ?int
     {
-        return $this->numeroDossier;
+        return $this->arrestReport;
     }
 
-    public function setNumeroDossier(string $numeroDossier): self
+    public function setArrestReport(int $arrestReport): self
     {
-        $this->numeroDossier = $numeroDossier;
+        $this->arrestReport = $arrestReport;
+
+        return $this;
+    }
+
+    public function getArrestFolder(): ?int
+    {
+        return $this->arrestFolder;
+    }
+
+    public function setArrestFolder(int $arrestFolder): self
+    {
+        $this->arrestFolder = $arrestFolder;
 
         return $this;
     }

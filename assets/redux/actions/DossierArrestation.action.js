@@ -1,6 +1,11 @@
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
-import { addDateByHour, obtainDate } from "../../utils/dateFormat";
+import {
+  addDateByHour,
+  dateFrenchFormat,
+  obtainDate,
+} from "../../utils/dateFormat";
+import { generateNumeroDossier, ucFirst } from "../../utils/textFormat";
 import { ENCLOSE_ARREST_FOLDER } from "../types/civil.type";
 import {
   ADD_DOSSIER_ARRESTATION,
@@ -8,6 +13,10 @@ import {
   EDIT_DOSSIER_ARRESTATION,
 } from "../types/DossierArrestation.type";
 import { add_rapportArrestation } from "./RapportArrestation.action";
+import { add_cellule } from "../actions/Cellule.action ";
+import { sendCelluleToDiscord } from "../../Pages/Civil/Selected/SendDiscord/SendDiscord";
+import { DOMAIN } from "../../constants/localStorage";
+import iconSAPD from "../../ressources/img/logoSapd.png";
 
 export const add_dossierArrestation = (data) => {
   return async (dispatch) => {
@@ -44,7 +53,7 @@ export const delete_dossierArrestation = (id) => {
   };
 };
 
-export const enCloseArrestFolder = (id) => {
+export const enCloseArrestFolder = (id, civilData, agentData) => {
   return async (dispatch) => {
     try {
       Api.put(`/arrest_folders/${id}`, {
@@ -75,9 +84,38 @@ export const enCloseArrestFolder = (id) => {
           conversionUp: false,
         };
 
-        // dispatch(add_rapportArrestation(createArrestReaport));
-        let dateEntree = `${obtainDate()} ${entreeCellule}`;
-        let dateSortie = addDateByHour(entreeDateFormat, peine);
+        dispatch(add_rapportArrestation(createArrestReaport)).then((res) => {
+          let dateEntree = `${obtainDate()} ${entreeCellule}`;
+          let dateSortie = addDateByHour(dateEntree, peine);
+          let arrestFolder = id;
+          let arrestReport = res.id;
+
+          let createCellule = {
+            entree: new Date(dateEntree),
+            sortie: new Date(dateSortie),
+            civil: `api/civils/${civil.id}`,
+            idAgent: parseInt(idAgent),
+            arrestReport,
+            arrestFolder,
+          };
+
+          dispatch(add_cellule(createCellule)).then(() => {
+            const { prenom, nom, photo } = civilData;
+            const { entree, sortie, idAgent, arrestReport, arrestFolder } =
+              createCellule;
+
+            let dataDiscord = {
+              name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
+              entree: dateFrenchFormat(entree),
+              sortie: dateFrenchFormat(sortie),
+              agent: agentData,
+              arrestReport: generateNumeroDossier(arrestReport),
+              arrestFolder: generateNumeroDossier(arrestFolder),
+              photo,
+            };
+            sendCelluleToDiscord(dataDiscord);
+          });
+        });
       });
     } catch (error) {
       console.log(error.message);
