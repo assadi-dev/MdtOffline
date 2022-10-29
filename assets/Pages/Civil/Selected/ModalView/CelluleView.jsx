@@ -71,7 +71,8 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
             ? listCellule.map((cellule) => (
                 <ListCelluleItem
                   key={cellule.id}
-                  numero={cellule.id}
+                  id={cellule.id}
+                  numero={cellule.arrestReport}
                   agent={getAgentNameById(listAgent, cellule.idAgent)}
                   entree={cellule.entree}
                   sortie={cellule.sortie}
