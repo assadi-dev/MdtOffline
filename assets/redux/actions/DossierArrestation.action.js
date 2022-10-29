@@ -70,7 +70,7 @@ export const enCloseArrestFolder = (id, civilData, agentData) => {
           idAgent,
           rapport,
         } = res.data;
-        // dispatch({ payload: id, type: ENCLOSE_ARREST_FOLDER });
+        dispatch({ payload: id, type: ENCLOSE_ARREST_FOLDER });
         let createArrestReaport = {
           infractions,
           lieux,
