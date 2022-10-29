@@ -57,7 +57,7 @@ export const enCloseArrestFolder = (id, civilData, agentData) => {
   return async (dispatch) => {
     try {
       Api.put(`/arrest_folders/${id}`, {
-        isEnclose: false,
+        isEnclose: true,
         enclosedAt: new Date(),
       }).then((res) => {
         const {
