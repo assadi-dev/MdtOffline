@@ -57,18 +57,6 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
       civil: `api/civils/${idCivil}`,
       idAgent: agent.idAgent,
     };
-
-    dispatch(add_cellule(data));
-    let discordData = {
-      titre: "Mise en cellule",
-      name: `${civilSelectore.selected.prenom} ${civilSelectore.selected.nom}`,
-      entree: dateFrenchFormat(inputState.entree),
-      sortie: dateFrenchFormat(inputState.sortie),
-      agent: getAgentNameById(listAgent, agent.idAgent),
-      photo: `${DOMAIN}${civilSelectore.selected.photo}`,
-    };
-
-    sendCelluleToDiscord(discordData);
   };
 
   return (
@@ -92,39 +80,7 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
             : null}
         </RowCardTopButton>
       </div>
-      <FooterCardTopButton>
-        <form onSubmit={handleSubmit}>
-          <FormBodyTopBtn>
-            <div className="form-control">
-              <FormLabel htmlFor="entree" className="formLabel">
-                Entrée
-              </FormLabel>
-              <Input
-                type="datetime-local"
-                idInput="entree"
-                inputName={"entree"}
-                value={inputState.entree}
-                onChange={handleChangeValue}
-              />
-            </div>
-            <div className="form-control">
-              <FormLabel htmlFor="sortie" className="formLabel">
-                Sortie
-              </FormLabel>
-              <Input
-                type="datetime-local"
-                idInput="sortie"
-                inputName={"sortie"}
-                value={inputState.sortie}
-                onChange={handleChangeValue}
-              />
-            </div>
-            <FooterSectionSubmit>
-              <ButtonDefault className="btn">Envoyer</ButtonDefault>
-            </FooterSectionSubmit>
-          </FormBodyTopBtn>
-        </form>
-      </FooterCardTopButton>
+      <FooterCardTopButton></FooterCardTopButton>
     </>
   );
 };
