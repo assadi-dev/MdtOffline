@@ -55,3 +55,9 @@ export const findChefAccusationByName = (lists, infractions) => {
 
   return lists.find((cf) => cf.infraction === infractions);
 };
+
+export const calculePeine = () => {};
+
+export const calculeNominal = () => {};
+
+export const calculeQte = () => {};

@@ -16,3 +16,13 @@ export const toSlugFormat = (text) => {
     trim: true,
   });
 };
+
+/**
+ * Retourn un numero au format 000 a partir d'un chiffre en parametre.
+ * @param {Number} number
+ * @returns
+ */
+export const generateNumeroDossier = (number) => {
+  let numeroFormat = numeral(number);
+  return numeroFormat.format("000");
+};
