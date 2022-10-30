@@ -1,11 +1,25 @@
+import {
+  ALL_ACCESS,
+  SUPERVISOR_ACCESS,
+  COMMAND_STAFF_ACCESS,
+} from "../constants/acces";
+
 export default [
-  { path: "", label: "Accueil", selected: true, submenu: [], end: true },
+  {
+    path: "",
+    label: "Accueil",
+    selected: true,
+    submenu: [],
+    end: true,
+    allowed: ALL_ACCESS,
+  },
   {
     path: "services",
     label: "Services",
     selected: false,
     openDropdown: false,
     end: false,
+    allowed: ALL_ACCESS,
     submenu: [
       {
         path: "/feuilles-d-heures",
@@ -64,6 +78,7 @@ export default [
     openDropdown: false,
     end: false,
     submenu: [],
+    allowed: ALL_ACCESS,
   },
   {
     path: "senior-lead-officier",
@@ -71,6 +86,7 @@ export default [
     selected: false,
     openDropdown: false,
     end: false,
+    allowed: SUPERVISOR_ACCESS,
     submenu: [
       {
         path: "/outil-slo",
@@ -96,6 +112,7 @@ export default [
     selected: false,
     openDropdown: false,
     end: false,
+    allowed: ALL_ACCESS,
     submenu: [
       {
         path: "/rapport-rookie",
@@ -113,6 +130,7 @@ export default [
     selected: false,
     openDropdown: false,
     end: false,
+    allowed: COMMAND_STAFF_ACCESS,
     submenu: [
       {
         path: "/voir-rappor-d-incidents",
@@ -161,6 +179,8 @@ export default [
     label: "Gestion des ressources",
     selected: false,
     openDropdown: false,
+    end: false,
+    allowed: COMMAND_STAFF_ACCESS,
     submenu: [
       {
         path: "/gestion-des-chef-d-accusations",
@@ -179,6 +199,5 @@ export default [
         end: false,
       },
     ],
-    end: false,
   },
 ];
