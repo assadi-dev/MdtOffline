@@ -130,7 +130,7 @@ export default [
     selected: false,
     openDropdown: false,
     end: false,
-    allowed: COMMAND_STAFF_ACCESS,
+    allowed: SUPERVISOR_ACCESS,
     submenu: [
       {
         path: "/voir-rappor-d-incidents",
