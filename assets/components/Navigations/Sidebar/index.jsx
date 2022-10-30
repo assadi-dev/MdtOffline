@@ -13,9 +13,12 @@ import {
 import uniqid from "uniqid";
 import { Link } from "react-router-dom";
 import SidebarNav from "../../../routes/SideBarNavigation.routes";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const [routes, setRoute] = useState(SidebarNav);
+  const agentConnect = useSelector((state) => state.AuthenticateReducer);
+  const grade = agentConnect.grade.nom;
 
   const activeRoute = (label) => {
     let reset = routes.map((r) => {

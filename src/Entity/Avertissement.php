@@ -154,9 +154,4 @@ class Avertissement
 
         return $this;
     }
-
-    public function getNumeroDossier(): ?string
-    {
-        return $this->numeroDossier;
-    }
 }

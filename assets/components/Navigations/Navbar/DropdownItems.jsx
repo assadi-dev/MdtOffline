@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../../redux/actions/Authentication.action";
 import { deconnect } from "../../../service/UserConnect";
+import { sleep } from "../../../utils/timer";
 import { PowwerOffOutline, SettingOutline, UserOutline } from "../../SVG";
 import { DeconnectButton, MenuList, NavBarLink } from "./Navbar.styled";
 
@@ -12,7 +13,7 @@ const DropdownItems = () => {
   const handleDeconnect = () => {
     deconnect().then((res) => {
       // dispatch(userLogout());
-      navigation("/connexion");
+      sleep(1000).then(() => window.location.replace("/"));
     });
   };
 

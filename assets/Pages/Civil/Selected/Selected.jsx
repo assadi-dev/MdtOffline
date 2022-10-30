@@ -58,6 +58,7 @@ import useListAgent from "../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../utils/userData";
 import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
 import { get_allAgent } from "../../../redux/actions/Agents.action";
+import { sortDescListItems } from "./helper";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -332,21 +333,23 @@ const CivilSelected = () => {
             title="AVERTISSEMENT"
           >
             {civilData.avertissements
-              ? civilData.avertissements.map((avertissement) => (
-                  <ListItemAvertissement
-                    key={avertissement.id}
-                    id={avertissement.id}
-                    lieux={avertissement.lieux}
-                    numero={avertissement.id}
-                    comment={avertissement.comments}
-                    agent={
-                      listAgent.length > 0 &&
-                      getAgentNameById(listAgent, avertissement.idAgent)
-                    }
-                    date={avertissement.createdAt}
-                    dispatchOpenModal={dispatch}
-                  />
-                ))
+              ? sortDescListItems(civilData.avertissements, "createdAt").map(
+                  (avertissement) => (
+                    <ListItemAvertissement
+                      key={avertissement.id}
+                      id={avertissement.id}
+                      lieux={avertissement.lieux}
+                      numero={avertissement.id}
+                      comment={avertissement.comments}
+                      agent={
+                        listAgent.length > 0 &&
+                        getAgentNameById(listAgent, avertissement.idAgent)
+                      }
+                      date={avertissement.createdAt}
+                      dispatchOpenModal={dispatch}
+                    />
+                  )
+                )
               : null}
           </CivilSelectedCard>
 
@@ -360,24 +363,27 @@ const CivilSelected = () => {
             }
           >
             {civilData.traffics
-              ? civilData.traffics.map((traffic) => {
-                  let offences = traffic.infractions.map((v) => v.label) || [];
-                  return (
-                    <ListItemTraffic
-                      key={traffic.id}
-                      id={traffic.id}
-                      numero={traffic.id}
-                      offence={offences}
-                      agent={
-                        listAgent.length > 0 &&
-                        getAgentNameById(listAgent, traffic.idAgent)
-                      }
-                      amende={traffic.amende}
-                      date={traffic.createdAt}
-                      dispatchOpenModal={dispatch}
-                    />
-                  );
-                })
+              ? sortDescListItems(civilData.traffics, "createdAt").map(
+                  (traffic) => {
+                    let offences =
+                      traffic.infractions.map((v) => v.label) || [];
+                    return (
+                      <ListItemTraffic
+                        key={traffic.id}
+                        id={traffic.id}
+                        numero={traffic.id}
+                        offence={offences}
+                        agent={
+                          listAgent.length > 0 &&
+                          getAgentNameById(listAgent, traffic.idAgent)
+                        }
+                        amende={traffic.amende}
+                        date={traffic.createdAt}
+                        dispatchOpenModal={dispatch}
+                      />
+                    );
+                  }
+                )
               : null}
           </CivilSelectedCard>
         </RowFirst>
@@ -393,7 +399,10 @@ const CivilSelected = () => {
           >
             {" "}
             {civilData.rapportArrestation
-              ? civilData.rapportArrestation.map((rapport) => {
+              ? sortDescListItems(
+                  civilData.rapportArrestation,
+                  "createdAt"
+                ).map((rapport) => {
                   let offence = rapport.infractions.map((r) => r.label);
 
                   return (
@@ -427,7 +436,10 @@ const CivilSelected = () => {
             }
           >
             {civilData.dossierArrestation
-              ? civilData.dossierArrestation.map((dossier) => {
+              ? sortDescListItems(
+                  civilData.dossierArrestation,
+                  "createdAt"
+                ).map((dossier) => {
                   let offence = dossier.infractions.map((d) => d.label);
                   return (
                     <ListItemDossierArrestaion

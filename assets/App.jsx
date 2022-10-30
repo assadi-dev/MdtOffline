@@ -20,6 +20,7 @@ import NoFoundPage from "./Pages/NoFoundPage";
 import { get_allAgent } from "./redux/actions/Agents.action";
 import { GenerateRoutes, GenerateSubNavRoutes } from "./routes/GenerateRoutes";
 import { getAllCivil } from "./redux/actions/Civil.action";
+import AccesDenied from "./Pages/Permission/AccesDenied";
 
 const App = () => {
   const Hello = () => {
@@ -78,6 +79,7 @@ const App = () => {
         </Route>
       </Route>
       <Route index path="/connexion" element={<Connexion />} />
+      <Route index path="/denied" element={<AccesDenied />} />
       <Route index path="/*" element={<NoFoundPage />} />
     </Routes>
   );

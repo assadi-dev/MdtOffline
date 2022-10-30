@@ -16,12 +16,17 @@ import Effectifs from "../Pages/CommandStaffSupervisor/Effectifs";
 import RedirectRoutes from "./RedirectRoutes";
 import ChefAccusation from "../Pages/Ressources/ChefAccusations";
 import Grades from "../Pages/Ressources/Grades";
+import {
+  ALL_ACCESS,
+  SUPERVISOR_ACCESS,
+  COMMAND_STAFF_ACCESS,
+} from "../constants/acces";
 
 export default [
   {
     label: "Services",
     path: "services",
-    element: <RedirectRoutes />,
+    element: <RedirectRoutes allowedGrades={ALL_ACCESS} />,
     subNavigation: [
       {
         label: "Services",
@@ -85,21 +90,21 @@ export default [
   {
     label: "Senior Lead Officier",
     path: "senior-lead-officier",
-    element: <RedirectRoutes />,
+    element: <RedirectRoutes allowedGrades={SUPERVISOR_ACCESS} />,
     index: false,
     subNavigation: [],
   },
   {
     label: "Police Academy",
     path: "police-academy",
-    element: <PoliceAcademy />,
+    element: <RedirectRoutes allowedGrades={ALL_ACCESS} />,
     index: false,
     subNavigation: [],
   },
   {
     label: "Command Staff Supervisor",
     path: "command-staff-supervisor",
-    element: <RedirectRoutes />,
+    element: <RedirectRoutes allowedGrades={COMMAND_STAFF_ACCESS} />,
     subNavigation: [
       {
         label: "Gestion des Comptes",
@@ -120,7 +125,7 @@ export default [
   {
     label: "Gestion des ressources",
     path: "gestion-des-ressources",
-    element: <RedirectRoutes />,
+    element: <RedirectRoutes allowedGrades={COMMAND_STAFF_ACCESS} />,
     index: false,
     subNavigation: [
       {
