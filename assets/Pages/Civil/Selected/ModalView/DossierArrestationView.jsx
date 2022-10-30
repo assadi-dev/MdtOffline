@@ -20,12 +20,14 @@ import {
   TableViewPresentation,
 } from "./ModalView.styled";
 import { add_dossierArrestation } from "../../../../redux/actions/DossierArrestation.action";
-import useFecthData from "../../../../hooks/useFecthData";
+import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 
 const DossierArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
 
-  const fetchInfractions = useFecthData("/chef_accusations");
+  const fetchInfractions = useFecthDataWithParams("/chef_accusations", {
+    categorie: [],
+  });
 
   const closeModal = () => {
     onClose();

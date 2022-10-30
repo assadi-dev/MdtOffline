@@ -28,7 +28,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
   const token = agent.token;
 
   const fetchContravention = useFecthDataWithParams("chef_accusations", {
-    categorie: "Contravention",
+    categorie: ["Contravention", "Délit mineur", "Délit majeur"],
   });
   /**
    * Reset la taille du champs text
