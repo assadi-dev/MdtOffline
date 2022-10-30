@@ -104,7 +104,7 @@ export default [
   {
     label: "Command Staff Supervisor",
     path: "command-staff-supervisor",
-    element: <RedirectRoutes allowedGrades={COMMAND_STAFF_ACCESS} />,
+    element: <RedirectRoutes allowedGrades={SUPERVISOR_ACCESS} />,
     subNavigation: [
       {
         label: "Gestion des Comptes",
