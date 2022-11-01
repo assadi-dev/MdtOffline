@@ -33,7 +33,6 @@ const EditCivilView = ({ idCivil, onClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      photo: civilData.photo,
       nom: civilData.nom,
       prenom: civilData.prenom,
       birthday: civilData.birthday,
