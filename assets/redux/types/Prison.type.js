@@ -1,0 +1,6 @@
+export const GET_ALL_PRISON = "GET_ALL_PRISON";
+export const GET_SINGLE_PRISON = "GET_SINGLE_PRISON";
+export const ADD_PRISON = "ADD_PRISON";
+export const EDIT_PRISON = "EDIT_PRISON";
+export const DELETE_PRISON = "DELETE_PRISON";
+export const UPDATE_PRISON = "UPDATE_PRISON";

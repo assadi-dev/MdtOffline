@@ -214,6 +214,7 @@ class Civil
 
     /**
      * @ORM\ManyToMany(targetEntity=Prison::class, mappedBy="civil")
+     * @Groups({"read:civil:item"})
      */
     private $prisons;
 

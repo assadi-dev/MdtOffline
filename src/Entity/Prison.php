@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\PrisonRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PrisonRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PrisonRepository::class)
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
  */
 class Prison
 {
@@ -16,21 +19,25 @@ class Prison
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:civil:item"})
      */
     private $entree;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:civil:item"})
      */
     private $sortie;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
@@ -41,16 +48,19 @@ class Prison
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $idAgent;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
+     * @Groups({"read:civil:item"})
      */
     private $arrestReport;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"read:civil:item"})
      */
     private $arrestFolder;
 

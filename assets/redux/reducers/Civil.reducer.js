@@ -30,6 +30,7 @@ import {
   EDIT_TRAFFIC,
 } from "../types/Traffic.type";
 import { ADD_CELLULE } from "../types/Cellule.type";
+import { ADD_PRISON } from "../types/Prison.type";
 
 const initialState = {
   collection: [],
@@ -268,6 +269,15 @@ const CivilReducer = (state = initialState, action) => {
         selected: {
           ...state.selected,
           cellule: [payload, ...state.selected.cellule],
+        },
+      };
+
+    case ADD_PRISON:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          prisons: [payload, ...state.selected.prison],
         },
       };
 
