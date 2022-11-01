@@ -21,6 +21,7 @@ import {
   addCivil,
   uploadPhotoCivil,
 } from "../../../redux/actions/Civil.action";
+import { ucFirst } from "../../../utils/textFormat";
 const EncodeCivil = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState({
@@ -50,8 +51,16 @@ const EncodeCivil = ({ isOpen, onClose }) => {
       sexe: "homme",
     },
     onSubmit: (values) => {
+      let data = {
+        ...values,
+        nom: ucFirst(values.nom),
+        prenom: ucFirst(values.prenom),
+        emploie: ucFirst(values.emploie),
+        nationalite: ucFirst(values.nationalite),
+      };
+
       token &&
-        dispatch(addCivil(values)).then((res) => {
+        dispatch(addCivil(data)).then((res) => {
           if (file.file) {
             let id = res.id;
             let formData = new FormData();
@@ -226,12 +235,12 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     value={formik.values.ethnie}
                     required={true}
                   >
-                    <option value="caucasien">Caucasien</option>
-                    <option value="afro-Americain">Afro-Americain</option>
-                    <option value="hispanique">Hispanique</option>
-                    <option value="asiatique">Asiatique</option>
-                    <option value="metis">Métis</option>
-                    <option value="amerindien">Amérindien</option>
+                    <option value="Caucasien">Caucasien</option>
+                    <option value="Afro-Americain">Afro-Americain</option>
+                    <option value="Hispanique">Hispanique</option>
+                    <option value="Asiatique">Asiatique</option>
+                    <option value="Métis">Métis</option>
+                    <option value="Amérindien">Amérindien</option>
                   </Select>
                 </div>
                 <div className="form-control">

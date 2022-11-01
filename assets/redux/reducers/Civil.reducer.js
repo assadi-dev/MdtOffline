@@ -5,6 +5,7 @@ import {
 } from "../types/avertissements..type";
 import {
   ADD_CIVIL,
+  EDIT_CIVIL,
   ENCLOSE_ARREST_FOLDER,
   GET_ALL_CIVIL,
   GET_ONE_CIVIL,
@@ -68,6 +69,21 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         collection: newStateCollection,
         selected: { ...state.selected, photo: payload.photo },
+        isReady: true,
+      };
+    case EDIT_CIVIL:
+      let updateCivilCollection = state.collection;
+      updateCivilCollection = updateCivilCollection.map((civil) => {
+        if (civil.id == payload.id) {
+          return { ...payload };
+        }
+        return civil;
+      });
+
+      return {
+        ...state,
+        collection: updateCivilCollection,
+        selected: { ...payload },
         isReady: true,
       };
 

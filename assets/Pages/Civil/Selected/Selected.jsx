@@ -62,6 +62,7 @@ import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.ac
 import { get_allAgent } from "../../../redux/actions/Agents.action";
 import { sortDescListItems } from "./helper";
 import EditCivilView from "./ListItemViews/EditView/EditCivilView";
+import { ucFirst } from "../../../utils/textFormat";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -135,6 +136,10 @@ const CivilSelected = () => {
 
     return [];
   }, [civilSelectore.selected, id]);
+
+  const civilName = civilData.nom
+    ? `${ucFirst(civilData.prenom)}  ${ucFirst(civilData.nom)}`
+    : "";
 
   //Effectue le rendue en fonction du la vue reçu en parametres
   const Render = ({ view }) => {
@@ -241,7 +246,7 @@ const CivilSelected = () => {
           <IconButtonTop title="Permis">
             <UserLicenceOutline />
           </IconButtonTop>
-          <h2 className="CivilTitle">{location.state ? name : "N/A"}</h2>
+          <h2 className="CivilTitle">{civilName}</h2>
           <IconButtonTop title={"Bracelet"}>
             <HandsCuffsOutline />
           </IconButtonTop>

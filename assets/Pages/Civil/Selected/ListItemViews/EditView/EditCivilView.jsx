@@ -23,6 +23,8 @@ import {
   SubmitButton,
 } from "./EditCivil.styled";
 import { useFormik } from "formik";
+import { editCivil } from "../../../../../redux/actions/Civil.action";
+import { ucFirst } from "../../../../../utils/textFormat";
 
 const EditCivilView = ({ idCivil, onClose }) => {
   const dispatch = useDispatch();
@@ -48,7 +50,17 @@ const EditCivilView = ({ idCivil, onClose }) => {
     },
     onSubmit: (values) => {
       console.log(values);
-      onClose();
+      let data = {
+        ...values,
+        id: idCivil,
+        nom: ucFirst(values.nom),
+        prenom: ucFirst(values.prenom),
+        emploie: ucFirst(values.emploie),
+        nationalite: ucFirst(values.nationalite),
+      };
+      dispatch(editCivil(idCivil, data)).then((res) => {
+        onClose();
+      });
     },
   });
 
@@ -73,6 +85,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
                     placeholder="Prénom"
                     value={formik.values.prenom}
                     onChange={formik.handleChange}
+                    required={true}
                   />
                 </FormControl>
                 <FormControl>
@@ -82,6 +95,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
                     placeholder="Nom"
                     value={formik.values.nom}
                     onChange={formik.handleChange}
+                    required={true}
                   />
                 </FormControl>
               </RowInput>
@@ -92,6 +106,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
                   placeholder="JJ-MM-AAAA"
                   onChange={formik.handleChange}
                   value={formik.values.birthday}
+                  required={true}
                 />
               </FormControl>
               <FormControl>
@@ -101,8 +116,9 @@ const EditCivilView = ({ idCivil, onClose }) => {
                   placeholder="Genre"
                   onChange={formik.handleChange}
                   value={formik.values.sexe}
+                  required={true}
                 >
-                  <option value="homme">Homme</option>
+                  <option value="Homme">Homme</option>
                   <option value="Femme">Femme</option>
                 </Select>
               </FormControl>
@@ -113,6 +129,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
                   placeholder="Adresse"
                   onChange={formik.handleChange}
                   value={formik.values.adresse}
+                  required={true}
                 />
               </FormControl>
             </ColStart>
@@ -129,6 +146,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
               placeholder="Nationalité"
               onChange={formik.handleChange}
               value={formik.values.nationalite}
+              required={true}
             />
           </FormControl>
           <FormControl>
@@ -139,12 +157,12 @@ const EditCivilView = ({ idCivil, onClose }) => {
               onChange={formik.handleChange}
               value={formik.values.ethnie}
             >
-              <option value="caucasien">Caucasien</option>
-              <option value="afro-Americain">Afro-Americain</option>
-              <option value="hispanique">Hispanique</option>
-              <option value="asiatique">Asiatique</option>
-              <option value="metis">Métis</option>
-              <option value="amerindien">Amérindien</option>
+              <option value="Caucasien">Caucasien</option>
+              <option value="Afro-Americain">Afro-Americain</option>
+              <option value="Hispanique">Hispanique</option>
+              <option value="Asiatique">Asiatique</option>
+              <option value="Métis">Métis</option>
+              <option value="Amérindien">Amérindien</option>
             </Select>
           </FormControl>
           <FormControl>
@@ -154,6 +172,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
               placeholder="Blonds,Noirs..."
               onChange={formik.handleChange}
               value={formik.values.hairColor}
+              required={true}
             />
           </FormControl>
 
@@ -177,6 +196,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
               placeholder="Emploie"
               onChange={formik.handleChange}
               value={formik.values.emploie}
+              required={true}
             />
           </FormControl>
           <FormControl>
@@ -186,6 +206,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
               placeholder="Numéro d'identification"
               onChange={formik.handleChange}
               value={formik.values.affiliation}
+              required={true}
             />
           </FormControl>
           <FormControl>
@@ -195,6 +216,7 @@ const EditCivilView = ({ idCivil, onClose }) => {
               placeholder="Numéro d'identification"
               onChange={formik.handleChange}
               value={formik.values.identification}
+              required={true}
             />
           </FormControl>
           <FormBottomRow>

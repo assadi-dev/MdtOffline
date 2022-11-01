@@ -1,5 +1,6 @@
 import {
   ADD_CIVIL,
+  EDIT_CIVIL,
   ENCLOSE_ARREST_FOLDER,
   GET_ALL_CIVIL,
   GET_ONE_CIVIL,
@@ -68,11 +69,11 @@ export const addCivil = (data) => {
   };
 };
 
-export const editCivil = (data) => {
+export const editCivil = (id, data) => {
   return async (dispatch) => {
     return new Promise((resolve, reject) => {
       try {
-        Api.put(`/civils/${data.id}`, data).then((res) => {
+        Api.put(`/civils/${id}`, data).then((res) => {
           let data = res.data;
           dispatch({ payload: data, type: EDIT_CIVIL });
           resolve(res.data);
