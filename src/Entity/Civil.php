@@ -212,6 +212,11 @@ class Civil
      */
     private $convocation;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Prison::class, mappedBy="civil")
+     */
+    private $prisons;
+
 
 
 
@@ -227,6 +232,7 @@ class Civil
         $this->rapportArrestation = new ArrayCollection();
         $this->cellule = new ArrayCollection();
         $this->convocation = new ArrayCollection();
+        $this->prisons = new ArrayCollection();
     }
 
 
@@ -630,6 +636,33 @@ class Civil
             if ($convocation->getCivil() === $this) {
                 $convocation->setCivil(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Prison>
+     */
+    public function getPrisons(): Collection
+    {
+        return $this->prisons;
+    }
+
+    public function addPrison(Prison $prison): self
+    {
+        if (!$this->prisons->contains($prison)) {
+            $this->prisons[] = $prison;
+            $prison->addCivil($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrison(Prison $prison): self
+    {
+        if ($this->prisons->removeElement($prison)) {
+            $prison->removeCivil($this);
         }
 
         return $this;

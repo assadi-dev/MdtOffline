@@ -63,6 +63,7 @@ import { get_allAgent } from "../../../redux/actions/Agents.action";
 import { sortDescListItems } from "./helper";
 import EditCivilView from "./ListItemViews/EditView/EditCivilView";
 import { ucFirst } from "../../../utils/textFormat";
+import PrisonView from "./ModalView/PrisonView";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -219,6 +220,14 @@ const CivilSelected = () => {
             listCellule={civilData.cellule}
           />
         );
+      case "prison":
+        return (
+          <PrisonView
+            idCivil={id}
+            onClose={closeModal}
+            listCellule={civilData.cellule}
+          />
+        );
       default:
         throw Error("Aucun rendu attribuée à cette vue");
         break;
@@ -240,7 +249,12 @@ const CivilSelected = () => {
           >
             <MailConvocIcon />
           </IconButtonTop>
-          <IconButtonTop title="Prison">
+          <IconButtonTop
+            title="Prison"
+            onClick={() =>
+              dispatch({ type: TOGGLE_MODAL, payload: { view: "prison" } })
+            }
+          >
             <LockOutline />
           </IconButtonTop>
           <IconButtonTop title="Permis">

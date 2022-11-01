@@ -2,83 +2,68 @@
 
 namespace App\Entity;
 
-use DateTimeImmutable;
+use App\Repository\PrisonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CelluleRepository;
-use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
- * @ORM\Entity(repositoryClass=CelluleRepository::class)
+ * @ORM\Entity(repositoryClass=PrisonRepository::class)
  */
-class Cellule
+class Prison
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:civil:item"})
      */
     private $entree;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:civil:item"})
      */
     private $sortie;
 
-
-
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"read:civil:item"})
      */
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="cellule")
+     * @ORM\ManyToMany(targetEntity=Civil::class, inversedBy="prisons")
      */
     private $civil;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item"})
      */
     private $idAgent;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"read:civil:item"})
      */
     private $arrestReport;
 
     /**
-     * @ORM\Column(type="integer",nullable=true)
-     * @Groups({"read:civil:item"})
+     * @ORM\Column(type="integer")
      */
     private $arrestFolder;
 
     /**
-     * @ORM\OneToOne(targetEntity=ArrestReport::class, inversedBy="cellule", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=ArrestFolder::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idArrestReport;
-
-
-
+    private $idArrestFolder;
 
     public function __construct()
     {
-        $this->createdAt = new DateTimeImmutable();
+        $this->civil = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -109,8 +94,6 @@ class Cellule
         return $this;
     }
 
-
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -123,31 +106,41 @@ class Cellule
         return $this;
     }
 
-    public function getCivil(): ?Civil
+    /**
+     * @return Collection<int, Civil>
+     */
+    public function getCivil(): Collection
     {
         return $this->civil;
     }
 
-    public function setCivil(?Civil $civil): self
+    public function addCivil(Civil $civil): self
     {
-        $this->civil = $civil;
+        if (!$this->civil->contains($civil)) {
+            $this->civil[] = $civil;
+        }
 
         return $this;
     }
 
-    public function getIdAgent(): ?string
+    public function removeCivil(Civil $civil): self
+    {
+        $this->civil->removeElement($civil);
+
+        return $this;
+    }
+
+    public function getIdAgent(): ?int
     {
         return $this->idAgent;
     }
 
-    public function setIdAgent(string $idAgent): self
+    public function setIdAgent(int $idAgent): self
     {
         $this->idAgent = $idAgent;
 
         return $this;
     }
-
-
 
     public function getArrestReport(): ?int
     {
@@ -173,14 +166,14 @@ class Cellule
         return $this;
     }
 
-    public function getIdArrestReport(): ?ArrestReport
+    public function getIdArrestFolder(): ?ArrestFolder
     {
-        return $this->idArrestReport;
+        return $this->idArrestFolder;
     }
 
-    public function setIdArrestReport(ArrestReport $idArrestReport): self
+    public function setIdArrestFolder(ArrestFolder $idArrestFolder): self
     {
-        $this->idArrestReport = $idArrestReport;
+        $this->idArrestFolder = $idArrestFolder;
 
         return $this;
     }
