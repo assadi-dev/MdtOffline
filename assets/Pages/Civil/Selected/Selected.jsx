@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useReducer, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../../../components/Shared/Modal";
 import {
+  EditPencilIcon,
   HandsCuffsOutline,
   JusticeHamerOutline,
   LockOutline,
@@ -31,6 +32,7 @@ import {
   RowDiv,
   UploadCivilPhotoBtn,
   PhotoContainer,
+  EditCivilbutton,
 } from "./Selected.styled";
 import ListItemTraffic from "./ListItemViews/ListItemTraffic";
 import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion";
@@ -289,11 +291,11 @@ const CivilSelected = () => {
               <CivilInfo>
                 <p>
                   <span className="personalDetail">NE(E) : </span>{" "}
-                  {civilData ? civilData.nom : "N/A"}
+                  {civilData ? civilData.birthday : "N/A"}
                 </p>
                 <p>
                   <span className="personalDetail">ADRESSE : </span>{" "}
-                  {civilData ? civilData.prenom : "N/A"}
+                  {civilData ? civilData.adresse : "N/A"}
                 </p>
                 <p>
                   <span className="personalDetail">TELEPHONE : </span>{" "}
@@ -316,9 +318,38 @@ const CivilSelected = () => {
                   {civilData ? civilData.nationalite : "N/A"}
                 </p>
                 <p>
+                  {" "}
+                  <span className="personalDetail">ETHNIE : </span>{" "}
+                  {civilData ? civilData.ethnie : ""}
+                </p>
+                <p>
                   <span className="personalDetail">SEXE : </span>{" "}
                   {civilData ? civilData.sexe : "N/A"}
                 </p>
+                <EditCivilbutton
+                  className="editCivil"
+                  onClick={() =>
+                    dispatch({
+                      type: TOGGLE_MODAL,
+                      payload: {
+                        view: "convocation",
+                        civil: {
+                          nom: "",
+                          prenem: "",
+                          birthday: "",
+                          telephone: "",
+                          nationalite: "",
+                          affiliation: "",
+                          permis: "",
+                          sexe: "",
+                          identification: "",
+                        },
+                      },
+                    })
+                  }
+                >
+                  <EditPencilIcon />
+                </EditCivilbutton>
               </CivilInfo>
             </RowDiv>
           </CivilCard>
