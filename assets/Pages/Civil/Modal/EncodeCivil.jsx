@@ -111,6 +111,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     autoFocus={true}
                     onChange={formik.handleChange}
                     value={formik.values.nom}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -119,6 +120,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Prénom"
                     onChange={formik.handleChange}
                     value={formik.values.prenom}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -128,6 +130,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="JJ-MM-AAAA"
                     onChange={formik.handleChange}
                     value={formik.values.birthday}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -137,6 +140,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Adresse"
                     onChange={formik.handleChange}
                     value={formik.values.adresse}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -147,6 +151,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     onChange={formik.handleChange}
                     value={formik.values.telephone}
                     type="tel"
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -156,6 +161,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Nationalité"
                     onChange={formik.handleChange}
                     value={formik.values.nationalite}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -165,6 +171,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Affiliation"
                     onChange={formik.handleChange}
                     value={formik.values.affiliation}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -174,6 +181,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Emploie"
                     onChange={formik.handleChange}
                     value={formik.values.emploie}
+                    required={true}
                   />
                 </div>
               </div>
@@ -207,6 +215,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Couleur des cheveux"
                     onChange={formik.handleChange}
                     value={formik.values.hairColor}
+                    required={true}
                   />
                 </div>
                 <div className="form-control">
@@ -215,6 +224,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Ethnie"
                     onChange={formik.handleChange}
                     value={formik.values.ethnie}
+                    required={true}
                   >
                     <option value="caucasien">Caucasien</option>
                     <option value="afro-Americain">Afro-Americain</option>
@@ -231,6 +241,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Permis"
                     onChange={formik.handleChange}
                     value={formik.values.permis}
+                    required={true}
                   >
                     <option value="non-valide">Non Valide</option>
                     <option value="valide">Valide</option>
@@ -240,9 +251,10 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                 <div className="form-control">
                   <Select
                     inputName={"sexe"}
-                    placeholder="Sexe"
+                    placeholder="Genre"
                     onChange={formik.handleChange}
                     value={formik.values.sexe}
+                    required={true}
                   >
                     <option value="homme">Homme</option>
                     <option value="Femme">Femme</option>
@@ -255,6 +267,7 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                     placeholder="Numéro d'identification"
                     onChange={formik.handleChange}
                     value={formik.values.identification}
+                    required={true}
                   />
                 </div>
               </div>

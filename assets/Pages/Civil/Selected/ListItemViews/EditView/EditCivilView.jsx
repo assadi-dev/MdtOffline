@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../../../../components/Shared/Input";
 import Select from "../../../../../components/Shared/Select";
@@ -22,26 +22,39 @@ import {
   RowInputHeader,
   SubmitButton,
 } from "./EditCivil.styled";
+import { useFormik } from "formik";
 
-const EditCivilView = ({ onClose }) => {
+const EditCivilView = ({ idCivil, onClose }) => {
   const dispatch = useDispatch();
   const civilSelectore = useSelector((state) => state.CivilReducer);
   const civilData = civilSelectore.selected;
-  let data = {
-    nom: civilData.nom,
-    prenom: civilData.prenom,
-    birthday: civilData.birthday,
-    telephone: civilData.telephone,
-    nationalite: civilData.nationalite,
-    affiliation: civilData.affiliation,
-    permis: civilData.permis,
-    sexe: civilData.sexe,
-    identification: civilData.identification,
-  };
+
+  const formik = useFormik({
+    initialValues: {
+      photo: civilData.photo,
+      nom: civilData.nom,
+      prenom: civilData.prenom,
+      birthday: civilData.birthday,
+      adresse: civilData.adresse,
+      telephone: civilData.telephone,
+      nationalite: civilData.nationalite,
+      ethnie: civilData.ethnie,
+      hairColor: civilData.hairColor,
+      affiliation: civilData.affiliation,
+      permis: civilData.permis,
+      sexe: civilData.sexe,
+      identification: civilData.identification,
+      emploie: civilData.emploie,
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      onClose();
+    },
+  });
 
   return (
     <>
-      <ModalViewContainer>
+      <ModalViewContainer onSubmit={formik.handleSubmit}>
         <HeaderModal>
           <h2 className="formTitle">
             {`${civilData.prenom} ${civilData.nom}`}
@@ -55,39 +68,77 @@ const EditCivilView = ({ onClose }) => {
               <RowInput style={{ alignItems: "start", marginBottom: 0 }}>
                 <FormControl>
                   <FormLabel>Prénom</FormLabel>
-                  <Input inputName={"name"} placeholder="Prénom" />
+                  <Input
+                    inputName={"prenom"}
+                    placeholder="Prénom"
+                    value={formik.values.prenom}
+                    onChange={formik.handleChange}
+                  />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Nom</FormLabel>
-                  <Input inputName={"name"} placeholder="Nom" />
+                  <Input
+                    inputName={"nom"}
+                    placeholder="Nom"
+                    value={formik.values.nom}
+                    onChange={formik.handleChange}
+                  />
                 </FormControl>
               </RowInput>
               <FormControl>
                 <FormLabel>Date de naissance</FormLabel>
-                <Input inputName={"name"} placeholder="JJ-MM-AAAA" />
+                <Input
+                  inputName={"birthday"}
+                  placeholder="JJ-MM-AAAA"
+                  onChange={formik.handleChange}
+                  value={formik.values.birthday}
+                />
               </FormControl>
               <FormControl>
                 <FormLabel>Genre</FormLabel>
-                <Input inputName={"name"} placeholder="Sexe" />
+                <Select
+                  inputName={"sexe"}
+                  placeholder="Genre"
+                  onChange={formik.handleChange}
+                  value={formik.values.sexe}
+                >
+                  <option value="homme">Homme</option>
+                  <option value="Femme">Femme</option>
+                </Select>
               </FormControl>
               <FormControl>
                 <FormLabel>Adresse</FormLabel>
-                <Input inputName={"name"} placeholder="Adresse" />
+                <Input
+                  inputName={"adresse"}
+                  placeholder="Adresse"
+                  onChange={formik.handleChange}
+                  value={formik.values.adresse}
+                />
               </FormControl>
             </ColStart>
             <ColEnd>
               <PhotoCivilContainer>
-                <PhotoCivil src={""} />
+                <PhotoCivil src={civilData.photo} />
               </PhotoCivilContainer>
             </ColEnd>
           </RowInputHeader>
           <FormControl>
             <FormLabel>Nationalité</FormLabel>
-            <Input inputName={"name"} placeholder="Nationalité" />
+            <Input
+              inputName={"nationalite"}
+              placeholder="Nationalité"
+              onChange={formik.handleChange}
+              value={formik.values.nationalite}
+            />
           </FormControl>
           <FormControl>
             <FormLabel>Ethnie</FormLabel>
-            <Select inputName={"ethnie"} placeholder="Ethnie">
+            <Select
+              inputName={"ethnie"}
+              placeholder="Ethnie"
+              onChange={formik.handleChange}
+              value={formik.values.ethnie}
+            >
               <option value="caucasien">Caucasien</option>
               <option value="afro-Americain">Afro-Americain</option>
               <option value="hispanique">Hispanique</option>
@@ -98,12 +149,22 @@ const EditCivilView = ({ onClose }) => {
           </FormControl>
           <FormControl>
             <FormLabel>Couleur des cheuveux</FormLabel>
-            <Input inputName={"name"} placeholder="Ethnie" />
+            <Input
+              inputName={"hairColor"}
+              placeholder="Blonds,Noirs..."
+              onChange={formik.handleChange}
+              value={formik.values.hairColor}
+            />
           </FormControl>
 
           <FormControl>
             <FormLabel>Permis</FormLabel>
-            <Select inputName={"permis"} placeholder="Permis">
+            <Select
+              inputName={"permis"}
+              placeholder="Permis"
+              onChange={formik.handleChange}
+              value={formik.values.permis}
+            >
               <option value="non-valide">Non Valide</option>
               <option value="valide">Valide</option>
               <option value="suspendue">Suspendu</option>
@@ -111,18 +172,37 @@ const EditCivilView = ({ onClose }) => {
           </FormControl>
           <FormControl>
             <FormLabel>Emploie</FormLabel>
-            <Input inputName={"name"} placeholder="Emploie" />
+            <Input
+              inputName={"emploie"}
+              placeholder="Emploie"
+              onChange={formik.handleChange}
+              value={formik.values.emploie}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Affiliation</FormLabel>
+            <Input
+              inputName={"affiliation"}
+              placeholder="Numéro d'identification"
+              onChange={formik.handleChange}
+              value={formik.values.affiliation}
+            />
           </FormControl>
           <FormControl>
             <FormLabel>Numéro d'identification</FormLabel>
-            <Input inputName={"name"} placeholder="Numéro d'identification" />
+            <Input
+              inputName={"identification"}
+              placeholder="Numéro d'identification"
+              onChange={formik.handleChange}
+              value={formik.values.identification}
+            />
           </FormControl>
           <FormBottomRow>
             <FormControl style={{ height: 10 }}>
               {/* <ErrorCustomAlert message={""} /> */}
             </FormControl>
             <FormControl>
-              <SubmitButton>Mettre à jour</SubmitButton>
+              <SubmitButton type="submit">Mettre à jour</SubmitButton>
             </FormControl>
           </FormBottomRow>
         </FormBodyContainer>
