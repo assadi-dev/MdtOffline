@@ -149,8 +149,30 @@ export const UploadCivilPhotoBtn = styled.button`
   }
 `;
 
+export const EditCivilbutton = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(0);
+  transition: all 0.35s;
+  cursor: pointer;
+  padding: 0px 5px;
+  svg: {
+    width: 30px;
+    height: 30px;
+  }
+  :active {
+    opacity: 0;
+  }
+  @media screen and (min-width: 992px) {
+    transform: translateX(100%);
+  }
+`;
+
 export const CivilInfo = styled.div`
   margin-left: 1rem;
+  position: relative;
+
   p {
     margin-top: 0.8rem;
     color: rgba(255, 255, 255, 0.6);
@@ -175,6 +197,17 @@ export const CivilInfo = styled.div`
     margin-bottom: 0.8rem;
     :last-of-type {
       margin-bottom: 0;
+    }
+  }
+  .editCivil {
+    color: var(--color-blue-opacity-50);
+    :hover {
+      color: var(--color-blue-primary);
+    }
+  }
+  :hover {
+    & .editCivil {
+      right: 0;
     }
   }
 `;

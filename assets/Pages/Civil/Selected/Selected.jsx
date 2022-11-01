@@ -61,6 +61,7 @@ import { getAgentNameById } from "../../../utils/userData";
 import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
 import { get_allAgent } from "../../../redux/actions/Agents.action";
 import { sortDescListItems } from "./helper";
+import EditCivilView from "./ListItemViews/EditView/EditCivilView";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -138,6 +139,9 @@ const CivilSelected = () => {
   //Effectue le rendue en fonction du la vue reçu en parametres
   const Render = ({ view }) => {
     switch (view) {
+      case "edit-civil":
+        return <EditCivilView idCivil={id} onClose={closeModal} />;
+
       case "avertissement":
         return <AvertissementView idCivil={id} onClose={closeModal} />;
       case "edit-avertissement":
@@ -332,18 +336,8 @@ const CivilSelected = () => {
                     dispatch({
                       type: TOGGLE_MODAL,
                       payload: {
-                        view: "convocation",
-                        civil: {
-                          nom: "",
-                          prenem: "",
-                          birthday: "",
-                          telephone: "",
-                          nationalite: "",
-                          affiliation: "",
-                          permis: "",
-                          sexe: "",
-                          identification: "",
-                        },
+                        view: "edit-civil",
+                        idCivil: civilData.id,
                       },
                     })
                   }

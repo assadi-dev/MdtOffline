@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import AlertError from "../../../components/Shared/Alert/AlertError";
-import CloseModalBtn from "../../../components/Shared/Modal/CloseModal";
-import userImg from "../../../ressources/img/user.jpg";
+import AlertError from "../../../../../components/Shared/Alert/AlertError";
+import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
+import userImg from "../../../../../ressources/img/user.jpg";
 
-export const EffectifWrapper = styled.div`
+export const EditCivilWrapper = styled.div`
   padding: 1.2rem 2.3rem;
   .validatSwitchBtn {
     input:checked + .switch {
@@ -12,23 +12,18 @@ export const EffectifWrapper = styled.div`
   }
 `;
 
-export const EffectifBody = styled.div`
+export const EditCivilBody = styled.div`
   padding-top: 1.2rem;
 `;
 
 export const ModalViewContainer = styled.form`
-  width: 35rem;
+  width: 100%;
   min-height: 200px;
   background: var(--background-color-dark);
   padding: 13px;
-  border: 0.5px solid #2b7de950;
-  border-radius: 8px;
-  box-shadow: 0px 0px 8px 5px #2b7de920;
   overflow-x: hidden;
   scrollbar-width: thin;
-  @media (min-width: 992px) {
-    width: 690px;
-  }
+
   .form-control {
     margin-top: 1rem;
     margin-bottom: 0;
@@ -74,13 +69,13 @@ export const FormBodyContainer = styled.div`
 
 export const FormLabel = styled.label`
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const FormControl = styled.div`
   position: relative;
   padding-left: 1rem;
-  margin-bottom: 2.3rem;
+  margin-bottom: 1.2rem;
   :last-of-type {
     margin-bottom: 0;
   }
@@ -93,7 +88,7 @@ export const FormControl = styled.div`
 `;
 
 export const FormBottomRow = styled.div`
-  margin-top: 1.2rem;
+  margin-top: 1rem;
   height: 80px;
 `;
 
@@ -113,15 +108,32 @@ export const SubmitButton = styled.button`
 export const RowInput = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr;
+  grid-template-columns: auto;
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 10px;
   justify-content: flex-end;
   grid-template-areas: "b" "a";
-  margin-bottom: 2.3rem;
+  margin-bottom: 1rem;
   @media screen and (min-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
+    grid-template-rows: auto;
+    justify-content: flex-start;
+    grid-template-areas: "a b";
+  }
+`;
+
+export const RowInputHeader = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  justify-content: flex-end;
+  grid-template-areas: "b" "a";
+  margin-bottom: 1rem;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 1fr minmax(100px, 300px);
+    grid-template-rows: auto;
     justify-content: flex-start;
     grid-template-areas: "a b";
   }
@@ -136,9 +148,11 @@ export const ColEnd = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (min-width: 992px) {
+  }
 `;
 
-export const PhotoAgentContainer = styled.div`
+export const PhotoCivilContainer = styled.div`
   position: relative;
   height: 200px;
   width: 200px;
@@ -152,7 +166,7 @@ export const PhotoAgentContainer = styled.div`
   position: relative;
 `;
 
-export const PhotoAgent = styled.label`
+export const PhotoCivil = styled.label`
   position: absolute;
   top: 0;
   bottom: 0;
