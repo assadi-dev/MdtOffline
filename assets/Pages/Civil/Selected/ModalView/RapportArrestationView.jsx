@@ -26,6 +26,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
   const token = agent.token;
+  const civilSelectore = useSelector((state) => state.CivilReducer);
 
   const fetchContravention = useFecthDataWithParams("chef_accusations", {
     categorie: ["Contravention", "Délit mineur", "Délit majeur"],
@@ -243,8 +244,10 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
       idAgent: agent.idAgent,
     };
 
+    const civilData = civilSelectore.selected;
+
     token &&
-      dispatch(add_rapportArrestation(data)).then(() => {
+      dispatch(add_rapportArrestation(data, civilData)).then(() => {
         onClose();
       });
   };

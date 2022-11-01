@@ -1,6 +1,12 @@
+import { sendCelluleToDiscord } from "../../Pages/Civil/Selected/SendDiscord/SendDiscord";
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
-import { addDateByHour, obtainDate } from "../../utils/dateFormat";
+import {
+  addDateByHour,
+  dateFrenchFormat,
+  obtainDate,
+} from "../../utils/dateFormat";
+import { generateNumeroDossier, ucFirst } from "../../utils/textFormat";
 import {
   ADD_RAPPORT_ARRESTATION,
   DELETE_RAPPORT_ARRESTATION,
@@ -8,7 +14,7 @@ import {
 } from "../types/RapportArrestation.type";
 import { add_cellule } from "./Cellule.action ";
 
-export const add_rapportArrestation = (data) => {
+export const add_rapportArrestation = (data, civilData) => {
   return async (dispatch) => {
     try {
       return new Promise((resolve, reject) => {
@@ -18,7 +24,7 @@ export const add_rapportArrestation = (data) => {
             dispatch({ type: ADD_RAPPORT_ARRESTATION, payload: result });
 
             const { entreeCellule, peine } = result;
-            const { idAgent, civil } = data;
+            const { idAgent, civil, agent } = data;
 
             let dateEntree = `${obtainDate()} ${entreeCellule}`;
             let dateSortie = addDateByHour(dateEntree, peine);
@@ -34,7 +40,22 @@ export const add_rapportArrestation = (data) => {
               idArrestReport: `api/arrest_reports/${result.id}`,
             };
 
-            dispatch(add_cellule(createCellule));
+            dispatch(add_cellule(createCellule)).then((res) => {
+              const { prenom, nom, photo } = civilData;
+              const { entree, sortie, idAgent, arrestReport, arrestFolder } =
+                createCellule;
+
+              let dataDiscord = {
+                name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
+                entree: dateFrenchFormat(entree),
+                sortie: dateFrenchFormat(sortie),
+                agent: agent,
+                arrestReport: generateNumeroDossier(arrestReport),
+                arrestFolder: generateNumeroDossier(arrestFolder),
+                photo,
+              };
+              sendCelluleToDiscord(dataDiscord);
+            });
             resolve(result);
           })
           .catch((e) => {

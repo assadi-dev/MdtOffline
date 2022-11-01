@@ -84,39 +84,9 @@ export const enCloseArrestFolder = (id, civilData, agentData) => {
           conversionUp: false,
         };
 
-        dispatch(add_rapportArrestation(createArrestReaport)).then((res) => {
-          let dateEntree = `${obtainDate()} ${entreeCellule}`;
-          let dateSortie = addDateByHour(dateEntree, peine);
-          let arrestFolder = id;
-          let arrestReport = res.id;
-
-          let createCellule = {
-            entree: new Date(dateEntree),
-            sortie: new Date(dateSortie),
-            civil: `api/civils/${civil.id}`,
-            idAgent: parseInt(idAgent),
-            arrestReport,
-            arrestFolder,
-            idArrestReport: `api/arrest_reports/${arrestReport}`,
-          };
-
-          dispatch(add_cellule(createCellule)).then(() => {
-            const { prenom, nom, photo } = civilData;
-            const { entree, sortie, idAgent, arrestReport, arrestFolder } =
-              createCellule;
-
-            let dataDiscord = {
-              name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
-              entree: dateFrenchFormat(entree),
-              sortie: dateFrenchFormat(sortie),
-              agent: agentData,
-              arrestReport: generateNumeroDossier(arrestReport),
-              arrestFolder: generateNumeroDossier(arrestFolder),
-              photo,
-            };
-            sendCelluleToDiscord(dataDiscord);
-          });
-        });
+        dispatch(add_rapportArrestation(createArrestReaport, civilData)).then(
+          (res) => {}
+        );
       });
     } catch (error) {
       console.log(error.message);
