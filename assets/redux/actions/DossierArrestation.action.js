@@ -97,6 +97,7 @@ export const enCloseArrestFolder = (id, civilData, agentData) => {
             idAgent: parseInt(idAgent),
             arrestReport,
             arrestFolder,
+            idArrestReport: `api/arrest_reports/${arrestReport}`,
           };
 
           dispatch(add_cellule(createCellule)).then(() => {

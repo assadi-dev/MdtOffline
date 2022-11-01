@@ -96,6 +96,11 @@ class ArrestReport
      */
     private $arrestFolder;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Cellule::class, mappedBy="idArrestReport", cascade={"persist", "remove"})
+     */
+    private $cellule;
+
 
 
 
@@ -245,6 +250,23 @@ class ArrestReport
     public function setArrestFolder(?ArrestFolder $arrestFolder): self
     {
         $this->arrestFolder = $arrestFolder;
+
+        return $this;
+    }
+
+    public function getCellule(): ?Cellule
+    {
+        return $this->cellule;
+    }
+
+    public function setCellule(Cellule $cellule): self
+    {
+        // set the owning side of the relation if necessary
+        if ($cellule->getIdArrestReport() !== $this) {
+            $cellule->setIdArrestReport($this);
+        }
+
+        $this->cellule = $cellule;
 
         return $this;
     }

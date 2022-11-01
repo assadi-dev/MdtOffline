@@ -1,10 +1,12 @@
 import Api from "../../service/Api/Api";
 import { setHeader } from "../../service/Api/options";
+import { addDateByHour, obtainDate } from "../../utils/dateFormat";
 import {
   ADD_RAPPORT_ARRESTATION,
   DELETE_RAPPORT_ARRESTATION,
   EDIT_RAPPORT_ARRESTATION,
 } from "../types/RapportArrestation.type";
+import { add_cellule } from "./Cellule.action ";
 
 export const add_rapportArrestation = (data) => {
   return async (dispatch) => {
@@ -14,6 +16,25 @@ export const add_rapportArrestation = (data) => {
           .then((res) => {
             let result = res.data;
             dispatch({ type: ADD_RAPPORT_ARRESTATION, payload: result });
+
+            const { entreeCellule, peine } = result;
+            const { idAgent, civil } = data;
+
+            let dateEntree = `${obtainDate()} ${entreeCellule}`;
+            let dateSortie = addDateByHour(dateEntree, peine);
+
+            let arrestReport = result.id;
+
+            let createCellule = {
+              entree: new Date(dateEntree),
+              sortie: new Date(dateSortie),
+              civil: civil,
+              idAgent: parseInt(idAgent),
+              arrestReport,
+              idArrestReport: `api/arrest_reports/${result.id}`,
+            };
+
+            dispatch(add_cellule(createCellule));
             resolve(result);
           })
           .catch((e) => {

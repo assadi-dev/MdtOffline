@@ -60,10 +60,16 @@ class Cellule
     private $arrestReport;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      * @Groups({"read:civil:item"})
      */
     private $arrestFolder;
+
+    /**
+     * @ORM\OneToOne(targetEntity=ArrestReport::class, inversedBy="cellule", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idArrestReport;
 
 
 
@@ -163,6 +169,18 @@ class Cellule
     public function setArrestFolder(int $arrestFolder): self
     {
         $this->arrestFolder = $arrestFolder;
+
+        return $this;
+    }
+
+    public function getIdArrestReport(): ?ArrestReport
+    {
+        return $this->idArrestReport;
+    }
+
+    public function setIdArrestReport(ArrestReport $idArrestReport): self
+    {
+        $this->idArrestReport = $idArrestReport;
 
         return $this;
     }
