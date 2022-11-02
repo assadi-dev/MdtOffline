@@ -17,12 +17,40 @@ import { add_cellule } from "../actions/Cellule.action ";
 import { sendCelluleToDiscord } from "../../Pages/Civil/Selected/SendDiscord/SendDiscord";
 import { DOMAIN } from "../../constants/localStorage";
 import iconSAPD from "../../ressources/img/logoSapd.png";
+import { add_prison } from "./Prison.action";
 
-export const add_dossierArrestation = (data) => {
+export const add_dossierArrestation = (data, civilData) => {
   return async (dispatch) => {
     try {
-      let res = await Api.post("/arrest_folders", data);
-      dispatch({ type: ADD_DOSSIER_ARRESTATION, payload: res.data });
+      return new Promise((resolve, reject) => {
+        Api.post("/arrest_folders", data)
+          .then((res) => {
+            let result = res.data;
+            dispatch({ type: ADD_DOSSIER_ARRESTATION, payload: result });
+
+            const { entreeCellule, peine } = result;
+            const { idAgent, civil, agent } = data;
+
+            let dateEntree = `${obtainDate()} ${entreeCellule}`;
+            let dateSortie = addDateByHour(dateEntree, peine);
+            let arrestFolder = result.id;
+
+            let createPrison = {
+              entree: new Date(dateEntree),
+              sortie: new Date(dateSortie),
+              civil: civil,
+              idAgent: parseInt(idAgent),
+              arrestFolder,
+              idArrestFolder: `api/arrest_folders/${result.id}`,
+            };
+
+            dispatch(add_prison(createPrison));
+            resolve(result);
+          })
+          .catch((e) => {
+            reject(e);
+          });
+      });
     } catch (error) {
       console.log(error.message);
     }

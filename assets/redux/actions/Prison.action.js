@@ -14,7 +14,7 @@ export const get_all_prison = () => {
   };
 };
 
-export const add_cellule = (data) => {
+export const add_prison = (data) => {
   return async (dispatch) => {
     try {
       Api.post("/prisons", data).then((res) => {

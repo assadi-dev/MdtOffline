@@ -8,6 +8,7 @@ import TrafficReducer from "./reducers/Traffic.reducer";
 import DossierArrestationReducer from "./reducers/DossierArrestation.reducer";
 import ConvocationReducer from "./reducers/Convocation.reducer";
 import CelluleReducer from "./reducers/Cellule.reducer";
+import PrisonReducer from "./reducers/Prison.reducer";
 import AuthenticateReducer from "./reducers/Authenticate.reducer";
 import AgentsReducer from "./reducers/Agents.reducer";
 import PlainteReducer from "./reducers/Plainte.reducer";
@@ -27,6 +28,7 @@ const RootReducers = combineReducers({
   DossierArrestationReducer,
   ConvocationReducer,
   CelluleReducer,
+  PrisonReducer,
   AuthenticateReducer,
   AgentsReducer,
   RapportDeputyTrainyReducer,

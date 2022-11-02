@@ -213,12 +213,10 @@ class Civil
     private $convocation;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Prison::class, mappedBy="civil")
+     * @ORM\OneToMany(targetEntity=Prison::class, mappedBy="civil")
      * @Groups({"read:civil:item"})
      */
     private $prisons;
-
-
 
 
 
@@ -654,7 +652,7 @@ class Civil
     {
         if (!$this->prisons->contains($prison)) {
             $this->prisons[] = $prison;
-            $prison->addCivil($this);
+            $prison->setCivil($this);
         }
 
         return $this;
@@ -663,7 +661,10 @@ class Civil
     public function removePrison(Prison $prison): self
     {
         if ($this->prisons->removeElement($prison)) {
-            $prison->removeCivil($this);
+            // set the owning side to null (unless already changed)
+            if ($prison->getCivil() === $this) {
+                $prison->setCivil(null);
+            }
         }
 
         return $this;

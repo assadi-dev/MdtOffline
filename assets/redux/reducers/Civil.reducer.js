@@ -277,7 +277,7 @@ const CivilReducer = (state = initialState, action) => {
         ...state,
         selected: {
           ...state.selected,
-          prisons: [payload, ...state.selected.prison],
+          prisons: [payload, ...state.selected.prisons],
         },
       };
 

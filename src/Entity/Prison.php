@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PrisonRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -41,10 +42,6 @@ class Prison
      */
     private $createdAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Civil::class, inversedBy="prisons")
-     */
-    private $civil;
 
     /**
      * @ORM\Column(type="integer")
@@ -65,15 +62,22 @@ class Prison
     private $arrestFolder;
 
     /**
-     * @ORM\OneToOne(targetEntity=ArrestFolder::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=ArrestFolder::class,inversedBy="prison", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $idArrestFolder;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Civil::class, inversedBy="prisons")
+     */
+    private $civil;
+
     public function __construct()
     {
-        $this->civil = new ArrayCollection();
+
+        $this->createdAt = new DateTimeImmutable();
     }
+
 
     public function getId(): ?int
     {
@@ -116,29 +120,6 @@ class Prison
         return $this;
     }
 
-    /**
-     * @return Collection<int, Civil>
-     */
-    public function getCivil(): Collection
-    {
-        return $this->civil;
-    }
-
-    public function addCivil(Civil $civil): self
-    {
-        if (!$this->civil->contains($civil)) {
-            $this->civil[] = $civil;
-        }
-
-        return $this;
-    }
-
-    public function removeCivil(Civil $civil): self
-    {
-        $this->civil->removeElement($civil);
-
-        return $this;
-    }
 
     public function getIdAgent(): ?int
     {
@@ -184,6 +165,18 @@ class Prison
     public function setIdArrestFolder(ArrestFolder $idArrestFolder): self
     {
         $this->idArrestFolder = $idArrestFolder;
+
+        return $this;
+    }
+
+    public function getCivil(): ?Civil
+    {
+        return $this->civil;
+    }
+
+    public function setCivil(?Civil $civil): self
+    {
+        $this->civil = $civil;
 
         return $this;
     }

@@ -135,6 +135,11 @@ class ArrestFolder
     private $arrestReport;
 
 
+    /**
+     * @ORM\OneToOne(targetEntity=Prison::class, mappedBy="idArrestFolder", cascade={"persist", "remove"})
+     */
+    private $prison;
+
 
 
 
@@ -380,6 +385,23 @@ class ArrestFolder
         }
 
         $this->arrestReport = $arrestReport;
+
+        return $this;
+    }
+
+    public function getPrison(): ?Prison
+    {
+        return $this->prison;
+    }
+
+    public function setCellule(Prison $prison): self
+    {
+        // set the owning side of the relation if necessary
+        if ($prison->getIdArrestFolder() !== $this) {
+            $prison->setIdArrestFolder($this);
+        }
+
+        $this->$prison = $prison;
 
         return $this;
     }

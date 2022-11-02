@@ -225,7 +225,7 @@ const CivilSelected = () => {
           <PrisonView
             idCivil={id}
             onClose={closeModal}
-            listCellule={civilData.cellule}
+            listPrison={civilData.prisons}
           />
         );
       default:

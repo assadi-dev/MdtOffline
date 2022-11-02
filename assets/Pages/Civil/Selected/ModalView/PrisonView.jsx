@@ -23,7 +23,7 @@ import useListAgent from "../../../../hooks/useListAgent";
 import { DOMAIN } from "../../../../constants/localStorage";
 import ListPrisonItem from "../ListItemViews/ListPrisonItem";
 
-const PrisonView = ({ onClose, idCivil, listCellule }) => {
+const PrisonView = ({ onClose, idCivil, listPrison }) => {
   const closeModal = () => {
     onClose();
   };
@@ -68,15 +68,15 @@ const PrisonView = ({ onClose, idCivil, listCellule }) => {
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <RowCardTopButton>
-          {listCellule.length
-            ? listCellule.map((cellule) => (
+          {listPrison.length
+            ? listPrison.map((prison) => (
                 <ListPrisonItem
-                  key={cellule.id}
-                  id={cellule.id}
-                  numero={cellule.arrestReport}
-                  agent={getAgentNameById(listAgent, cellule.idAgent)}
-                  entree={cellule.entree}
-                  sortie={cellule.sortie}
+                  key={prison.id}
+                  id={prison.id}
+                  numero={prison.arrestReport}
+                  agent={getAgentNameById(listAgent, prison.idAgent)}
+                  entree={prison.entree}
+                  sortie={prison.sortie}
                 />
               ))
             : null}
