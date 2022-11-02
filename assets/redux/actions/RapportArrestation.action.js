@@ -68,6 +68,27 @@ export const add_rapportArrestation = (data, civilData) => {
   };
 };
 
+export const add_rapportArrestation_onEnclose = (data) => {
+  return async (dispatch) => {
+    try {
+      return new Promise((resolve, reject) => {
+        Api.post("/arrest_reports", data)
+          .then((res) => {
+            let result = res.data;
+            dispatch({ type: ADD_RAPPORT_ARRESTATION, payload: result });
+
+            resolve(result);
+          })
+          .catch((e) => {
+            reject(e);
+          });
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 export const edit_rapportArrestation = (id, data) => {
   return async (dispatch) => {
     try {
