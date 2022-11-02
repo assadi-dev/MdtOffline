@@ -17,7 +17,10 @@ import {
   add_rapportArrestation_onEnclose,
 } from "./RapportArrestation.action";
 import { add_cellule } from "../actions/Cellule.action ";
-import { sendCelluleToDiscord } from "../../Pages/Civil/Selected/SendDiscord/SendDiscord";
+import {
+  sendCelluleToDiscord,
+  sendPrisonToDiscord,
+} from "../../Pages/Civil/Selected/SendDiscord/SendDiscord";
 import { DOMAIN } from "../../constants/localStorage";
 import iconSAPD from "../../ressources/img/logoSapd.png";
 import { add_prison } from "./Prison.action";
@@ -47,7 +50,23 @@ export const add_dossierArrestation = (data, civilData) => {
               idArrestFolder: `api/arrest_folders/${result.id}`,
             };
 
-            dispatch(add_prison(createPrison));
+            dispatch(add_prison(createPrison)).then((res) => {
+              const { prenom, nom, photo } = civilData;
+              const { entree, sortie, idAgent, arrestReport, arrestFolder } =
+                createPrison;
+
+              let dataDiscord = {
+                name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
+                entree: dateFrenchFormat(entree),
+                sortie: dateFrenchFormat(sortie),
+                agent: agent,
+                arrestReport: generateNumeroDossier(arrestReport),
+                arrestFolder: generateNumeroDossier(arrestFolder),
+                photo,
+              };
+              sendPrisonToDiscord(dataDiscord);
+            });
+
             resolve(result);
           })
           .catch((e) => {
@@ -133,22 +152,7 @@ export const enCloseArrestFolder = (id, civilData, agentData) => {
               idArrestFolder: `api/arrest_folders/${result.id}`,
             };
 
-            dispatch(add_prison(createPrison)).then((res) => {
-              const { prenom, nom, photo } = civilData;
-              const { entree, sortie, idAgent, arrestReport, arrestFolder } =
-                createPrison;
-
-              let dataDiscord = {
-                name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
-                entree: dateFrenchFormat(entree),
-                sortie: dateFrenchFormat(sortie),
-                agent: agent,
-                arrestReport: generateNumeroDossier(arrestReport),
-                arrestFolder: generateNumeroDossier(arrestFolder),
-                photo,
-              };
-              sendCelluleToDiscord(dataDiscord);
-            });
+            dispatch(add_prison(createPrison)).then((res) => {});
           }
         );
       });

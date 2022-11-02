@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Modal from "../../../components/Shared/Modal";
 import { EditPencilIcon, TrashIcon } from "../../../components/SVG";
 import { get_allGrades } from "../../../redux/actions/Grades.action";
 import {
@@ -10,6 +11,8 @@ import {
   TableAction,
 } from "../Ressources.styled";
 import { GradeBody, GradeWrapper } from "./Grade.styled";
+import EditModal from "./Modal/EditModal";
+import ModalReducer from "./reducer/ModalReducer";
 
 const Grades = () => {
   const GradesSelectors = useSelector((state) => state.GradesReducer);
@@ -18,6 +21,31 @@ const Grades = () => {
   useEffect(() => {
     dispatch(get_allGrades());
   }, []);
+
+  const [modalState, dispatchModalState] = useReducer(ModalReducer, {
+    isOpen: false,
+    view: "",
+    gradeData: "",
+  });
+
+  const toogleModal = (view) => {
+    dispatchModalState({
+      type: "TOOGLE_MODAL",
+      payload: { view, gradeData: modalState.gradeData },
+    });
+  };
+
+  const Render = ({ view, gradeData }) => {
+    switch (view) {
+      case "edit":
+        return (
+          <EditModal gradeData={gradeData} onClose={() => toogleModal(view)} />
+        );
+
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -52,7 +80,23 @@ const Grades = () => {
 
                     <td>
                       <TableAction>
-                        <OutlineBtnAction className="edit">
+                        <OutlineBtnAction
+                          className="edit"
+                          onClick={() =>
+                            dispatchModalState({
+                              type: "TOOGLE_MODAL",
+                              payload: {
+                                view: "edit",
+                                gradeData: {
+                                  grade: grade.id,
+                                  nom: grade.nom,
+                                  categorie: grade.categorie,
+                                  rang: grade.rang,
+                                },
+                              },
+                            })
+                          }
+                        >
                           <EditPencilIcon />
                         </OutlineBtnAction>
                         <OutlineBtnAction className="delete">
@@ -66,6 +110,20 @@ const Grades = () => {
           </Table>
         </GradeBody>
       </GradeWrapper>
+      <Modal isOpen={modalState.isOpen}>
+        {modalState.view.includes("delete") ? (
+          /*     <DeleteView>
+            {modalState.view && <Render view={modalState.view} />}
+          </DeleteView> */
+          <></>
+        ) : (
+          <>
+            {modalState.view && (
+              <Render view={modalState.view} gradeData={modalState.gradeData} />
+            )}
+          </>
+        )}
+      </Modal>
     </>
   );
 };

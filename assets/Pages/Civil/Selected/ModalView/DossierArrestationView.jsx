@@ -37,6 +37,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
 
   const dispatch = useDispatch();
   const agent = useSelector((state) => state.AuthenticateReducer);
+  const civilSelectore = useSelector((state) => state.CivilReducer);
 
   const token = agent.token;
 
@@ -257,9 +258,9 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
       rapport: inputState.rapport,
       idAgent: agent.idAgent,
     };
-
+    const civilData = civilSelectore.selected;
     token &&
-      dispatch(add_dossierArrestation(data)).then(() => {
+      dispatch(add_dossierArrestation(data, civilData)).then(() => {
         closeModal();
       });
   };
