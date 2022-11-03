@@ -180,6 +180,11 @@ export const FluentMoreDropDownContainer = styled.div`
   .delete {
     color: #ba5a3c;
   }
+
+  .disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;
 
 export const FluentMoreActiontext = styled.p`

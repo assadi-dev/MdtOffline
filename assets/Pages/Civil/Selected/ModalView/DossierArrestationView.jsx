@@ -297,6 +297,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
                       autoFocus
                       onChange={handleChangeValue}
                       value={inputState.lieux}
+                      required={true}
                     />
                   </td>
                   <td>
@@ -306,6 +307,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
                       className="entreCellule"
                       onChange={handleChangeValue}
                       value={inputState.entreeCellule}
+                      required={true}
                     />
                   </td>
                 </tr>

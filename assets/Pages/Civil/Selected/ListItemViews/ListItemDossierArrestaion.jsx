@@ -108,6 +108,7 @@ const ListItemDossierArrestaion = ({
               isOpen={openMore}
               editFunc={handleEdit}
               deleteFunc={handleDelete}
+              disabledEdit={isEnclosed}
             />
           </RowIcon>
         </RowListItemView>
