@@ -206,3 +206,35 @@ export const FluentMoreActiontext = styled.p`
     }
   }
 `;
+
+export const AlertInfo = styled.div`
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid var(--danger-color);
+  color: var(--danger-color);
+  background-color: #f8d7da;
+  margin: 1rem auto;
+  padding: 0.5rem 1.3rem;
+`;
+
+export const HeaderInfo = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
+export const AlertInfoIcon = styled.span`
+  width: 35px;
+  height: 35px;
+  svg {
+    width: 35px;
+    height: 35px;
+  }
+`;
+
+export const AlertInfoBody = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+`;

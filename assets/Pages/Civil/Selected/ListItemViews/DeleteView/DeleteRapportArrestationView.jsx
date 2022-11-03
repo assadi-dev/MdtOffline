@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
+import { AlertTriangleFill } from "../../../../../components/SVG";
 import { getOneCivil } from "../../../../../redux/actions/Civil.action";
 import { delete_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 
@@ -10,6 +11,12 @@ import {
   DeleteHeadTitleView,
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
+import {
+  AlertInfo,
+  AlertInfoBody,
+  AlertInfoIcon,
+  HeaderInfo,
+} from "../ListViewItems.styled";
 
 const DeleteRapportArrestationView = ({ id, onClose, civil }) => {
   let numeroFormat = numeral(id);
@@ -45,6 +52,21 @@ const DeleteRapportArrestationView = ({ id, onClose, civil }) => {
           </h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </DeleteHeadTitleView>
+
+        <AlertInfo>
+          <HeaderInfo>
+            <AlertInfoIcon>
+              <AlertTriangleFill />
+            </AlertInfoIcon>
+          </HeaderInfo>
+          <AlertInfoBody>
+            <p>
+              {" "}
+              Cette action entainera la suppression des données cellules lies à
+              ce rapport d'arrestation. Ainsi qu'au dossier d'arrestation liée
+            </p>
+          </AlertInfoBody>
+        </AlertInfo>
 
         <DeleteSectionbutton>
           <div className="col-validate">

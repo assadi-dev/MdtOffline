@@ -13,6 +13,13 @@ import {
 } from "../../ModalView/ModalView.styled";
 import { delete_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 import { getOneCivil } from "../../../../../redux/actions/Civil.action";
+import { AlertTriangleFill } from "../../../../../components/SVG";
+import {
+  AlertInfo,
+  AlertInfoBody,
+  AlertInfoIcon,
+  HeaderInfo,
+} from "../ListViewItems.styled";
 
 const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
   let numeroFormat = numeral(id);
@@ -46,6 +53,21 @@ const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
           </h2>
           <CloseModalBtn className="closeBtn" onClick={closeModal} />
         </DeleteHeadTitleView>
+
+        <AlertInfo>
+          <HeaderInfo>
+            <AlertInfoIcon>
+              <AlertTriangleFill />
+            </AlertInfoIcon>
+          </HeaderInfo>
+          <AlertInfoBody>
+            <p>
+              {" "}
+              Cette action entainera la suppression des données prisons lies à
+              ce dossier d'arrestation. Ainsi qu'au rapport d'arrestation liée
+            </p>
+          </AlertInfoBody>
+        </AlertInfo>
 
         <DeleteSectionbutton>
           <div className="col-validate">
