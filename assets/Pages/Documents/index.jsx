@@ -52,7 +52,7 @@ const Documents = () => {
     <DocumentWrapper>
       <DocumentRowBtn>
         <SelectButton onClick={() => toogleModal("rapportDeputyTrainy")}>
-          Rapport Deputy Trainy
+          Rapport Rookie / Deputy Trainee
         </SelectButton>
         <SelectButton onClick={() => toogleModal("plainte")}>
           Plainte

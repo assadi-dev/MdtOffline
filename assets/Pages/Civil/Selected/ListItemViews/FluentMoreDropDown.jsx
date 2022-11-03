@@ -5,16 +5,31 @@ import {
   FluentMoreDropDownContainer,
 } from "./ListViewItems.styled";
 
-const FluentMoreDropDown = ({ isOpen, editFunc, deleteFunc }) => {
+const FluentMoreDropDown = ({
+  isOpen,
+  editFunc,
+  deleteFunc,
+  disabledEdit,
+  disableDelete,
+}) => {
   return (
     <>
       <FluentMoreDropDownContainer isOpen={isOpen}>
-        <FluentMoreActiontext className="edit" onClick={editFunc}>
-          <span className="edit">
-            <EditPencilIcon />
-          </span>
-          Editer
-        </FluentMoreActiontext>
+        {!disabledEdit ? (
+          <FluentMoreActiontext className="edit" onClick={editFunc}>
+            <span className="edit">
+              <EditPencilIcon />
+            </span>
+            Editer
+          </FluentMoreActiontext>
+        ) : (
+          <FluentMoreActiontext className="edit disabled">
+            <span className="edit">
+              <EditPencilIcon />
+            </span>
+            Editer
+          </FluentMoreActiontext>
+        )}
         <FluentMoreActiontext className="delete" onClick={deleteFunc}>
           <span className="delete">
             <TrashIcon />

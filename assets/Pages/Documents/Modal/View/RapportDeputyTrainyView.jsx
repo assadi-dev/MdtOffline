@@ -77,17 +77,19 @@ const RapportDeputyTrainyView = ({ onClose }) => {
     <>
       <FormContainer onSubmit={formik.handleSubmit}>
         <HeaderModal>
-          <h2 className="formTitle">Creer un Rapport Deputy Trainy</h2>
+          <h2 className="formTitle">
+            Creer un Rapport Rookie / Deputy Trainee
+          </h2>
 
           <CloseModal onClick={() => onClose()} />
         </HeaderModal>
 
         <FormBodyContainer>
           <FormControl>
-            <FormLabel>Deputy Trainy concerné</FormLabel>
+            <FormLabel>Rookie / Deputy Trainee concerné</FormLabel>
             <Select
               inputName={"deputyTrainyConcerned"}
-              placeholder="Deputy Trainy Concerné"
+              placeholder="Rookie/Deputy Trainy Concerné"
               onChange={formik.handleChange}
               value={formik.values.deputyTrainyConcerned}
             >
