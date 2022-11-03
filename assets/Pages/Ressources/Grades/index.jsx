@@ -88,7 +88,7 @@ const Grades = () => {
                               payload: {
                                 view: "edit",
                                 gradeData: {
-                                  grade: grade.id,
+                                  id: grade.id,
                                   nom: grade.nom,
                                   categorie: grade.categorie,
                                   rang: grade.rang,

@@ -1,5 +1,5 @@
 import React from "react";
-import { GET_ALL_GRADES } from "../types/Grades.type";
+import { EDIT_GRADE, GET_ALL_GRADES } from "../types/Grades.type";
 const initialState = {
   collections: [],
   selected: [],
@@ -13,6 +13,16 @@ const GradesReducer = (state = initialState, action) => {
   switch (type) {
     case GET_ALL_GRADES:
       return { ...state, collections: payload, isReady: true };
+    case EDIT_GRADE:
+      let updateGradeCollection = state.collections;
+      updateGradeCollection = updateGradeCollection.map((grade) => {
+        if (grade.id === payload.id) {
+          return { ...payload };
+        }
+        return grade;
+      });
+
+      return { ...state, collections: updateGradeCollection, isReady: true };
 
     default:
       return state;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../../../../components/Shared/Input";
 import {
   CloseModal,
@@ -10,9 +10,14 @@ import {
   SubmitButton,
 } from "../Grade.styled";
 import { useFormik } from "formik";
+import { sleep } from "../../../../utils/timer";
+import { useDispatch } from "react-redux";
+import { edit_grades } from "../../../../redux/actions/Grades.action";
 
 const EditModal = ({ gradeData, onClose }) => {
   const { id, nom, rang, categorie } = gradeData;
+  const [ready, setReady] = useState(false);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -22,57 +27,61 @@ const EditModal = ({ gradeData, onClose }) => {
       rang: rang,
     },
     onSubmit: (values) => {
-      console.log(values);
       let data = {
         ...values,
-        id: id,
-        nom: nom,
-        categorie: categorie,
-        rang: rang,
+        id: values.id,
+        nom: values.nom,
+        categorie: values.categorie,
+        rang: values.rang,
       };
-
-      onClose();
+      dispatch(edit_grades(id, data)).then(() => {
+        onClose();
+      });
     },
   });
 
   return (
     <>
-      <ModalViewContainer>
+      <ModalViewContainer onSubmit={formik.handleSubmit}>
         <HeaderModal>
           {" "}
           <h2 className="formTitle">{`${nom}`}</h2>
           <CloseModal onClick={() => onClose()} />
         </HeaderModal>
 
-        <FormBodyContainer>
-          <FormControl>
-            <Input
-              required
-              inputName={"nom"}
-              onChange={formik.handleChange}
-              values={formik.values.nom}
-              placeholder="Nom"
-            />
-          </FormControl>
-          <FormControl>
-            <Input
-              required
-              inputName={"categorie"}
-              onChange={formik.handleChange}
-              values={formik.values.categorie}
-              placeholder="Categorie"
-            />
-          </FormControl>
-          <FormControl>
-            <Input
-              required
-              inputName={"rang"}
-              onChange={formik.handleChange}
-              values={formik.values.rang}
-              placeholder="Nom"
-            />
-          </FormControl>
-        </FormBodyContainer>
+        {
+          <FormBodyContainer>
+            <FormControl>
+              <Input
+                required
+                inputName={"nom"}
+                onChange={formik.handleChange}
+                value={formik.values.nom}
+                placeholder="Nom"
+              />
+            </FormControl>
+            <FormControl>
+              <Input
+                required
+                inputName={"categorie"}
+                onChange={formik.handleChange}
+                value={formik.values.categorie}
+                placeholder="Categorie"
+              />
+            </FormControl>
+            <FormControl>
+              <Input
+                required
+                inputName={"rang"}
+                onChange={formik.handleChange}
+                value={formik.values.rang}
+                placeholder="Rang ex: 1,2,3"
+                type="number"
+                min="1"
+              />
+            </FormControl>
+          </FormBodyContainer>
+        }
         <FormBottomRow>
           <SubmitButton>Mettre à jour</SubmitButton>
         </FormBottomRow>
