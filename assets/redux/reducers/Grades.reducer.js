@@ -1,5 +1,10 @@
 import React from "react";
-import { EDIT_GRADE, GET_ALL_GRADES } from "../types/Grades.type";
+import {
+  ADD_GRADE,
+  DELETE_GRADE,
+  EDIT_GRADE,
+  GET_ALL_GRADES,
+} from "../types/Grades.type";
 const initialState = {
   collections: [],
   selected: [],
@@ -13,6 +18,14 @@ const GradesReducer = (state = initialState, action) => {
   switch (type) {
     case GET_ALL_GRADES:
       return { ...state, collections: payload, isReady: true };
+
+    case ADD_GRADE:
+      return {
+        ...state,
+        collections: [...state.collections, payload],
+        isReady: true,
+      };
+
     case EDIT_GRADE:
       let updateGradeCollection = state.collections;
       updateGradeCollection = updateGradeCollection.map((grade) => {
@@ -24,6 +37,12 @@ const GradesReducer = (state = initialState, action) => {
 
       return { ...state, collections: updateGradeCollection, isReady: true };
 
+    case DELETE_GRADE:
+      let removeGradeCollection = state.collections;
+      removeGradeCollection = removeGradeCollection.filter(
+        (grade) => grade.id != payload.id
+      );
+      return { ...state, collections: removeGradeCollection, isReady: true };
     default:
       return state;
   }

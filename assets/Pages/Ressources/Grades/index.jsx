@@ -11,6 +11,7 @@ import {
   TableAction,
 } from "../Ressources.styled";
 import { GradeBody, GradeWrapper } from "./Grade.styled";
+import DeleteModal from "./Modal/DeleteModal";
 import EditModal from "./Modal/EditModal";
 import ModalReducer from "./reducer/ModalReducer";
 
@@ -40,6 +41,15 @@ const Grades = () => {
       case "edit":
         return (
           <EditModal gradeData={gradeData} onClose={() => toogleModal(view)} />
+        );
+
+      case "delete":
+        return (
+          <DeleteModal
+            id={gradeData.id}
+            name={gradeData.nom}
+            onClose={() => toogleModal(view)}
+          />
         );
 
       default:
@@ -99,7 +109,21 @@ const Grades = () => {
                         >
                           <EditPencilIcon />
                         </OutlineBtnAction>
-                        <OutlineBtnAction className="delete">
+                        <OutlineBtnAction
+                          className="delete"
+                          onClick={() =>
+                            dispatchModalState({
+                              type: "TOOGLE_MODAL",
+                              payload: {
+                                view: "delete",
+                                gradeData: {
+                                  id: grade.id,
+                                  nom: grade.nom,
+                                },
+                              },
+                            })
+                          }
+                        >
                           <TrashIcon />
                         </OutlineBtnAction>
                       </TableAction>
@@ -111,18 +135,13 @@ const Grades = () => {
         </GradeBody>
       </GradeWrapper>
       <Modal isOpen={modalState.isOpen}>
-        {modalState.view.includes("delete") ? (
-          /*     <DeleteView>
-            {modalState.view && <Render view={modalState.view} />}
-          </DeleteView> */
-          <></>
-        ) : (
+        {
           <>
             {modalState.view && (
               <Render view={modalState.view} gradeData={modalState.gradeData} />
             )}
           </>
-        )}
+        }
       </Modal>
     </>
   );

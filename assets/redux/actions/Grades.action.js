@@ -1,5 +1,10 @@
 import Api from "../../service/Api/Api";
-import { DELETE_GRADE, EDIT_GRADE, GET_ALL_GRADES } from "../types/Grades.type";
+import {
+  ADD_GRADE,
+  DELETE_GRADE,
+  EDIT_GRADE,
+  GET_ALL_GRADES,
+} from "../types/Grades.type";
 
 export const get_allGrades = () => {
   return async (dispatch) => {
@@ -7,6 +12,17 @@ export const get_allGrades = () => {
       Api.get("/grades").then((res) => {
         const data = res.data;
         dispatch({ type: GET_ALL_GRADES, payload: data });
+      });
+    } catch (error) {}
+  };
+};
+
+export const add_grade = (data) => {
+  return async (dispatch) => {
+    try {
+      Api.post(`/grades`, data).then((res) => {
+        const data = res.data;
+        dispatch({ type: ADD_GRADE, payload: data });
       });
     } catch (error) {}
   };
@@ -27,7 +43,7 @@ export const delete_grades = (id) => {
   return async (dispatch) => {
     try {
       Api.delete(`/grades/${id}`).then(() => {
-        dispatch({ type: DELETE_GRADE, payload: id });
+        dispatch({ type: DELETE_GRADE, payload: { id } });
       });
     } catch (error) {}
   };
