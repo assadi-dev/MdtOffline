@@ -11,6 +11,7 @@ import {
   TableAction,
 } from "../Ressources.styled";
 import { GradeBody, GradeWrapper } from "./Grade.styled";
+import AddModal from "./Modal/AddModal";
 import DeleteModal from "./Modal/DeleteModal";
 import EditModal from "./Modal/EditModal";
 import ModalReducer from "./reducer/ModalReducer";
@@ -38,6 +39,11 @@ const Grades = () => {
 
   const Render = ({ view, gradeData }) => {
     switch (view) {
+      case "add":
+        return (
+          <AddModal gradeData={gradeData} onClose={() => toogleModal(view)} />
+        );
+
       case "edit":
         return (
           <EditModal gradeData={gradeData} onClose={() => toogleModal(view)} />
@@ -63,7 +69,17 @@ const Grades = () => {
         <HeaderRowAction>
           {" "}
           <div></div>
-          <Button className="addBtn">Ajouter</Button>{" "}
+          <Button
+            className="addBtn"
+            onClick={() =>
+              dispatchModalState({
+                type: "TOOGLE_MODAL",
+                payload: { view: "add", gradeData: [] },
+              })
+            }
+          >
+            Ajouter
+          </Button>{" "}
         </HeaderRowAction>
 
         <GradeBody>
