@@ -1,7 +1,10 @@
 import { DOMAIN } from "../../../../constants/localStorage";
 import sendDiscord from "../../../../service/Api/SendDiscord";
 import iconSAPD from "../../../../ressources/img/logoSapd.png";
-import { SEND_DISCORD_CELLS } from "../../../../constants/Webhooks";
+import {
+  SEND_DISCORD_CELLS,
+  SEND_DISCORD_JAIL,
+} from "../../../../constants/Webhooks";
 
 export const sendCelluleToDiscord = (data) => {
   const { name, entree, sortie, agent, photo, arrestReport, arrestFolder } =
