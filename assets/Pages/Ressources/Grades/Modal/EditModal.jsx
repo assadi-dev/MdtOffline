@@ -32,7 +32,7 @@ const EditModal = ({ gradeData, onClose }) => {
         id: values.id,
         nom: values.nom,
         categorie: values.categorie,
-        rang: values.rang,
+        rang: values.rang.toString(),
       };
       dispatch(edit_grades(id, data)).then(() => {
         onClose();

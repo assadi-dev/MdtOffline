@@ -20,7 +20,9 @@ import {
   ALL_ACCESS,
   SUPERVISOR_ACCESS,
   COMMAND_STAFF_ACCESS,
+  POLICE_ACADEMY,
 } from "../constants/acces";
+import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 
 export default [
   {
@@ -97,7 +99,7 @@ export default [
   {
     label: "Police Academy",
     path: "police-academy",
-    element: <RedirectRoutes allowedGrades={ALL_ACCESS} />,
+    element: <RedirectRoutes allowedGrades={POLICE_ACADEMY} />,
     index: false,
     subNavigation: [],
   },
@@ -117,6 +119,13 @@ export default [
         label: "Effectifs",
         path: "effectifs",
         element: <Effectifs />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Comptabilités",
+        path: "comptabilites",
+        element: <Comptabilite />,
         index: false,
         subNavigation: [],
       },

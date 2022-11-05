@@ -68,4 +68,8 @@ export const Table = styled.table`
   .td-center {
     text-align: center;
   }
+
+  .td-start {
+    text-align: left;
+  }
 `;
