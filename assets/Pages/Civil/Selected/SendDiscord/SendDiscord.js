@@ -58,5 +58,5 @@ export const sendPrisonToDiscord = (data) => {
     ],
   });
 
-  return sendDiscord.post(SEND_DISCORD_CELLS, payload);
+  return sendDiscord.post(SEND_DISCORD_JAIL, payload);
 };
