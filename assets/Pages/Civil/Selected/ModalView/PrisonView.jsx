@@ -73,7 +73,7 @@ const PrisonView = ({ onClose, idCivil, listPrison }) => {
                 <ListPrisonItem
                   key={prison.id}
                   id={prison.id}
-                  numero={prison.arrestReport}
+                  numero={prison.id}
                   agent={getAgentNameById(listAgent, prison.idAgent)}
                   entree={prison.entree}
                   sortie={prison.sortie}

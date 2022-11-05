@@ -73,26 +73,30 @@ const ListItemRapportArrestation = ({
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
-          {isAllowedAction(SUPERVISOR_ACCESS) && (
-            <RowIcon>
-              {" "}
-              <NumberView className="text-end">
-                N°{numeroFormat.format("000")}
-              </NumberView>
-              <MoreIconBtn
-                className="m-left-1"
-                onClick={() => setOpenMore(!openMore)}
-                ref={moreIconBtnRef}
-              >
-                <FluentMoreCircleFill />
-              </MoreIconBtn>
-              <FluentMoreDropDown
-                isOpen={openMore}
-                editFunc={handleEdit}
-                deleteFunc={handleDelete}
-              />
-            </RowIcon>
-          )}
+
+          <RowIcon>
+            {" "}
+            <NumberView className="text-end">
+              N°{numeroFormat.format("000")}
+            </NumberView>
+            {isAllowedAction(SUPERVISOR_ACCESS) && (
+              <>
+                {" "}
+                <MoreIconBtn
+                  className="m-left-1"
+                  onClick={() => setOpenMore(!openMore)}
+                  ref={moreIconBtnRef}
+                >
+                  <FluentMoreCircleFill />
+                </MoreIconBtn>
+                <FluentMoreDropDown
+                  isOpen={openMore}
+                  editFunc={handleEdit}
+                  deleteFunc={handleDelete}
+                />{" "}
+              </>
+            )}
+          </RowIcon>
         </RowListItemView>
         <ListViewOffence>
           {" "}
