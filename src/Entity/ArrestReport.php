@@ -91,6 +91,7 @@ class ArrestReport
 
     /**
      * @ORM\OneToOne(targetEntity=ArrestFolder::class, inversedBy="arrestReport", cascade={"persist", "remove"})
+     * @Groups({"read:civil:item"})
      * 
      * 
      */

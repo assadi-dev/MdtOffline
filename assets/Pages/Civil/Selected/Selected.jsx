@@ -464,6 +464,7 @@ const CivilSelected = () => {
                       peine={rapport.peine}
                       conversionUp={rapport.conversionUp}
                       dispatchOpenModal={dispatch}
+                      disabledEdit={rapport.arrestFolder ? true : false}
                     />
                   );
                 })

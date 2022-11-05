@@ -34,6 +34,7 @@ const ListItemRapportArrestation = ({
   offence,
   conversionUp,
   dispatchOpenModal,
+  disabledEdit,
 }) => {
   let numeroFormat = numeral(numero);
 
@@ -93,6 +94,7 @@ const ListItemRapportArrestation = ({
                   isOpen={openMore}
                   editFunc={handleEdit}
                   deleteFunc={handleDelete}
+                  disabledEdit={disabledEdit}
                 />{" "}
               </>
             )}
