@@ -28,6 +28,8 @@ import { sleep } from "../../../../utils/timer";
 import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
 import useListAgent from "../../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../../utils/userData";
+import { SUPERVISOR_ACCESS } from "../../../../constants/acces";
+import { isAllowedAction } from "../helper";
 
 const ListItemDossierArrestaion = ({
   id,
@@ -93,24 +95,26 @@ const ListItemDossierArrestaion = ({
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
-          <RowIcon>
-            <NumberView className="text-end">
-              N°{numeroFormat.format("000")}
-            </NumberView>
-            <MoreIconBtn
-              className="m-left-1"
-              onClick={() => setOpenMore(!openMore)}
-              ref={moreIconBtnRef}
-            >
-              <FluentMoreCircleFill />
-            </MoreIconBtn>
-            <FluentMoreDropDown
-              isOpen={openMore}
-              editFunc={handleEdit}
-              deleteFunc={handleDelete}
-              disabledEdit={isEnclosed}
-            />
-          </RowIcon>
+          {isAllowedAction(SUPERVISOR_ACCESS) && (
+            <RowIcon>
+              <NumberView className="text-end">
+                N°{numeroFormat.format("000")}
+              </NumberView>
+              <MoreIconBtn
+                className="m-left-1"
+                onClick={() => setOpenMore(!openMore)}
+                ref={moreIconBtnRef}
+              >
+                <FluentMoreCircleFill />
+              </MoreIconBtn>
+              <FluentMoreDropDown
+                isOpen={openMore}
+                editFunc={handleEdit}
+                deleteFunc={handleDelete}
+                disabledEdit={isEnclosed}
+              />
+            </RowIcon>
+          )}
         </RowListItemView>
         <ListViewOffence>
           {" "}

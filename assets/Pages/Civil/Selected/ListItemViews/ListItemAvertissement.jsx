@@ -17,6 +17,8 @@ import FluentMoreDropDown from "./FluentMoreDropDown";
 import { sleep } from "../../../../utils/timer";
 import moreActionReducer from "../Reducer/moreActionReducer";
 import { TOGGLE_MODAL } from "../Reducer/ModalReducer";
+import { isAllowedAction } from "../helper";
+import { SUPERVISOR_ACCESS } from "../../../../constants/acces";
 
 const ListItemAvertissement = ({
   id,
@@ -69,24 +71,26 @@ const ListItemAvertissement = ({
   return (
     <ListContainer>
       <ListContent>
-        <RowIcon>
-          {" "}
-          <NumberView className="text-end">
-            N°{numeroFormat.format("000")}
-          </NumberView>
-          <MoreIconBtn
-            className="m-left-1 "
-            onClick={() => setOpenMore(!openMore)}
-            ref={moreIconBtnRef}
-          >
-            <FluentMoreCircleFill />
-          </MoreIconBtn>
-          <FluentMoreDropDown
-            isOpen={openMore}
-            editFunc={handleEdit}
-            deleteFunc={handleDelete}
-          />
-        </RowIcon>
+        {isAllowedAction(SUPERVISOR_ACCESS) && (
+          <RowIcon>
+            {" "}
+            <NumberView className="text-end">
+              N°{numeroFormat.format("000")}
+            </NumberView>
+            <MoreIconBtn
+              className="m-left-1 "
+              onClick={() => setOpenMore(!openMore)}
+              ref={moreIconBtnRef}
+            >
+              <FluentMoreCircleFill />
+            </MoreIconBtn>
+            <FluentMoreDropDown
+              isOpen={openMore}
+              editFunc={handleEdit}
+              deleteFunc={handleDelete}
+            />
+          </RowIcon>
+        )}
 
         <TitleItemView>
           Fait à : <LieuxItemView>{lieux}</LieuxItemView>
