@@ -46,8 +46,11 @@ const ListItemTraffic = ({
       }
     };
 
-    document.addEventListener("mousedown", closeDropDown);
-    return () => document.removeEventListener("mousedown", closeDropDown);
+    isAllowedAction(SUPERVISOR_ACCESS) &&
+      document.addEventListener("mousedown", closeDropDown);
+    return () =>
+      isAllowedAction(SUPERVISOR_ACCESS) &&
+      document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
   const handleEdit = () => {

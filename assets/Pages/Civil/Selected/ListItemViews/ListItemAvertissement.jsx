@@ -57,15 +57,21 @@ const ListItemAvertissement = ({
   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
-      if (!moreIconBtnRef.current.contains(target)) {
+      if (
+        isAllowedAction(SUPERVISOR_ACCESS) &&
+        !moreIconBtnRef.current.contains(target)
+      ) {
         sleep(100).then(() => {
           setOpenMore(false);
         });
       }
     };
 
-    document.addEventListener("mousedown", closeDropDown);
-    return () => document.removeEventListener("mousedown", closeDropDown);
+    isAllowedAction(SUPERVISOR_ACCESS) &&
+      document.addEventListener("mousedown", closeDropDown);
+    return () =>
+      isAllowedAction(SUPERVISOR_ACCESS) &&
+      document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
   return (

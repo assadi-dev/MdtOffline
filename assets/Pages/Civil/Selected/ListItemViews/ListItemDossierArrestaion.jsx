@@ -85,9 +85,12 @@ const ListItemDossierArrestaion = ({
       }
     };
 
-    document.addEventListener("mousedown", closeDropDown);
+    isAllowedAction(SUPERVISOR_ACCESS) &&
+      document.addEventListener("mousedown", closeDropDown);
 
-    return () => document.removeEventListener("mousedown", closeDropDown);
+    return () =>
+      isAllowedAction(SUPERVISOR_ACCESS) &&
+      document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
   return (
