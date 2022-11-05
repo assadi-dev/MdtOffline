@@ -77,6 +77,7 @@ class PriseDeService
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read:agent:item"})
      */
     private $isActive;
 
