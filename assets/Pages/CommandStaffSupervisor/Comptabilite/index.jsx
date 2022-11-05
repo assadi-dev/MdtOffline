@@ -4,6 +4,7 @@ import SwitchButton from "../../../components/Shared/SwitchButton";
 import { ChevronLeft, ChevronRight } from "../../../components/SVG";
 import { get_allAgent } from "../../../redux/actions/Agents.action";
 import { get_allGrades } from "../../../redux/actions/Grades.action";
+import { updateIsPaidService } from "../../../redux/actions/PriseDeService.action";
 import {
   FormatDuration,
   getCurrentWeekNumber,
@@ -15,7 +16,12 @@ import {
   ComptabiliteWrapper,
   HoursSheetHeaderRowBtn,
 } from "./Comptabilite.styled";
-import { getIsServiceActive, getTotalHourByWeek } from "./helper";
+import {
+  getIsServiceActive,
+  getIsServicePaid,
+  getServicebyWeek,
+  getTotalHourByWeek,
+} from "./helper";
 import ServiceState from "./ServiceState";
 
 const Comptabilite = () => {
@@ -23,10 +29,21 @@ const Comptabilite = () => {
   const AgentsSelector = useSelector((state) => state.AgentsReducer);
   const [week, setWeek] = useState(parseInt(getCurrentWeekNumber()));
 
+  const [paidState, setPaidState] = useState(false);
+
   const handleCheckPayement = (id, e) => {
     let checkState = e.target.checked;
-    let data = { payement: checkState };
-    // dispatch(validation_user(id, data));
+    let currenAgent = AgentsSelector.collections.find(
+      (agent) => agent.id == id
+    );
+    let servicesOfWeek = getServicebyWeek(currenAgent, week);
+    let submitServicesOfWeek = {
+      idAgent: id,
+      week,
+      priseServiceByWeek: servicesOfWeek,
+      paidValue: servicesOfWeek.length > 0 ? checkState : false,
+    };
+    dispatch(updateIsPaidService(submitServicesOfWeek));
   };
 
   const setWeekCounter = (type) => {
@@ -43,11 +60,13 @@ const Comptabilite = () => {
   const agents = useMemo(() => {
     if (AgentsSelector.collections.length > 0) {
       return AgentsSelector.collections.map((agent) => ({
+        id: agent.id,
         nom: `${agent.name}`,
         matricule: agent.matricule,
         grade: agent.grade.nom,
         totalDuration: getTotalHourByWeek(agent, week),
         serviceStatus: getIsServiceActive(agent, week) ? "actif" : "inactif",
+        paidStatus: getIsServicePaid(agent, week),
       }));
     }
     return [];
@@ -80,7 +99,7 @@ const Comptabilite = () => {
             </thead>
             <tbody>
               {agents.map((agent) => (
-                <tr>
+                <tr key={agent.id}>
                   <td className="td-start">{agent.nom}</td>
                   <td className="td-center">{agent.matricule}</td>
                   <td className="td-center">{agent.grade}</td>
@@ -93,10 +112,10 @@ const Comptabilite = () => {
                   <td className="td-center">
                     {" "}
                     <SwitchButton
-                      checked={false}
+                      checked={agent.paidStatus}
                       sliderOffColor={"var( --danger-color)"}
                       sliderClass="validatSwitchBtn"
-                      onChange={(e) => handleCheckPayement(10, e)}
+                      onChange={(e) => handleCheckPayement(agent.id, e)}
                     />
                   </td>
                 </tr>

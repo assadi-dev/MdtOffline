@@ -21,8 +21,28 @@ export const getIsServiceActive = (agent, week) => {
     let hasServiceActive = servicesOfWeek.find(
       (service) => service.isActive === true
     );
-    console.log(hasServiceActive);
-    if (hasServiceActive != undefined) return true;
+    if (hasServiceActive) return true;
   }
   return false;
+};
+
+export const getIsServicePaid = (agent, week) => {
+  if (agent.priseDeServices !== null || agent.priseDeServices.length > 0) {
+    let servicesOfWeek = agent.priseDeServices.filter(
+      (service) => service.week == week
+    );
+
+    let hasServiceActive = servicesOfWeek.find(
+      (service) => service.isPaid === true
+    );
+    if (hasServiceActive) return true;
+  }
+  return false;
+};
+
+export const getServicebyWeek = (agent, week) => {
+  if (agent.priseDeServices !== null || agent.priseDeServices.length > 0) {
+    return agent.priseDeServices.filter((service) => service.week == week);
+  }
+  return [];
 };

@@ -81,6 +81,12 @@ class PriseDeService
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read:agent:item"})
+     */
+    private $isPaid;
+
 
 
     public function __construct()
@@ -88,6 +94,7 @@ class PriseDeService
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTime();
         $this->isActive = false;
+        $this->isPaid = false;
     }
 
 
@@ -190,6 +197,18 @@ class PriseDeService
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function isIsPaid(): ?bool
+    {
+        return $this->isPaid;
+    }
+
+    public function setIsPaid(bool $isPaid): self
+    {
+        $this->isPaid = $isPaid;
 
         return $this;
     }

@@ -1,4 +1,5 @@
 import Api from "../../service/Api/Api";
+import { UPDATE_PAID_PRISE_DE_SERVICES } from "../types/Agent.types";
 import {
   ADD_PRISE_DE_SERVICES,
   DELETE_PRISE_DE_SERVICES,
@@ -89,6 +90,32 @@ export const delete_priseServices = (id) => {
       Api.delete(`/prise_de_services/${id}`).then(() => {
         dispatch({ type: DELETE_PRISE_DE_SERVICES, payload: { id } });
       });
+    } catch (error) {}
+  };
+};
+
+export const updateIsPaidService = (servicesOfWeek) => {
+  return async (dispatch) => {
+    try {
+      let idSevices = servicesOfWeek.priseServiceByWeek.map(
+        (services) => services.id
+      );
+
+      const { idAgent, paidValue } = servicesOfWeek;
+
+      if (idSevices.length > 0) {
+        Promise.all(
+          idSevices.map((id) => {
+            dispatch({
+              type: UPDATE_PAID_PRISE_DE_SERVICES,
+              payload: { idAgent, id, isPaid: paidValue },
+            });
+            Api.put(`/prise_de_services/${id}`, {
+              isPaid: paidValue,
+            }).then((res) => {});
+          })
+        );
+      }
     } catch (error) {}
   };
 };
