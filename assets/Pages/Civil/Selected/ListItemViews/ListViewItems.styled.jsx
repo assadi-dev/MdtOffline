@@ -106,6 +106,11 @@ export const ClotureButton = styled.button`
   :active {
     opacity: 0.5;
   }
+
+  :disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 export const MoreIconBtn = styled.span`

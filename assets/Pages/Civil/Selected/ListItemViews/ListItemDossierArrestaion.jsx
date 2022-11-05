@@ -144,7 +144,12 @@ const ListItemDossierArrestaion = ({
         {isEnclosed ? (
           <p>Cloturé</p>
         ) : (
-          <ClotureButton onClick={onEnclose}>CLOTURER</ClotureButton>
+          <ClotureButton
+            disabled={isAllowedAction(SUPERVISOR_ACCESS) ? false : true}
+            onClick={onEnclose}
+          >
+            CLOTURER
+          </ClotureButton>
         )}
       </div>
     </ListContainer>
