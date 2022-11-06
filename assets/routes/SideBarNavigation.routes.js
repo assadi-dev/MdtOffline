@@ -31,8 +31,8 @@ export default [
         submenu: [],
       },
       {
-        path: "/note-de-frais",
-        label: "Notes de frais",
+        path: "/saisies",
+        label: "Saisies",
         selected: false,
         openDropdown: false,
         end: false,
