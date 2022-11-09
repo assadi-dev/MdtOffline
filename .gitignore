@@ -37,3 +37,4 @@ yarn.lock
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 /uploads
+/conf-template.conf
