@@ -18,6 +18,7 @@ import ChefAccusation from "../Pages/Ressources/ChefAccusations";
 import Grades from "../Pages/Ressources/Grades";
 import {
   ALL_ACCESS,
+  EFFECTIF,
   SUPERVISOR_ACCESS,
   COMMAND_STAFF_ACCESS,
   POLICE_ACADEMY,
@@ -29,7 +30,7 @@ export default [
   {
     label: "Services",
     path: "services",
-    element: <RedirectRoutes allowedGrades={ALL_ACCESS} />,
+    element: <RedirectRoutes allowedGrades={EFFECTIF} />,
     subNavigation: [
       {
         label: "Services",
@@ -52,13 +53,6 @@ export default [
     path: "doj",
     element: <RedirectRoutes allowedGrades={DOJ} />,
     index: false,
-    subNavigation: [],
-  },
-
-  {
-    label: "MDT",
-    path: "mdt",
-    element: <MDT />,
     subNavigation: [
       {
         label: "Civil",
@@ -67,26 +61,48 @@ export default [
         index: true,
         subNavigation: [],
       },
+    ],
+  },
+
+  {
+    label: "MDT",
+    path: "mdt",
+    element: <MDT />,
+    subNavigation: [
       {
-        label: "Documents",
-        path: "documents",
-        element: <Documents />,
-        index: false,
-        subNavigation: [],
-      },
-      {
-        label: "Pannic Button",
-        path: "panic-button",
-        element: <PanicButton />,
-        index: false,
-        subNavigation: [],
-      },
-      {
-        label: "Rapport d'incident",
-        path: "rapport-d-incident",
-        element: <RapportIncident />,
-        index: false,
-        subNavigation: [],
+        label: "MDT",
+        path: "",
+        element: <RedirectRoutes allowedGrades={EFFECTIF} />,
+        subNavigation: [
+          {
+            label: "Civil",
+            path: "civil",
+            element: <Civil />,
+            index: true,
+            subNavigation: [],
+          },
+          {
+            label: "Documents",
+            path: "documents",
+            element: <Documents />,
+            index: false,
+            subNavigation: [],
+          },
+          {
+            label: "Pannic Button",
+            path: "panic-button",
+            element: <PanicButton />,
+            index: false,
+            subNavigation: [],
+          },
+          {
+            label: "Rapport d'incident",
+            path: "rapport-d-incident",
+            element: <RapportIncident />,
+            index: false,
+            subNavigation: [],
+          },
+        ],
       },
     ],
   },

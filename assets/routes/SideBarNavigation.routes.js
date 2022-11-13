@@ -3,6 +3,7 @@ import {
   SUPERVISOR_ACCESS,
   COMMAND_STAFF_ACCESS,
   POLICE_ACADEMY,
+  EFFECTIF,
 } from "../constants/acces";
 
 export default [
@@ -20,7 +21,7 @@ export default [
     selected: false,
     openDropdown: false,
     end: false,
-    allowed: ALL_ACCESS,
+    allowed: EFFECTIF,
     submenu: [
       {
         path: "/feuilles-d-heures",
@@ -79,7 +80,7 @@ export default [
     openDropdown: false,
     end: false,
     submenu: [],
-    allowed: ALL_ACCESS,
+    allowed: EFFECTIF,
   },
   {
     path: "senior-lead-officier",

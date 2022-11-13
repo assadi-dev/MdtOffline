@@ -3,6 +3,14 @@ export const ALL_ACCESS = [
   "POLICE ACADEMY",
   "SUPERVISOR",
   "COMMAND STAFF",
+  "DOJ",
+];
+
+export const EFFECTIF = [
+  "EFFECTIF",
+  "POLICE ACADEMY",
+  "SUPERVISOR",
+  "COMMAND STAFF",
 ];
 export const DOJ = ["DOJ", "COMMAND STAFF"];
 export const SUPERVISOR_ACCESS = ["SUPERVISOR", "COMMAND STAFF"];
