@@ -21,6 +21,7 @@ import {
   SUPERVISOR_ACCESS,
   COMMAND_STAFF_ACCESS,
   POLICE_ACADEMY,
+  DOJ,
 } from "../constants/acces";
 import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 
@@ -45,6 +46,13 @@ export default [
         subNavigation: [],
       },
     ],
+  },
+  {
+    label: "DOJ",
+    path: "doj",
+    element: <RedirectRoutes allowedGrades={DOJ} />,
+    index: false,
+    subNavigation: [],
   },
 
   {
