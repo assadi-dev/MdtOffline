@@ -1,6 +1,12 @@
 import React from "react";
 import { AddCircleIconFill } from "../../SVG";
 import { CardContainer, CardHeader, IconButton } from "./CardHeadDark.styled";
+import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
+import { EFFECTIF_ACCESS } from "../../../constants/acces";
+import { isAllowedAction } from "../../../Pages/Civil/Selected/helper";
 
 const CardHeadDarkButton = ({
   title,
@@ -13,9 +19,11 @@ const CardHeadDarkButton = ({
     <CardContainer {...props}>
       <CardHeader className={classNameHeader}>
         {title}{" "}
-        <IconButton onClick={onClick}>
-          <AddCircleIconFill />
-        </IconButton>{" "}
+        {isAllowedAction(EFFECTIF_ACCESS) ? (
+          <IconButton onClick={onClick}>
+            <AddCircleIconFill />
+          </IconButton>
+        ) : null}
       </CardHeader>
       {children}
     </CardContainer>

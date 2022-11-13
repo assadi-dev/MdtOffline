@@ -3,6 +3,12 @@ import styled from "styled-components";
 export const TableCard = styled.div`
   padding: 12px;
   border-radius: 5px;
+  select {
+    :disabled {
+      color: var(--color-white);
+      opacity: 1;
+    }
+  }
 `;
 
 export const Table = styled.table`

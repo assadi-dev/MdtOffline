@@ -6,13 +6,17 @@ export const ALL_ACCESS = [
   "DOJ",
 ];
 
-export const EFFECTIF = [
+export const EFFECTIF_ACCESS = [
   "EFFECTIF",
   "POLICE ACADEMY",
   "SUPERVISOR",
   "COMMAND STAFF",
 ];
-export const DOJ = ["DOJ", "COMMAND STAFF"];
+export const DOJ_ACCESS = ["DOJ", "COMMAND STAFF"];
 export const SUPERVISOR_ACCESS = ["SUPERVISOR", "COMMAND STAFF"];
 export const COMMAND_STAFF_ACCESS = ["COMMAND STAFF"];
-export const POLICE_ACADEMY = ["POLICE ACADEMY", "SUPERVISOR", "COMMAND STAFF"];
+export const POLICE_ACADEMY_ACCESS = [
+  "POLICE ACADEMY",
+  "SUPERVISOR",
+  "COMMAND STAFF",
+];

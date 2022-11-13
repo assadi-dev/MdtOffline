@@ -12,6 +12,8 @@ const SwitchButton = ({
   switchClass,
   sliderOnColor,
   sliderOffColor,
+  defaultChecked,
+  disabled,
 }) => {
   const switch_class = ["switch"];
   switchClass ? switchClass.push(switchClass) : switchClass;
@@ -23,6 +25,8 @@ const SwitchButton = ({
         value={value}
         onChange={onChange}
         checked={checked}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
         name={name}
       />
       <SwitchIcon

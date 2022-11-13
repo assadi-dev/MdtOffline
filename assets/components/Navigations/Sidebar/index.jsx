@@ -80,7 +80,7 @@ const Sidebar = () => {
                     {route.label}
                   </SideNavlinkButton>
                 )
-              : isAllowed && (
+              : isAllowed(route.allowed) && (
                   <SideNavlink
                     className={route.selected && "active"}
                     to={route.path}
