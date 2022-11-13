@@ -60,10 +60,15 @@ import useListAgent from "../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../utils/userData";
 import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
 import { get_allAgent } from "../../../redux/actions/Agents.action";
-import { sortDescListItems } from "./helper";
+import { isAllowedAction, sortDescListItems } from "./helper";
 import EditCivilView from "./ListItemViews/EditView/EditCivilView";
 import { ucFirst } from "../../../utils/textFormat";
 import PrisonView from "./ModalView/PrisonView";
+import { EFFECTIF_ACCESS } from "../../../constants/acces";
+import ReadDossierArrestationView from "./ListItemViews/ReadView/ReadDossierArrestationView";
+import ReadTrafficView from "./ListItemViews/ReadView/ReadTrafficView";
+import ReadRapportArrestationView from "./ListItemViews/ReadView/ReadRapportArrestationView";
+import ReadAvertissementView from "./ListItemViews/ReadView/ReadAvertissementView";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -147,7 +152,10 @@ const CivilSelected = () => {
     switch (view) {
       case "edit-civil":
         return <EditCivilView idCivil={id} onClose={closeModal} />;
-
+      case "read-avertissement":
+        return (
+          <ReadAvertissementView id={modaleState.id} onClose={closeModal} />
+        );
       case "avertissement":
         return <AvertissementView idCivil={id} onClose={closeModal} />;
       case "edit-avertissement":
@@ -160,6 +168,8 @@ const CivilSelected = () => {
         );
       case "traffic":
         return <TrafficView idCivil={id} onClose={closeModal} />;
+      case "read-traffic":
+        return <ReadTrafficView id={modaleState.id} onClose={closeModal} />;
       case "edit-traffic":
         return <EditTrafficView id={modaleState.id} onClose={closeModal} />;
       case "delete-traffic":
@@ -172,9 +182,17 @@ const CivilSelected = () => {
         );
       case "rapport-d-arrestation":
         return <RapportArrestationView idCivil={id} onClose={closeModal} />;
+
       case "edit-rapport-d-arrestation":
         return (
           <EditRapportArrestationView
+            id={modaleState.id}
+            onClose={closeModal}
+          />
+        );
+      case "read-rapport-d-arrestation":
+        return (
+          <ReadRapportArrestationView
             id={modaleState.id}
             onClose={closeModal}
           />
@@ -189,6 +207,14 @@ const CivilSelected = () => {
         );
       case "dossier-d-arrestation":
         return <DossierArrestationView idCivil={id} onClose={closeModal} />;
+      case "read-dossier-d-arrestation":
+        return (
+          <ReadDossierArrestationView
+            id={modaleState.id}
+            onClose={closeModal}
+          />
+        );
+
       case "edit-dossier-d-arrestation":
         return (
           <EditDossierArrestationView
@@ -218,6 +244,7 @@ const CivilSelected = () => {
             idCivil={id}
             onClose={closeModal}
             listCellule={civilData.cellule}
+            dispatchOpenModal={dispatch}
           />
         );
       case "prison":
@@ -293,13 +320,15 @@ const CivilSelected = () => {
                   htmlFor={"photo"}
                   src={file.preview ? file.preview : civilData.photo}
                 >
-                  <input
-                    id="photo"
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    onChange={handleLoadFile}
-                  />
+                  {isAllowedAction(EFFECTIF_ACCESS) && (
+                    <input
+                      id="photo"
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      onChange={handleLoadFile}
+                    />
+                  )}
                 </CivilPhoto>
                 {file.preview && (
                   <UploadCivilPhotoBtn
@@ -349,20 +378,22 @@ const CivilSelected = () => {
                   <span className="personalDetail">SEXE : </span>{" "}
                   {civilData ? civilData.sexe : "N/A"}
                 </p>
-                <EditCivilbutton
-                  className="editCivil"
-                  onClick={() =>
-                    dispatch({
-                      type: TOGGLE_MODAL,
-                      payload: {
-                        view: "edit-civil",
-                        idCivil: civilData.id,
-                      },
-                    })
-                  }
-                >
-                  <EditPencilIcon />
-                </EditCivilbutton>
+                {isAllowedAction(EFFECTIF_ACCESS) ? (
+                  <EditCivilbutton
+                    className="editCivil"
+                    onClick={() =>
+                      dispatch({
+                        type: TOGGLE_MODAL,
+                        payload: {
+                          view: "edit-civil",
+                          idCivil: civilData.id,
+                        },
+                      })
+                    }
+                  >
+                    <EditPencilIcon />
+                  </EditCivilbutton>
+                ) : null}
               </CivilInfo>
             </RowDiv>
           </CivilCard>

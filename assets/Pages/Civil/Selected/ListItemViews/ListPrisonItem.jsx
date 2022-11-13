@@ -9,13 +9,26 @@ import {
   TextCardModalTopBtn,
 } from "./ListViewItems.styled";
 
-const ListPrisonItem = ({ numero, agent, entree, sortie }) => {
+const ListPrisonItem = ({
+  numero,
+  agent,
+  entree,
+  sortie,
+  idDossier,
+  readDossierModal,
+}) => {
   let numeroFormat = numeral(numero);
   entree = entree || new Date();
   sortie = sortie || new Date();
 
+  const handleRead = (idRapport) => {
+    if (idDossier) {
+      readDossierModal(idRapport);
+    }
+  };
+
   return (
-    <CardTopButtonContainer>
+    <CardTopButtonContainer onClick={handleRead}>
       <div className="headerlistViewTop">
         <p className="numeroTitle "> N°{numeroFormat.format("000")}</p>
         <TextCardModalTopBtn>

@@ -34,22 +34,29 @@ const ListItemAvertissement = ({
   const [openMore, setOpenMore] = useState(false);
 
   const [MoreAction, dispatchMoreAction] = useReducer(moreActionReducer, {
-    id: "",
+    id: id,
     action: "",
     isOpen: false,
   });
 
+  const handleRead = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "read-avertissement", id },
+    });
+  };
+
   const handleEdit = () => {
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
-      payload: { view: "edit-avertissement", id: id },
+      payload: { view: "edit-avertissement", id },
     });
   };
 
   const handleDelete = () => {
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
-      payload: { view: "delete-avertissement", id: id },
+      payload: { view: "delete-avertissement", id },
     });
   };
 
@@ -75,7 +82,7 @@ const ListItemAvertissement = ({
   }, []);
 
   return (
-    <ListContainer>
+    <ListContainer onClick={handleRead}>
       <ListContent>
         {
           <RowIcon>

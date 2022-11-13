@@ -15,17 +15,26 @@ import {
   FormLabel,
   HeadTitleView,
   RowCardTopButton,
+  View,
 } from "./ModalView.styled";
 import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
 import { getAgentNameById } from "../../../../utils/userData";
 import useListAgent from "../../../../hooks/useListAgent";
 import { DOMAIN } from "../../../../constants/localStorage";
+import Modal from "../../../../components/Shared/Modal";
+import ReadRapportArrestationView from "../ListItemViews/ReadView/ReadRapportArrestationView";
+import { ModalContainer } from "../../../../components/Shared/Modal/Modal.styled";
 
-const CelluleView = ({ onClose, idCivil, listCellule }) => {
+const CelluleView = ({ onClose, idCivil, listCellule, dispatchOpenModal }) => {
   const closeModal = () => {
     onClose();
   };
+
+  const [rapportModal, setRapportModal] = useState({
+    isOpen: false,
+    id: undefined,
+  });
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   const civilSelectore = useSelector((state) => state.CivilReducer);
@@ -59,6 +68,22 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
     };
   };
 
+  const handleRead = (id) => {
+    setRapportModal((prevState) => ({
+      ...prevState,
+      id,
+      isOpen: !prevState.isOpen,
+    }));
+  };
+
+  const closeRapportModal = () => {
+    setRapportModal((prevState) => ({
+      ...prevState,
+      id: undefined,
+      isOpen: !prevState.isOpen,
+    }));
+  };
+
   return (
     <>
       <div>
@@ -76,12 +101,25 @@ const CelluleView = ({ onClose, idCivil, listCellule }) => {
                   agent={getAgentNameById(listAgent, cellule.idAgent)}
                   entree={cellule.entree}
                   sortie={cellule.sortie}
+                  idRapport={cellule.arrestReport}
+                  readRapportModal={() => handleRead(cellule.arrestReport)}
                 />
               ))
             : null}
         </RowCardTopButton>
       </div>
       <FooterCardTopButton></FooterCardTopButton>
+      <ModalContainer isOpen={rapportModal.isOpen}>
+        {rapportModal.id != undefined && (
+          <View>
+            {" "}
+            <ReadRapportArrestationView
+              id={rapportModal.id}
+              onClose={closeRapportModal}
+            />{" "}
+          </View>
+        )}
+      </ModalContainer>
     </>
   );
 };

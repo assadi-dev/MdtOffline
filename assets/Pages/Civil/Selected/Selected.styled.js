@@ -165,7 +165,7 @@ export const EditCivilbutton = styled.span`
     opacity: 0;
   }
   @media screen and (min-width: 992px) {
-    transform: translateX(100%);
+    transform: translateX(50%);
   }
 `;
 

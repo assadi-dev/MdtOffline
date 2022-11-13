@@ -18,11 +18,11 @@ import ChefAccusation from "../Pages/Ressources/ChefAccusations";
 import Grades from "../Pages/Ressources/Grades";
 import {
   ALL_ACCESS,
-  EFFECTIF,
   SUPERVISOR_ACCESS,
   COMMAND_STAFF_ACCESS,
-  POLICE_ACADEMY,
-  DOJ,
+  EFFECTIF_ACCESS,
+  DOJ_ACCESS,
+  POLICE_ACADEMY_ACCESS,
 } from "../constants/acces";
 import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 
@@ -30,7 +30,7 @@ export default [
   {
     label: "Services",
     path: "services",
-    element: <RedirectRoutes allowedGrades={EFFECTIF} />,
+    element: <RedirectRoutes allowedGrades={EFFECTIF_ACCESS} />,
     subNavigation: [
       {
         label: "Services",
@@ -51,11 +51,11 @@ export default [
   {
     label: "DOJ",
     path: "doj",
-    element: <RedirectRoutes allowedGrades={DOJ} />,
+    element: <RedirectRoutes allowedGrades={DOJ_ACCESS} />,
     index: false,
     subNavigation: [
       {
-        label: "Civil",
+        label: "DOJ - Civil",
         path: "civil",
         element: <Civil />,
         index: true,
@@ -72,7 +72,7 @@ export default [
       {
         label: "MDT",
         path: "",
-        element: <RedirectRoutes allowedGrades={EFFECTIF} />,
+        element: <RedirectRoutes allowedGrades={EFFECTIF_ACCESS} />,
         subNavigation: [
           {
             label: "Civil",
@@ -123,7 +123,7 @@ export default [
   {
     label: "Police Academy",
     path: "police-academy",
-    element: <RedirectRoutes allowedGrades={POLICE_ACADEMY} />,
+    element: <RedirectRoutes allowedGrades={POLICE_ACADEMY_ACCESS} />,
     index: false,
     subNavigation: [],
   },

@@ -13,6 +13,7 @@ export const ListContent = styled.div`
   font-size: 12px;
   padding: 0px 18px;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const NumberView = styled.p`

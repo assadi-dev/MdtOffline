@@ -75,6 +75,14 @@ const ListItemDossierArrestaion = ({
 
   const [openMore, setOpenMore] = useState(false);
   const moreIconBtnRef = useRef();
+
+  const handleRead = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "read-dossier-d-arrestation", id },
+    });
+  };
+
   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
@@ -94,66 +102,68 @@ const ListItemDossierArrestaion = ({
   }, []);
 
   return (
-    <ListContainer>
-      <ListContent>
-        <RowListItemView>
-          <TicketView className="text-start">Ticket</TicketView>
+    <>
+      <ListContainer onClick={handleRead}>
+        <ListContent>
+          <RowListItemView>
+            <TicketView className="text-start">Ticket</TicketView>
 
-          <RowIcon>
-            <NumberView className="text-end">
-              N°{numeroFormat.format("000")}
-            </NumberView>
-            {isAllowedAction(SUPERVISOR_ACCESS) && (
-              <>
-                <MoreIconBtn
-                  className="m-left-1"
-                  onClick={() => setOpenMore(!openMore)}
-                  ref={moreIconBtnRef}
-                >
-                  <FluentMoreCircleFill />
-                </MoreIconBtn>
-                <FluentMoreDropDown
-                  isOpen={openMore}
-                  editFunc={handleEdit}
-                  deleteFunc={handleDelete}
-                  disabledEdit={isEnclosed}
-                />
-              </>
-            )}
-          </RowIcon>
-        </RowListItemView>
-        <ListViewOffence>
-          {" "}
-          <p>Offence :</p>
-          <ul>
+            <RowIcon>
+              <NumberView className="text-end">
+                N°{numeroFormat.format("000")}
+              </NumberView>
+              {isAllowedAction(SUPERVISOR_ACCESS) && (
+                <>
+                  <MoreIconBtn
+                    className="m-left-1"
+                    onClick={() => setOpenMore(!openMore)}
+                    ref={moreIconBtnRef}
+                  >
+                    <FluentMoreCircleFill />
+                  </MoreIconBtn>
+                  <FluentMoreDropDown
+                    isOpen={openMore}
+                    editFunc={handleEdit}
+                    deleteFunc={handleDelete}
+                    disabledEdit={isEnclosed}
+                  />
+                </>
+              )}
+            </RowIcon>
+          </RowListItemView>
+          <ListViewOffence>
+            {" "}
+            <p>Offence :</p>
             <ul>
-              {offence.length > 0 &&
-                offence.map((v, i) => <li key={i}>{v}</li>)}
+              <ul>
+                {offence.length > 0 &&
+                  offence.map((v, i) => <li key={i}>{v}</li>)}
+              </ul>
             </ul>
-          </ul>
-        </ListViewOffence>
+          </ListViewOffence>
 
-        <RowListItemView>
-          {" "}
-          <AgentItemView>
-            <span className="agent">Agent : </span> {agent}
-          </AgentItemView>{" "}
-          <DateItemView> {dateForCivilListView(date)} </DateItemView>
-        </RowListItemView>
+          <RowListItemView>
+            {" "}
+            <AgentItemView>
+              <span className="agent">Agent : </span> {agent}
+            </AgentItemView>{" "}
+            <DateItemView> {dateForCivilListView(date)} </DateItemView>
+          </RowListItemView>
 
-        <RowListItemView>
-          <AmendItemView> {amende} $ </AmendItemView>
-          <UpListView>{peine}</UpListView>
-        </RowListItemView>
-      </ListContent>
-      <div className="text-center">
-        {isEnclosed ? (
-          <p>Cloturé</p>
-        ) : (
-          <ClotureButton onClick={onEnclose}>CLOTURER</ClotureButton>
-        )}
-      </div>
-    </ListContainer>
+          <RowListItemView>
+            <AmendItemView> {amende} $ </AmendItemView>
+            <UpListView>{peine}</UpListView>
+          </RowListItemView>
+        </ListContent>
+        <div className="text-center">
+          {isEnclosed ? (
+            <p>Cloturé</p>
+          ) : isAllowedAction(SUPERVISOR_ACCESS) ? (
+            <ClotureButton onClick={onEnclose}>CLOTURER</ClotureButton>
+          ) : null}
+        </div>
+      </ListContainer>
+    </>
   );
 };
 

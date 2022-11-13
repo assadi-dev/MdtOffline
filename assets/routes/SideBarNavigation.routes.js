@@ -2,8 +2,9 @@ import {
   ALL_ACCESS,
   SUPERVISOR_ACCESS,
   COMMAND_STAFF_ACCESS,
-  POLICE_ACADEMY,
-  EFFECTIF,
+  POLICE_ACADEMY_ACCESS,
+  EFFECTIF_ACCESS,
+  DOJ_ACCESS,
 } from "../constants/acces";
 
 export default [
@@ -16,12 +17,30 @@ export default [
     allowed: ALL_ACCESS,
   },
   {
+    path: "doj",
+    label: "DOJ",
+    selected: false,
+    openDropdown: false,
+    end: false,
+    submenu: [
+      {
+        path: "/civil",
+        label: "Civil",
+        selected: false,
+        openDropdown: false,
+        end: false,
+        submenu: [],
+      },
+    ],
+    allowed: DOJ_ACCESS,
+  },
+  {
     path: "services",
     label: "Services",
     selected: false,
     openDropdown: false,
     end: false,
-    allowed: EFFECTIF,
+    allowed: EFFECTIF_ACCESS,
     submenu: [
       {
         path: "/feuilles-d-heures",
@@ -80,8 +99,9 @@ export default [
     openDropdown: false,
     end: false,
     submenu: [],
-    allowed: EFFECTIF,
+    allowed: EFFECTIF_ACCESS,
   },
+
   {
     path: "senior-lead-officier",
     label: "Senior Lead Officier",
@@ -114,7 +134,7 @@ export default [
     selected: false,
     openDropdown: false,
     end: false,
-    allowed: POLICE_ACADEMY,
+    allowed: POLICE_ACADEMY_ACCESS,
     submenu: [
       {
         path: "/rapport-rookie",

@@ -15,6 +15,7 @@ import {
   FormLabel,
   HeadTitleView,
   RowCardTopButton,
+  View,
 } from "./ModalView.styled";
 import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
@@ -22,6 +23,8 @@ import { getAgentNameById } from "../../../../utils/userData";
 import useListAgent from "../../../../hooks/useListAgent";
 import { DOMAIN } from "../../../../constants/localStorage";
 import ListPrisonItem from "../ListItemViews/ListPrisonItem";
+import { ModalContainer } from "../../../../components/Shared/Modal/Modal.styled";
+import ReadDossierArrestationView from "../ListItemViews/ReadView/ReadDossierArrestationView";
 
 const PrisonView = ({ onClose, idCivil, listPrison }) => {
   const closeModal = () => {
@@ -42,6 +45,11 @@ const PrisonView = ({ onClose, idCivil, listPrison }) => {
     idAgent: agent.idAgent,
   });
 
+  const [dossierModal, setDossierModal] = useState({
+    isOpen: false,
+    id: undefined,
+  });
+
   const handleChangeValue = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -58,6 +66,22 @@ const PrisonView = ({ onClose, idCivil, listPrison }) => {
       civil: `api/civils/${idCivil}`,
       idAgent: agent.idAgent,
     };
+  };
+
+  const handleRead = (id) => {
+    setDossierModal((prevState) => ({
+      ...prevState,
+      id,
+      isOpen: !prevState.isOpen,
+    }));
+  };
+
+  const closeDossierModalModal = () => {
+    setDossierModal((prevState) => ({
+      ...prevState,
+      id: undefined,
+      isOpen: !prevState.isOpen,
+    }));
   };
 
   return (
@@ -77,12 +101,25 @@ const PrisonView = ({ onClose, idCivil, listPrison }) => {
                   agent={getAgentNameById(listAgent, prison.idAgent)}
                   entree={prison.entree}
                   sortie={prison.sortie}
+                  idDossier={prison.arrestFolder}
+                  readDossierModal={() => handleRead(prison.arrestFolder)}
                 />
               ))
             : null}
         </RowCardTopButton>
       </div>
       <FooterCardTopButton></FooterCardTopButton>
+      <ModalContainer isOpen={dossierModal.isOpen}>
+        {dossierModal.id != undefined && (
+          <View>
+            {" "}
+            <ReadDossierArrestationView
+              id={dossierModal.id}
+              onClose={closeDossierModalModal}
+            />{" "}
+          </View>
+        )}
+      </ModalContainer>
     </>
   );
 };

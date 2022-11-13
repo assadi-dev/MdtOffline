@@ -58,6 +58,13 @@ const ListItemRapportArrestation = ({
       document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
+  const handleRead = () => {
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "read-rapport-d-arrestation", id },
+    });
+  };
+
   const handleEdit = () => {
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
@@ -73,7 +80,7 @@ const ListItemRapportArrestation = ({
   };
 
   return (
-    <ListContainer>
+    <ListContainer onClick={handleRead}>
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>

@@ -20,7 +20,7 @@ export const deconnect = async () => {
   return new Promise((resolve, reject) => {
     localStorage.clear();
     Cookies.remove(TOKEN_STORAGE_NAME, {
-      path: "",
+      path: "/",
       sameSite: "Lax",
       secure: true,
     });
