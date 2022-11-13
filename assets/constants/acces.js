@@ -12,7 +12,7 @@ export const EFFECTIF_ACCESS = [
   "SUPERVISOR",
   "COMMAND STAFF",
 ];
-export const DOJ_ACCESS = ["DOJ", "COMMAND STAFF"];
+export const DOJ_ACCESS = ["DOJ"];
 export const SUPERVISOR_ACCESS = ["SUPERVISOR", "COMMAND STAFF"];
 export const COMMAND_STAFF_ACCESS = ["COMMAND STAFF"];
 export const POLICE_ACADEMY_ACCESS = [
