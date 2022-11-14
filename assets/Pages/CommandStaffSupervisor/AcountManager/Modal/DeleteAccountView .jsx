@@ -45,8 +45,8 @@ const DeleteAccountView = ({ id, username, onClose }) => {
           <AlertInfoBody>
             <p>
               {" "}
-              Cette action entraînera la suppression des données Agent lies à ce
-              compte utilisateur.Les documents créer par cette utilisateur
+              Cette action entraînera la suppression des données de l'agent lié
+              à ce compte utilisateur.Les documents créer par cet utilisateur
               resteront toujours presente
             </p>
           </AlertInfoBody>
