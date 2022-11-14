@@ -11,7 +11,7 @@ import {
   validation_user,
 } from "../../../redux/actions/User.action";
 import { dateFrenchFormat } from "../../../utils/dateFormat";
-import { getUserRole } from "../../../utils/userData";
+import { getUserRole, IsCommandStaff } from "../../../utils/userData";
 import {
   Button,
   HeaderRowAction,
@@ -30,6 +30,7 @@ import ModalStateReducer from "./Reducer/ModalStateReducer";
 const AccountManager = () => {
   const dispatch = useDispatch();
   const userSelector = useSelector((state) => state.UserReducer);
+  const agent = useSelector((state) => state.AuthenticateReducer);
   const [modalState, dispatchModalState] = useReducer(ModalStateReducer, {
     view: "",
     data: null,
@@ -97,7 +98,9 @@ const AccountManager = () => {
                 <th>Role</th>
                 <th className="td-center">Date de création</th>
                 <th className="td-center">Validation</th>
-                <th>Action</th>
+                {IsCommandStaff(agent.grade && agent.grade.categorie) && (
+                  <th>Action</th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -117,19 +120,22 @@ const AccountManager = () => {
                         onChange={(e) => handleCheckValidate(user.id, e)}
                       />
                     </td>
-                    <td>
-                      <TableAction>
-                        <OutlineBtnAction className="edit">
-                          <EditPencilIcon />
-                        </OutlineBtnAction>
-                        <OutlineBtnAction
-                          className="delete"
-                          onClick={() => handleDelete(user.id, user.username)}
-                        >
-                          <TrashIcon />
-                        </OutlineBtnAction>
-                      </TableAction>
-                    </td>
+                    {IsCommandStaff(agent.grade && agent.grade.categorie) && (
+                      <td>
+                        <TableAction>
+                          <OutlineBtnAction className="edit">
+                            <EditPencilIcon />
+                          </OutlineBtnAction>
+
+                          <OutlineBtnAction
+                            className="delete"
+                            onClick={() => handleDelete(user.id, user.username)}
+                          >
+                            <TrashIcon />
+                          </OutlineBtnAction>
+                        </TableAction>
+                      </td>
+                    )}
                   </tr>
                 ))}
             </tbody>

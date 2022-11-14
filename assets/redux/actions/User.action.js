@@ -59,12 +59,11 @@ export const edit_user = (id, data) => {
   };
 };
 
-export const delete_user = (id, data) => {
+export const delete_user = (id) => {
   return async (dispatch) => {
     try {
       Api.delete(`/users/${id}`).then((res) => {
-        const data = res.data;
-        dispatch({ type: DELETE_USER, payload: data });
+        dispatch({ type: DELETE_USER, payload: { id } });
       });
     } catch (error) {
       log.error(error);

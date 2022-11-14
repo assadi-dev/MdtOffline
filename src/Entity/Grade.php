@@ -32,6 +32,7 @@ class Grade
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:agent:collections","read:user:collections"})
      * 
      */
     private $categorie;

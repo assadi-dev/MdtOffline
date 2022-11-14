@@ -38,7 +38,7 @@ const UserReducer = (state = initialState, action) => {
       return { ...state, collection: updateUserCollection, isReady: true };
 
     case DELETE_USER:
-      let updateDeleteCollection = state.collection.map(
+      let updateDeleteCollection = state.collection.filter(
         (user) => user.id !== payload.id
       );
 
