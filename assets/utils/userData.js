@@ -50,7 +50,7 @@ export const IsCommandStaff = () => {
   if (tokenStorage) {
     const decode = jwt_decode(tokenStorage);
 
-    const usergrade = decode.categorie.toLowerCase();
+    const usergrade = decode.categorie;
 
     if (COMMAND_STAFF_ACCESS.includes(usergrade)) return true;
   }
