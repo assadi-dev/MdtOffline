@@ -98,9 +98,7 @@ const AccountManager = () => {
                 <th>Role</th>
                 <th className="td-center">Date de création</th>
                 <th className="td-center">Validation</th>
-                {IsCommandStaff(agent.grade && agent.grade.categorie) && (
-                  <th>Action</th>
-                )}
+                {IsCommandStaff() && <th>Action</th>}
               </tr>
             </thead>
             <tbody>
@@ -120,7 +118,7 @@ const AccountManager = () => {
                         onChange={(e) => handleCheckValidate(user.id, e)}
                       />
                     </td>
-                    {IsCommandStaff(agent.grade && agent.grade.categorie) && (
+                    {IsCommandStaff() && (
                       <td>
                         <TableAction>
                           <OutlineBtnAction className="edit">

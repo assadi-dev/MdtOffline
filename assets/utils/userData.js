@@ -1,4 +1,7 @@
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 import { COMMAND_STAFF_ACCESS } from "../constants/acces";
+import { TOKEN_STORAGE_NAME } from "../constants/localStorage";
 
 export const getUserRole = (role) => {
   if (Array.isArray(role)) {
@@ -41,6 +44,15 @@ export const getGradeById = (id, listOfGrades) => {
   }
 };
 
-export const IsCommandStaff = (userGrade) => {
-  return userGrade.includes(COMMAND_STAFF_ACCESS) ? true : false;
+export const IsCommandStaff = () => {
+  const tokenStorage = Cookies.get(TOKEN_STORAGE_NAME);
+
+  if (tokenStorage) {
+    const decode = jwt_decode(tokenStorage);
+
+    const usergrade = decode.categorie.toLowerCase();
+
+    if (COMMAND_STAFF_ACCESS.includes(usergrade)) return true;
+  }
+  return false;
 };
