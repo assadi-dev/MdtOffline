@@ -66,7 +66,7 @@ const Civil = () => {
             civilSelector.collection.map((civil) => (
               <Link
                 key={civil.id}
-                to={`../../civil/${toSlugFormat(
+                to={`../../../civil/${toSlugFormat(
                   `${civil && civil.nom} ${civil && civil.prenom}`
                 )}`}
                 state={{
