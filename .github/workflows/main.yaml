@@ -1,4 +1,4 @@
-name: Deploiment continueement
+name: Deploiment continue
 
 on:
   push: 
