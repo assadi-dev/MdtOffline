@@ -12,7 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: APT UPDATE and INSTALL PACKAGE SERVER_VERSION
-        
-        run :
-          git pull && npm run build 
+      - name: APT UPDATE and INSTALL PACKAGE SERVER_VERSION   
+        run:
+          git pull 
+      - name: INTALL and BUILD PROJECT
+        run:
+          npm run build
