@@ -14,9 +14,9 @@ jobs:
        # APT UPDATE and INSTALL PACKAGE SERVER_VERSION    
       - name: RETRIEVE LAST UPDATE REPO   
         run:
-          git pull 
+          cd /var/www/mdt-offline && git pull 
       - name: NPM INTALL and BUILD PROJECT
         run:
-          composer install && php bin/console d:m:m -n && npm install -f && npm run build
+          cd /var/www/mdt-offline && composer install && php bin/console d:m:m -n && npm install -f && npm run build
 
       
