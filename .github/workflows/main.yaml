@@ -9,13 +9,10 @@ jobs:
   deploy: 
     runs-on: ubuntu-latest
 
-    env: 
-      SSHPASS: ${{secrets.APP_PASS}}
-
     steps:
       - uses: actions/checkout@v2
         
       - name: APT UPDATE and INSTALL PACKAGE SERVER_VERSION
         
         run :
-          git pull && composer install && npm install && npm run build && php bin/console cache:clear 
+          git pull 
