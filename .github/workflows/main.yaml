@@ -17,6 +17,6 @@ jobs:
          ls -l
       - name: NPM INTALL and BUILD PROJECT
         run:
-          cd /var/www/mdt-offline && composer install && php bin/console d:m:m -n && npm install -f && npm run buil
+          cd /var/www/mdt-offline && composer install && php bin/console d:m:m -n && npm install -f && npm run build
 
       
