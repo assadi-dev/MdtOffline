@@ -15,4 +15,4 @@ jobs:
       - name: APT UPDATE and INSTALL PACKAGE SERVER_VERSION
         
         run :
-          git pull && npm run build && php bin/console cache:clear
+          git pull && npm run build 
