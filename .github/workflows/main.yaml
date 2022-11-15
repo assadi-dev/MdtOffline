@@ -10,13 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
        # APT UPDATE and INSTALL PACKAGE SERVER_VERSION    
       - name: RETRIEVE LAST UPDATE REPO   
         run:
-         ls -l
+         git pull
+      - name: INSTALL PHP DEPENDENCES and MIGRATE BDD
+        run:
+          composer install && php bin/console d:m:m -n 
       - name: NPM INTALL and BUILD PROJECT
         run:
-          "cd var/www/mdt-offline && composer install && php bin/console d:m:m -n && npm install -f && npm run build"
+          cd var/www/mdt-offline &&npm install -f && npm run build
 
       
