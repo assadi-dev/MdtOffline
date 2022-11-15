@@ -11,10 +11,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        
-      - name: APT UPDATE and INSTALL PACKAGE SERVER_VERSION   
+       # APT UPDATE and INSTALL PACKAGE SERVER_VERSION    
+      - name: RETRIEVE LAST UPDATE REPO   
         run:
           git pull 
-      - name: INTALL and BUILD PROJECT
+      - name: NPM INTALL and BUILD PROJECT
         run:
-         npm install && npm run build
+          composer install && php bin/console d:m:m -n && npm install -f && npm run build
+
+      
