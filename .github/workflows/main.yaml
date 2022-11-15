@@ -12,14 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
        # APT UPDATE and INSTALL PACKAGE SERVER_VERSION    
-      - name: RETRIEVE LAST UPDATE REPO   
-        run:
-         git pull
-      - name: INSTALL PHP DEPENDENCES and MIGRATE BDD
-        run:
-          composer install && php bin/console d:m:m -n 
-      - name: NPM INTALL and BUILD PROJECT
-        run:
-          cd var/www/mdt-offline &&npm install -f && npm run build
+      # - name: RETRIEVE LAST UPDATE REPO   
+      #   run:
+      #    git pull
+      # - name: INSTALL PHP DEPENDENCES and MIGRATE BDD
+      #   run:
+      #     composer install && php bin/console d:m:m -n 
+      # - name: NPM INTALL and BUILD PROJECT
+      #   run:
+      #     cd var/www/mdt-offline &&npm install -f && npm run build
 
       
