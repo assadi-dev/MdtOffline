@@ -26,7 +26,7 @@ const App = () => {
   const Hello = () => {
     return (
       <div>
-        <h1>Page d'accueil</h1>
+        <h1>Page d'accueil Test</h1>
       </div>
     );
   };
