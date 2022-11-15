@@ -17,4 +17,4 @@ jobs:
           git pull 
       - name: INTALL and BUILD PROJECT
         run:
-          npm run build
+         npm install && npm run build
