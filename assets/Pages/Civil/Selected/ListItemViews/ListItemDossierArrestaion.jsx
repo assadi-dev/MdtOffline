@@ -60,10 +60,13 @@ const ListItemDossierArrestaion = ({
   };
 
   const handleEdit = () => {
-    return dispatchOpenModal({
-      type: TOGGLE_MODAL,
-      payload: { view: "edit-dossier-d-arrestation", id },
-    });
+    return (
+      !isAllowedAction(SUPERVISOR_ACCESS) &&
+      dispatchOpenModal({
+        type: TOGGLE_MODAL,
+        payload: { view: "edit-dossier-d-arrestation", id },
+      })
+    );
   };
 
   const handleDelete = () => {

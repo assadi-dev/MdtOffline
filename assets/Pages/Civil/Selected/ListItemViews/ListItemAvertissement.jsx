@@ -40,10 +40,13 @@ const ListItemAvertissement = ({
   });
 
   const handleRead = () => {
-    return dispatchOpenModal({
-      type: TOGGLE_MODAL,
-      payload: { view: "read-avertissement", id },
-    });
+    return (
+      !isAllowedAction(SUPERVISOR_ACCESS) &&
+      dispatchOpenModal({
+        type: TOGGLE_MODAL,
+        payload: { view: "read-avertissement", id },
+      })
+    );
   };
 
   const handleEdit = () => {

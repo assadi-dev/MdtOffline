@@ -54,10 +54,13 @@ const ListItemTraffic = ({
   }, []);
 
   const handleRead = () => {
-    return dispatchOpenModal({
-      type: TOGGLE_MODAL,
-      payload: { view: "read-traffic", id },
-    });
+    return (
+      !isAllowedAction(SUPERVISOR_ACCESS) &&
+      dispatchOpenModal({
+        type: TOGGLE_MODAL,
+        payload: { view: "read-traffic", id },
+      })
+    );
   };
 
   const handleEdit = () => {

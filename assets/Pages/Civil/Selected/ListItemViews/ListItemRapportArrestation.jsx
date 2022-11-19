@@ -59,10 +59,13 @@ const ListItemRapportArrestation = ({
   }, []);
 
   const handleRead = () => {
-    return dispatchOpenModal({
-      type: TOGGLE_MODAL,
-      payload: { view: "read-rapport-d-arrestation", id },
-    });
+    return (
+      !isAllowedAction(SUPERVISOR_ACCESS) &&
+      dispatchOpenModal({
+        type: TOGGLE_MODAL,
+        payload: { view: "read-rapport-d-arrestation", id },
+      })
+    );
   };
 
   const handleEdit = () => {
