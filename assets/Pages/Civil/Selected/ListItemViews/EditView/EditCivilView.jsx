@@ -48,7 +48,6 @@ const EditCivilView = ({ idCivil, onClose }) => {
       emploie: civilData.emploie,
     },
     onSubmit: (values) => {
-      console.log(values);
       let data = {
         ...values,
         id: idCivil,
