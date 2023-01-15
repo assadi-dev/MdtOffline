@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useReducer, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Modal from "../../../components/Shared/Modal";
 import {
   EditPencilIcon,
@@ -81,7 +81,8 @@ const CivilSelected = () => {
     dispatch({ type: TOGGLE_MODAL, payload: { view: "", id: "" } });
   };
   const location = useLocation();
-  const { name, id } = location.state;
+  // const { name} = location.state;
+  const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
   const dispatchCivilData = useDispatch();

@@ -68,7 +68,7 @@ const Civil = () => {
                 key={civil.id}
                 to={`../../../civil/${toSlugFormat(
                   `${civil && civil.nom} ${civil && civil.prenom}`
-                )}`}
+                )}/${civil.id}`}
                 state={{
                   name: `${civil && civil.nom.toUpperCase()} ${
                     civil && ucFirst(civil.prenom)

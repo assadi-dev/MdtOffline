@@ -108,7 +108,7 @@ export default [
   },
   {
     label: "Civil",
-    path: "civil/:slug",
+    path: "civil/:slug/:id",
     element: <CivilSelected />,
     index: false,
     subNavigation: [],
