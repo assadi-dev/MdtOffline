@@ -21,8 +21,10 @@ const ServicesBtn = () => {
   const [toggleButton, setToggleButton] = useState(false);
 
   useEffect(() => {
-    dispatch(get_lastActiveService(agent.idAgent));
-  }, []);
+    if (agent.idAgent) {
+      dispatch(get_lastActiveService(agent.idAgent));
+    }
+  }, [agent.idAgent]);
 
   const activeService = () => {
     const dt = new Date();
