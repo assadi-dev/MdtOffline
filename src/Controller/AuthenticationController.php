@@ -101,4 +101,62 @@ class AuthenticationController extends AbstractController
             return $response;
         }
     }
+
+      /**
+     *@Route("/api/update_password/{id}",name="api_change_password",methods="PUT") 
+     */
+    public function changePassword($id, User $user,UserPasswordHasherInterface $passwordHasher)
+    {
+        $manager = $this->entityManager;
+        $body = $this->request->getContent();
+        $body = json_decode($body, true);
+        $plaintextPassword = $body["password"];
+        $confirmPassword = $body["confirm"];
+
+
+        try {
+            //code...
+
+            if(strcmp($plaintextPassword,$confirmPassword) !== 0){
+
+             throw new Exception("le mot de passe est different de la confirmation");
+                
+
+            }
+
+
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
+
+            $user->setPassword($hashedPassword);
+            $manager->persist($user);
+            $manager->flush();
+            $response = new Response();
+            $response->setContent(json_encode([
+                'message' => "votre mot de passe à été mise à jours",
+            ]));
+            $response->setStatusCode(201);
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            $message = $th->getMessage();
+            $response = new Response();
+            $response->setContent(json_encode([
+                "code" => 500,
+                'message' =>  $message,
+            ]));
+            $response->setStatusCode(500);
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+
+   
+
+    }
+
 }

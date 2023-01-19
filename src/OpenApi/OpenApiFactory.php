@@ -30,6 +30,13 @@ class OpenApiFactory implements OpenApiFactoryInterface
 
         $schemas = $openApi->getComponents()->getSecuritySchemes();
         $schemas["bearerAuth"] = new \ArrayObject(["type" => "http", "scheme" => "bearer", "bearerFormat" => "JWT"]);
+        $schemas = $openApi->getComponents()->getSchemas();
+        $schemas["Credentials"] = new \ArrayObject([
+        "type" => "object", 
+        "properties" => [
+            "username"=>["type" => "string", "exemple"=>"Scott Adkins"],
+            "password"=>["type" => "string", "exemple"=>"password"]
+        ]]);
 
         //  $openApi->getPaths()->addPath("/api/login", []);
 
