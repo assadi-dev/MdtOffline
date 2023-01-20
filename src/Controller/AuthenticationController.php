@@ -7,10 +7,13 @@ use App\Entity\User;
 use App\Entity\Agent;
 use App\Entity\Grade;
 use App\Repository\GradeRepository;
+use function PHPUnit\Framework\isEmpty;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -102,7 +105,8 @@ class AuthenticationController extends AbstractController
         }
     }
 
-      /**
+    /**
+     *@Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *@Route("/api/update_password/{id}",name="api_change_password",methods="PUT") 
      */
     public function changePassword($id, User $user,UserPasswordHasherInterface $passwordHasher)
@@ -110,12 +114,22 @@ class AuthenticationController extends AbstractController
         $manager = $this->entityManager;
         $body = $this->request->getContent();
         $body = json_decode($body, true);
-        $plaintextPassword = $body["password"];
-        $confirmPassword = $body["confirm"];
+
 
 
         try {
             //code...
+            if(!isset($body["password"]) || empty($body["password"]) ){
+                throw new Exception("le mot de passe est vide");
+            }
+
+            if(!isset($body["password"]) || empty($body["password"]) ){
+                throw new Exception("la confirmation est vide");
+            }
+
+
+            $plaintextPassword = $body["password"];
+            $confirmPassword = $body["confirm"];
 
             if(strcmp($plaintextPassword,$confirmPassword) !== 0){
 
@@ -135,9 +149,9 @@ class AuthenticationController extends AbstractController
             $manager->flush();
             $response = new Response();
             $response->setContent(json_encode([
-                'message' => "votre mot de passe à été mise à jours",
+                'message' => "votre mot de passe à été mise à jour",
             ]));
-            $response->setStatusCode(201);
+            $response->setStatusCode(200);
             $response->headers->set('Content-Type', 'application/json');
             return $response;
 

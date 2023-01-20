@@ -13,13 +13,13 @@ const instance = axios.create({
   headers: {
     "Content-type": "application/json;charset=UTF-8",
     Accept: "application/json",
-    Authorization: `Bearer ${Cookies.get(TOKEN_STORAGE_NAME)}`,
   },
 });
 
-instance.interceptors.response.use(
-  async (response) => {
-    return response;
+instance.interceptors.request.use(
+  (request) => {
+    request.headers.Authorization = `Bearer ${Cookies.get(TOKEN_STORAGE_NAME)}`;
+    return request;
   },
   async (error) => {
     if (error.response.status == 401) {
