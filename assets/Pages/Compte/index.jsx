@@ -16,6 +16,7 @@ import {
   PhotoValidateBtn,
 } from "./Compte.styled";
 import FormUser from "./FormUser";
+import FormUserPassword from "./FormUserPassword";
 
 const Compte = () => {
   const User = useSelector((state) => state.AuthenticateReducer);
@@ -85,16 +86,24 @@ const Compte = () => {
         </InfoAgent>
       </HeaderContainer>
       {User.idAgent && (
-        <BodyCompte>
-          <FormUser
-            idUser={User.id}
-            idAgent={User.idAgent}
-            username={User.username}
-            matricule={User.matricule}
-            telephone={User.telephone}
-            token={User.token}
-          />
-        </BodyCompte>
+        <>
+          <BodyCompte>
+            <FormUser
+              idUser={User.id}
+              idAgent={User.idAgent}
+              username={User.username}
+              matricule={User.matricule}
+              telephone={User.telephone}
+              token={User.token}
+            />
+          </BodyCompte>
+          <InfoAgent style={{ margin: "22px 0px" }}>
+            <p className="username">Changer de mot de mot de passe</p>
+          </InfoAgent>
+          <BodyCompte>
+            <FormUserPassword idUser={User.id} />
+          </BodyCompte>
+        </>
       )}
     </Container>
   );
