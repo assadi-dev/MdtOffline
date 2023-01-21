@@ -4,11 +4,11 @@ import { CodeAlert, ErrorContainer, IconAlert, RowAlert } from "./Alert.styled";
 const AlertError = ({ code, message, ...props }) => {
   return (
     <ErrorContainer>
-      <IconAlert>
-        <DangerIcon />
-      </IconAlert>
-      <CodeAlert>Erreur {code} </CodeAlert>
+      {/* <CodeAlert>Erreur {code} </CodeAlert> */}
       <RowAlert {...props}>
+        <IconAlert>
+          <DangerIcon />
+        </IconAlert>
         <p> {message}</p>
       </RowAlert>
     </ErrorContainer>

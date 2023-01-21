@@ -67,7 +67,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
               type: "FINISH",
               payload: "Authentification reussi !",
             });
-            sleep(3000).then(() => navigate("/"));
+            sleep(3000).then(() => navigate("/", { replace: true }));
           })
           .catch((error) => {
             dispatchStep({
