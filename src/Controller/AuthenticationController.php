@@ -98,7 +98,7 @@ class AuthenticationController extends AbstractController
 
             if (stripos($message,"Duplicate entry")){
 
-             $message = "Cette identifiant est déjà présente dans la base de données";
+             $message = "Cette identifiant est déjà présente dans la base de données veuillez séléctionner une autre";
 
             }
 
