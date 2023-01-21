@@ -36,7 +36,7 @@ const ListItemTraffic = ({
 
   const [openMore, setOpenMore] = useState(false);
   const moreIconBtnRef = useRef();
-  useEffect(() => {
+  /*   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
       const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
@@ -47,12 +47,9 @@ const ListItemTraffic = ({
       }
     };
 
-    isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.addEventListener("mousedown", closeDropDown);
-    return () =>
-      isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.removeEventListener("mousedown", closeDropDown);
-  }, []);
+    document.addEventListener("mousedown", closeDropDown);
+    return () => document.removeEventListener("mousedown", closeDropDown);
+  }, []); */
 
   const handleRead = () => {
     return (
@@ -65,6 +62,7 @@ const ListItemTraffic = ({
   };
 
   const handleEdit = () => {
+    setOpenMore((current) => (current = false));
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "edit-traffic", id: id },
@@ -72,6 +70,7 @@ const ListItemTraffic = ({
   };
 
   const handleDelete = () => {
+    setOpenMore((current) => (current = false));
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "delete-traffic", id: id },
@@ -94,8 +93,9 @@ const ListItemTraffic = ({
                 {" "}
                 <MoreIconBtn
                   className="m-left-1"
-                  onClick={() => setOpenMore(!openMore)}
-                  ref={moreIconBtnRef}
+                  onClick={() =>
+                    setOpenMore((current) => (current = !openMore))
+                  }
                 >
                   <FluentMoreCircleFill />
                 </MoreIconBtn>

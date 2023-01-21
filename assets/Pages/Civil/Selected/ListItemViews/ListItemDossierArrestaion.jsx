@@ -51,7 +51,7 @@ const ListItemDossierArrestaion = ({
   const [openMore, setOpenMore] = useState(false);
   const moreIconBtnRef = useRef();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
       const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
@@ -65,7 +65,7 @@ const ListItemDossierArrestaion = ({
     document.addEventListener("mousedown", closeDropDown);
 
     return () => document.removeEventListener("mousedown", closeDropDown);
-  }, []);
+  }, []); */
 
   const onEnclose = () => {
     dispatch(
@@ -78,6 +78,7 @@ const ListItemDossierArrestaion = ({
   };
 
   const handleEdit = () => {
+    setOpenMore((current) => (current = false));
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "edit-dossier-d-arrestation", id },
@@ -85,6 +86,7 @@ const ListItemDossierArrestaion = ({
   };
 
   const handleDelete = () => {
+    setOpenMore((current) => (current = false));
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "delete-dossier-d-arrestation", id },
@@ -92,6 +94,7 @@ const ListItemDossierArrestaion = ({
   };
 
   const handleRead = () => {
+    setOpenMore((current) => (current = false));
     return (
       !isAllowedAction(SUPERVISOR_ACCESS) &&
       dispatchOpenModal({
@@ -103,9 +106,7 @@ const ListItemDossierArrestaion = ({
 
   return (
     <>
-      <ListContainer
-        onClick={!isAllowedAction(SUPERVISOR_ACCESS) ? handleRead : null}
-      >
+      <ListContainer onClick={handleRead}>
         <ListContent>
           <RowListItemView>
             <TicketView className="text-start">Ticket</TicketView>

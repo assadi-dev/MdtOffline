@@ -17,9 +17,18 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  async (request) => {
+  (request) => {
     request.headers.Authorization = `Bearer ${Cookies.get(TOKEN_STORAGE_NAME)}`;
     return request;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+instance.interceptors.response.use(
+  async (response) => {
+    return response;
   },
   async (error) => {
     if (error.response.status == 401) {
@@ -56,7 +65,7 @@ instance.interceptors.request.use(
             .catch((error) => {
               console.log(error);
               refresh_token = "";
-              COOKIES.remove(REFRESH_TOKEN_STORAGE_NAME);
+              Cookies.remove(REFRESH_TOKEN_STORAGE_NAME);
               alert(
                 "Erreur le serveur n'a pas reussi à rafraichir votre session veuillez vous reconnectez ou appuyez sur F5"
               );

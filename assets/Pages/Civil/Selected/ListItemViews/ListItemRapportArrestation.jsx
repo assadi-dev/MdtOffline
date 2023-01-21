@@ -40,14 +40,14 @@ const ListItemRapportArrestation = ({
 
   const [openMore, setOpenMore] = useState(false);
   const moreIconBtnRef = useRef();
-  useEffect(() => {
+  /*   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
       const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
 
       if (!moreIconDropdown.contains(target)) {
         sleep(100).then(() => {
-          setOpenMore(false);
+          setOpenMore((current) => (current = false));
         });
       }
     };
@@ -55,7 +55,7 @@ const ListItemRapportArrestation = ({
     document.addEventListener("mousedown", closeDropDown);
 
     return () => document.removeEventListener("mousedown", closeDropDown);
-  }, []);
+  }, []); */
 
   const handleRead = () => {
     return (
@@ -68,6 +68,8 @@ const ListItemRapportArrestation = ({
   };
 
   const handleEdit = () => {
+    setOpenMore((current) => (current = false));
+
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "edit-rapport-d-arrestation", id },
@@ -75,6 +77,8 @@ const ListItemRapportArrestation = ({
   };
 
   const handleDelete = () => {
+    setOpenMore((current) => (current = false));
+
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "delete-rapport-d-arrestation", id },
@@ -82,9 +86,7 @@ const ListItemRapportArrestation = ({
   };
 
   return (
-    <ListContainer
-      onClick={!isAllowedAction(SUPERVISOR_ACCESS) ? handleRead : null}
-    >
+    <ListContainer onClick={handleRead}>
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>

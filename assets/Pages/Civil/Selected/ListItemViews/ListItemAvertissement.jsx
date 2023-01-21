@@ -40,7 +40,7 @@ const ListItemAvertissement = ({
   });
 
   const moreIconBtnRef = useRef();
-  useEffect(() => {
+  /*   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
       const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
@@ -53,7 +53,7 @@ const ListItemAvertissement = ({
 
     document.addEventListener("mousedown", closeDropDown);
     return () => document.removeEventListener("mousedown", closeDropDown);
-  }, []);
+  }, []); */
 
   const handleRead = () => {
     return (
@@ -66,6 +66,8 @@ const ListItemAvertissement = ({
   };
 
   const handleEdit = () => {
+    setOpenMore((current) => (current = false));
+
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "edit-avertissement", id },
@@ -73,6 +75,8 @@ const ListItemAvertissement = ({
   };
 
   const handleDelete = () => {
+    setOpenMore((current) => (current = false));
+
     return dispatchOpenModal({
       type: TOGGLE_MODAL,
       payload: { view: "delete-avertissement", id },
@@ -80,9 +84,7 @@ const ListItemAvertissement = ({
   };
 
   return (
-    <ListContainer
-      onClick={!isAllowedAction(SUPERVISOR_ACCESS) ? handleRead : null}
-    >
+    <ListContainer onClick={handleRead}>
       <ListContent>
         {
           <RowIcon>
