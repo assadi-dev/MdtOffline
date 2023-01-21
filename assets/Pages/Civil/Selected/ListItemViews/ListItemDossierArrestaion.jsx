@@ -94,7 +94,6 @@ const ListItemDossierArrestaion = ({
   };
 
   const handleRead = () => {
-    setOpenMore((current) => (current = false));
     return (
       !isAllowedAction(SUPERVISOR_ACCESS) &&
       dispatchOpenModal({
@@ -119,7 +118,9 @@ const ListItemDossierArrestaion = ({
                 <>
                   <MoreIconBtn
                     className="m-left-1"
-                    onClick={() => setOpenMore(!openMore)}
+                    onClick={() =>
+                      setOpenMore((current) => (current = !openMore))
+                    }
                     ref={moreIconBtnRef}
                   >
                     <FluentMoreCircleFill />
