@@ -65,7 +65,7 @@ class Agent
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true,unique=true))
+     * @ORM\Column(type="string", length=255, nullable=true,unique=true)
      * @Groups({"read:agent:collections","read:user:collections"})
      */
     private $matricule;

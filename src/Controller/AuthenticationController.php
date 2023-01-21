@@ -93,7 +93,15 @@ class AuthenticationController extends AbstractController
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         } catch (\Throwable $th) {
+          
             $message = $th->getMessage();
+
+            if (stripos($message,"Duplicate entry")){
+
+             $message = "Cette identifiant est déjà présente dans la base de données";
+
+            }
+
             $response = new Response();
             $response->setContent(json_encode([
                 "code" => 500,

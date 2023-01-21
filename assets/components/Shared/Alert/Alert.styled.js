@@ -37,6 +37,8 @@ export const IconAlert = styled.span`
   width: ${Iconsize}px;
   height: ${Iconsize}px;
   margin-right: 0.3rem;
+  vertical-align: middle;
+  text-align: center;
   & svg {
     width: ${Iconsize}px;
     height: ${Iconsize}px;

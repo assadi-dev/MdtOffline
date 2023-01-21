@@ -52,15 +52,18 @@ const Register = ({ processStep, dispatchStep }) => {
             });
           })
           .catch((error) => {
-            /*     let errorMessage = `${
-              error.data.detail ? error.data.detail : error.data.message
-            }`; */
+            let errorMessage =
+              "Une erreur survenue lors de la création de votre compte veuillez reessayer";
+            errorMessage = error.message;
+            if (error.data) {
+              errorMessage = error.data.message;
+            }
+
             console.log(error);
             dispatchStep({
               type: "ERROR",
               payload: {
-                message:
-                  "Une erreur survenue lors de la création de votre compte veuillez reessayer",
+                message: errorMessage,
                 code: 500,
               },
             });
@@ -160,7 +163,6 @@ const Register = ({ processStep, dispatchStep }) => {
                 message={processStep.message}
               />
             )}
-            {/* <AlertError code={500} message={"Champs manquant"} /> */}
             {processStep.step == "finish" && (
               <AlertSuccess message={processStep.message} />
             )}

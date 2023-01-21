@@ -34,7 +34,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *  
  * },
  * )
- * @UniqueEntity(fields={"username"}, message="Cette identifiant est déjà pris")
+ * @UniqueEntity(fields="username", message="Cette identifiant est déjà pris")
  * 
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true,nullable=false)
+     * @ORM\Column(type="string", length=255,nullable=false, unique=true)
      * @Groups({"read:user:collections"})
      */
     private $username;
