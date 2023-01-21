@@ -157,7 +157,7 @@ class AuthenticationController extends AbstractController
             $manager->flush();
             $response = new Response();
             $response->setContent(json_encode([
-                'message' => "votre mot de passe à été mise à jour",
+                'message' => "Votre mot de passe à été mise à jour",
             ]));
             $response->setStatusCode(200);
             $response->headers->set('Content-Type', 'application/json');

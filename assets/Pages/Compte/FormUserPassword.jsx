@@ -21,6 +21,7 @@ import {
   SubmitButton,
 } from "./Compte.styled";
 import Loading from "./Loading";
+import { updatePassword } from "./function";
 
 const FormUserPassword = ({ idUser }) => {
   const dispatch = useDispatch();
@@ -50,7 +51,23 @@ const FormUserPassword = ({ idUser }) => {
         password: values.password,
         confirm: values.confirm,
       };
-      console.log(data);
+      updatePassword(data)
+        .then((res) => {
+          console.log(res);
+          sleep(1000).then(() => {
+            stepDispatch({
+              type: FINISH,
+              payload: { message: res.message },
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          stepDispatch({
+            type: FINISH,
+            payload: { message: err.message, error: true },
+          });
+        });
     },
   });
 
