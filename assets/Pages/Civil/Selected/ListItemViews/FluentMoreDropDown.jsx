@@ -11,10 +11,15 @@ const FluentMoreDropDown = ({
   deleteFunc,
   disabledEdit,
   disableDelete,
+  ...props
 }) => {
   return (
     <>
-      <FluentMoreDropDownContainer isOpen={isOpen}>
+      <FluentMoreDropDownContainer
+        className="fluentMoreDopDown"
+        isOpen={isOpen}
+        {...props}
+      >
         {!disabledEdit ? (
           <FluentMoreActiontext className="edit" onClick={editFunc}>
             <span className="edit">
@@ -23,14 +28,18 @@ const FluentMoreDropDown = ({
             Editer
           </FluentMoreActiontext>
         ) : (
-          <FluentMoreActiontext className="edit disabled">
+          <FluentMoreActiontext className="edit disabled" role={"button"}>
             <span className="edit">
               <EditPencilIcon />
             </span>
             Editer
           </FluentMoreActiontext>
         )}
-        <FluentMoreActiontext className="delete" onClick={deleteFunc}>
+        <FluentMoreActiontext
+          className="delete"
+          role={"button"}
+          onClick={deleteFunc}
+        >
           <span className="delete">
             <TrashIcon />
           </span>

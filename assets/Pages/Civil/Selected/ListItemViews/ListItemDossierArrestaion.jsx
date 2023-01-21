@@ -48,6 +48,24 @@ const ListItemDossierArrestaion = ({
   const civilSelectore = useSelector((state) => state.CivilReducer);
   const listAgent = useListAgent();
   const agentData = useSelector((state) => state.AuthenticateReducer);
+  const [openMore, setOpenMore] = useState(false);
+  const moreIconBtnRef = useRef();
+
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      const target = e.target;
+      const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
+      if (!moreIconDropdown.contains(target)) {
+        sleep(100).then(() => {
+          setOpenMore((current) => (current = false));
+        });
+      }
+    };
+
+    document.addEventListener("mousedown", closeDropDown);
+
+    return () => document.removeEventListener("mousedown", closeDropDown);
+  }, []);
 
   const onEnclose = () => {
     dispatch(
@@ -60,13 +78,10 @@ const ListItemDossierArrestaion = ({
   };
 
   const handleEdit = () => {
-    return (
-      !isAllowedAction(SUPERVISOR_ACCESS) &&
-      dispatchOpenModal({
-        type: TOGGLE_MODAL,
-        payload: { view: "edit-dossier-d-arrestation", id },
-      })
-    );
+    return dispatchOpenModal({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-dossier-d-arrestation", id },
+    });
   };
 
   const handleDelete = () => {
@@ -76,37 +91,21 @@ const ListItemDossierArrestaion = ({
     });
   };
 
-  const [openMore, setOpenMore] = useState(false);
-  const moreIconBtnRef = useRef();
-
   const handleRead = () => {
-    return dispatchOpenModal({
-      type: TOGGLE_MODAL,
-      payload: { view: "read-dossier-d-arrestation", id },
-    });
+    return (
+      !isAllowedAction(SUPERVISOR_ACCESS) &&
+      dispatchOpenModal({
+        type: TOGGLE_MODAL,
+        payload: { view: "read-dossier-d-arrestation", id },
+      })
+    );
   };
-
-  useEffect(() => {
-    const closeDropDown = (e) => {
-      const target = e.target;
-      if (!moreIconBtnRef.current.contains(target)) {
-        sleep(100).then(() => {
-          setOpenMore(false);
-        });
-      }
-    };
-
-    isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.addEventListener("mousedown", closeDropDown);
-
-    return () =>
-      isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.removeEventListener("mousedown", closeDropDown);
-  }, []);
 
   return (
     <>
-      <ListContainer onClick={handleRead}>
+      <ListContainer
+        onClick={!isAllowedAction(SUPERVISOR_ACCESS) ? handleRead : null}
+      >
         <ListContent>
           <RowListItemView>
             <TicketView className="text-start">Ticket</TicketView>

@@ -17,7 +17,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (request) => {
+  async (request) => {
     request.headers.Authorization = `Bearer ${Cookies.get(TOKEN_STORAGE_NAME)}`;
     return request;
   },

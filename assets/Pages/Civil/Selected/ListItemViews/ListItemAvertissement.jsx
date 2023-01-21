@@ -39,6 +39,22 @@ const ListItemAvertissement = ({
     isOpen: false,
   });
 
+  const moreIconBtnRef = useRef();
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      const target = e.target;
+      const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
+      if (!moreIconDropdown.contains(target)) {
+        sleep(100).then(() => {
+          setOpenMore((current) => (current = false));
+        });
+      }
+    };
+
+    document.addEventListener("mousedown", closeDropDown);
+    return () => document.removeEventListener("mousedown", closeDropDown);
+  }, []);
+
   const handleRead = () => {
     return (
       !isAllowedAction(SUPERVISOR_ACCESS) &&
@@ -63,29 +79,10 @@ const ListItemAvertissement = ({
     });
   };
 
-  const moreIconBtnRef = useRef();
-  useEffect(() => {
-    const closeDropDown = (e) => {
-      const target = e.target;
-      if (
-        isAllowedAction(SUPERVISOR_ACCESS) &&
-        !moreIconBtnRef.current.contains(target)
-      ) {
-        sleep(100).then(() => {
-          setOpenMore(false);
-        });
-      }
-    };
-
-    isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.addEventListener("mousedown", closeDropDown);
-    return () =>
-      isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.removeEventListener("mousedown", closeDropDown);
-  }, []);
-
   return (
-    <ListContainer onClick={handleRead}>
+    <ListContainer
+      onClick={!isAllowedAction(SUPERVISOR_ACCESS) ? handleRead : null}
+    >
       <ListContent>
         {
           <RowIcon>
@@ -97,7 +94,9 @@ const ListItemAvertissement = ({
               <>
                 <MoreIconBtn
                   className="m-left-1 "
-                  onClick={() => setOpenMore(!openMore)}
+                  onClick={() =>
+                    setOpenMore((current) => (current = !openMore))
+                  }
                   ref={moreIconBtnRef}
                 >
                   <FluentMoreCircleFill />

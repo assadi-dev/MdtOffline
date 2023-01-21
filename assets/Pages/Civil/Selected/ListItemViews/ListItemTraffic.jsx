@@ -39,9 +39,10 @@ const ListItemTraffic = ({
   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
-      if (!moreIconBtnRef.current.contains(target)) {
+      const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
+      if (!moreIconDropdown.contains(target)) {
         sleep(100).then(() => {
-          setOpenMore(false);
+          setOpenMore((current) => (current = false));
         });
       }
     };

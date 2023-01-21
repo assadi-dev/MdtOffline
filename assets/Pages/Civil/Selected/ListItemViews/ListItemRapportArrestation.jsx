@@ -43,19 +43,18 @@ const ListItemRapportArrestation = ({
   useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
-      if (!moreIconBtnRef.current.contains(target)) {
+      const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
+
+      if (!moreIconDropdown.contains(target)) {
         sleep(100).then(() => {
           setOpenMore(false);
         });
       }
     };
 
-    isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.addEventListener("mousedown", closeDropDown);
+    document.addEventListener("mousedown", closeDropDown);
 
-    return () =>
-      isAllowedAction(SUPERVISOR_ACCESS) &&
-      document.removeEventListener("mousedown", closeDropDown);
+    return () => document.removeEventListener("mousedown", closeDropDown);
   }, []);
 
   const handleRead = () => {
@@ -83,7 +82,9 @@ const ListItemRapportArrestation = ({
   };
 
   return (
-    <ListContainer onClick={handleRead}>
+    <ListContainer
+      onClick={!isAllowedAction(SUPERVISOR_ACCESS) ? handleRead : null}
+    >
       <ListContent>
         <RowListItemView>
           <TicketView className="text-start">Ticket</TicketView>
@@ -98,7 +99,9 @@ const ListItemRapportArrestation = ({
                 {" "}
                 <MoreIconBtn
                   className="m-left-1"
-                  onClick={() => setOpenMore(!openMore)}
+                  onClick={() =>
+                    setOpenMore((current) => (current = !openMore))
+                  }
                   ref={moreIconBtnRef}
                 >
                   <FluentMoreCircleFill />
