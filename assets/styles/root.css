@@ -36,7 +36,7 @@
     /* Taille des textes par default */
     --fontSize-title: 2.5rem;
     --fontsize-subtitle: 1.8rem;
-    --fonSize-regular: 14px;
+    --fonSize-regular: 16px;
     /* Breakpoint */
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;

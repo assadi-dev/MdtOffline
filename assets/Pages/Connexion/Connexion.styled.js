@@ -56,7 +56,7 @@ export const FooterConnexion = styled.div`
 `;
 
 export const CardConnexion = styled.div`
-  width: 32rem;
+  width: 38rem;
   min-height: 400px;
   padding: 18px;
   border-radius: 10px;
