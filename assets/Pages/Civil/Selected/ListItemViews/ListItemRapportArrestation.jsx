@@ -40,12 +40,12 @@ const ListItemRapportArrestation = ({
 
   const [openMore, setOpenMore] = useState(false);
   const moreIconBtnRef = useRef();
-  /*   useEffect(() => {
+  useEffect(() => {
     const closeDropDown = (e) => {
       const target = e.target;
       const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
 
-      if (!moreIconDropdown.contains(target)) {
+      if (!moreIconBtnRef.current.contains(target)) {
         sleep(100).then(() => {
           setOpenMore((current) => (current = false));
         });
@@ -55,7 +55,7 @@ const ListItemRapportArrestation = ({
     document.addEventListener("mousedown", closeDropDown);
 
     return () => document.removeEventListener("mousedown", closeDropDown);
-  }, []); */
+  }, []);
 
   const handleRead = () => {
     return (
