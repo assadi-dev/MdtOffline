@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllAgentAsync } from "./AgentAsyncApi";
+import {
+  editAgentAsync,
+  getAllAgentAsync,
+  getOneAgentAsync,
+} from "./AgentAsyncApi";
 
 const initialState = {
   collections: [],
@@ -28,6 +32,30 @@ export const AgentSlice = createSlice({
         state.error = "";
         state.collections = action.payload;
       });
+    builder
+      .addCase(getOneAgentAsync.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(getOneAgentAsync.fulfilled, (state, action) => {
+        state.error = "";
+        state.selected = action.payload;
+        state.status = "complete";
+      });
+    builder.addCase(editAgentAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+
+      let updatedCollections = state.collections;
+      updatedCollections = updatedCollections.map((agent) => {
+        if (agent.id == payload.id) {
+          return { ...payload };
+        }
+        return agent;
+      });
+
+      state.status = "complete";
+      state.collections = updatedCollections;
+      state.status = "complete";
+    });
   },
 });
 

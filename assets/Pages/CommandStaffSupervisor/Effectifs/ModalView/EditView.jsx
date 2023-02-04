@@ -24,6 +24,11 @@ import { useFormik } from "formik";
 import Input from "../../../../components/Shared/Input";
 import useFecthData from "../../../../hooks/useFecthData";
 import Select from "../../../../components/Shared/Select";
+import {
+  editAgentAsync,
+  getOneAgentAsync,
+} from "../../../../features/Agents/AgentAsyncApi";
+import { isEmpty } from "../../../../utils/userData";
 
 const EditView = ({ agentId, onClose }) => {
   const dispatch = useDispatch();
@@ -32,7 +37,10 @@ const EditView = ({ agentId, onClose }) => {
   const [requestState, setRequestState] = useState({ success: "", error: "" });
 
   useEffect(() => {
-    agentId && dispatch(get_singleAgent(agentId));
+    const promise = agentId && dispatch(getOneAgentAsync(agentId));
+    return () => {
+      agentId && promise.abort();
+    };
   }, [agentId]);
 
   const { photo, name, matricule, grade, telephone, createdAt, updatedAt } =
@@ -54,7 +62,10 @@ const EditView = ({ agentId, onClose }) => {
         grade: `api/grades/${values.grade}`,
       };
 
-      dispatch(edit_agent(agentId, agentsValues))
+      const payload = { id: agentId, data: agentsValues };
+
+      dispatch(editAgentAsync(payload))
+        .unwrap()
         .then((res) => {
           formik.resetForm();
           setRequestState({ success: "", error: "" });
@@ -63,14 +74,6 @@ const EditView = ({ agentId, onClose }) => {
         })
         .catch((error) => {
           let message = error.message;
-
-          if (error.response) {
-            let violations = error.response.data
-              ? error.response.data.violations
-              : error.message;
-            message = violations[0].message;
-          }
-
           setRequestState({ success: "", error: message });
         });
     },
