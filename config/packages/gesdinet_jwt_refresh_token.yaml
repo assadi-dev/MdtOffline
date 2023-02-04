@@ -4,6 +4,7 @@ gesdinet_jwt_refresh_token:
     user_identity_field: id
     ttl: 269200
     ttl_update: true
+    token_parameter_name: "mdt911-Offline-Refresh-Token"
     
 
     cookie:

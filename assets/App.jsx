@@ -37,7 +37,7 @@ const App = () => {
 
   useEffect(() => {
     let promise = null;
-    if (tokenStorage.length > 0) {
+    if (tokenStorage) {
       const decode = jwt_decode(tokenStorage);
       const id = decode.id;
       const role = decode.roles.join("-");
