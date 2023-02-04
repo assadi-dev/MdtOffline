@@ -41,21 +41,25 @@ export const AgentSlice = createSlice({
         state.selected = action.payload;
         state.status = "complete";
       });
-    builder.addCase(editAgentAsync.fulfilled, (state, action) => {
-      const { payload } = action;
+    builder
+      .addCase(editAgentAsync.fulfilled, (state, action) => {
+        const { payload } = action;
 
-      let updatedCollections = state.collections;
-      updatedCollections = updatedCollections.map((agent) => {
-        if (agent.id == payload.id) {
-          return { ...payload };
-        }
-        return agent;
+        let updatedCollections = state.collections;
+        updatedCollections = updatedCollections.map((agent) => {
+          if (agent.id == payload.id) {
+            return { ...payload };
+          }
+          return agent;
+        });
+
+        state.error = "";
+        state.collections = updatedCollections;
+        state.status = "complete";
+      })
+      .addCase(editAgentAsync.rejected, (state, action) => {
+        state.error = action.error.message;
       });
-
-      state.status = "complete";
-      state.collections = updatedCollections;
-      state.status = "complete";
-    });
   },
 });
 
