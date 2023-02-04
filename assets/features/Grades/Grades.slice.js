@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addGradeAsync, getAllGradesAsync } from "./GradeAsyncApi";
+import {
+  addGradeAsync,
+  deleteGradeAsync,
+  editGradeAsync,
+  getAllGradesAsync,
+} from "./GradeAsyncApi";
 
 const initialState = {
   collections: [],
@@ -37,17 +42,47 @@ export const GradesSlice = createSlice({
         return newState;
       });
     builder
-      .addCase(addGradeAsync.pending, (state) => {
-        state.status = "pending";
-        state.errors = "";
-      })
       .addCase(addGradeAsync.rejected, (state, action) => {
         state.status = "rejected";
         state.errors = action.error.message;
       })
       .addCase(addGradeAsync.fulfilled, (state, action) => {
         const { payload } = action;
+        state.errors = "";
         state.collections = [...state.collections, payload];
+        state.status = "complete";
+      });
+    builder
+      .addCase(editGradeAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        let updateGradeCollection = state.collections;
+        updateGradeCollection = updateGradeCollection.map((grade) => {
+          if (grade.id === payload.id) {
+            return { ...payload };
+          }
+          return grade;
+        });
+        state.errors = "";
+        state.collections = updateGradeCollection;
+      })
+      .addCase(editGradeAsync.rejected, (state, action) => {
+        state.errors = action.errors;
+      });
+    builder
+      .addCase(deleteGradeAsync.rejected, (state, action) => {
+        const { error } = action;
+        state.errors = error.message;
+      })
+      .addCase(deleteGradeAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        const id = payload.id;
+        let removeGradeCollection = state.collections;
+        removeGradeCollection = removeGradeCollection.filter(
+          (grade) => grade.id != payload.id
+        );
+        state.collections = removeGradeCollection;
+        state.errors = "";
+        state.status = "complete";
       });
   },
 });

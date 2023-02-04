@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
-import { delete_grades } from "../../../../redux/actions/Grades.action";
 import { CloseModal } from "../Grade.styled";
 import {
   BodyDeleteContent,
@@ -9,13 +8,14 @@ import {
   DeleteSectionbutton,
   DeleteView,
 } from "./Delete.styled";
+import { deleteGradeAsync } from "../../../../features/Grades/GradeAsyncApi";
 
 const DeleteModal = ({ id, name, onClose }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(delete_grades(id)).then(() => onClose());
+    dispatch(deleteGradeAsync({ id })).then(() => onClose());
   };
 
   return (

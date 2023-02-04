@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import { sleep } from "../../../../utils/timer";
 import { useDispatch } from "react-redux";
 import { edit_grades } from "../../../../redux/actions/Grades.action";
+import { editGradeAsync } from "../../../../features/Grades/GradeAsyncApi";
 
 const EditModal = ({ gradeData, onClose }) => {
   const { id, nom, rang, categorie } = gradeData;
@@ -34,7 +35,7 @@ const EditModal = ({ gradeData, onClose }) => {
         categorie: values.categorie,
         rang: values.rang.toString(),
       };
-      dispatch(edit_grades(id, data)).then(() => {
+      dispatch(editGradeAsync({ id, data })).then(() => {
         onClose();
       });
     },

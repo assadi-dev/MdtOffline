@@ -64,11 +64,11 @@ export const deleteGradeAsync = createAsyncThunk(
     try {
       const { id } = payload;
       const response = await delete_grades(id);
-      return response.data;
+      return { id };
     } catch (error) {
       let message = "";
       if (error.response) {
-        message = error.response.data.error;
+        message = error.response.data.detail;
       } else {
         message = error.message;
       }
