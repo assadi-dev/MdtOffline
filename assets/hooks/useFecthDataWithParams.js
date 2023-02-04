@@ -6,6 +6,7 @@ const useFecthDataWithParams = (url, params) => {
   const [state, setState] = useState({ data: [], error: [], loading });
 
   useEffect(() => {
+    const controller = new AbortController();
     Api.get(url, { params })
       .then((res) => {
         setState((prevState) => ({ ...prevState, data: res.data }));
@@ -18,6 +19,9 @@ const useFecthDataWithParams = (url, params) => {
       .finally(() =>
         setState((prevState) => ({ ...prevState, loading: false }))
       );
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const { data, error, loading } = state;

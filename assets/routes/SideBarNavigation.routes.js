@@ -155,7 +155,7 @@ export default [
     allowed: SUPERVISOR_ACCESS,
     submenu: [
       {
-        path: "/voir-rappor-d-incidents",
+        path: "/voir-rapport-d-incidents",
         label: "Voir les rapports d'incidents",
         selected: false,
         openDropdown: false,

@@ -69,7 +69,7 @@ export const DeleteHeadTitleView = styled.div`
   }
   & .titleView {
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: var(--font-title);
     text-align: center;
   }
@@ -102,7 +102,7 @@ export const BodyDeleteContent = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   text-align: center;
-  font-size: 1rem;
+  font-size: 2rem;
 `;
 
 export const CloseModal = styled(CloseModalBtn)`

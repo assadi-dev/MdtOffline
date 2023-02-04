@@ -9,11 +9,9 @@ import PagesRoutes from "./routes/Pages.routes";
 import uniqid from "uniqid";
 import Connexion from "./Pages/Connexion";
 import { useDispatch, useSelector } from "react-redux";
-import { get_owner } from "./redux/actions/Authentication.action";
 import jwt_decode from "jwt-decode";
 import { TOKEN_STORAGE_NAME } from "./constants/localStorage";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
-import { GET_OWNER } from "./redux/types/Authenticate.type";
 import Cookies from "js-cookie";
 import MDT from "./Pages/MDT";
 import NoFoundPage from "./Pages/NoFoundPage";
@@ -21,6 +19,7 @@ import { get_allAgent } from "./redux/actions/Agents.action";
 import { GenerateRoutes, GenerateSubNavRoutes } from "./routes/GenerateRoutes";
 import { getAllCivil } from "./redux/actions/Civil.action";
 import AccesDenied from "./Pages/Permission/AccesDenied";
+import { getOwnerdAsync } from "./features/Authenticate/AuthenticateAsyncAction";
 
 const App = () => {
   const Hello = () => {
@@ -36,7 +35,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (tokenStorage) {
+    let promise = null;
+    if (tokenStorage.length > 0) {
       const decode = jwt_decode(tokenStorage);
       const id = decode.id;
       const role = decode.roles.join("-");
@@ -54,13 +54,16 @@ const App = () => {
         token: tokenStorage,
         isLoggedIn: true,
       };
+      promise = dispatch(getOwnerdAsync({ id: id, role: role })).unwrap();
 
-      dispatch({ type: GET_OWNER, payload: data });
-      dispatch(get_owner(id));
+      /*     
       dispatch(get_allAgent());
-      dispatch(getAllCivil());
+      dispatch(getAllCivil()); */
     }
-  }, [authSelector.isLoggedIn]);
+    return () => {
+      promise.abort();
+    };
+  }, []);
 
   return (
     <Routes>

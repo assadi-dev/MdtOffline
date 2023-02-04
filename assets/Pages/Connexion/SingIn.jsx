@@ -16,10 +16,6 @@ import { useDispatch } from "react-redux";
 import { connect } from "../../service/UserConnect";
 import { useLocation, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import {
-  get_owner,
-  userLoged,
-} from "../../redux/actions/Authentication.action";
 import { BarLoading } from "../../components/SVG/Loader.svg";
 import AlertError from "../../components/Shared/Alert/AlertError";
 import { sleep } from "../../utils/timer";
@@ -30,6 +26,7 @@ import {
 } from "../../constants/localStorage";
 import Cookies from "js-cookie";
 import AlertSuccess from "../../components/Shared/Alert/AlertSuccess";
+import { useerLogged } from "../../features/Authenticate/Authenticate.slice";
 
 const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
@@ -50,11 +47,12 @@ const SingIn = ({ processStep, dispatchStep }) => {
         connect(username, password)
           .then((res) => {
             const token = res.token;
+
             //const refreshToken = res.refresh_token;
             /*  localStorage.setItem(TOKEN_STORAGE_NAME, token);
             localStorage.setItem(REFRESH_TOKEN_STORAGE_NAME, refreshToken); */
             Cookies.set(TOKEN_STORAGE_NAME, token, {
-              path: "",
+              path: "/",
               sameSite: "Lax",
               secure: true,
             });
@@ -62,7 +60,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
             const decode = jwt_decode(token);
             const id = decode.id;
             const role = decode.roles.join("-");
-            dispatch(userLoged(id, role));
+            dispatch(useerLogged({ id, role }));
             dispatchStep({
               type: "FINISH",
               payload: "Authentification reussi !",

@@ -56,3 +56,13 @@ export const IsCommandStaff = () => {
   }
   return false;
 };
+
+export const isEmpty = (value) => {
+  if (Array.isArray(value)) {
+    if (value === undefined || value == null || value.length == 0) return true;
+    return false;
+  } else {
+    if (value === undefined || value == null || value.length == 0) return true;
+    return false;
+  }
+};

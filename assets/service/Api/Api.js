@@ -18,7 +18,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (request) => {
-    request.headers.Authorization = `Bearer ${Cookies.get(TOKEN_STORAGE_NAME)}`;
+    let urlRequest = request.url;
+    if (urlRequest != "/token/refresh")
+      request.headers.Authorization = `Bearer ${Cookies.get(
+        TOKEN_STORAGE_NAME
+      )}`;
     return request;
   },
   (error) => {

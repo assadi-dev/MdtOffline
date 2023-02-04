@@ -2,7 +2,6 @@ import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../../components/Shared/Modal";
 import { EditPencilIcon, TrashIcon } from "../../../components/SVG";
-import { get_allGrades } from "../../../redux/actions/Grades.action";
 import {
   Button,
   HeaderRowAction,
@@ -15,13 +14,18 @@ import AddModal from "./Modal/AddModal";
 import DeleteModal from "./Modal/DeleteModal";
 import EditModal from "./Modal/EditModal";
 import ModalReducer from "./reducer/ModalReducer";
+import { getAllGradesAsync } from "../../../features/Grades/GradeAsyncApi";
 
 const Grades = () => {
   const GradesSelectors = useSelector((state) => state.GradesReducer);
   const { collections, filtered } = GradesSelectors;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(get_allGrades());
+    const promise = dispatch(getAllGradesAsync());
+
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   const [modalState, dispatchModalState] = useReducer(ModalReducer, {

@@ -25,6 +25,7 @@ import {
   POLICE_ACADEMY_ACCESS,
 } from "../constants/acces";
 import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
+import RapportIncidentTab from "../Pages/CommandStaffSupervisor/RapportIncidentTab";
 
 export default [
   {
@@ -132,6 +133,13 @@ export default [
     path: "command-staff-supervisor",
     element: <RedirectRoutes allowedGrades={SUPERVISOR_ACCESS} />,
     subNavigation: [
+      {
+        label: "Rapports d'incidents",
+        path: "voir-rapport-d-incidents",
+        element: <RapportIncidentTab />,
+        index: false,
+        subNavigation: [],
+      },
       {
         label: "Gestion des Comptes",
         path: "gestion-des-comptes",
