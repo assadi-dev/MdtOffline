@@ -13,6 +13,7 @@ import {
   ChefAccusationBody,
   ChefAccusationWrapper,
 } from "./ChefAccusation.styled";
+import { getAllChefAccusationAsync } from "../../../features/ChefAccusation/ChefAccusationAsyncApi";
 
 const ChefAccusation = () => {
   const chefAccusationSelectors = useSelector(
@@ -21,7 +22,11 @@ const ChefAccusation = () => {
   const { collections, filtered } = chefAccusationSelectors;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(get_allChefAccusations());
+    const promise = dispatch(getAllChefAccusationAsync());
+
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   return (

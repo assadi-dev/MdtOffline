@@ -59,9 +59,9 @@ instance.interceptors.response.use(
               const newToken = res.data.token;
               instance.defaults.headers["Authorization"] = `Bearer ${newToken}`;
               originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
-              localStorage.setItem(TOKEN_STORAGE_NAME, newToken);
+              // localStorage.setItem(TOKEN_STORAGE_NAME, newToken);
               Cookies.set(TOKEN_STORAGE_NAME, newToken, {
-                path: "",
+                path: "/",
                 sameSite: "Lax",
                 secure: true,
               });

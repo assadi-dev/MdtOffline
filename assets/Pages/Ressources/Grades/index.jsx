@@ -22,7 +22,6 @@ const Grades = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const promise = dispatch(getAllGradesAsync());
-
     return () => {
       promise.abort();
     };
