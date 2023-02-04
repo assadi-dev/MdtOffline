@@ -5,8 +5,6 @@ import Modal from "../../../components/Shared/Modal";
 import SwitchButton from "../../../components/Shared/SwitchButton";
 import { EditPencilIcon, TrashIcon } from "../../../components/SVG";
 import useFecthData from "../../../hooks/useFecthData";
-import { get_allAgent } from "../../../redux/actions/Agents.action";
-import { get_allGrades } from "../../../redux/actions/Grades.action";
 import {
   get_allUsers,
   validation_user,
@@ -23,6 +21,8 @@ import {
 import ModalStateReducer from "../reducer/ModalState.reducer";
 import { EffectifBody, EffectifWrapper } from "./Effectifs.styled";
 import Render from "./ModalView/Render";
+import { getAllGradesAsync } from "../../../features/Grades/GradeAsyncApi";
+import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
 
 const Effectifs = () => {
   const dispatch = useDispatch();
@@ -37,8 +37,12 @@ const Effectifs = () => {
   });
 
   useEffect(() => {
-    dispatch(get_allAgent());
-    dispatch(get_allGrades());
+    const promise = dispatch(getAllAgentAsync());
+    const promise2 = dispatch(getAllGradesAsync());
+    return () => {
+      promise.abort();
+      promise2.abort();
+    };
   }, []);
 
   const handlEditAgent = (agentId) => {
@@ -71,7 +75,7 @@ const Effectifs = () => {
               </tr>
             </thead>
             <tbody>
-              {AgentsSelector.isReady &&
+              {AgentsSelector.status == "complete" &&
                 AgentsSelector.collections.map((agent) => (
                   <tr key={agent.id}>
                     <td scope="col">{agent.matricule}</td>

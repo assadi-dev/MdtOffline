@@ -20,6 +20,7 @@ import { GenerateRoutes, GenerateSubNavRoutes } from "./routes/GenerateRoutes";
 import { getAllCivil } from "./redux/actions/Civil.action";
 import AccesDenied from "./Pages/Permission/AccesDenied";
 import { getOwnerdAsync } from "./features/Authenticate/AuthenticateAsyncAction";
+import { getAllAgentAsync } from "./features/Agents/AgentAsyncApi";
 
 const App = () => {
   const Hello = () => {
@@ -55,12 +56,12 @@ const App = () => {
         isLoggedIn: true,
       };
       promise = dispatch(getOwnerdAsync({ id: id, role: role })).unwrap();
-
-      /*     
-      dispatch(get_allAgent());
-      dispatch(getAllCivil()); */
     }
+
+    const promiseAgent = dispatch(getAllAgentAsync());
+    /* dispatch(getAllCivil()); */
     return () => {
+      promiseAgent.abort();
       promise.abort();
     };
   }, []);
