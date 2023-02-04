@@ -26,6 +26,10 @@ import {
 } from "./AcountManager.styled";
 import DeleteAccountView from "./Modal/DeleteAccountView ";
 import ModalStateReducer from "./Reducer/ModalStateReducer";
+import {
+  getAllUsersAsync,
+  validateUsersAsync,
+} from "../../../features/Users/UserAsyncApi";
 
 const AccountManager = () => {
   const dispatch = useDispatch();
@@ -40,11 +44,15 @@ const AccountManager = () => {
   const handleCheckValidate = (id, e) => {
     let checkState = e.target.checked;
     let data = { validate: checkState };
-    dispatch(validation_user(id, data));
+    let payload = { id, data };
+    dispatch(validateUsersAsync(payload));
   };
 
   useEffect(() => {
-    dispatch(get_allUsers());
+    const promise = dispatch(getAllUsersAsync());
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   const handleDelete = (id, username) => {
@@ -102,7 +110,7 @@ const AccountManager = () => {
               </tr>
             </thead>
             <tbody>
-              {userSelector.isReady &&
+              {userSelector.status == "complete" &&
                 userSelector.collection.map((user) => (
                   <tr key={user.id}>
                     <td>{user.username}</td>

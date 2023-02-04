@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
 import { AlertTriangleFill } from "../../../../components/SVG";
-import { delete_user } from "../../../../redux/actions/User.action";
 import {
   AlertInfo,
   AlertInfoBody,
@@ -12,6 +11,7 @@ import {
   DeleteSectionbutton,
   HeaderInfo,
 } from "../AcountManager.styled";
+import { deleteUsersAsync } from "../../../../features/Users/UserAsyncApi";
 
 const DeleteAccountView = ({ id, username, onClose }) => {
   const dispatch = useDispatch();
@@ -21,9 +21,11 @@ const DeleteAccountView = ({ id, username, onClose }) => {
 
   const handleSubmitDelete = (e) => {
     e.preventDefault();
-    dispatch(delete_user(id)).then(() => {
-      onClose();
-    });
+    dispatch(deleteUsersAsync({ id }))
+      .unwrap()
+      .then(() => {
+        onClose();
+      });
   };
 
   return (
