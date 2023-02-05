@@ -37,6 +37,7 @@ import {
   OutlineBtnAction,
 } from "./HoursSheet.styled";
 import AddServiceView from "./ModalView/AddServiceView";
+import { getUserPriseServiceByWeekAsync } from "../../../features/PriseDeService/PriseDeserviceAsyncApi";
 
 const HoursSheet = () => {
   const [week, setWeek] = useState(parseInt(getCurrentWeekNumber()));
@@ -58,7 +59,13 @@ const HoursSheet = () => {
   };
 
   useEffect(() => {
-    agent.idAgent && dispatch(get_userPriseServiceByWeek(agent.idAgent, week));
+    const promise =
+      agent.idAgent &&
+      week &&
+      dispatch(getUserPriseServiceByWeekAsync({ agent: agent.idAgent, week }));
+    return () => {
+      agent.idAgent && week && promise.abort();
+    };
   }, [week, agent.idAgent]);
 
   const listeServices = useMemo(() => {
