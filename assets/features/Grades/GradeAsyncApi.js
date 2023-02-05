@@ -15,7 +15,7 @@ export const getAllGradesAsync = createAsyncThunk(
     } catch (error) {
       let message = "";
       if (error.response) {
-        message = error.response.data.error;
+        message = error.response.data.detail;
       } else {
         message = error.message;
       }
