@@ -20,6 +20,25 @@ export const AgentSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    updatePaidUser: (state, action) => {
+      const { idAgent, id, isPaid } = action.payload;
+      let agentCollection = state.collections;
+      let updatedCollection = agentCollection.map((agent) => {
+        if (agent.id == idAgent) {
+          return {
+            ...agent,
+            priseDeServices: agent.priseDeServices.map((s) => {
+              if (s.id == id) {
+                return { ...s, isPaid };
+              }
+              return s;
+            }),
+          };
+        }
+        return agent;
+      });
+      state.collections = updatedCollection;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -62,5 +81,7 @@ export const AgentSlice = createSlice({
       });
   },
 });
+
+export const { updatePaidUser } = AgentSlice.actions;
 
 export default AgentSlice.reducer;

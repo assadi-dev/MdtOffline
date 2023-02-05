@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SwitchButton from "../../../components/Shared/SwitchButton";
 import { ChevronLeft, ChevronRight } from "../../../components/SVG";
-import { get_allAgent } from "../../../redux/actions/Agents.action";
-import { get_allGrades } from "../../../redux/actions/Grades.action";
 import { updateIsPaidService } from "../../../redux/actions/PriseDeService.action";
 import {
   FormatDuration,
@@ -23,6 +21,9 @@ import {
   getTotalHourByWeek,
 } from "./helper";
 import ServiceState from "./ServiceState";
+import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
+import { getAllGradesAsync } from "../../../features/Grades/GradeAsyncApi";
+import { updateisPaidService } from "../../../features/Agents/AgentApi";
 
 const Comptabilite = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Comptabilite = () => {
 
   const handleCheckPayement = (id, e) => {
     let checkState = e.target.checked;
+
     let currenAgent = AgentsSelector.collections.find(
       (agent) => agent.id == id
     );
@@ -43,7 +45,8 @@ const Comptabilite = () => {
       priseServiceByWeek: servicesOfWeek,
       paidValue: servicesOfWeek.length > 0 ? checkState : false,
     };
-    dispatch(updateIsPaidService(submitServicesOfWeek));
+    //dispatch(updateIsPaidServiceAsync(submitServicesOfWeek));
+    updateisPaidService(dispatch, submitServicesOfWeek);
   };
 
   const setWeekCounter = (type) => {
@@ -53,8 +56,12 @@ const Comptabilite = () => {
   };
 
   useEffect(() => {
-    dispatch(get_allAgent());
-    dispatch(get_allGrades());
+    const promise = dispatch(getAllAgentAsync());
+    const promise2 = dispatch(getAllGradesAsync());
+    return () => {
+      promise.abort();
+      promise2.abort();
+    };
   }, [week]);
 
   const agents = useMemo(() => {

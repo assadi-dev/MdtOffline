@@ -1,3 +1,5 @@
+import { updatePaidUser } from "../../../features/Agents/Agent.slice";
+
 export const getTotalHourByWeek = (agent, week) => {
   if (agent.priseDeServices !== null || agent.priseDeServices.length > 0) {
     let servicesOfWeek = agent.priseDeServices.filter(

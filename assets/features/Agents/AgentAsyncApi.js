@@ -1,6 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { edit_agent, fetchAllAgents, fetch_one } from "./AgentApi";
+import {
+  edit_agent,
+  fetchAllAgents,
+  fetch_one,
+  updateisPaidService,
+} from "./AgentApi";
 import { async } from "regenerator-runtime";
+import { updatePaidUser } from "./Agent.slice";
 
 export const getAllAgentAsync = createAsyncThunk(
   "Agent/fetchAll",
