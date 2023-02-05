@@ -12,6 +12,12 @@ import {
 } from "../../../../utils/dateFormat";
 import { PlayFilled, PlayOutline } from "../../../SVG";
 import { ServiceButton } from "./ServicesBtn.styled";
+import {
+  addServiceAsync,
+  editServiceAsync,
+  getLastActiveServiceAsync,
+} from "../../../../features/PriseDeService/PriseDeserviceAsyncApi";
+import { addSeeviceBtn } from "../../../../features/PriseDeService/PriseDeService.slice";
 
 const ServicesBtn = () => {
   const agent = useSelector((state) => state.AuthenticateReducer);
@@ -21,9 +27,14 @@ const ServicesBtn = () => {
   const [toggleButton, setToggleButton] = useState(false);
 
   useEffect(() => {
+    let promise = null;
     if (agent.idAgent) {
-      dispatch(get_lastActiveService(agent.idAgent));
+      let payload = { agent: agent.idAgent };
+      promise = dispatch(getLastActiveServiceAsync(payload));
     }
+    return () => {
+      if (agent.idAgent) promise.abort();
+    };
   }, [agent.idAgent]);
 
   const activeService = () => {
@@ -37,7 +48,7 @@ const ServicesBtn = () => {
       isActive: true,
     };
 
-    dispatch(add_priseServices(servicesValues));
+    dispatch(addServiceAsync(servicesValues));
   };
 
   const endService = () => {
@@ -48,7 +59,9 @@ const ServicesBtn = () => {
       isActive: false,
     };
 
-    dispatch(edit_priseServices(currentService.id, servicesValues));
+    let payload = { id: currentService.id, data: servicesValues };
+
+    dispatch(editServiceAsync(payload));
   };
 
   const toggleOnService = () => {
