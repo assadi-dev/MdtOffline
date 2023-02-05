@@ -37,6 +37,7 @@ const App = () => {
 
   useEffect(() => {
     let promise = null;
+    let promiseAgent = null;
     if (tokenStorage) {
       const decode = jwt_decode(tokenStorage);
       const id = decode.id;
@@ -56,15 +57,17 @@ const App = () => {
         isLoggedIn: true,
       };
       promise = dispatch(getOwnerdAsync({ id: id, role: role })).unwrap();
+      promiseAgent = dispatch(getAllAgentAsync());
+      /* dispatch(getAllCivil()); */
     }
 
-    const promiseAgent = dispatch(getAllAgentAsync());
-    /* dispatch(getAllCivil()); */
     return () => {
-      promiseAgent.abort();
-      promise.abort();
+      if (tokenStorage) {
+        promiseAgent.abort();
+        promise.abort();
+      }
     };
-  }, []);
+  }, [tokenStorage]);
 
   return (
     <Routes>

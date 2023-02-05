@@ -13,7 +13,7 @@ const DropdownItems = () => {
   const handleDeconnect = () => {
     deconnect().then((res) => {
       // dispatch(userLogout());
-      sleep(1000).then(() => window.location.replace("/"));
+      sleep(1000).then(() => navigation("/connexion", { replace: true }));
     });
   };
 
