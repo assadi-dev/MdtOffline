@@ -30,6 +30,7 @@ import {
   getAllUsersAsync,
   validateUsersAsync,
 } from "../../../features/Users/UserAsyncApi";
+import { accountValidate } from "../../../features/Users/User.slice";
 
 const AccountManager = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const AccountManager = () => {
     let checkState = e.target.checked;
     let data = { validate: checkState };
     let payload = { id, data };
+    //dispatch(accountValidate(payload));
     dispatch(validateUsersAsync(payload));
   };
 

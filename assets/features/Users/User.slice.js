@@ -10,6 +10,20 @@ const initialState = { collection: [], selected: [], error: "", status: "" };
 const UserSlice = createSlice({
   name: "Users",
   initialState,
+  reducers: {
+    accountValidate: (state, action) => {
+      const { payload } = action;
+      let updateValidationCollection = state.collection;
+      updateValidationCollection = updateValidationCollection.map((user) => {
+        if (user.id === payload.id) {
+          return { ...user, validate: payload.validate };
+        }
+        return user;
+      });
+
+      state.collection = updateValidationCollection;
+    },
+  },
   extraReducers: (builders) => {
     builders
       .addCase(getAllUsersAsync.fulfilled, (state, action) => {
@@ -55,5 +69,7 @@ const UserSlice = createSlice({
       });
   },
 });
+
+export const { accountValidate } = UserSlice.actions;
 
 export default UserSlice.reducer;
