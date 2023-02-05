@@ -37,7 +37,10 @@ import {
   OutlineBtnAction,
 } from "./HoursSheet.styled";
 import AddServiceView from "./ModalView/AddServiceView";
-import { getUserPriseServiceByWeekAsync } from "../../../features/PriseDeService/PriseDeserviceAsyncApi";
+import {
+  deleteServiceAsync,
+  getUserPriseServiceByWeekAsync,
+} from "../../../features/PriseDeService/PriseDeserviceAsyncApi";
 
 const HoursSheet = () => {
   const [week, setWeek] = useState(parseInt(getCurrentWeekNumber()));
@@ -137,11 +140,12 @@ const HoursSheet = () => {
   };
 
   const handleDeletService = (id) => {
+    let payload = { id };
     currentService
       ? alert(
           "Vous avez un service en cours ,veuillez mettre fin à votre service avant d'effectué cette action"
         )
-      : dispatch(delete_priseServices(id));
+      : dispatch(deleteServiceAsync(payload));
   };
 
   return (
