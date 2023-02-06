@@ -17,11 +17,9 @@ import {
 } from "./EncodeCivile.styled";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCivil,
-  uploadPhotoCivil,
-} from "../../../redux/actions/Civil.action";
 import { ucFirst } from "../../../utils/textFormat";
+import { addCivilAsync } from "../../../features/Civil/CivilAsyncApi";
+import { uploadPhotoCivil } from "../../../features/Civil/CivilApi";
 const EncodeCivil = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState({
@@ -59,8 +57,11 @@ const EncodeCivil = ({ isOpen, onClose }) => {
         nationalite: ucFirst(values.nationalite),
       };
 
-      token &&
-        dispatch(addCivil(data)).then((res) => {
+      const payload = { data };
+      console.log("dispatch");
+      dispatch(addCivilAsync(payload))
+        .unwrap()
+        .then((res) => {
           if (file.file) {
             let id = res.id;
             let formData = new FormData();
@@ -286,7 +287,9 @@ const EncodeCivil = ({ isOpen, onClose }) => {
                 <p></p>
               </div>
               <div className="form-control">
-                <ButtonStyled className="btn">Envoyer</ButtonStyled>
+                <ButtonStyled type="submit" className="btn">
+                  Envoyer
+                </ButtonStyled>
               </div>
             </ModalFooter>
           </InputContainer>

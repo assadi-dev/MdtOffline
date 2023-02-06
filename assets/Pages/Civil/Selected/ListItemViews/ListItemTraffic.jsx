@@ -48,7 +48,9 @@ const ListItemTraffic = ({
     };
 
     document.addEventListener("mousedown", closeDropDown);
-    return () => document.removeEventListener("mousedown", closeDropDown);
+    return () => {
+      document.removeEventListener("mousedown", closeDropDown);
+    };
   }, []);
 
   const handleRead = () => {
@@ -92,6 +94,7 @@ const ListItemTraffic = ({
               <>
                 {" "}
                 <MoreIconBtn
+                  ref={moreIconBtnRef}
                   className="m-left-1"
                   onClick={() =>
                     setOpenMore((current) => (current = !openMore))

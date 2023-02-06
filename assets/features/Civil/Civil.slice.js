@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCivilsAsync, getOneCivilsAsync } from "./CivilAsyncApi";
+import {
+  addCivilAsync,
+  getAllCivilsAsync,
+  getOneCivilsAsync,
+  searchCivilAsync,
+} from "./CivilAsyncApi";
 
 const initialState = {
   collection: [],
@@ -58,7 +63,30 @@ export const CivilSlice = createSlice({
       .addCase(getOneCivilsAsync.rejected, (state, { error }) => {
         state.error = error.message;
       });
+    builders
+      .addCase(addCivilAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.collection = [...state.collection, payload];
+      })
+      .addCase(addCivilAsync.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+    builders
+      .addCase(searchCivilAsync.pending, (state) => {
+        state.status = "pending";
+        state.error = "";
+      })
+      .addCase(searchCivilAsync.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(searchCivilAsync.fulfilled, (state, action) => {
+        state.status = "complete";
+        state.error = "";
+        state.collection = action.payload;
+      });
   },
 });
+
+export const { uploadPhoto } = CivilSlice.actions;
 
 export default CivilSlice.reducer;

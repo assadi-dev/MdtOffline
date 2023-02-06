@@ -38,10 +38,7 @@ import ListItemTraffic from "./ListItemViews/ListItemTraffic";
 import ListItemDossierArrestaion from "./ListItemViews/ListItemDossierArrestaion";
 import ListItemRapportArrestation from "./ListItemViews/ListItemRapportArrestation";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getOneCivil,
-  uploadPhotoCivil,
-} from "../../../redux/actions/Civil.action";
+import { getOneCivil } from "../../../redux/actions/Civil.action";
 import ConvocationView from "./ModalView/ConvocationView";
 import CelluleView from "./ModalView/CelluleView";
 import EditAvertissementView from "./ListItemViews/EditView/EditAvertissementView";
@@ -58,8 +55,6 @@ import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
 import Cookies from "js-cookie";
 import useListAgent from "../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../utils/userData";
-import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
-import { get_allAgent } from "../../../redux/actions/Agents.action";
 import { isAllowedAction, sortDescListItems } from "./helper";
 import EditCivilView from "./ListItemViews/EditView/EditCivilView";
 import { ucFirst } from "../../../utils/textFormat";
@@ -122,7 +117,7 @@ const CivilSelected = () => {
     const formData = new FormData();
     formData.append("photo", file.file);
 
-    dispatchCivilData(uploadPhotoCivil(id, formData)).then(() => {
+    /*     dispatchCivilData(uploadPhotoCivil(id, formData)).then(() => {
       setFile((prevState) => ({
         ...prevState,
         file: "",
@@ -130,22 +125,14 @@ const CivilSelected = () => {
         type: 0,
         preview: "",
       }));
-    });
+    }); */
   };
 
   useEffect(() => {
-    let promise, promise2;
     if (id) {
-      promise = dispatchCivilData(getOneCivilsAsync({ id }));
-      promise2 = dispatch(getAllAgentAsync());
+      dispatchCivilData(getOneCivilsAsync({ id }));
+      dispatch(getAllAgentAsync());
     }
-
-    return () => {
-      if (id) {
-        promise2.abort();
-        promise2.abort();
-      }
-    };
   }, [id]);
 
   const civilData = useMemo(() => {

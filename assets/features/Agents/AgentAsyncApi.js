@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  add_agent,
   edit_agent,
   fetchAllAgents,
   fetch_one,

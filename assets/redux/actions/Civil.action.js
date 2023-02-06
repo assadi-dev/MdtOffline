@@ -85,16 +85,3 @@ export const editCivil = (id, data) => {
     });
   };
 };
-
-export const uploadPhotoCivil = (id, data) => {
-  return async (dispatch) => {
-    try {
-      Api.post(`/civils/${id}/photo`, data).then((res) => {
-        let data = res.data;
-        dispatch({ payload: data, type: UPLOAD_PHOTO_CIVIL });
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};

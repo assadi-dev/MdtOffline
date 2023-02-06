@@ -2,19 +2,23 @@ import Api from "../../service/Api/Api";
 import { updatePaidUser } from "./Agent.slice";
 
 export const fetchAllAgents = (signal) => {
-  return Api.get("agents", { signal });
+  return Api.get("/agents", { signal });
 };
 
 export const fetch_one = (idAgent, signal) => {
-  return Api.get(`agents/${idAgent}`, { signal });
+  return Api.get(`/agents/${idAgent}`, { signal });
 };
 
 export const fetch_allRookie = (signal) => {
-  return Api.get("agents", { params: { "grade.nom": "Rookie" }, signal });
+  return Api.get("/agents", { params: { "grade.nom": "Rookie" }, signal });
 };
 
 export const edit_agent = (id, data) => {
-  return Api.put(`agents/${id}`, data);
+  return Api.put(`/agents/${id}`, data);
+};
+
+export const add_agent = (data) => {
+  return Api.post(`/agents`, data);
 };
 
 export const updateisPaidService = (dispatch, servicesOfWeek) => {
@@ -29,7 +33,7 @@ export const updateisPaidService = (dispatch, servicesOfWeek) => {
         dispatch(updatePaidUser(payload));
         Api.put(`/prise_de_services/${id}`, {
           isPaid: paidValue,
-        }).then((res) => {});
+        });
       })
     );
   }
