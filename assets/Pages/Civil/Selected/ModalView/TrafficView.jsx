@@ -13,13 +13,8 @@ import SelectMultiple from "../../../../components/Shared/SelectMultiple";
 import { codePenal, nominal } from "../../../../Data/FichesCalcule";
 import EditTable from "../EditTable";
 import { useDispatch, useSelector } from "react-redux";
-import { add_traffic } from "../../../../redux/actions/Traffic.action";
-import {
-  get_filltedChefAccusations,
-  get_filteredChefAccusations,
-} from "../../../../redux/actions/ChefAccusation.action";
-import useFecthData from "../../../../hooks/useFecthData";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
+import { addTrafficAsync } from "../../../../features/Civil/CasierAsyncApi";
 
 const TrafficView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -122,8 +117,9 @@ const TrafficView = ({ idCivil, onClose }) => {
       idAgent: agent.idAgent,
     };
 
-    token &&
-      dispatch(add_traffic(data)).then(() => {
+    dispatch(addTrafficAsync(data))
+      .unwrap()
+      .then(() => {
         onClose();
       });
   };

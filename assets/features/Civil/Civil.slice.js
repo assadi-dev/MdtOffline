@@ -9,7 +9,9 @@ import {
   addAvertissementAsync,
   addTrafficAsync,
   deleteAvertissementAsync,
+  deleteTrafficAsync,
   editAvertissementAsync,
+  editTrafficAsync,
 } from "./CasierAsyncApi";
 
 const initialState = {
@@ -115,8 +117,25 @@ export const CivilSlice = createSlice({
     });
     builders.addCase(addTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
-      state.selected = [payload, ...state.selected.traffics];
-      state.status = "complete";
+      state.selected.traffics = [payload, ...state.selected.traffics];
+    });
+    builders.addCase(editTrafficAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let updateTraffic = state.selected.traffics.map((traffic) => {
+        if (traffic.id == payload.id) {
+          return { ...payload };
+        }
+        return traffic;
+      });
+      state.selected.traffics = updateTraffic;
+    });
+
+    builders.addCase(deleteTrafficAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let removeTraffic = state.selected.traffics.filter(
+        (traffic) => traffic.id != payload.id
+      );
+      state.selected.traffics = removeTraffic;
     });
   },
 });

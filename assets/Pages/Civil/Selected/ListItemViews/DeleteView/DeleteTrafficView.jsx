@@ -9,6 +9,7 @@ import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import numeral from "numeral";
 import { deletet_traffic } from "../../../../../redux/actions/Traffic.action";
+import { deleteTrafficAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const DeleteTrafficView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -23,8 +24,10 @@ const DeleteTrafficView = ({ id, onClose }) => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    token &&
-      dispatch(deletet_traffic(id)).then(() => {
+
+    dispatch(deleteTrafficAsync({ id }))
+      .unwrap()
+      .then(() => {
         onClose();
       });
   };

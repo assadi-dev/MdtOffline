@@ -15,8 +15,8 @@ import SelectMultiple from "../../../../../components/Shared/SelectMultiple";
 import EditTable from "../../EditTable";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import numeral from "numeral";
-import { edit_traffic } from "../../../../../redux/actions/Traffic.action";
 import useFecthDataWithParams from "../../../../../hooks/useFecthDataWithParams";
+import { editTrafficAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const EditTrafficView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -129,8 +129,9 @@ const EditTrafficView = ({ id, onClose }) => {
       // civil: `api/civils/${idCivil}`,
     };
 
-    token &&
-      dispatch(edit_traffic(id, data)).then(() => {
+    dispatch(editTrafficAsync({ id, data }))
+      .unwrap()
+      .then(() => {
         onClose();
       });
   };
