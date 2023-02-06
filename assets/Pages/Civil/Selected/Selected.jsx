@@ -69,6 +69,8 @@ import ReadDossierArrestationView from "./ListItemViews/ReadView/ReadDossierArre
 import ReadTrafficView from "./ListItemViews/ReadView/ReadTrafficView";
 import ReadRapportArrestationView from "./ListItemViews/ReadView/ReadRapportArrestationView";
 import ReadAvertissementView from "./ListItemViews/ReadView/ReadAvertissementView";
+import { getOneCivilsAsync } from "../../../features/Civil/CivilAsyncApi";
+import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
 
 const CivilSelected = () => {
   const [modaleState, dispatch] = useReducer(ModalReducer, {
@@ -132,8 +134,18 @@ const CivilSelected = () => {
   };
 
   useEffect(() => {
-    dispatchCivilData(getOneCivil(id));
-    dispatch(get_allAgent());
+    let promise, promise2;
+    if (id) {
+      promise = dispatchCivilData(getOneCivilsAsync({ id }));
+      promise2 = dispatch(getAllAgentAsync());
+    }
+
+    return () => {
+      if (id) {
+        promise2.abort();
+        promise2.abort();
+      }
+    };
   }, [id]);
 
   const civilData = useMemo(() => {

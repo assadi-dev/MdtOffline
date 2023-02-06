@@ -10,6 +10,7 @@ import { ActionRow, Card, CivilWrapper, RowCard } from "./Civil.styled";
 import CivilCard from "./CivilCard";
 import EncodeCivil from "./Modal/EncodeCivil";
 import { get_allChefAccusations } from "../../redux/actions/ChefAccusation.action";
+import { getAllCivilsAsync } from "../../features/Civil/CivilAsyncApi";
 
 const Civil = () => {
   const [search, setSearch] = useState();
@@ -36,10 +37,11 @@ const Civil = () => {
   };
 
   useEffect(() => {
-    {
-      dispatch(getAllCivil(userAuth.token));
-    }
-  }, [userAuth.token]);
+    const promise = dispatch(getAllCivilsAsync());
+    return () => {
+      promise.abort();
+    };
+  }, []);
 
   return (
     <>
