@@ -14,7 +14,7 @@ import { codePenal, nominal } from "../../../../Data/FichesCalcule";
 import EditTable from "../EditTable";
 import { useDispatch, useSelector } from "react-redux";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
-import { addTrafficAsync } from "../../../../features/Civil/CasierAsyncApi";
+import { addCivilTrafficAsync } from "../../../../features/Civil/CasierAsyncApi";
 
 const TrafficView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -117,7 +117,7 @@ const TrafficView = ({ idCivil, onClose }) => {
       idAgent: agent.idAgent,
     };
 
-    dispatch(addTrafficAsync(data))
+    dispatch(addCivilTrafficAsync(data))
       .unwrap()
       .then(() => {
         onClose();

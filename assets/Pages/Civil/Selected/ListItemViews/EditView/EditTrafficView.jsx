@@ -16,7 +16,7 @@ import EditTable from "../../EditTable";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import numeral from "numeral";
 import useFecthDataWithParams from "../../../../../hooks/useFecthDataWithParams";
-import { editTrafficAsync } from "../../../../../features/Civil/CasierAsyncApi";
+import { editCivilTrafficAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const EditTrafficView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -129,7 +129,7 @@ const EditTrafficView = ({ id, onClose }) => {
       // civil: `api/civils/${idCivil}`,
     };
 
-    dispatch(editTrafficAsync({ id, data }))
+    dispatch(editCivilTrafficAsync({ id, data }))
       .unwrap()
       .then(() => {
         onClose();

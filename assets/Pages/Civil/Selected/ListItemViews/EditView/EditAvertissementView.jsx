@@ -9,7 +9,7 @@ import {
   FooterSectionButton,
   HeadTitleView,
 } from "../../ModalView/ModalView.styled";
-import { editAvertissementAsync } from "../../../../../features/Civil/CasierAsyncApi";
+import { editCivilAvertissementAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const EditAvertissementView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -43,7 +43,7 @@ const EditAvertissementView = ({ id, onClose }) => {
     e.preventDefault();
     let data = { ...inputState };
 
-    dispatch(editAvertissementAsync({ id, data })).then(() => {
+    dispatch(editCivilAvertissementAsync({ id, data })).then(() => {
       onClose();
     });
   };
