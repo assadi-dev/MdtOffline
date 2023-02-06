@@ -53,33 +53,19 @@ export const uploadPhotoCivil = (id, data) => {
 
 //Action Casier
 
+//Avertissement
 export const add_Avertissement = (data) => {
-  return async (dispatch) => {
-    try {
-      Api.post("/avertissements", data).then((res) => {
-        let data = res.data;
-        dispatch(addAvertissement(data));
-      });
-    } catch (error) {}
-  };
+  return Api.post("/avertissements", data);
 };
 export const edit_Avertissement = (id, data) => {
-  return async (dispatch) => {
-    try {
-      Api.put(`/avertissements/${id}`, data).then((res) => {
-        let data = res.data;
-        dispatch(editAvertissement(data));
-      });
-    } catch (error) {}
-  };
+  return Api.put(`/avertissements/${id}`, data);
 };
 
 export const delete_avertissement = (id) => {
-  return async (dispatch) => {
-    try {
-      Api.delete(`/avertissements/${id}`).then(() => {
-        dispatch(deleteAvertissement({ id }));
-      });
-    } catch (error) {}
-  };
+  return Api.delete(`/avertissements/${id}`);
+};
+
+//Traffic
+export const add_traffic = (data) => {
+  return Api.post("traffic", data);
 };

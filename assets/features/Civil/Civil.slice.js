@@ -5,6 +5,12 @@ import {
   getOneCivilsAsync,
   searchCivilAsync,
 } from "./CivilAsyncApi";
+import {
+  addAvertissementAsync,
+  addTrafficAsync,
+  deleteAvertissementAsync,
+  editAvertissementAsync,
+} from "./CasierAsyncApi";
 
 const initialState = {
   collection: [],
@@ -29,33 +35,6 @@ export const CivilSlice = createSlice({
       newStateCollection[civilIndex].photo = payload.photo;
       state.collection = newStateCollection;
       state.selected = { ...state.selected, photo: payload.photo };
-    },
-    addAvertissement: (state, action) => {
-      const { payload } = action;
-      state.selected.avertissements = [
-        payload,
-        ...state.selected.avertissements,
-      ];
-    },
-    editAvertissement: (state, action) => {
-      const { payload } = action;
-      let updateAvertissement = state.selected.avertissements.map(
-        (avertissement) => {
-          if (avertissement.id == payload.id) {
-            return { ...payload };
-          }
-          return avertissement;
-        }
-      );
-      state.selected.avertissements = updateAvertissement;
-    },
-
-    deleteAvertissement: (state, { payload }) => {
-      let removeAvertissement = state.selected.avertissements.filter(
-        (a) => a.id != payload.id
-      );
-
-      state.selected.avertissements = removeAvertissement;
     },
   },
 
@@ -108,6 +87,37 @@ export const CivilSlice = createSlice({
         state.error = "";
         state.collection = action.payload;
       });
+    builders.addCase(addAvertissementAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected.avertissements = [
+        payload,
+        ...state.selected.avertissements,
+      ];
+    });
+    builders.addCase(editAvertissementAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let updateAvertissement = state.selected.avertissements.map(
+        (avertissement) => {
+          if (avertissement.id == payload.id) {
+            return { ...payload };
+          }
+          return avertissement;
+        }
+      );
+      state.selected.avertissements = updateAvertissement;
+    });
+    builders.addCase(deleteAvertissementAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let removeAvertissement = state.selected.avertissements.filter(
+        (a) => a.id != payload.id
+      );
+      state.selected.avertissements = removeAvertissement;
+    });
+    builders.addCase(addTrafficAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected = [payload, ...state.selected.traffics];
+      state.status = "complete";
+    });
   },
 });
 

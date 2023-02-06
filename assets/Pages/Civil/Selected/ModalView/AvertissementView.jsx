@@ -6,6 +6,7 @@ import InputTextArea from "../../../../components/Shared/InputTextArea";
 import CloseModalBtn from "../../../../components/Shared/Modal/CloseModal";
 import { FooterSectionButton, HeadTitleView } from "./ModalView.styled";
 import { add_Avertissement } from "../../../../features/Civil/CivilApi";
+import { addAvertissementAsync } from "../../../../features/Civil/CasierAsyncApi";
 
 const AvertissementView = ({ onClose, idCivil }) => {
   const textAreaRef = useRef();
@@ -34,9 +35,11 @@ const AvertissementView = ({ onClose, idCivil }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     let data = { ...inputState };
-    dispatch(add_Avertissement(data)).then(() => {
-      onClose();
-    });
+    dispatch(addAvertissementAsync(data))
+      .unwrap()
+      .then(() => {
+        onClose();
+      });
   };
 
   return (

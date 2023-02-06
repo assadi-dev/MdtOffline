@@ -10,6 +10,7 @@ import {
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
 import { delete_avertissement } from "../../../../../features/Civil/CivilApi";
+import { deleteAvertissementAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const DeleteAvertissementView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -25,10 +26,11 @@ const DeleteAvertissementView = ({ id, onClose }) => {
 
     const token = agent.token;
 
-    dispatch(delete_avertissement(id)).then((res) => {
-      console.log(res);
-      onClose();
-    });
+    dispatch(deleteAvertissementAsync({ id }))
+      .unwrap()
+      .then((res) => {
+        onClose();
+      });
   };
 
   return (
