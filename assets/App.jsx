@@ -38,6 +38,7 @@ const App = () => {
   useEffect(() => {
     let promise = null;
     let promiseAgent = null;
+    let promiseCivil = null;
     if (tokenStorage) {
       const decode = jwt_decode(tokenStorage);
       const id = decode.id;
@@ -58,13 +59,14 @@ const App = () => {
       };
       promise = dispatch(getOwnerdAsync({ id: id, role: role })).unwrap();
       promiseAgent = dispatch(getAllAgentAsync());
-      /* dispatch(getAllCivil()); */
+      // promiseCivil = dispatch(getAllCivil());
     }
 
     return () => {
       if (tokenStorage) {
         promiseAgent.abort();
         promise.abort();
+        //promiseCivil.abort();
       }
     };
   }, [tokenStorage]);
