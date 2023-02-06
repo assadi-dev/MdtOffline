@@ -9,7 +9,6 @@ import {
   FooterSectionButton,
   HeadTitleView,
 } from "../../ModalView/ModalView.styled";
-import { edit_Avertissement } from "../../../../../features/Civil/CivilApi";
 import { editAvertissementAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const EditAvertissementView = ({ id, onClose }) => {

@@ -9,7 +9,6 @@ import {
   DeleteHeadTitleView,
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
-import { delete_avertissement } from "../../../../../features/Civil/CivilApi";
 import { deleteAvertissementAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const DeleteAvertissementView = ({ id, onClose }) => {
