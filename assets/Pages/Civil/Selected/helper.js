@@ -2,7 +2,8 @@ import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import { TOKEN_STORAGE_NAME } from "../../../constants/localStorage";
 export const sortDescListItems = (lists, keys) => {
-  return lists.sort((a, b) => {
+  lists = Object.freeze(lists);
+  return lists.slice().sort((a, b) => {
     a = new Date(a[keys]);
     b = new Date(b[keys]);
     return b.getTime() - a.getTime();
