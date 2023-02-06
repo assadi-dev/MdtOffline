@@ -62,7 +62,6 @@ export const addCivilAsync = createAsyncThunk("Civils/add", async (payload) => {
 export const searchCivilAsync = createAsyncThunk(
   "Civil/search",
   async (searchTerm) => {
-    console.log(searchTerm);
     try {
       const res = await searchCivil(searchTerm);
       return res.data;
