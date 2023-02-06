@@ -273,7 +273,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
           arrestReport,
           idArrestReport: `api/arrest_reports/${res.id}`,
         };
-        console.log(createCellule);
+
         dispatch(addCivilCelluleAsync(createCellule))
           .unwrap()
           .then((res) => {
