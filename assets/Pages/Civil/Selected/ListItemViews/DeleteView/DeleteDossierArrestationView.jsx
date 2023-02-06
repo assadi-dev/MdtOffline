@@ -35,12 +35,11 @@ const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    token &&
-      dispatch(delete_dossierArrestation(id)).then(() => {
-        const { id } = civil;
-        dispatch(getOneCivil(id));
-        onClose();
-      });
+    dispatch(delete_dossierArrestation(id)).then(() => {
+      const { id } = civil;
+      dispatch(getOneCivil(id));
+      onClose();
+    });
   };
 
   return (

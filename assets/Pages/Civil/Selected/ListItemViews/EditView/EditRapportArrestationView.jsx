@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { codePenal, nominal } from "../../../../../Data/FichesCalcule";
 import useFecthData from "../../../../../hooks/useFecthData";
-import { edit_rapportArrestation } from "../../../../../redux/actions/RapportArrestation.action";
 import {
   conversionUP,
   findChefAccusationByName,
@@ -22,6 +21,7 @@ import {
   TableViewPresentation,
 } from "../../ModalView/ModalView.styled";
 import useFecthDataWithParams from "../../../../../hooks/useFecthDataWithParams";
+import { editCivilRapportArrestationAsync } from "../../../../../features/Civil/CasierAsyncApi";
 
 const EditRapportArrestationView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -262,8 +262,9 @@ const EditRapportArrestationView = ({ id, onClose }) => {
       conversionUp: inputState.up,
     };
 
-    token &&
-      dispatch(edit_rapportArrestation(id, data)).then(() => {
+    dispatch(editCivilRapportArrestationAsync({ id, data }))
+      .unwrap()
+      .then(() => {
         onClose();
       });
   };

@@ -6,12 +6,15 @@ import {
   searchCivilAsync,
 } from "./CivilAsyncApi";
 import {
-  addAvertissementAsync,
-  addTrafficAsync,
-  deleteAvertissementAsync,
-  deleteTrafficAsync,
-  editAvertissementAsync,
-  editTrafficAsync,
+  addCivilAvertissementAsync,
+  addCivilRapportArrestationAsync,
+  addCivilTrafficAsync,
+  deleteCivilAvertissementAsync,
+  deleteCivilRapportArrestationAsync,
+  deleteCivilTrafficAsync,
+  editCivilAvertissementAsync,
+  editCivilRapportArrestationAsync,
+  editCivilTrafficAsync,
 } from "./CasierAsyncApi";
 
 const initialState = {
@@ -89,14 +92,14 @@ export const CivilSlice = createSlice({
         state.error = "";
         state.collection = action.payload;
       });
-    builders.addCase(addAvertissementAsync.fulfilled, (state, action) => {
+    builders.addCase(addCivilAvertissementAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.avertissements = [
         payload,
         ...state.selected.avertissements,
       ];
     });
-    builders.addCase(editAvertissementAsync.fulfilled, (state, action) => {
+    builders.addCase(editCivilAvertissementAsync.fulfilled, (state, action) => {
       const { payload } = action;
       let updateAvertissement = state.selected.avertissements.map(
         (avertissement) => {
@@ -108,18 +111,21 @@ export const CivilSlice = createSlice({
       );
       state.selected.avertissements = updateAvertissement;
     });
-    builders.addCase(deleteAvertissementAsync.fulfilled, (state, action) => {
-      const { payload } = action;
-      let removeAvertissement = state.selected.avertissements.filter(
-        (a) => a.id != payload.id
-      );
-      state.selected.avertissements = removeAvertissement;
-    });
-    builders.addCase(addTrafficAsync.fulfilled, (state, action) => {
+    builders.addCase(
+      deleteCivilAvertissementAsync.fulfilled,
+      (state, action) => {
+        const { payload } = action;
+        let removeAvertissement = state.selected.avertissements.filter(
+          (a) => a.id != payload.id
+        );
+        state.selected.avertissements = removeAvertissement;
+      }
+    );
+    builders.addCase(addCivilTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.traffics = [payload, ...state.selected.traffics];
     });
-    builders.addCase(editTrafficAsync.fulfilled, (state, action) => {
+    builders.addCase(editCivilTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
       let updateTraffic = state.selected.traffics.map((traffic) => {
         if (traffic.id == payload.id) {
@@ -130,21 +136,54 @@ export const CivilSlice = createSlice({
       state.selected.traffics = updateTraffic;
     });
 
-    builders.addCase(deleteTrafficAsync.fulfilled, (state, action) => {
+    builders.addCase(deleteCivilTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
       let removeTraffic = state.selected.traffics.filter(
         (traffic) => traffic.id != payload.id
       );
       state.selected.traffics = removeTraffic;
     });
+
+    builders.addCase(
+      addCivilRapportArrestationAsync.fulfilled,
+      (state, action) => {
+        const { payload } = action;
+        state.selected.rapportArrestation = [
+          payload,
+          ...state.selected.rapportArrestation,
+        ];
+      }
+    );
+    builders.addCase(
+      editCivilRapportArrestationAsync.fulfilled,
+      (state, action) => {
+        const { payload } = action;
+        let updateRapportArrestation = state.selected.rapportArrestation.map(
+          (rapportArrestation) => {
+            if (rapportArrestation.id == payload.id) {
+              return { ...payload };
+            }
+            return rapportArrestation;
+          }
+        );
+
+        state.selected.rapportArrestation = updateRapportArrestation;
+      }
+    );
+    builders.addCase(
+      deleteCivilRapportArrestationAsync.fulfilled,
+      (state, action) => {
+        const { payload } = action;
+        let removeRapporArrestation = state.selected.rapportArrestation.filter(
+          (rapportArrestation) => rapportArrestation.id != payload.id
+        );
+
+        state.selected.rapportArrestation = removeRapporArrestation;
+      }
+    );
   },
 });
 
-export const {
-  uploadPhoto,
-  addAvertissement,
-  editAvertissement,
-  deleteAvertissement,
-} = CivilSlice.actions;
+export const { uploadPhoto } = CivilSlice.actions;
 
 export default CivilSlice.reducer;

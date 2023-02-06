@@ -20,6 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { add_rapportArrestation } from "../../../../redux/actions/RapportArrestation.action";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
+import { addCivilRapportArrestationAsync } from "../../../../features/Civil/CasierAsyncApi";
 
 const RapportArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -246,8 +247,10 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
 
     const civilData = civilSelectore.selected;
 
-    token &&
-      dispatch(add_rapportArrestation(data, civilData)).then(() => {
+    dispatch(addCivilRapportArrestationAsync(data))
+      .unwrap()
+      .then((res) => {
+        console.log(res);
         onClose();
       });
   };

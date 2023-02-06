@@ -1,15 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   add_Avertissement,
+  add_rapportArrestation,
   add_traffic,
   delete_avertissement,
+  delete_rapportArrestation,
   delete_traffic,
   edit_Avertissement,
+  edit_rapportArrestation,
   edit_traffic,
 } from "./CivilApi";
 
 //Avertissement Async
-export const addAvertissementAsync = createAsyncThunk(
+export const addCivilAvertissementAsync = createAsyncThunk(
   "Civil/add_Avertissement",
   async (payload) => {
     try {
@@ -27,7 +30,7 @@ export const addAvertissementAsync = createAsyncThunk(
   }
 );
 
-export const editAvertissementAsync = createAsyncThunk(
+export const editCivilAvertissementAsync = createAsyncThunk(
   "Civil/edit_Avertissement",
   async (payload) => {
     const { id, data } = payload;
@@ -47,7 +50,7 @@ export const editAvertissementAsync = createAsyncThunk(
   }
 );
 
-export const deleteAvertissementAsync = createAsyncThunk(
+export const deleteCivilAvertissementAsync = createAsyncThunk(
   "Civil/delete_Avertissement",
   async (payload) => {
     const { id } = payload;
@@ -67,7 +70,7 @@ export const deleteAvertissementAsync = createAsyncThunk(
 );
 
 //Traffic Async
-export const addTrafficAsync = createAsyncThunk(
+export const addCivilTrafficAsync = createAsyncThunk(
   "Civil/add_traffic",
   async (payload) => {
     try {
@@ -85,7 +88,7 @@ export const addTrafficAsync = createAsyncThunk(
   }
 );
 
-export const editTrafficAsync = createAsyncThunk(
+export const editCivilTrafficAsync = createAsyncThunk(
   "Civil/edit_traffic",
   async (payload) => {
     try {
@@ -104,7 +107,7 @@ export const editTrafficAsync = createAsyncThunk(
   }
 );
 
-export const deleteTrafficAsync = createAsyncThunk(
+export const deleteCivilTrafficAsync = createAsyncThunk(
   "Civil/delete_traffic",
   async (payload) => {
     try {
@@ -125,4 +128,75 @@ export const deleteTrafficAsync = createAsyncThunk(
 
 //RAPPORT D'ARRESTATION Async
 
+export const addCivilRapportArrestationAsync = createAsyncThunk(
+  "Civil/add_rapportArrestation",
+  async (payload) => {
+    try {
+      const res = await add_rapportArrestation(payload);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const editCivilRapportArrestationAsync = createAsyncThunk(
+  "Civil/edit_rapportArrestation",
+  async (payload) => {
+    try {
+      const { id, data } = payload;
+      const res = await edit_rapportArrestation(id, data);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const deleteCivilRapportArrestationAsync = createAsyncThunk(
+  "Civil/delete_rapportArrestation",
+  async (payload) => {
+    try {
+      const { id } = payload;
+      delete_rapportArrestation(id);
+      return { id };
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
 //DOSSIER D'ARRESTATION Async
+export const addDossierArrestationAsync = createAsyncThunk(
+  "Civil/add_dossierArrestation",
+  async (payload) => {
+    try {
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
