@@ -2,7 +2,6 @@ import numeral from "numeral";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFecthData from "../../../../../hooks/useFecthData";
-import { edit_Avertissement } from "../../../../../redux/actions/Avertissement.action";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import InputTextArea from "../../../../../components/Shared/InputTextArea";
 import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
@@ -10,6 +9,7 @@ import {
   FooterSectionButton,
   HeadTitleView,
 } from "../../ModalView/ModalView.styled";
+import { edit_Avertissement } from "../../../../../features/Civil/CivilApi";
 
 const EditAvertissementView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -42,7 +42,6 @@ const EditAvertissementView = ({ id, onClose }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     let data = { ...inputState };
-    const token = agent.token;
 
     dispatch(edit_Avertissement(id, data)).then(() => {
       onClose();

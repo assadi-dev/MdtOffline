@@ -1,5 +1,10 @@
 import Api from "../../service/Api/Api";
-import { uploadPhoto } from "./Civil.slice";
+import {
+  addAvertissement,
+  deleteAvertissement,
+  editAvertissement,
+  uploadPhoto,
+} from "./Civil.slice";
 
 export const fetchAllCivils = () => {
   return Api.get("/civils");
@@ -43,5 +48,38 @@ export const uploadPhotoCivil = (id, data) => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+};
+
+//Action Casier
+
+export const add_Avertissement = (data) => {
+  return async (dispatch) => {
+    try {
+      Api.post("/avertissements", data).then((res) => {
+        let data = res.data;
+        dispatch(addAvertissement(data));
+      });
+    } catch (error) {}
+  };
+};
+export const edit_Avertissement = (id, data) => {
+  return async (dispatch) => {
+    try {
+      Api.put(`/avertissements/${id}`, data).then((res) => {
+        let data = res.data;
+        dispatch(editAvertissement(data));
+      });
+    } catch (error) {}
+  };
+};
+
+export const delete_avertissement = (id) => {
+  return async (dispatch) => {
+    try {
+      Api.delete(`/avertissements/${id}`).then(() => {
+        dispatch(deleteAvertissement({ id }));
+      });
+    } catch (error) {}
   };
 };

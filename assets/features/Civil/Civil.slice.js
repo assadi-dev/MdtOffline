@@ -21,10 +21,6 @@ export const CivilSlice = createSlice({
     setError: (state, action) => {
       state.errors = action.payload;
     },
-    addCivil: (state, { payload }) => {
-      state.collection = [...state.collection, payload];
-      state.error = "";
-    },
     uploadPhoto: (state, { payload }) => {
       let newStateCollection = state.collection;
       const civilIndex = newStateCollection.findIndex(
@@ -34,7 +30,35 @@ export const CivilSlice = createSlice({
       state.collection = newStateCollection;
       state.selected = { ...state.selected, photo: payload.photo };
     },
+    addAvertissement: (state, action) => {
+      const { payload } = action;
+      state.selected.avertissements = [
+        payload,
+        ...state.selected.avertissements,
+      ];
+    },
+    editAvertissement: (state, action) => {
+      const { payload } = action;
+      let updateAvertissement = state.selected.avertissements.map(
+        (avertissement) => {
+          if (avertissement.id == payload.id) {
+            return { ...payload };
+          }
+          return avertissement;
+        }
+      );
+      state.selected.avertissements = updateAvertissement;
+    },
+
+    deleteAvertissement: (state, { payload }) => {
+      let removeAvertissement = state.selected.avertissements.filter(
+        (a) => a.id != payload.id
+      );
+
+      state.selected.avertissements = removeAvertissement;
+    },
   },
+
   extraReducers: (builders) => {
     builders
       .addCase(getAllCivilsAsync.pending, (state) => {
@@ -87,6 +111,11 @@ export const CivilSlice = createSlice({
   },
 });
 
-export const { uploadPhoto } = CivilSlice.actions;
+export const {
+  uploadPhoto,
+  addAvertissement,
+  editAvertissement,
+  deleteAvertissement,
+} = CivilSlice.actions;
 
 export default CivilSlice.reducer;

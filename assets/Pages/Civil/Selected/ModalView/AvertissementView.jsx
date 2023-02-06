@@ -5,6 +5,7 @@ import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import CloseModalBtn from "../../../../components/Shared/Modal/CloseModal";
 import { FooterSectionButton, HeadTitleView } from "./ModalView.styled";
+import { add_Avertissement } from "../../../../features/Civil/CivilApi";
 
 const AvertissementView = ({ onClose, idCivil }) => {
   const textAreaRef = useRef();
@@ -33,11 +34,9 @@ const AvertissementView = ({ onClose, idCivil }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     let data = { ...inputState };
-    const token = agent.token;
-    token &&
-      dispatch(addAvertissement(data)).then(() => {
-        onClose();
-      });
+    dispatch(add_Avertissement(data)).then(() => {
+      onClose();
+    });
   };
 
   return (

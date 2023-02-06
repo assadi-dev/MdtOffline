@@ -2,10 +2,6 @@ import numeral from "numeral";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFecthData from "../../../../../hooks/useFecthData";
-import {
-  delete_avertissement,
-  edit_Avertissement,
-} from "../../../../../redux/actions/Avertissement.action";
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import InputTextArea from "../../../../../components/Shared/InputTextArea";
 import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
@@ -13,6 +9,7 @@ import {
   DeleteHeadTitleView,
   DeleteSectionbutton,
 } from "../../ModalView/ModalView.styled";
+import { delete_avertissement } from "../../../../../features/Civil/CivilApi";
 
 const DeleteAvertissementView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -28,7 +25,8 @@ const DeleteAvertissementView = ({ id, onClose }) => {
 
     const token = agent.token;
 
-    dispatch(delete_avertissement(id)).then(() => {
+    dispatch(delete_avertissement(id)).then((res) => {
+      console.log(res);
       onClose();
     });
   };
