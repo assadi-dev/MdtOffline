@@ -7,6 +7,7 @@ import {
 } from "./CivilAsyncApi";
 import {
   addCivilAvertissementAsync,
+  addCivilCelluleAsync,
   addCivilRapportArrestationAsync,
   addCivilTrafficAsync,
   deleteCivilAvertissementAsync,
@@ -181,6 +182,10 @@ export const CivilSlice = createSlice({
         state.selected.rapportArrestation = removeRapporArrestation;
       }
     );
+    builders.addCase(addCivilCelluleAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected.cellule = [payload, ...state.selected.cellule];
+    });
   },
 });
 

@@ -20,7 +20,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { add_rapportArrestation } from "../../../../redux/actions/RapportArrestation.action";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
-import { addCivilRapportArrestationAsync } from "../../../../features/Civil/CasierAsyncApi";
+import {
+  addCivilCelluleAsync,
+  addCivilRapportArrestationAsync,
+} from "../../../../features/Civil/CasierAsyncApi";
+import {
+  addDateByHour,
+  dateFrenchFormat,
+  obtainDate,
+} from "../../../../utils/dateFormat";
+import { generateNumeroDossier, ucFirst } from "../../../../utils/textFormat";
+import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
 
 const RapportArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -250,7 +260,39 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
     dispatch(addCivilRapportArrestationAsync(data))
       .unwrap()
       .then((res) => {
-        console.log(res);
+        const { entreeCellule, peine } = res;
+        const { idAgent, civil, agent } = data;
+        let dateEntree = `${obtainDate()} ${entreeCellule}`;
+        let dateSortie = addDateByHour(dateEntree, peine);
+        let arrestReport = res.id;
+        let createCellule = {
+          entree: new Date(dateEntree),
+          sortie: new Date(dateSortie),
+          civil: civil,
+          idAgent: parseInt(idAgent),
+          arrestReport,
+          idArrestReport: `api/arrest_reports/${res.id}`,
+        };
+        console.log(createCellule);
+        dispatch(addCivilCelluleAsync(createCellule))
+          .unwrap()
+          .then((res) => {
+            const { prenom, nom, photo } = civilData;
+            const { entree, sortie, idAgent, arrestReport, arrestFolder } =
+              createCellule;
+
+            let dataDiscord = {
+              name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
+              entree: dateFrenchFormat(entree),
+              sortie: dateFrenchFormat(sortie),
+              agent: agent,
+              arrestReport: generateNumeroDossier(arrestReport),
+              arrestFolder: generateNumeroDossier(arrestFolder),
+              photo,
+            };
+
+            sendCelluleToDiscord(dataDiscord);
+          });
         onClose();
       });
   };

@@ -91,3 +91,11 @@ export const delete_rapportArrestation = (id) => {
 };
 
 //DOSSIER D'ARRESTATION
+
+//CELLULE
+
+export const add_cellule = (data) => {
+  return Api.post("/cellules", data);
+};
+
+//PRISON

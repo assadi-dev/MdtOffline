@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   add_Avertissement,
+  add_cellule,
   add_rapportArrestation,
   add_traffic,
   delete_avertissement,
@@ -185,10 +186,29 @@ export const deleteCivilRapportArrestationAsync = createAsyncThunk(
 );
 
 //DOSSIER D'ARRESTATION Async
-export const addDossierArrestationAsync = createAsyncThunk(
+export const addCivilDossierArrestationAsync = createAsyncThunk(
   "Civil/add_dossierArrestation",
   async (payload) => {
     try {
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+//Cellule Async
+export const addCivilCelluleAsync = createAsyncThunk(
+  "Civil/add_cellule",
+  async (payload) => {
+    try {
+      const res = await add_cellule(payload);
+      return res.data;
     } catch (error) {
       let message = "";
       if (error.response) {
