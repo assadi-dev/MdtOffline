@@ -10,11 +10,16 @@ import { ActionRow, Card, CivilWrapper, RowCard } from "./Civil.styled";
 import CivilCard from "./CivilCard";
 import EncodeCivil from "./Modal/EncodeCivil";
 import { get_allChefAccusations } from "../../redux/actions/ChefAccusation.action";
-import { getAllCivilsAsync } from "../../features/Civil/CivilAsyncApi";
+import {
+  getAllCivilsAsync,
+  searchCivilAsync,
+} from "../../features/Civil/CivilAsyncApi";
+import { sleep } from "../../utils/timer";
 
 const Civil = () => {
   const [search, setSearch] = useState();
   const [modal, setModal] = useState({ encodeCivil: false });
+  const [timer, setTimer] = useState(null);
 
   const dispatch = useDispatch();
   const civilSelector = useSelector((state) => state.CivilReducer);
@@ -25,8 +30,11 @@ const Civil = () => {
   };
   const handleSearch = (e) => {
     let value = e.target.value;
-
-    userAuth.token && dispatch(searchCivil(value, userAuth.token));
+    clearTimeout(timer);
+    let newTimer = setTimeout(() => {
+      dispatch(searchCivilAsync(value));
+    }, 500);
+    setTimer(newTimer);
   };
 
   const toggleModal = () => {
