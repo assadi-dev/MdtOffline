@@ -4,6 +4,7 @@ import {
   getAllCivilsAsync,
   getOneCivilsAsync,
   searchCivilAsync,
+  uploadPhotoCivilAsync,
 } from "./CivilAsyncApi";
 
 import {
@@ -244,6 +245,19 @@ export const CivilSlice = createSlice({
     builders.addCase(addConvocationAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.convocation = [payload, ...state.selected.convocation];
+    });
+    builders.addCase(uploadPhotoCivilAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+
+      let updateCollection = state.collection.map((c) => {
+        if (c.id == payload.id) {
+          return { ...c, photo: payload.photo };
+        }
+        return c;
+      });
+
+      state.collection = updateCollection;
+      state.selected = { ...state.selected, photo: payload.photo };
     });
   },
 });

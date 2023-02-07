@@ -18,7 +18,10 @@ import {
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { ucFirst } from "../../../utils/textFormat";
-import { addCivilAsync } from "../../../features/Civil/CivilAsyncApi";
+import {
+  addCivilAsync,
+  uploadPhotoCivilAsync,
+} from "../../../features/Civil/CivilAsyncApi";
 import { uploadPhotoCivil } from "../../../features/Civil/CivilApi";
 const EncodeCivil = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -64,9 +67,8 @@ const EncodeCivil = ({ isOpen, onClose }) => {
         .then((res) => {
           if (file.file) {
             let id = res.id;
-            let formData = new FormData();
-            formData.append("photo", file.file);
-            dispatch(uploadPhotoCivil(id, formData));
+
+            dispatch(uploadPhotoCivilAsync({ id, photo: file.file }));
           }
           formik.resetForm();
           onClose();

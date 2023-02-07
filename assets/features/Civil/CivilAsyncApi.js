@@ -4,6 +4,7 @@ import {
   fetchAllCivils,
   fetchOneCivil,
   searchCivil,
+  uploadPhotoCivil,
 } from "./CivilApi";
 
 export const getAllCivilsAsync = createAsyncThunk(
@@ -64,6 +65,27 @@ export const searchCivilAsync = createAsyncThunk(
   async (searchTerm) => {
     try {
       const res = await searchCivil(searchTerm);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const uploadPhotoCivilAsync = createAsyncThunk(
+  "Civil/UploadPhoto",
+  async (payload) => {
+    try {
+      const { id, photo } = payload;
+      let formData = new FormData();
+      formData.append("photo", photo);
+      const res = await uploadPhotoCivil(id, formData);
       return res.data;
     } catch (error) {
       let message = "";

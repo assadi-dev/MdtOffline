@@ -34,14 +34,5 @@ export const searchCivil = (searchTerm) => {
 };
 
 export const uploadPhotoCivil = (id, data) => {
-  return async (dispatch) => {
-    try {
-      Api.post(`/civils/${id}/photo`, data).then((res) => {
-        let data = res.data;
-        dispatch(uploadPhoto(data));
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  return Api.post(`/civils/${id}/photo`, data);
 };

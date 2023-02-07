@@ -64,7 +64,10 @@ import ReadDossierArrestationView from "./ListItemViews/ReadView/ReadDossierArre
 import ReadTrafficView from "./ListItemViews/ReadView/ReadTrafficView";
 import ReadRapportArrestationView from "./ListItemViews/ReadView/ReadRapportArrestationView";
 import ReadAvertissementView from "./ListItemViews/ReadView/ReadAvertissementView";
-import { getOneCivilsAsync } from "../../../features/Civil/CivilAsyncApi";
+import {
+  getOneCivilsAsync,
+  uploadPhotoCivilAsync,
+} from "../../../features/Civil/CivilAsyncApi";
 import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
 
 const CivilSelected = () => {
@@ -101,9 +104,7 @@ const CivilSelected = () => {
 
   const handleLoadFile = (e) => {
     let file = e.target.files[0];
-
     let blob = URL.createObjectURL(file);
-
     setFile((prevState) => ({
       ...prevState,
       file: file,
@@ -114,10 +115,9 @@ const CivilSelected = () => {
   };
 
   const handleSubmitPhoto = () => {
-    const formData = new FormData();
-    formData.append("photo", file.file);
+    const payload = { id, photo: file.file };
 
-    /*     dispatchCivilData(uploadPhotoCivil(id, formData)).then(() => {
+    dispatchCivilData(uploadPhotoCivilAsync(payload)).then(() => {
       setFile((prevState) => ({
         ...prevState,
         file: "",
@@ -125,7 +125,7 @@ const CivilSelected = () => {
         type: 0,
         preview: "",
       }));
-    }); */
+    });
   };
 
   useEffect(() => {
