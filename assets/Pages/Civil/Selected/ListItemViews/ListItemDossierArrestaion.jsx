@@ -19,7 +19,11 @@ import {
   UpListView,
 } from "./ListViewItems.styled";
 import numeral from "numeral";
-import { dateForCivilListView } from "../../../../utils/dateFormat";
+import {
+  addDateByHour,
+  dateForCivilListView,
+  obtainDate,
+} from "../../../../utils/dateFormat";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { enCloseArrestFolder } from "../../../../redux/actions/DossierArrestation.action";
@@ -30,8 +34,8 @@ import useListAgent from "../../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../../utils/userData";
 import { SUPERVISOR_ACCESS } from "../../../../constants/acces";
 import { isAllowedAction } from "../helper";
-import { encloseAresstFolderAsync } from "../../../../features/DossierArrestation/DossierArrestationAsyncApi";
 import { addRapportArrestationAsync } from "../../../../features/RapportArrestation/RapportArrestationAsyncApi";
+import { encloseAresstFolderAsync } from "../../../../features/DossierArrestation/DossierArrestationAsyncApi";
 
 const ListItemDossierArrestaion = ({
   id,
@@ -70,12 +74,9 @@ const ListItemDossierArrestaion = ({
   }, []);
 
   const onEnclose = () => {
-    // civilSelectore.selected,
-    // getAgentNameById(listAgent, agentData.idAgent)
     dispatch(encloseAresstFolderAsync({ id }))
       .unwrap()
       .then((res) => {
-        console.log(res);
         getAgentNameById(listAgent, agentData.idAgent);
         const civiData = civilSelectore.selected;
         const {
@@ -101,7 +102,22 @@ const ListItemDossierArrestaion = ({
           arrestFolder: `api/arrest_folders/${id}`,
           conversionUp: false,
         };
-        dispatch(addRapportArrestationAsync(createArrestReport));
+        dispatch(addRapportArrestationAsync(createArrestReport))
+          .unwrap()
+          .then((res) => {
+            let dateEntree = `${obtainDate()} ${entreeCellule}`;
+            let dateSortie = addDateByHour(dateEntree, peine);
+            let createPrison = {
+              entree: new Date(dateEntree),
+              sortie: new Date(dateSortie),
+              civil: `api/civils/${civil.id}`,
+              idAgent: parseInt(idAgent),
+              arrestReport: res.id,
+              arrestFolder: id,
+            };
+
+            //dispatch(addPrisonAsync(createPrison));
+          });
       });
   };
 

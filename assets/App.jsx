@@ -64,7 +64,7 @@ const App = () => {
 
     return () => {
       promiseAgent && promiseAgent.abort();
-      promiseAgent && promise.abort();
+      promise && promise.abort();
       //promiseCivil.abort();
     };
   }, [tokenStorage]);
