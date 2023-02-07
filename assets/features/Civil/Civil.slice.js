@@ -10,6 +10,7 @@ import {
   addDossierArrestationAsync,
   deleteDossierArrestationAsync,
   editDossierArrestationAsync,
+  encloseAresstFolderAsync,
 } from "../DossierArrestation/DossierArrestationAsyncApi";
 import {
   addAvertissementAsync,
@@ -225,6 +226,18 @@ export const CivilSlice = createSlice({
     builders.addCase(addPrisonAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.prisons = [payload, ...state.selected.prisons];
+    });
+
+    builders.addCase(encloseAresstFolderAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let update = state.selected.dossierArrestation.map((d) => {
+        if (d.id == payload.id) {
+          return { ...d, isEnclose: true };
+        }
+        return d;
+      });
+
+      state.selected.dossierArrestation = update;
     });
   },
 });

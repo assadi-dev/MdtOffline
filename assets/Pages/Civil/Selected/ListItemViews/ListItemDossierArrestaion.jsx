@@ -30,6 +30,8 @@ import useListAgent from "../../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../../utils/userData";
 import { SUPERVISOR_ACCESS } from "../../../../constants/acces";
 import { isAllowedAction } from "../helper";
+import { encloseAresstFolderAsync } from "../../../../features/DossierArrestation/DossierArrestationAsyncApi";
+import { addRapportArrestationAsync } from "../../../../features/RapportArrestation/RapportArrestationAsyncApi";
 
 const ListItemDossierArrestaion = ({
   id,
@@ -68,13 +70,39 @@ const ListItemDossierArrestaion = ({
   }, []);
 
   const onEnclose = () => {
-    dispatch(
-      enCloseArrestFolder(
-        id,
-        civilSelectore.selected,
-        getAgentNameById(listAgent, agentData.idAgent)
-      )
-    );
+    // civilSelectore.selected,
+    // getAgentNameById(listAgent, agentData.idAgent)
+    dispatch(encloseAresstFolderAsync({ id }))
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+        getAgentNameById(listAgent, agentData.idAgent);
+        const civiData = civilSelectore.selected;
+        const {
+          infractions,
+          lieux,
+          entreeCellule,
+          civil,
+          amende,
+          peine,
+          idAgent,
+          rapport,
+        } = res;
+
+        let createArrestReport = {
+          infractions,
+          lieux,
+          entreeCellule,
+          infractions,
+          civil: `api/civils/${civil.id}`,
+          amende: amende.toString(),
+          peine,
+          idAgent: Number(idAgent),
+          arrestFolder: `api/arrest_folders/${id}`,
+          conversionUp: false,
+        };
+        dispatch(addRapportArrestationAsync(createArrestReport));
+      });
   };
 
   const handleEdit = () => {

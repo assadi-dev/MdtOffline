@@ -3,6 +3,7 @@ import {
   add_dossierArrestation,
   delete_dossierArrestation,
   edit_dossierArrestation,
+  enCloseArrestFolder,
 } from "./DossierArrestationApi";
 
 //DOSSIER D'ARRESTATION Async
@@ -50,6 +51,25 @@ export const deleteDossierArrestationAsync = createAsyncThunk(
       const { id } = payload;
       delete_dossierArrestation(id);
       return payload;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const encloseAresstFolderAsync = createAsyncThunk(
+  "DossierArrestation/cloturation",
+  async (payload) => {
+    try {
+      const { id } = payload;
+      const res = await enCloseArrestFolder(id);
+      return res.data;
     } catch (error) {
       let message = "";
       if (error.response) {

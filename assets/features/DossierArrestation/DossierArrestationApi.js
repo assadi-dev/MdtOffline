@@ -11,3 +11,10 @@ export const edit_dossierArrestation = (id, data) => {
 export const delete_dossierArrestation = (id) => {
   return Api.delete(`/arrest_folders/${id}`);
 };
+
+export const enCloseArrestFolder = (id) => {
+  return Api.put(`/arrest_folders/${id}`, {
+    isEnclose: false,
+    enclosedAt: new Date(),
+  });
+};
