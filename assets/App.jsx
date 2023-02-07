@@ -63,11 +63,9 @@ const App = () => {
     }
 
     return () => {
-      if (tokenStorage) {
-        promiseAgent.abort();
-        promise.abort();
-        //promiseCivil.abort();
-      }
+      promiseAgent && promiseAgent.abort();
+      promiseAgent && promise.abort();
+      //promiseCivil.abort();
     };
   }, [tokenStorage]);
 
