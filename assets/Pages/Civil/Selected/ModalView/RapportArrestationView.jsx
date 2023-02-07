@@ -45,7 +45,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
    */
   const closeModal = () => {
     onClose();
-    let textInput = textAreaRef.current.querySelector("textarea");
+    //let textInput = textAreaRef.current.querySelector("textarea");
     //textInput.removeAttribute("style");
   };
 

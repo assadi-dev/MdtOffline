@@ -19,8 +19,8 @@ import {
   HeadTitleView,
   TableViewPresentation,
 } from "./ModalView.styled";
-import { add_dossierArrestation } from "../../../../redux/actions/DossierArrestation.action";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
+import { addDossierArrestationAsync } from "../../../../features/DossierArrestation/DossierArrestationAsyncApi";
 
 const DossierArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -31,8 +31,8 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
 
   const closeModal = () => {
     onClose();
-    let textInput = textAreaRef.current.querySelector("textarea");
-    textInput.hasAttribute("style") ? textInput.removeAttribute("style") : null;
+    // let textInput = textAreaRef.current.querySelector("textarea");
+    // textInput.hasAttribute("style") ? textInput.removeAttribute("style") : null;
   };
 
   const dispatch = useDispatch();
@@ -259,8 +259,10 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
       idAgent: agent.idAgent,
     };
     const civilData = civilSelectore.selected;
-    token &&
-      dispatch(add_dossierArrestation(data, civilData)).then(() => {
+
+    dispatch(addDossierArrestationAsync(data))
+      .unwrap()
+      .then(() => {
         closeModal();
       });
   };
