@@ -46,10 +46,10 @@ export const getOwnerdAsync = createAsyncThunk(
 
 export const editAccountAsync = createAsyncThunk(
   "Authenticate/editAccount",
-  async (payload, thunkApi) => {
+  async (payload) => {
     const { id, data } = payload;
     try {
-      const response = await editAccount(id, data, thunkApi);
+      const response = await editAccount(id, data);
       return response.data;
     } catch (error) {
       let message = "";

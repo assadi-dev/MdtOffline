@@ -29,6 +29,7 @@ import {
 } from "../RapportArrestation/RapportArrestationAsyncApi";
 import { addCelluleAsync } from "../Cellules/CellulesAsyncApi";
 import { addPrisonAsync } from "../Prison/PrisonAsyncApi";
+import { addConvocationAsync } from "../Convocation/ConvocationAsyncApi";
 
 const initialState = {
   collection: [],
@@ -238,6 +239,11 @@ export const CivilSlice = createSlice({
       });
 
       state.selected.dossierArrestation = update;
+    });
+
+    builders.addCase(addConvocationAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected.convocation = [payload, ...state.selected.convocation];
     });
   },
 });

@@ -17,6 +17,7 @@ import {
 } from "./ModalView.styled";
 import useListAgent from "../../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../../utils/userData";
+import { addConvocationAsync } from "../../../../features/Convocation/ConvocationAsyncApi";
 
 const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
   const closeModal = () => {
@@ -50,7 +51,7 @@ const ConvocationView = ({ onClose, idCivil, listConvocation }) => {
       agent: `${agent.matricule}-${agent.username}`,
       idAgent: agent.idAgent,
     };
-    token && dispatch(add_convocation(data));
+    dispatch(addConvocationAsync(data));
   };
 
   return (

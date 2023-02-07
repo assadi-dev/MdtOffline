@@ -57,14 +57,14 @@ const App = () => {
         token: tokenStorage,
         isLoggedIn: true,
       };
-      promise = dispatch(getOwnerdAsync({ id: id, role: role })).unwrap();
+      promise = dispatch(getOwnerdAsync({ id: id, role: role }));
       promiseAgent = dispatch(getAllAgentAsync());
       // promiseCivil = dispatch(getAllCivil());
     }
 
     return () => {
-      promiseAgent && promiseAgent.abort();
-      promise && promise.abort();
+      //promiseAgent != null && promiseAgent.abort();
+      //promise != null && promise.abort();
       //promiseCivil.abort();
     };
   }, [tokenStorage]);
