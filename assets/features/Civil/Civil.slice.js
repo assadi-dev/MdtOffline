@@ -5,18 +5,25 @@ import {
   getOneCivilsAsync,
   searchCivilAsync,
 } from "./CivilAsyncApi";
+
+import { addDossierArrestationAsync } from "../DossierArrestation/DossierArrestationAsyncApi";
 import {
-  addCivilAvertissementAsync,
-  addCivilCelluleAsync,
-  addCivilRapportArrestationAsync,
-  addCivilTrafficAsync,
-  deleteCivilAvertissementAsync,
-  deleteCivilRapportArrestationAsync,
-  deleteCivilTrafficAsync,
-  editCivilAvertissementAsync,
-  editCivilRapportArrestationAsync,
-  editCivilTrafficAsync,
-} from "./CasierAsyncApi";
+  addAvertissementAsync,
+  deleteAvertissementAsync,
+  editAvertissementAsync,
+} from "../Avertissements/AvertissementAsynApi";
+import {
+  addTrafficAsync,
+  deleteTrafficAsync,
+  editTrafficAsync,
+} from "../Traffic/TrafficAsyncApi";
+import {
+  addRapportArrestationAsync,
+  deleteRapportArrestationAsync,
+  editRapportArrestationAsync,
+} from "../RapportArrestation/RapportArrestationAsyncApi";
+import { addCelluleAsync } from "../Cellules/CellulesAsyncApi";
+import { addPrisonAsync } from "../Prison/PrisonAsyncApi";
 
 const initialState = {
   collection: [],
@@ -93,14 +100,14 @@ export const CivilSlice = createSlice({
         state.error = "";
         state.collection = action.payload;
       });
-    builders.addCase(addCivilAvertissementAsync.fulfilled, (state, action) => {
+    builders.addCase(addAvertissementAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.avertissements = [
         payload,
         ...state.selected.avertissements,
       ];
     });
-    builders.addCase(editCivilAvertissementAsync.fulfilled, (state, action) => {
+    builders.addCase(editAvertissementAsync.fulfilled, (state, action) => {
       const { payload } = action;
       let updateAvertissement = state.selected.avertissements.map(
         (avertissement) => {
@@ -112,21 +119,18 @@ export const CivilSlice = createSlice({
       );
       state.selected.avertissements = updateAvertissement;
     });
-    builders.addCase(
-      deleteCivilAvertissementAsync.fulfilled,
-      (state, action) => {
-        const { payload } = action;
-        let removeAvertissement = state.selected.avertissements.filter(
-          (a) => a.id != payload.id
-        );
-        state.selected.avertissements = removeAvertissement;
-      }
-    );
-    builders.addCase(addCivilTrafficAsync.fulfilled, (state, action) => {
+    builders.addCase(deleteAvertissementAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let removeAvertissement = state.selected.avertissements.filter(
+        (a) => a.id != payload.id
+      );
+      state.selected.avertissements = removeAvertissement;
+    });
+    builders.addCase(addTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.traffics = [payload, ...state.selected.traffics];
     });
-    builders.addCase(editCivilTrafficAsync.fulfilled, (state, action) => {
+    builders.addCase(editTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
       let updateTraffic = state.selected.traffics.map((traffic) => {
         if (traffic.id == payload.id) {
@@ -137,7 +141,7 @@ export const CivilSlice = createSlice({
       state.selected.traffics = updateTraffic;
     });
 
-    builders.addCase(deleteCivilTrafficAsync.fulfilled, (state, action) => {
+    builders.addCase(deleteTrafficAsync.fulfilled, (state, action) => {
       const { payload } = action;
       let removeTraffic = state.selected.traffics.filter(
         (traffic) => traffic.id != payload.id
@@ -145,34 +149,28 @@ export const CivilSlice = createSlice({
       state.selected.traffics = removeTraffic;
     });
 
-    builders.addCase(
-      addCivilRapportArrestationAsync.fulfilled,
-      (state, action) => {
-        const { payload } = action;
-        state.selected.rapportArrestation = [
-          payload,
-          ...state.selected.rapportArrestation,
-        ];
-      }
-    );
-    builders.addCase(
-      editCivilRapportArrestationAsync.fulfilled,
-      (state, action) => {
-        const { payload } = action;
-        let updateRapportArrestation = state.selected.rapportArrestation.map(
-          (rapportArrestation) => {
-            if (rapportArrestation.id == payload.id) {
-              return { ...payload };
-            }
-            return rapportArrestation;
+    builders.addCase(addRapportArrestationAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected.rapportArrestation = [
+        payload,
+        ...state.selected.rapportArrestation,
+      ];
+    });
+    builders.addCase(editRapportArrestationAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let updateRapportArrestation = state.selected.rapportArrestation.map(
+        (rapportArrestation) => {
+          if (rapportArrestation.id == payload.id) {
+            return { ...payload };
           }
-        );
+          return rapportArrestation;
+        }
+      );
 
-        state.selected.rapportArrestation = updateRapportArrestation;
-      }
-    );
+      state.selected.rapportArrestation = updateRapportArrestation;
+    });
     builders.addCase(
-      deleteCivilRapportArrestationAsync.fulfilled,
+      deleteRapportArrestationAsync.fulfilled,
       (state, action) => {
         const { payload } = action;
         let removeRapporArrestation = state.selected.rapportArrestation.filter(
@@ -182,9 +180,23 @@ export const CivilSlice = createSlice({
         state.selected.rapportArrestation = removeRapporArrestation;
       }
     );
-    builders.addCase(addCivilCelluleAsync.fulfilled, (state, action) => {
+
+    builders.addCase(addDossierArrestationAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected.dossierArrestation = [
+        payload,
+        ...state.selected.dossierArrestation,
+      ];
+    });
+
+    builders.addCase(addCelluleAsync.fulfilled, (state, action) => {
       const { payload } = action;
       state.selected.cellule = [payload, ...state.selected.cellule];
+    });
+
+    builders.addCase(addPrisonAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.selected.prisons = [payload, ...state.selected.prisons];
     });
   },
 });

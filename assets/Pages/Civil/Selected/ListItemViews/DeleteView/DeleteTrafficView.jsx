@@ -8,7 +8,7 @@ import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
 
 import ButtonDefault from "../../../../../components/Shared/Buttons/ButtonDefault";
 import numeral from "numeral";
-import { deleteCivilTrafficAsync } from "../../../../../features/Civil/CasierAsyncApi";
+import { deleteTrafficAsync } from "../../../../../features/Traffic/TrafficAsyncApi";
 
 const DeleteTrafficView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -24,7 +24,7 @@ const DeleteTrafficView = ({ id, onClose }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
-    dispatch(deleteCivilTrafficAsync({ id }))
+    dispatch(deleteTrafficAsync({ id }))
       .unwrap()
       .then(() => {
         onClose();

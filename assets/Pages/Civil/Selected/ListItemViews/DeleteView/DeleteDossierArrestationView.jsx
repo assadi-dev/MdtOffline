@@ -20,6 +20,8 @@ import {
   AlertInfoIcon,
   HeaderInfo,
 } from "../ListViewItems.styled";
+import { deleteDossierArrestationAsync } from "../../../../../features/DossierArrestation/DossierArrestationAsyncApi";
+import { getOneCivilsAsync } from "../../../../../features/Civil/CivilAsyncApi";
 
 const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
   let numeroFormat = numeral(id);
@@ -35,9 +37,9 @@ const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(delete_dossierArrestation(id)).then(() => {
+    dispatch(deleteDossierArrestationAsync(id)).then(() => {
       const { id } = civil;
-      dispatch(getOneCivil(id));
+      dispatch(getOneCivilsAsync({ id }));
       onClose();
     });
   };

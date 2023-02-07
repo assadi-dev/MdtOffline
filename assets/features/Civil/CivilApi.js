@@ -1,10 +1,5 @@
 import Api from "../../service/Api/Api";
-import {
-  addAvertissement,
-  deleteAvertissement,
-  editAvertissement,
-  uploadPhoto,
-} from "./Civil.slice";
+import { uploadPhoto } from "./Civil.slice";
 
 export const fetchAllCivils = () => {
   return Api.get("/civils");
@@ -50,52 +45,3 @@ export const uploadPhotoCivil = (id, data) => {
     }
   };
 };
-
-//Action Casier
-
-//Avertissement
-export const add_Avertissement = (data) => {
-  return Api.post("/avertissements", data);
-};
-export const edit_Avertissement = (id, data) => {
-  return Api.put(`/avertissements/${id}`, data);
-};
-
-export const delete_avertissement = (id) => {
-  return Api.delete(`/avertissements/${id}`);
-};
-
-//Traffic
-export const add_traffic = (data) => {
-  return Api.post("/traffic", data);
-};
-export const edit_traffic = (id, data) => {
-  return Api.put(`/traffic/${id}`, data);
-};
-export const delete_traffic = (id) => {
-  return Api.delete(`/traffic/${id}`);
-};
-
-//RAPPORT D'ARRESTATION
-
-export const add_rapportArrestation = (data) => {
-  return Api.post("/arrest_reports", data);
-};
-
-export const edit_rapportArrestation = (id, data) => {
-  return Api.put(`/arrest_reports/${id}`, data);
-};
-
-export const delete_rapportArrestation = (id) => {
-  return Api.delete(`/arrest_reports/${id}`);
-};
-
-//DOSSIER D'ARRESTATION
-
-//CELLULE
-
-export const add_cellule = (data) => {
-  return Api.post("/cellules", data);
-};
-
-//PRISON

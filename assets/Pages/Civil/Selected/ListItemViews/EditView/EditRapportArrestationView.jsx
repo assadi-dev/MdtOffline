@@ -21,7 +21,7 @@ import {
   TableViewPresentation,
 } from "../../ModalView/ModalView.styled";
 import useFecthDataWithParams from "../../../../../hooks/useFecthDataWithParams";
-import { editCivilRapportArrestationAsync } from "../../../../../features/Civil/CasierAsyncApi";
+import { editRapportArrestationAsync } from "../../../../../features/RapportArrestation/RapportArrestationAsyncApi";
 
 const EditRapportArrestationView = ({ id, onClose }) => {
   let numeroFormat = numeral(id);
@@ -262,7 +262,7 @@ const EditRapportArrestationView = ({ id, onClose }) => {
       conversionUp: inputState.up,
     };
 
-    dispatch(editCivilRapportArrestationAsync({ id, data }))
+    dispatch(editRapportArrestationAsync({ id, data }))
       .unwrap()
       .then(() => {
         onClose();

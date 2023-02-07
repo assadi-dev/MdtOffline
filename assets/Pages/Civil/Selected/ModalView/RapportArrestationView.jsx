@@ -21,16 +21,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { add_rapportArrestation } from "../../../../redux/actions/RapportArrestation.action";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 import {
-  addCivilCelluleAsync,
-  addCivilRapportArrestationAsync,
-} from "../../../../features/Civil/CasierAsyncApi";
-import {
   addDateByHour,
   dateFrenchFormat,
   obtainDate,
 } from "../../../../utils/dateFormat";
 import { generateNumeroDossier, ucFirst } from "../../../../utils/textFormat";
 import { sendCelluleToDiscord } from "../SendDiscord/SendDiscord";
+import { addRapportArrestationAsync } from "../../../../features/RapportArrestation/RapportArrestationAsyncApi";
+import { addCelluleAsync } from "../../../../features/Cellules/CellulesAsyncApi";
 
 const RapportArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -257,7 +255,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
 
     const civilData = civilSelectore.selected;
 
-    dispatch(addCivilRapportArrestationAsync(data))
+    dispatch(addRapportArrestationAsync(data))
       .unwrap()
       .then((res) => {
         const { entreeCellule, peine } = res;
@@ -274,7 +272,7 @@ const RapportArrestationView = ({ idCivil, onClose }) => {
           idArrestReport: `api/arrest_reports/${res.id}`,
         };
 
-        dispatch(addCivilCelluleAsync(createCellule))
+        dispatch(addCelluleAsync(createCellule))
           .unwrap()
           .then((res) => {
             const { prenom, nom, photo } = civilData;

@@ -17,8 +17,8 @@ import {
   AlertInfoIcon,
   HeaderInfo,
 } from "../ListViewItems.styled";
-import { deleteCivilRapportArrestationAsync } from "../../../../../features/Civil/CasierAsyncApi";
 import { getOneCivilsAsync } from "../../../../../features/Civil/CivilAsyncApi";
+import { deleteRapportArrestationAsync } from "../../../../../features/RapportArrestation/RapportArrestationAsyncApi";
 
 const DeleteRapportArrestationView = ({ id, onClose, civil }) => {
   let numeroFormat = numeral(id);
@@ -36,7 +36,7 @@ const DeleteRapportArrestationView = ({ id, onClose, civil }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
-    dispatch(deleteCivilRapportArrestationAsync({ id }))
+    dispatch(deleteRapportArrestationAsync({ id }))
       .unwrap()
       .then(() => {
         const { id } = civil;

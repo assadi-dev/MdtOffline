@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { add_cellule } from "./CelluleApi";
+import { add_prison } from "./PrisonApi";
 
-//Cellule Async
-export const addCelluleAsync = createAsyncThunk(
-  "Cellule/add_cellule",
+//Prison Async
+export const addPrisonAsync = createAsyncThunk(
+  "Prison/Add",
   async (payload) => {
     try {
-      const res = await add_cellule(payload);
+      const res = await add_prison(payload);
       return res.data;
     } catch (error) {
       let message = "";
