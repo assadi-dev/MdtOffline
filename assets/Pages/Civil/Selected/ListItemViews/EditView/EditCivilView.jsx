@@ -23,8 +23,8 @@ import {
   SubmitButton,
 } from "./EditCivil.styled";
 import { useFormik } from "formik";
-import { editCivil } from "../../../../../redux/actions/Civil.action";
 import { ucFirst } from "../../../../../utils/textFormat";
+import { editCivilAsync } from "../../../../../features/Civil/CivilAsyncApi";
 
 const EditCivilView = ({ idCivil, onClose }) => {
   const dispatch = useDispatch();
@@ -56,9 +56,12 @@ const EditCivilView = ({ idCivil, onClose }) => {
         emploie: ucFirst(values.emploie),
         nationalite: ucFirst(values.nationalite),
       };
-      dispatch(editCivil(idCivil, data)).then((res) => {
-        onClose();
-      });
+      let payload = { id: idCivil, data };
+      dispatch(editCivilAsync(payload))
+        .unwrap()
+        .then((res) => {
+          onClose();
+        });
     },
   });
 

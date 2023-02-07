@@ -21,7 +21,7 @@ export const addCivil = (data) => {
   return Api.post("/civils", data);
 };
 
-export const editCivil = (id) => {
+export const editCivil = (id, data) => {
   return Api.put(`/civils/${id}`, data);
 };
 

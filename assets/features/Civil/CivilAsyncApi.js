@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addCivil,
+  editCivil,
   fetchAllCivils,
   fetchOneCivil,
   searchCivil,
@@ -59,6 +60,26 @@ export const addCivilAsync = createAsyncThunk("Civils/add", async (payload) => {
     throw new Error(message);
   }
 });
+
+export const editCivilAsync = createAsyncThunk(
+  "Civil/edit",
+  async (payload) => {
+    try {
+      const { id, data } = payload;
+
+      const res = await editCivil(id, data);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
 
 export const searchCivilAsync = createAsyncThunk(
   "Civil/search",

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addCivilAsync,
+  editCivilAsync,
   getAllCivilsAsync,
   getOneCivilsAsync,
   searchCivilAsync,
@@ -94,6 +95,25 @@ export const CivilSlice = createSlice({
       .addCase(addCivilAsync.rejected, (state, action) => {
         state.error = action.error.message;
       });
+
+    builders
+      .addCase(editCivilAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        let updateCollection = state.collection.map((c) => {
+          if (c.id == payload.id) {
+            return { ...payload };
+          }
+          return c;
+        });
+
+        state.error = "";
+        state.collection = updateCollection;
+        state.selected = payload;
+      })
+      .addCase(editCivilAsync.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+
     builders
       .addCase(searchCivilAsync.pending, (state) => {
         state.status = "pending";
