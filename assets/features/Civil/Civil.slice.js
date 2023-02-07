@@ -6,7 +6,11 @@ import {
   searchCivilAsync,
 } from "./CivilAsyncApi";
 
-import { addDossierArrestationAsync } from "../DossierArrestation/DossierArrestationAsyncApi";
+import {
+  addDossierArrestationAsync,
+  deleteDossierArrestationAsync,
+  editDossierArrestationAsync,
+} from "../DossierArrestation/DossierArrestationAsyncApi";
 import {
   addAvertissementAsync,
   deleteAvertissementAsync,
@@ -188,6 +192,30 @@ export const CivilSlice = createSlice({
         ...state.selected.dossierArrestation,
       ];
     });
+
+    builders.addCase(editDossierArrestationAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let updateDossierArrestation = state.selected.dossierArrestation.map(
+        (dossierArrestation) => {
+          if (dossierArrestation.id == payload.id) {
+            return { ...payload };
+          }
+          return dossierArrestation;
+        }
+      );
+      state.selected.dossierArrestation = updateDossierArrestation;
+    });
+
+    builders.addCase(
+      deleteDossierArrestationAsync.fulfilled,
+      (state, action) => {
+        const { payload } = action;
+        let removeDossierArrestation = state.selected.dossierArrestation.filter(
+          (dossierArrestation) => dossierArrestation.id != payload.id
+        );
+        state.selected.dossierArrestation = removeDossierArrestation;
+      }
+    );
 
     builders.addCase(addCelluleAsync.fulfilled, (state, action) => {
       const { payload } = action;

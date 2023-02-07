@@ -21,6 +21,13 @@ import {
 } from "./ModalView.styled";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 import { addDossierArrestationAsync } from "../../../../features/DossierArrestation/DossierArrestationAsyncApi";
+import {
+  addDateByHour,
+  dateFrenchFormat,
+  obtainDate,
+} from "../../../../utils/dateFormat";
+import { addPrisonAsync } from "../../../../features/Prison/PrisonAsyncApi";
+import { generateNumeroDossier, ucFirst } from "../../../../utils/textFormat";
 
 const DossierArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -262,8 +269,40 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
 
     dispatch(addDossierArrestationAsync(data))
       .unwrap()
-      .then(() => {
-        closeModal();
+      .then((res) => {
+        const { entreeCellule, peine } = res;
+        const { idAgent, civil, agent } = data;
+        let dateEntree = `${obtainDate()} ${entreeCellule}`;
+        let dateSortie = addDateByHour(dateEntree, peine);
+        let arrestFolder = res.id;
+
+        let createPrison = {
+          entree: new Date(dateEntree),
+          sortie: new Date(dateSortie),
+          civil: civil,
+          idAgent: parseInt(idAgent),
+          arrestFolder,
+          idArrestFolder: `api/arrest_folders/${res.id}`,
+        };
+
+        dispatch(addPrisonAsync(createPrison))
+          .unwrap()
+          .then((response) => {
+            const { prenom, nom, photo } = civilData;
+            const { entree, sortie, idAgent, arrestReport, arrestFolder } =
+              createPrison;
+            let dataDiscord = {
+              name: `${ucFirst(prenom)} ${ucFirst(nom)}`,
+              entree: dateFrenchFormat(entree),
+              sortie: dateFrenchFormat(sortie),
+              agent: agent,
+              arrestReport: generateNumeroDossier(arrestReport),
+              arrestFolder: generateNumeroDossier(arrestFolder),
+              photo,
+            };
+            //sendPrisonToDiscord(dataDiscord);
+            closeModal();
+          });
       });
   };
 

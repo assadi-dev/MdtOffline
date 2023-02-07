@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   add_dossierArrestation,
   delete_dossierArrestation,
+  edit_dossierArrestation,
 } from "./DossierArrestationApi";
 
 //DOSSIER D'ARRESTATION Async
@@ -10,6 +11,25 @@ export const addDossierArrestationAsync = createAsyncThunk(
   async (payload) => {
     try {
       const res = await add_dossierArrestation(payload);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const editDossierArrestationAsync = createAsyncThunk(
+  "DossierArrestation/Edit",
+  async (payload) => {
+    try {
+      const { id, data } = payload;
+      const res = await edit_dossierArrestation(id, data);
       return res.data;
     } catch (error) {
       let message = "";
