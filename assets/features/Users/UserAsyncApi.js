@@ -23,10 +23,10 @@ export const getAllUsersAsync = createAsyncThunk(
 export const validateUsersAsync = createAsyncThunk(
   "User/validateAccount",
   async (payload, { signal }) => {
-    const { id, data } = payload;
     try {
-      const res = await validation_user(id, data);
-      return res.data;
+      const { id, data } = payload;
+      validation_user(id, data);
+      return { id, ...data };
     } catch (error) {
       let message = "";
       if (error.response) {

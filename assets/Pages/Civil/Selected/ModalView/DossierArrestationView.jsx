@@ -28,6 +28,7 @@ import {
 } from "../../../../utils/dateFormat";
 import { addPrisonAsync } from "../../../../features/Prison/PrisonAsyncApi";
 import { generateNumeroDossier, ucFirst } from "../../../../utils/textFormat";
+import { sendPrisonToDiscord } from "../SendDiscord/SendDiscord";
 
 const DossierArrestationView = ({ idCivil, onClose }) => {
   const textAreaRef = useRef();
@@ -300,7 +301,7 @@ const DossierArrestationView = ({ idCivil, onClose }) => {
               arrestFolder: generateNumeroDossier(arrestFolder),
               photo,
             };
-            //sendPrisonToDiscord(dataDiscord);
+            sendPrisonToDiscord(dataDiscord);
             closeModal();
           });
       });
