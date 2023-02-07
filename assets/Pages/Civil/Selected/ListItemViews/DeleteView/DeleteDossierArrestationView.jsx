@@ -37,7 +37,7 @@ const DeleteDossierArrestationView = ({ id, onClose, civil }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(deleteDossierArrestationAsync(id)).then(() => {
+    dispatch(deleteDossierArrestationAsync({ id })).then(() => {
       const { id } = civil;
       dispatch(getOneCivilsAsync({ id }));
       onClose();
