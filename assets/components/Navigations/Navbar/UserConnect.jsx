@@ -22,8 +22,6 @@ const UserConnect = () => {
   const userAuth = useSelector((state) => state.AuthenticateReducer);
 
   useEffect(() => {
-    sleep(2500).then(() => setReady(true));
-
     const closeDropDownMenu = (e) => {
       if (!userConnectRef.current.contains(e.target)) {
         setShow(false);
@@ -47,7 +45,7 @@ const UserConnect = () => {
         <div style={{ display: "flex" }}>
           <UserNameStyle>
             {userAuth.username}{" "}
-            {ready ? (
+            {userAuth.status == "complete" ? (
               <UserGradStyle>{`${
                 userAuth.matricule ? userAuth.matricule : "N/A"
               }-${

@@ -21,6 +21,8 @@ import {
   SubmitButton,
 } from "./Compte.styled";
 import Loading from "./Loading";
+import { editUserAsync } from "../../features/Users/UserAsyncApi";
+import { editAccountAsync } from "../../features/Authenticate/AuthenticateAsyncAction";
 
 const FormUser = ({
   idUser,
@@ -60,32 +62,25 @@ const FormUser = ({
         matricule: values.matricule,
         telephone: values.telephone,
       };
-      dispatch(editAccount(idUser, data))
+      let payload = { id: idUser, data };
+      dispatch(editAccountAsync(payload))
+        .unwrap()
         .then((res) => {
+          let data = { username: res.name };
+          let payload = { id: idUser, data };
           sleep(3000).then(() => {
             stepDispatch({
               type: FINISH,
               payload: { message: "Modification validé" },
             });
           });
+          dispatch(editUserAsync(payload));
         })
-        .catch((err) => {
-          if (err.response) {
-            let violations = err.response.data.violations;
-            stepDispatch({
-              type: FINISH,
-              payload: { message: violations[0].message, error: true },
-            });
-          } else {
-            stepDispatch({
-              type: FINISH,
-              payload: {
-                message:
-                  "une erreur est survenue lors de la mise à jours de votre compte",
-                error: true,
-              },
-            });
-          }
+        .catch((error) => {
+          stepDispatch({
+            type: FINISH,
+            payload: { message: error.message, error: true },
+          });
         });
     },
   });

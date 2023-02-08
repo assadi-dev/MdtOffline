@@ -54,7 +54,9 @@ export const editAccountAsync = createAsyncThunk(
     } catch (error) {
       let message = "";
       if (error.response) {
-        message = error.response.data.violations;
+        error.response.data.violations
+          ? (message = error.response.data.violations[0].message)
+          : error.response.data.detail;
       } else {
         message = error.message;
       }

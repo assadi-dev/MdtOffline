@@ -13,9 +13,13 @@ export const validation_user = (id, data) => {
 };
 
 export const edit_user = (id, data) => {
-  Api.put(`/users/${id}`, data);
+  return Api.put(`/users/${id}`, data);
 };
 
 export const delete_user = (id) => {
-  Api.delete(`/users/${id}`);
+  return Api.delete(`/users/${id}`);
 };
+
+/* export const changepassword = () => {
+  
+} */

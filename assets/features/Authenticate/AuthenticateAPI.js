@@ -19,29 +19,13 @@ export const editAccount = (id, data) => {
     { url: "/users/" + id, body: { username } },
   ];
 
-  return new Promise((resolve, reject) => {
-    try {
-      Promise.all(
-        endpoints.map((endpoint) =>
-          Api.put(endpoint.url, endpoint.body, { signal: thunkApi.signal })
-        )
-      ).then(([{ data: agent }, { data: user }]) => {
-        if (agent) {
-          resolve(agent);
-        }
-      });
-    } catch (error) {
-      if (error.response) {
-        let errorData = err.response.data.violations;
-        reject(errorData[0].message);
-      }
-      reject(error.message);
-    }
+  return Api.put(`/agents/${idAgent}`, {
+    matricule,
+    telephone,
+    name: username,
   });
 };
 
-export const UploadPhotoOwner = (idAgent, data, signal) => {
-  return Api.post(`/agents/${idAgent}/photo`, data, {
-    signal: signal,
-  });
+export const UploadPhotoOwner = (idAgent, data) => {
+  return Api.post(`/agents/${idAgent}/photo`, data);
 };

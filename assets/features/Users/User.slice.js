@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   deleteUsersAsync,
+  editUserAsync,
   getAllUsersAsync,
   validateUsersAsync,
 } from "./UserAsyncApi";
@@ -66,6 +67,27 @@ const UserSlice = createSlice({
         state.collection = removeduser;
         state.status = "complete";
         state.error = "";
+      });
+
+    builders
+      .addCase(editUserAsync.rejected, (state, action) => {
+        const { error } = action;
+        state.error = error.message;
+      })
+      .addCase(editUserAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+
+        let updateUserCollection = state.collection.map((user) => {
+          if (user.id === payload.id) {
+            return { ...user, ...payload };
+          }
+          return user;
+        });
+
+        state.collection = updateUserCollection;
+        state.selected = payload;
+        state.error = "";
+        state.status = "complete";
       });
   },
 });

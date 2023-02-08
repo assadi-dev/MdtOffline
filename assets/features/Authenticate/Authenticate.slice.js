@@ -10,6 +10,7 @@ const initialState = {
   id: "",
   username: "",
   matricule: "",
+  telephone: "",
   grade: "",
   token: "",
   isLoggedIn: false,
@@ -56,23 +57,30 @@ export const AuthenticateSlice = createSlice({
         state.error = action.error.message;
       });
     builder
-      .addCase(editAccountAsync.pending, (state) => {
+      /*       .addCase(editAccountAsync.pending, (state) => {
         state.status = "pending";
         state.error = "";
-      })
+      }) */
       .addCase(editAccountAsync.fulfilled, (state, action) => {
         const { payload } = action;
-        return { ...state, ...payload, status: "complete", isLoggedIn: true };
+        return {
+          ...state,
+          username: payload.name,
+          telephone: payload.telephone,
+          photo: payload.photo,
+          status: "complete",
+          isLoggedIn: true,
+        };
       })
       .addCase(editAccountAsync.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
       });
     builder
-      .addCase(UploadPhotoOwnerAsync.pending, (state) => {
+      /*       .addCase(UploadPhotoOwnerAsync.pending, (state) => {
         state.status = "pending";
         state.error = "";
-      })
+      }) */
       .addCase(UploadPhotoOwnerAsync.fulfilled, (state, action) => {
         const { payload } = action;
         return {

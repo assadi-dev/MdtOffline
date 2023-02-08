@@ -53,7 +53,6 @@ const FormUserPassword = ({ idUser }) => {
       };
       updatePassword(data)
         .then((res) => {
-          console.log(res);
           sleep(1000).then(() => {
             stepDispatch({
               type: FINISH,
