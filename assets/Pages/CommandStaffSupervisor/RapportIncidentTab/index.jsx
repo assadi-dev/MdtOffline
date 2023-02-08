@@ -23,9 +23,9 @@ const RapportIncidentTab = () => {
   );
 
   const [modalState, dispatchModalState] = useReducer(ModalStateReducer, {
-    view: "show-rapport",
+    view: "",
     data: null,
-    isOpen: true,
+    isOpen: false,
   });
 
   //console.log(listAgent);
@@ -39,7 +39,7 @@ const RapportIncidentTab = () => {
   const Render = ({ view, data }) => {
     switch (view) {
       case "show-rapport":
-        return <ShowRapportIncident />;
+        return <ShowRapportIncident closeModal={closeModal} rapport={data} />;
       default:
         return null;
     }

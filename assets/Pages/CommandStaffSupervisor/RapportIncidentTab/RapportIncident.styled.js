@@ -57,7 +57,7 @@ export const DeleteView = styled.div`
   }
 `;
 
-export const DeleteHeadTitleView = styled.div`
+export const HeadTitleView = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 1.2rem;
@@ -171,5 +171,37 @@ export const ShowRapportbtn = styled.span`
   svg {
     width: 30px;
     height: 30px;
+  }
+`;
+
+/**Modal */
+
+export const ShowRapportIncidentView = styled.div`
+  min-width: 350px;
+  max-width: 100%;
+  min-height: 120px;
+
+  border-radius: 5px;
+  border: solid 1px var(--color-blue-primary);
+  background-color: var(--color-blue-dark);
+  padding: 15px;
+  position: relative;
+
+  @media screen and (min-width: 992px) {
+    width: 960px;
+  }
+`;
+
+export const TextContent = styled.div`
+  padding: 12px;
+  max-height: 35vh;
+  overflow-y: auto;
+  p {
+    width: 100%;
+    margin: 1rem auto;
+    line-height: 2em;
+    @media screen and (min-width: 992px) {
+      width: 80%;
+    }
   }
 `;
