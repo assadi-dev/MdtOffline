@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  UploadPhotoOwnerAsync,
-  editAccountAsync,
-  getOwnerdAsync,
-} from "./AuthenticateAsyncAction";
+import { editAccountAsync, getOwnerdAsync } from "./AuthenticateAsyncAction";
+import { uploadPhotoAgentAsync } from "../Agents/AgentAsyncApi";
 
 const initialState = {
   role: "",
@@ -81,16 +78,16 @@ export const AuthenticateSlice = createSlice({
         state.status = "pending";
         state.error = "";
       }) */
-      .addCase(UploadPhotoOwnerAsync.fulfilled, (state, action) => {
+      .addCase(uploadPhotoAgentAsync.fulfilled, (state, action) => {
         const { payload } = action;
         return {
           ...state,
-          ...payload,
+          photo: payload.photo,
           status: "complete",
           isLoggedIn: true,
         };
       })
-      .addCase(UploadPhotoOwnerAsync.rejected, (state, action) => {
+      .addCase(uploadPhotoAgentAsync.rejected, (state, action) => {
         const { payload, error } = action;
         return {
           ...state,

@@ -5,6 +5,7 @@ import {
   fetchAllAgents,
   fetch_one,
   updateisPaidService,
+  uploadPhotoAgent,
 } from "./AgentApi";
 import { async } from "regenerator-runtime";
 import { updatePaidUser } from "./Agent.slice";
@@ -63,6 +64,27 @@ export const editAgentAsync = createAsyncThunk(
             message = error.response.data.detail;
           }
         }
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const uploadPhotoAgentAsync = createAsyncThunk(
+  "Agent/upload-photo",
+  async (payload) => {
+    try {
+      const { id, file } = payload;
+      let formData = new FormData();
+      formData.append("photo", file);
+      const res = await uploadPhotoAgent(id, formData);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.data.detail;
       } else {
         message = error.message;
       }

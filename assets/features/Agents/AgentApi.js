@@ -38,3 +38,7 @@ export const updateisPaidService = (dispatch, servicesOfWeek) => {
     );
   }
 };
+
+export const uploadPhotoAgent = (idAgent, data) => {
+  return Api.post(`/agents/${idAgent}/photo`, data);
+};

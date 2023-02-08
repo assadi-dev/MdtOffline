@@ -17,6 +17,7 @@ import {
 } from "./Compte.styled";
 import FormUser from "./FormUser";
 import FormUserPassword from "./FormUserPassword";
+import { uploadPhotoAgentAsync } from "../../features/Agents/AgentAsyncApi";
 
 const Compte = () => {
   const User = useSelector((state) => state.AuthenticateReducer);
@@ -42,10 +43,10 @@ const Compte = () => {
   };
 
   const uploadPhotoAgent = () => {
-    let formData = new FormData();
-    formData.append("photo", file.file);
+    let payload = { id: User.idAgent, file: file.file };
+
     file.preview &&
-      dispatch(UploadPhotoOwner(User.idAgent, formData)).then(() => {
+      dispatch(uploadPhotoAgentAsync(payload)).then(() => {
         setFile((prevState) => ({
           ...prevState,
           file: "",

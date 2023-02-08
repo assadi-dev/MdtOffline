@@ -64,23 +64,3 @@ export const editAccountAsync = createAsyncThunk(
     }
   }
 );
-
-export const UploadPhotoOwnerAsync = createAsyncThunk(
-  "Authenticate/UploadPhotoOwner",
-  async (payload, { signal }) => {
-    try {
-      const { idAgent, data } = payload;
-      const response = await UploadPhotoOwner(idAgent, data, signal);
-      return response.data;
-    } catch (error) {
-      let message = "";
-      if (error.response) {
-        message = error.response.data.error;
-      } else {
-        message = error.message;
-      }
-      console.log(message);
-      throw new Error(message);
-    }
-  }
-);
