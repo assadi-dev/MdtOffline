@@ -113,11 +113,21 @@ export const addDateByHour = (date, time) => {
 };
 
 /**
- * Retourne la Date du jour au format 22-10-2022
+ * Retourne la Date du jour au format 2022-02-08
  * @returns
  */
 export const obtainDate = () => {
   const dt = new Date();
   const result = format(dt, "yyyy-MM-dd", { locale: fr });
+  return result;
+};
+
+/**
+ * Retourne la Date du jour au format 2022-02-08
+ * @returns
+ */
+export const FrenchFormatDate = () => {
+  const dt = new Date();
+  const result = format(dt, "dd-MM-yyyy", { locale: fr });
   return result;
 };

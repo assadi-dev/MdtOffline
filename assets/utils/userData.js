@@ -23,7 +23,7 @@ export const getAgentNameById = (listOfAgents, id) => {
       let agent = listOfAgents.find((agent) => agent.id == id);
       if (agent) {
         const { name, matricule } = agent;
-        return `${matricule}-${name}`;
+        return `${matricule ? matricule : ""}-${name}`;
       }
       return "Cet agent n'est plus dans l'effectif";
     } else {
