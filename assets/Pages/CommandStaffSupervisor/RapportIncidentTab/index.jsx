@@ -9,7 +9,11 @@ import { IsCommandStaff, getAgentNameById } from "../../../utils/userData";
 import Modal from "../../../components/Shared/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRaportIncidentAsync } from "../../../features/RapportIncident/RapportIncidentAsyncApi";
-import { FrenchFormatDate, obtainDate } from "../../../utils/dateFormat";
+import {
+  FrenchFormatDate,
+  FrenchFormatDateWithHour,
+  obtainDate,
+} from "../../../utils/dateFormat";
 import useListAgent from "../../../hooks/useListAgent";
 import { Eyes, SearchDocumentIcon } from "../../../components/SVG";
 import ModalStateReducer from "./reducer/ModalStateReducer";
@@ -79,7 +83,7 @@ const RapportIncidentTab = () => {
                 {rapportIncidentSelector.collections.length > 0 &&
                   rapportIncidentSelector.collections.map((rapport) => (
                     <tr key={rapport.id}>
-                      <td>{FrenchFormatDate(rapport.createdAt)}</td>
+                      <td>{FrenchFormatDateWithHour(rapport.createdAt)}</td>
                       <td>{getAgentNameById(listAgent, rapport.idAgent)}</td>
                       <td>{rapport.lieuxIncident}</td>
                       <td className="td-center">

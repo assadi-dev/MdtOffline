@@ -26,6 +26,7 @@ import {
 } from "../constants/acces";
 import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 import RapportIncidentTab from "../Pages/CommandStaffSupervisor/RapportIncidentTab";
+import RapportRookieTab from "../Pages/PoliceAcademy/RapportRookie";
 
 export default [
   {
@@ -126,7 +127,15 @@ export default [
     path: "police-academy",
     element: <RedirectRoutes allowedGrades={POLICE_ACADEMY_ACCESS} />,
     index: false,
-    subNavigation: [],
+    subNavigation: [
+      {
+        labe: "Rapport Rookie",
+        path: "rapport-rookie",
+        element: <RapportRookieTab />,
+        index: false,
+        subNavigation: [],
+      },
+    ],
   },
   {
     label: "Command Staff Supervisor",

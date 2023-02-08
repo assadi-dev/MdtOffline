@@ -126,8 +126,18 @@ export const obtainDate = () => {
  * Retourne la Date du jour au format 2022-02-08
  * @returns
  */
-export const FrenchFormatDate = () => {
-  const dt = new Date();
+export const FrenchFormatDate = (date) => {
+  const dt = new Date(date);
   const result = format(dt, "dd-MM-yyyy", { locale: fr });
+  return result;
+};
+
+/**
+ * Retourne la Date du jour au format 2022-02-08 22:30
+ * @returns
+ */
+export const FrenchFormatDateWithHour = (date) => {
+  const dt = new Date(date);
+  const result = format(dt, "dd-MM-yyyy HH:mm", { locale: fr });
   return result;
 };
