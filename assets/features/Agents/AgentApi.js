@@ -9,8 +9,8 @@ export const fetch_one = (idAgent, signal) => {
   return Api.get(`/agents/${idAgent}`, { signal });
 };
 
-export const fetch_allRookie = (signal) => {
-  return Api.get("/agents", { params: { "grade.nom": "Rookie" }, signal });
+export const fetch_allRookie = () => {
+  return Api.get("/agents", { params: { "grade.nom": "Rookie" } });
 };
 
 export const edit_agent = (id, data) => {

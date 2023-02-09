@@ -1,20 +1,27 @@
 import React, { useEffect, useReducer } from "react";
 import {
   HeaderRowAction,
+  OutlineBtnAction,
   RapportRookieBody,
   RapportRookieWrapper,
   ShowRapportbtn,
   Table,
+  TableAction,
 } from "./RapportRookie.styled";
 import { IsCommandStaff, getAgentNameById } from "../../../utils/userData";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRapportRookieAsync } from "../../../features/RapportRookie/RapportRookieAsyncApi";
 import { FrenchFormatDateWithHour } from "../../../utils/dateFormat";
 import useListAgent from "../../../hooks/useListAgent";
-import { SearchDocumentIcon } from "../../../components/SVG";
+import {
+  EditPencilIcon,
+  SearchDocumentIcon,
+  TrashIcon,
+} from "../../../components/SVG";
 import ShowRapportRookie from "./Modal/ShowRapportRookie";
 import ModalStateReducer from "./reducer/ModalStateReducer";
 import Modal from "../../../components/Shared/Modal";
+import EditRapportRokie from "./Modal/EditRapportRokie";
 
 const RapportRookieTab = () => {
   const dispatch = useDispatch();
@@ -24,7 +31,10 @@ const RapportRookieTab = () => {
   const listAgent = useListAgent();
 
   useEffect(() => {
-    dispatch(getAllRapportRookieAsync());
+    const promise = dispatch(getAllRapportRookieAsync());
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   const [modalState, dispatchModalState] = useReducer(ModalStateReducer, {
@@ -49,6 +59,8 @@ const RapportRookieTab = () => {
     switch (view) {
       case "show-rapport":
         return <ShowRapportRookie closeModal={closeModal} rapport={data} />;
+      case "edit-rapport":
+        return <EditRapportRokie closeModal={closeModal} id={data.id} />;
       default:
         return null;
     }
@@ -75,7 +87,7 @@ const RapportRookieTab = () => {
               <tbody>
                 {rapportRookie.collections.length > 0 ? (
                   rapportRookie.collections.map((rapport) => (
-                    <tr>
+                    <tr key={rapport.id}>
                       <td>{FrenchFormatDateWithHour(rapport.createdAt)}</td>
                       <td>
                         {getAgentNameById(
@@ -94,7 +106,26 @@ const RapportRookieTab = () => {
                           <SearchDocumentIcon />
                         </ShowRapportbtn>
                       </td>
-                      <td className="td-center">action</td>
+                      {IsCommandStaff() && (
+                        <td className="td-center">
+                          {" "}
+                          <TableAction>
+                            <OutlineBtnAction
+                              className="edit"
+                              onClick={() =>
+                                toggleModal("edit-rapport", {
+                                  id: rapport.id,
+                                })
+                              }
+                            >
+                              <EditPencilIcon />
+                            </OutlineBtnAction>
+                            <OutlineBtnAction className="delete">
+                              <TrashIcon />
+                            </OutlineBtnAction>
+                          </TableAction>
+                        </td>
+                      )}
                     </tr>
                   ))
                 ) : (

@@ -3,6 +3,7 @@ import {
   add_agent,
   edit_agent,
   fetchAllAgents,
+  fetch_allRookie,
   fetch_one,
   updateisPaidService,
   uploadPhotoAgent,
@@ -64,6 +65,24 @@ export const editAgentAsync = createAsyncThunk(
             message = error.response.data.detail;
           }
         }
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const getAllRookieAsync = createAsyncThunk(
+  "Agent/fetcheAll_Rookies",
+  async (payload) => {
+    try {
+      const res = await fetch_allRookie();
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.detail;
       } else {
         message = error.message;
       }

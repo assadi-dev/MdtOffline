@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllRapportRookieAsync } from "./RapportRookieAsyncApi";
+import {
+  editRapportRookieAsync,
+  getAllRapportRookieAsync,
+  getOneRapportRookieAsync,
+} from "./RapportRookieAsyncApi";
 
 const initialState = { collections: [], selected: [], error: "", status: "" };
 
@@ -23,6 +27,23 @@ const RapportRookieSlice = createSlice({
         state.status = "complete";
         state.collections = action.payload;
       });
+    builders
+      .addCase(getOneRapportRookieAsync.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(getOneRapportRookieAsync.fulfilled, (state, action) => {
+        state.selected = action.payload;
+      });
+    builders.addCase(editRapportRookieAsync.fulfilled, (state, action) => {
+      let updateCollection = state.collections.map((rapport) => {
+        const { payload } = action;
+        if (rapport.id == payload.id) {
+          return { ...payload };
+        }
+        return rapport;
+      });
+      state.collections = updateCollection;
+    });
   },
 });
 

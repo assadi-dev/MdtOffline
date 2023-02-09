@@ -4,7 +4,12 @@ import {
   RapportIncidentWrapper,
   ShowRapportbtn,
 } from "./RapportIncident.styled";
-import { HeaderRowAction, Table } from "../CommandStaffSupervisor.styled";
+import {
+  HeaderRowAction,
+  OutlineBtnAction,
+  Table,
+  TableAction,
+} from "../CommandStaffSupervisor.styled";
 import { IsCommandStaff, getAgentNameById } from "../../../utils/userData";
 import Modal from "../../../components/Shared/Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,9 +20,15 @@ import {
   obtainDate,
 } from "../../../utils/dateFormat";
 import useListAgent from "../../../hooks/useListAgent";
-import { Eyes, SearchDocumentIcon } from "../../../components/SVG";
+import {
+  EditPencilIcon,
+  Eyes,
+  SearchDocumentIcon,
+  TrashIcon,
+} from "../../../components/SVG";
 import ModalStateReducer from "./reducer/ModalStateReducer";
 import ShowRapportIncident from "./Modal/ShowRapportIncident";
+import EditRapportRokie from "../../PoliceAcademy/RapportRookie/Modal/EditRapportRokie";
 
 const RapportIncidentTab = () => {
   const dispatch = useDispatch();
@@ -43,6 +54,7 @@ const RapportIncidentTab = () => {
     switch (view) {
       case "show-rapport":
         return <ShowRapportIncident closeModal={closeModal} rapport={data} />;
+
       default:
         return null;
     }
@@ -96,7 +108,20 @@ const RapportIncidentTab = () => {
                         </ShowRapportbtn>
                       </td>
                       {IsCommandStaff() && (
-                        <td className="td-center">action</td>
+                        <td className="td-center">
+                          {" "}
+                          <TableAction>
+                            <OutlineBtnAction
+                              className="edit"
+                              onClick={() => handlEditAgent(agent.id)}
+                            >
+                              <EditPencilIcon />
+                            </OutlineBtnAction>
+                            <OutlineBtnAction className="delete">
+                              <TrashIcon />
+                            </OutlineBtnAction>
+                          </TableAction>
+                        </td>
                       )}
                     </tr>
                   ))}

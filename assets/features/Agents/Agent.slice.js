@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   editAgentAsync,
   getAllAgentAsync,
+  getAllRookieAsync,
   getOneAgentAsync,
 } from "./AgentAsyncApi";
 
@@ -79,6 +80,10 @@ export const AgentSlice = createSlice({
       .addCase(editAgentAsync.rejected, (state, action) => {
         state.error = action.error.message;
       });
+    builder.addCase(getAllRookieAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      state.filtered = payload;
+    });
   },
 });
 

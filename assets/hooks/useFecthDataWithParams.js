@@ -9,16 +9,22 @@ const useFecthDataWithParams = (url, params) => {
     const controller = new AbortController();
     Api.get(url, { params })
       .then((res) => {
-        setState((prevState) => ({ ...prevState, data: res.data }));
+        setState((prevState) => ({
+          ...prevState,
+          data: res.data,
+          loading: false,
+        }));
       })
       .catch((err) => {
         if (err) {
-          setState((prevState) => ({ ...prevState, error: err.ressponse }));
+          setState((prevState) => ({
+            ...prevState,
+            error: err.ressponse,
+            loading: false,
+          }));
         }
-      })
-      .finally(() =>
-        setState((prevState) => ({ ...prevState, loading: false }))
-      );
+      });
+
     return () => {
       controller.abort();
     };
