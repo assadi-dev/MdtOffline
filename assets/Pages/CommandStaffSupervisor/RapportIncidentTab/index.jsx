@@ -32,7 +32,6 @@ const RapportIncidentTab = () => {
     isOpen: false,
   });
 
-  //console.log(listAgent);
   useEffect(() => {
     const promise = dispatch(getAllRaportIncidentAsync());
     return () => {

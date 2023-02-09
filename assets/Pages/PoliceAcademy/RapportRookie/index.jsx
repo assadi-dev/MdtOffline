@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import {
   HeaderRowAction,
   RapportRookieBody,
@@ -12,6 +12,9 @@ import { getAllRapportRookieAsync } from "../../../features/RapportRookie/Rappor
 import { FrenchFormatDateWithHour } from "../../../utils/dateFormat";
 import useListAgent from "../../../hooks/useListAgent";
 import { SearchDocumentIcon } from "../../../components/SVG";
+import ShowRapportRookie from "./Modal/ShowRapportRookie";
+import ModalStateReducer from "./reducer/ModalStateReducer";
+import Modal from "../../../components/Shared/Modal";
 
 const RapportRookieTab = () => {
   const dispatch = useDispatch();
@@ -23,6 +26,33 @@ const RapportRookieTab = () => {
   useEffect(() => {
     dispatch(getAllRapportRookieAsync());
   }, []);
+
+  const [modalState, dispatchModalState] = useReducer(ModalStateReducer, {
+    view: "",
+    data: null,
+    isOpen: false,
+  });
+
+  const toggleModal = (view, data) => {
+    let payload = { view, data };
+    dispatchModalState({ type: "TOOGLE_MODAL", payload });
+  };
+
+  const closeModal = () => {
+    dispatchModalState({
+      type: "CLOSE_MODAL",
+      payload: { view: modalState.view, data: modalState.data },
+    });
+  };
+
+  const Render = ({ view, data }) => {
+    switch (view) {
+      case "show-rapport":
+        return <ShowRapportRookie closeModal={closeModal} rapport={data} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -57,9 +87,9 @@ const RapportRookieTab = () => {
                       <td className="td-center">
                         <ShowRapportbtn
                           title="Afficher le rapport"
-                          /*      onClick={() =>
+                          onClick={() =>
                             toggleModal("show-rapport", rapport.rapport)
-                          } */
+                          }
                         >
                           <SearchDocumentIcon />
                         </ShowRapportbtn>
@@ -81,6 +111,9 @@ const RapportRookieTab = () => {
             "Loading"
           )}
         </RapportRookieBody>
+        <Modal isOpen={modalState.isOpen} onClose={closeModal}>
+          <Render view={modalState.view} data={modalState.data} />
+        </Modal>
       </RapportRookieWrapper>
     </>
   );

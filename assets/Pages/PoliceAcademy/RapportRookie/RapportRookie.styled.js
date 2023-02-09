@@ -313,7 +313,7 @@ export const ShowRapportbtn = styled.span`
 
 /**Modal */
 
-export const ShowRapportIncidentView = styled.div`
+export const ShowRapportRookietView = styled.div`
   min-width: 350px;
   max-width: 100%;
   min-height: 120px;
