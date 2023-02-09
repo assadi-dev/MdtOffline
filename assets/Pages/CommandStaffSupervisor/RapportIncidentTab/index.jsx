@@ -29,6 +29,7 @@ import {
 import ModalStateReducer from "./reducer/ModalStateReducer";
 import ShowRapportIncident from "./Modal/ShowRapportIncident";
 import EditRapportRokie from "../../PoliceAcademy/RapportRookie/Modal/EditRapportRokie";
+import DeleteRapportIncident from "./Modal/DeleteRapportIncident";
 
 const RapportIncidentTab = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,15 @@ const RapportIncidentTab = () => {
     switch (view) {
       case "show-rapport":
         return <ShowRapportIncident closeModal={closeModal} rapport={data} />;
+
+      case "delete-rapport":
+        return (
+          <DeleteRapportIncident
+            id={data.id}
+            closeModal={closeModal}
+            rapport={data.rapport}
+          />
+        );
 
       default:
         return null;
@@ -117,7 +127,15 @@ const RapportIncidentTab = () => {
                             >
                               <EditPencilIcon />
                             </OutlineBtnAction>
-                            <OutlineBtnAction className="delete">
+                            <OutlineBtnAction
+                              className="delete"
+                              onClick={() =>
+                                toggleModal("delete-rapport", {
+                                  id: rapport.id,
+                                  rapport: rapport.rapport,
+                                })
+                              }
+                            >
                               <TrashIcon />
                             </OutlineBtnAction>
                           </TableAction>

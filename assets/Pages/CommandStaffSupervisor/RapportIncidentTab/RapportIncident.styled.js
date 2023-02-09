@@ -205,3 +205,33 @@ export const TextContent = styled.div`
     }
   }
 `;
+
+export const ActionRowbtn = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto;
+
+  .btn {
+    padding: 12px 22px;
+    max-width: fit-content;
+    font-family: var(--font-title);
+    font-weight: 100;
+    font-size: 1rem;
+    background-color: #2b7de9;
+    :active {
+      opacity: 0.3;
+    }
+    @media (min-width: 668px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .btn:first-of-type {
+    margin-right: 2rem;
+  }
+  .delete {
+    background-color: var(--red);
+  }
+`;

@@ -9,11 +9,11 @@ export const fetchOneRapportIncident = (id) => {
 };
 
 export const add_rapportIncident = (data) => {
-  return Api.post(`/rapport_incidents`);
+  return Api.post(`/rapport_incidents`, data);
 };
 
 export const edit_rapportIncident = (id, data) => {
-  return Api.put(`/rapport_incidents/${id}`);
+  return Api.put(`/rapport_incidents/${id}`), data;
 };
 
 export const delete_rapportIncident = (id) => {
