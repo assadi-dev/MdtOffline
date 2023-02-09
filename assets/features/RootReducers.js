@@ -6,6 +6,7 @@ import AgentsReducer from "./Agents/Agent.slice";
 import UserReducer from "./Users/User.slice";
 import CivilReducer from "./Civil/Civil.slice";
 import RapportIncidentReducer from "./RapportIncident/RapportIncident.slice";
+import RapportDeputyTrainyReducer from "./RapportRookie/RapportRookie.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -17,6 +18,7 @@ const RootReducers = {
   GradesReducer,
   ChefAccusationReducer,
   RapportIncidentReducer,
+  RapportDeputyTrainyReducer,
 };
 
 export default RootReducers;
