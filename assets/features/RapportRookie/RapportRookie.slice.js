@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  deleteRapportRookieAsync,
   editRapportRookieAsync,
   getAllRapportRookieAsync,
   getOneRapportRookieAsync,
@@ -42,6 +43,13 @@ const RapportRookieSlice = createSlice({
         }
         return rapport;
       });
+      state.collections = updateCollection;
+    });
+    builders.addCase(deleteRapportRookieAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+      let updateCollection = state.collections.filter(
+        (rapport) => rapport.id != payload.id
+      );
       state.collections = updateCollection;
     });
   },

@@ -22,6 +22,7 @@ import ShowRapportRookie from "./Modal/ShowRapportRookie";
 import ModalStateReducer from "./reducer/ModalStateReducer";
 import Modal from "../../../components/Shared/Modal";
 import EditRapportRokie from "./Modal/EditRapportRokie";
+import DeleteRapportRookie from "./Modal/DeleteRapportRookie";
 
 const RapportRookieTab = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,14 @@ const RapportRookieTab = () => {
         return <ShowRapportRookie closeModal={closeModal} rapport={data} />;
       case "edit-rapport":
         return <EditRapportRokie closeModal={closeModal} id={data.id} />;
+      case "delete-rapport":
+        return (
+          <DeleteRapportRookie
+            closeModal={closeModal}
+            id={data.id}
+            rapport={data.rapport}
+          />
+        );
       default:
         return null;
     }
@@ -120,7 +129,15 @@ const RapportRookieTab = () => {
                             >
                               <EditPencilIcon />
                             </OutlineBtnAction>
-                            <OutlineBtnAction className="delete">
+                            <OutlineBtnAction
+                              className="delete"
+                              onClick={() =>
+                                toggleModal("delete-rapport", {
+                                  id: rapport.id,
+                                  rapport: rapport.rapport,
+                                })
+                              }
+                            >
                               <TrashIcon />
                             </OutlineBtnAction>
                           </TableAction>
