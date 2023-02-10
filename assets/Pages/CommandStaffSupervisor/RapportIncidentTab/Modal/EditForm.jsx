@@ -41,10 +41,6 @@ const EditForm = ({ rapportData, onClose }) => {
       idAgent: idAgent ? idAgent : "",
     },
     onSubmit: (values) => {
-      const findAgent = listOfRookies.find(
-        (rookie) => rookie.id == values.deputyTrainyConcerned
-      );
-
       let rapportIncidentData = {
         ...values,
         idAgentConcerned: parseInt(values.idAgentConcerned),
@@ -115,7 +111,7 @@ const EditForm = ({ rapportData, onClose }) => {
           </Select>
         </FormControl>
         <FormBottomRow>
-          <SubmitButton>Modifier</SubmitButton>
+          <SubmitButton type="submit">Modifier</SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>
