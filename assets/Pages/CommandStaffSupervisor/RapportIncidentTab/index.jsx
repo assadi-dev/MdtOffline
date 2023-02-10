@@ -97,6 +97,7 @@ const RapportIncidentTab = () => {
                 <tr>
                   <th>Date</th>
                   <th>officier</th>
+                  <th>Type</th>
                   <th>lieu</th>
                   <th className="td-center">Rapport</th>
                   {IsCommandStaff() && <th>Action</th>}
@@ -108,6 +109,7 @@ const RapportIncidentTab = () => {
                     <tr key={rapport.id}>
                       <td>{FrenchFormatDateWithHour(rapport.createdAt)}</td>
                       <td>{getAgentNameById(listAgent, rapport.idAgent)}</td>
+                      <td>{rapport.typeIncident}</td>
                       <td>{rapport.lieuxIncident}</td>
                       <td className="td-center">
                         <ShowRapportbtn
