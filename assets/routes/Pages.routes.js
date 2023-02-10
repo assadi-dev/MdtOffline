@@ -27,6 +27,7 @@ import {
 import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 import RapportIncidentTab from "../Pages/CommandStaffSupervisor/RapportIncidentTab";
 import RapportRookieTab from "../Pages/PoliceAcademy/RapportRookie";
+import PlaintesTab from "../Pages/Services/PlaintesTab";
 
 export default [
   {
@@ -45,6 +46,13 @@ export default [
         label: "Services",
         path: "feuilles-d-heures",
         element: <Services />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Services",
+        path: "plaintes",
+        element: <PlaintesTab />,
         index: false,
         subNavigation: [],
       },
