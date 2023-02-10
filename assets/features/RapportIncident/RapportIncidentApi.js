@@ -13,7 +13,7 @@ export const add_rapportIncident = (data) => {
 };
 
 export const edit_rapportIncident = (id, data) => {
-  return Api.put(`/rapport_incidents/${id}`), data;
+  return Api.put(`/rapport_incidents/${id}`, data);
 };
 
 export const delete_rapportIncident = (id) => {

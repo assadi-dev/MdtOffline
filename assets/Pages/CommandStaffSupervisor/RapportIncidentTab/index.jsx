@@ -30,6 +30,7 @@ import ModalStateReducer from "./reducer/ModalStateReducer";
 import ShowRapportIncident from "./Modal/ShowRapportIncident";
 import EditRapportRokie from "../../PoliceAcademy/RapportRookie/Modal/EditRapportRokie";
 import DeleteRapportIncident from "./Modal/DeleteRapportIncident";
+import EditRapportIncident from "./Modal/EditRapportIncident";
 
 const RapportIncidentTab = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,8 @@ const RapportIncidentTab = () => {
     switch (view) {
       case "show-rapport":
         return <ShowRapportIncident closeModal={closeModal} rapport={data} />;
-
+      case "edit-rapport":
+        return <EditRapportIncident closeModal={closeModal} id={data.id} />;
       case "delete-rapport":
         return (
           <DeleteRapportIncident
@@ -123,7 +125,11 @@ const RapportIncidentTab = () => {
                           <TableAction>
                             <OutlineBtnAction
                               className="edit"
-                              onClick={() => handlEditAgent(agent.id)}
+                              onClick={() =>
+                                toggleModal("edit-rapport", {
+                                  id: rapport.id,
+                                })
+                              }
                             >
                               <EditPencilIcon />
                             </OutlineBtnAction>

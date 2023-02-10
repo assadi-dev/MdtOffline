@@ -15,6 +15,7 @@ import {
   SubmitButton,
 } from "../RapportIncident.styled";
 import { typeIncident } from "./dataList";
+import { addRapportIncidentAsync } from "../../../features/RapportIncident/RapportIncidentAsyncApi";
 
 const RapportIncidentForm = () => {
   const dispatch = useDispatch();
@@ -35,9 +36,11 @@ const RapportIncidentForm = () => {
         idAgentConcerned: parseInt(values.idAgentConcerned),
         idAgent: agent.idAgent,
       };
-      dispatch(add_rapportIncident(formData)).then(() => {
-        formik.resetForm();
-      });
+      dispatch(addRapportIncidentAsync({ data: formData }))
+        .unwrap()
+        .then(() => {
+          formik.resetForm();
+        });
     },
   });
 

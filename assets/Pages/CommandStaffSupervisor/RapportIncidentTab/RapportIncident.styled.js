@@ -235,3 +235,118 @@ export const ActionRowbtn = styled.div`
     background-color: var(--red);
   }
 `;
+
+/***Action Form */
+
+/**ActionContainer Modal */
+export const ActionRapportIncidenttView = styled.div`
+  min-width: 350px;
+  max-width: 100%;
+  min-height: 120px;
+
+  border-radius: 5px;
+  border: solid 1px var(--color-blue-primary);
+  background-color: var(--color-blue-dark);
+  padding: 15px;
+  position: relative;
+
+  @media screen and (min-width: 680px) {
+    width: 660px;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 960px;
+  }
+`;
+
+/**Form Edit */
+
+export const SelectButton = styled.button`
+  margin-right: 18px;
+  margin-bottom: 18px;
+  background-color: #2b7de9;
+  padding: 15px 22px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.6;
+  transition: all 0.35s;
+  :hover {
+    opacity: 1;
+    box-shadow: 0px 0px 10px 3px #2b7de9;
+  }
+  :active {
+    transform: scale(0.6);
+  }
+`;
+
+export const FormContainer = styled.form`
+  min-height: 300px;
+  max-height: 82vh;
+  background: var(--background-color-dark);
+  padding: 13px;
+  border: 0.5px solid #2b7de950;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 5px #2b7de920;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+
+  @media (min-width: 992px) {
+    width: 690px;
+  }
+  .form-control {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    option {
+      color: #444;
+    }
+  }
+
+  .btn {
+    background-color: #2b7de9;
+    padding: 15px 22px;
+    width: fit-content;
+  }
+`;
+
+export const FormBodyContainer = styled.div`
+  padding: 2rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+`;
+
+export const FormLabel = styled.label`
+  display: block;
+  margin-bottom: 1rem;
+`;
+
+export const FormControl = styled.div`
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 2.3rem;
+  :last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+export const FormBottomRow = styled.div`
+  margin-top: 1rem;
+  height: 80px;
+`;
+
+export const SubmitButton = styled.button`
+  background-color: #2b7de9;
+  padding: 15px 22px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  margin: auto;
+`;
