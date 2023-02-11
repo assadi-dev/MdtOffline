@@ -193,6 +193,14 @@ export default [
         end: false,
         submenu: [],
       },
+      {
+        path: "/demande-mot-de-passe",
+        label: "Demande de nouveau mot de passe",
+        selected: false,
+        openDropdown: false,
+        end: false,
+        submenu: [],
+      },
     ],
   },
 

@@ -28,6 +28,7 @@ import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 import RapportIncidentTab from "../Pages/CommandStaffSupervisor/RapportIncidentTab";
 import RapportRookieTab from "../Pages/PoliceAcademy/RapportRookie";
 import PlaintesTab from "../Pages/Services/PlaintesTab";
+import ForgottenPassword from "../Pages/CommandStaffSupervisor/ForgottenPasswordTab";
 
 export default [
   {
@@ -175,6 +176,13 @@ export default [
         label: "Comptabilités",
         path: "comptabilites",
         element: <Comptabilite />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Demande de nouveau mot de passe",
+        path: "demande-mot-de-passe",
+        element: <ForgottenPassword />,
         index: false,
         subNavigation: [],
       },
