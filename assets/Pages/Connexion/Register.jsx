@@ -28,13 +28,28 @@ const Register = ({ processStep, dispatchStep }) => {
   let navigate = useNavigate();
   const [error, setError] = useState("");
 
+  const validate = (values) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = "Le Prénom et Nom est obligatoire";
+    }
+
+    if (values.username) {
+      let username = values.username.split(" ");
+      if (username.length <= 1) errors.username = "Format incorrect";
+      if (username.length > 1 && username[1] == "")
+        errors.username = "Format incorrect";
+    }
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
       telephone: "",
     },
-
+    validate,
     onSubmit: (values) => {
       const { username, password, telephone } = values;
 
@@ -88,9 +103,16 @@ const Register = ({ processStep, dispatchStep }) => {
                 placeholder="Prénom Nom"
                 onChange={formik.handleChange}
                 value={formik.values.username}
+                onBlur={formik.handleBlur}
               />
             </InputConnexion>
-            <TextError>{/* <p>dfer"</p> */}</TextError>
+            <TextError>
+              {formik.touched.username && formik.errors.username ? (
+                <p>{formik.errors.username}</p>
+              ) : (
+                ""
+              )}
+            </TextError>
           </InputAnimation>
           <InputAnimation className="form-control mb-signIn" delay={"100ms"}>
             <InputConnexion>
@@ -103,6 +125,7 @@ const Register = ({ processStep, dispatchStep }) => {
                 placeholder="Mot de passe"
                 onChange={formik.handleChange}
                 value={formik.values.password}
+                onBlur={formik.handleBlur}
               />
             </InputConnexion>
 
@@ -123,6 +146,7 @@ const Register = ({ processStep, dispatchStep }) => {
                 placeholder="Téléphone"
                 onChange={formik.handleChange}
                 value={formik.values.telephone}
+                onBlur={formik.handleBlur}
               />
             </InputConnexion>
 

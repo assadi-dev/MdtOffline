@@ -47,10 +47,6 @@ const SingIn = ({ processStep, dispatchStep }) => {
         connect(username, password)
           .then((res) => {
             const token = res.token;
-
-            //const refreshToken = res.refresh_token;
-            /*  localStorage.setItem(TOKEN_STORAGE_NAME, token);
-            localStorage.setItem(REFRESH_TOKEN_STORAGE_NAME, refreshToken); */
             Cookies.set(TOKEN_STORAGE_NAME, token, {
               path: "/",
               sameSite: "Lax",
