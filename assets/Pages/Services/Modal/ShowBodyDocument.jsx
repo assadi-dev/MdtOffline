@@ -4,6 +4,7 @@ import {
   HeadTitleView,
   ShowDocumentWrapper,
   TextContent,
+  TextFormat,
 } from "../../../components/Shared/Table/Table.styled";
 
 const ShowBodyDocument = ({ closeModal, textContent, title }) => {
@@ -14,7 +15,9 @@ const ShowBodyDocument = ({ closeModal, textContent, title }) => {
         <CloseModal className="closeBtn" onClick={closeModal} />
       </HeadTitleView>
       <TextContent>
-        <p>{textContent}</p>
+        <TextFormat>
+          <p>{textContent}</p>
+        </TextFormat>
       </TextContent>
     </ShowDocumentWrapper>
   );

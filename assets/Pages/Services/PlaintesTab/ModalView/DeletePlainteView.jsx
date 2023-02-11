@@ -6,6 +6,7 @@ import {
   HeadTitleView,
   ShowDocumentWrapper,
   TextContent,
+  TextFormat,
 } from "../../../../components/Shared/Table/Table.styled";
 import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
 import useTabAction from "../Hooks/useTabAction";
@@ -33,7 +34,10 @@ const DeletePlainteView = ({ id, raison, closeModal }) => {
           <CloseModal className="closeBtn" onClick={closeModal} />
         </HeadTitleView>
         <TextContent>
-          <p className="text-center"> {raison}</p>
+          <TextFormat>
+            {" "}
+            <p>{raison}</p>
+          </TextFormat>
         </TextContent>
         <ActionRowbtn>
           <ButtonDefault className="btn delete" type="submit">

@@ -23,6 +23,7 @@ import ModalStateReducer from "./reducer/ModalStateReducer";
 import Modal from "../../../components/Shared/Modal";
 import EditRapportRokie from "./Modal/EditRapportRokie";
 import DeleteRapportRookie from "./Modal/DeleteRapportRookie";
+import EmptyRow from "../../../components/Shared/Table/EmptyRow";
 
 const RapportRookieTab = () => {
   const dispatch = useDispatch();
@@ -146,12 +147,7 @@ const RapportRookieTab = () => {
                     </tr>
                   ))
                 ) : (
-                  <tr>
-                    {" "}
-                    <td colSpan={5} className="td-center">
-                      Aucun Rapport Rookie
-                    </td>{" "}
-                  </tr>
+                  <EmptyRow message={"Rapport Rookie vide"} colSpan={10} />
                 )}
               </tbody>
             </Table>

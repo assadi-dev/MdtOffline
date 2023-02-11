@@ -190,6 +190,15 @@ export const TextContent = styled.div`
   }
 `;
 
+export const TextFormat = styled.div`
+  width: fit-content !important;
+  margin-left: auto;
+  margin-right: auto;
+  p {
+    width: fit-content;
+  }
+`;
+
 export const ActionRowbtn = styled.div`
   display: flex;
   width: 100%;

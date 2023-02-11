@@ -31,6 +31,7 @@ import ShowRapportIncident from "./Modal/ShowRapportIncident";
 import EditRapportRokie from "../../PoliceAcademy/RapportRookie/Modal/EditRapportRokie";
 import DeleteRapportIncident from "./Modal/DeleteRapportIncident";
 import EditRapportIncident from "./Modal/EditRapportIncident";
+import EmptyRow from "../../../components/Shared/Table/EmptyRow";
 
 const RapportIncidentTab = () => {
   const dispatch = useDispatch();
@@ -104,7 +105,7 @@ const RapportIncidentTab = () => {
                 </tr>
               </thead>
               <tbody>
-                {rapportIncidentSelector.collections.length > 0 &&
+                {rapportIncidentSelector.collections.length > 0 ? (
                   rapportIncidentSelector.collections.map((rapport) => (
                     <tr key={rapport.id}>
                       <td>{FrenchFormatDateWithHour(rapport.createdAt)}</td>
@@ -150,7 +151,10 @@ const RapportIncidentTab = () => {
                         </td>
                       )}
                     </tr>
-                  ))}
+                  ))
+                ) : (
+                  <EmptyRow message={"Rapport Incient vide"} colSpan={7} />
+                )}
               </tbody>
             </Table>
           ) : (

@@ -148,7 +148,7 @@ const PlaintesTab = () => {
                           onClick={() =>
                             actionTabBtn.handleDelete(
                               plainte.id,
-                              plainte.raisonDepot
+                              plainte.corpsPlainte
                             )
                           }
                         >
