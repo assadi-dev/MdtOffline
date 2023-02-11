@@ -8,6 +8,7 @@ import CivilReducer from "./Civil/Civil.slice";
 import RapportIncidentReducer from "./RapportIncident/RapportIncident.slice";
 import RapportDeputyTrainyReducer from "./RapportRookie/RapportRookie.slice";
 import PlainteReducer from "./Plaintes/Plaintes.slice";
+import ForgottenPasswordReducer from "./ForgottenPassword/ForgottenPassword.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -21,6 +22,7 @@ const RootReducers = {
   RapportIncidentReducer,
   RapportDeputyTrainyReducer,
   PlainteReducer,
+  ForgottenPasswordReducer,
 };
 
 export default RootReducers;

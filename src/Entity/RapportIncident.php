@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\RapportIncidentRepository;
 use DateTime;
 use DateTimeImmutable;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\RapportIncidentRepository;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ORM\Entity(repositoryClass=RapportIncidentRepository::class)
  * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
+ * @ApiFilter(OrderFilter::class, properties= {"createdAt":"DESC"})
  */
 class RapportIncident
 {
