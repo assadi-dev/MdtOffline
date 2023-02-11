@@ -83,7 +83,7 @@ export const deletePlaintesAsync = createAsyncThunk(
     try {
       const { id } = payload;
       delete_plaintes(id);
-      return { id };
+      return payload;
     } catch (error) {
       let message = "";
       if (error.response) {

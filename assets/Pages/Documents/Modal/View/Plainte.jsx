@@ -15,6 +15,7 @@ import Input from "../../../../components/Shared/Input";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import { useDispatch, useSelector } from "react-redux";
 import { add_plainte } from "../../../../redux/actions/Plainte.action";
+import { addPlaintesAsync } from "../../../../features/Plaintes/PlaintesAsyncApi";
 
 const PlainteView = ({ onClose }) => {
   const agent = useSelector((state) => state.AuthenticateReducer);
@@ -33,7 +34,7 @@ const PlainteView = ({ onClose }) => {
     onSubmit: (values) => {
       let plainteData = { ...values, idAgent: agent.idAgent };
 
-      dispatch(add_plainte(plainteData)).then(() => {
+      dispatch(addPlaintesAsync(plainteData)).then(() => {
         formik.resetForm();
         onClose();
       });

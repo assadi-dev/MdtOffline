@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CloseModalBtn from "../Modal/CloseModal";
 
 export const TableCard = styled.div`
   padding: 12px;
@@ -106,5 +107,115 @@ export const OutlineBtnAction = styled.button`
   svg {
     width: 20px;
     height: 20px;
+  }
+`;
+
+export const EmptyRowStyle = styled.td`
+  text-align: center;
+`;
+
+export const HeadTitleView = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.2rem;
+  padding: 5px 15px;
+  & .closeBtn {
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    top: 0;
+
+    :hover {
+      span {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+
+    & span {
+      color: rgba(255, 255, 255, 0.5);
+      width: 25px;
+      height: 25px;
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+  & .titleView {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: var(--font-title);
+    text-align: center;
+    padding: 0 15px;
+    line-height: 30px;
+  }
+`;
+
+export const CloseModal = styled(CloseModalBtn)`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+`;
+
+export const ShowDocumentWrapper = styled.div`
+  min-width: 350px;
+  max-width: 100%;
+  min-height: 120px;
+
+  border-radius: 5px;
+  border: solid 1px var(--color-blue-primary);
+  background-color: var(--color-blue-dark);
+  padding: 15px;
+  position: relative;
+
+  @media screen and (min-width: 992px) {
+    width: 960px;
+  }
+`;
+
+export const TextContent = styled.div`
+  padding: 12px;
+  max-height: 35vh;
+  overflow-y: auto;
+  p {
+    width: 100%;
+    margin: 1rem auto;
+    line-height: 2em;
+    @media screen and (min-width: 992px) {
+      width: 80%;
+    }
+  }
+`;
+
+export const ActionRowbtn = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto;
+
+  .btn {
+    padding: 12px 22px;
+    max-width: fit-content;
+    font-family: var(--font-title);
+    font-weight: 100;
+    font-size: 1rem;
+    background-color: #2b7de9;
+    :active {
+      opacity: 0.3;
+    }
+    @media (min-width: 668px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .btn:first-of-type {
+    margin-right: 2rem;
+  }
+  .delete {
+    background-color: var(--red);
   }
 `;

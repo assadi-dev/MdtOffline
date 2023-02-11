@@ -57,7 +57,7 @@ const PlaintesSlice = createSlice({
       })
       .addCase(deletePlaintesAsync.fulfilled, (state, action) => {
         const { payload } = action;
-        let updateCollection = state.collections.map(
+        let updateCollection = state.collections.filter(
           (plainte) => plainte.id != payload.id
         );
         state.collections = updateCollection;
