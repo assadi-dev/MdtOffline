@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addRapportRookieAsync,
   deleteRapportRookieAsync,
   editRapportRookieAsync,
   getAllRapportRookieAsync,
@@ -35,6 +36,17 @@ const RapportRookieSlice = createSlice({
       .addCase(getOneRapportRookieAsync.fulfilled, (state, action) => {
         state.selected = action.payload;
       });
+
+    builders
+      .addCase(addRapportRookieAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.collections = [...state.collections, payload];
+      })
+      .addCase(addRapportRookieAsync.rejected, (state, action) => {
+        const { error } = action;
+        state.error = error.message;
+      });
+
     builders.addCase(editRapportRookieAsync.fulfilled, (state, action) => {
       let updateCollection = state.collections.map((rapport) => {
         const { payload } = action;

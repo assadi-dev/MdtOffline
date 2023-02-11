@@ -18,19 +18,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendDeputyTrainy } from "../../SendDiscord/DeputyTrainy";
 import { dateFrenchFormat } from "../../../../utils/dateFormat";
 import { getAgentNameById } from "../../../../utils/userData";
-import { add_rapportDeputyTrainy } from "../../../../redux/actions/RapporDeputyTrainy.action";
 import { get_allRookie } from "../../../../redux/actions/Agents.action";
+import { addRapportRookieAsync } from "../../../../features/RapportRookie/RapportRookieAsyncApi";
+import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
-  const { isReady, collections, filtered } = useSelector(
+  const { error, collections, status } = useSelector(
     (state) => state.AgentsReducer
   );
-  const listOfRookies = useMemo(() => {
-    if (filtered.length > 0) {
-      return filtered;
-    }
-    return [];
-  }, [filtered]);
+
+  const listOfRookies = useFecthDataWithParams("/agents", {
+    "grade.nom": "Rookie",
+  }).data;
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
@@ -65,11 +64,13 @@ const RapportDeputyTrainyView = ({ onClose }) => {
 
       let rapportDeputyTrainy = { ...values, idAgent: agent.idAgent };
 
-      dispatch(add_rapportDeputyTrainy(rapportDeputyTrainy)).then(() => {
-        formik.resetForm();
-        onClose();
-        sendDeputyTrainy(sendDiscordData);
-      });
+      dispatch(addRapportRookieAsync(rapportDeputyTrainy))
+        .unwrap()
+        .then(() => {
+          formik.resetForm();
+          onClose();
+          sendDeputyTrainy(sendDiscordData);
+        });
     },
   });
 

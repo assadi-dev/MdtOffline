@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  add_rapportRookie,
   delete_rapportRookie,
   edit_rapportRookie,
   fetchAllRapportRookie,
@@ -30,6 +31,24 @@ export const getOneRapportRookieAsync = createAsyncThunk(
     try {
       const { id } = payload;
       const res = await fetchOneRapportRookie(id);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        messsage = error.response.data.detail;
+      } else {
+        messsage = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const addRapportRookieAsync = createAsyncThunk(
+  "RapportRookie/add",
+  async (payload) => {
+    try {
+      const res = await add_rapportRookie(payload);
       return res.data;
     } catch (error) {
       let message = "";

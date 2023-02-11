@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "../../../components/Shared/Input";
 import InputTextArea from "../../../components/Shared/InputTextArea";
 import Select from "../../../components/Shared/Select";
-import { get_allAgent } from "../../../redux/actions/Agents.action";
-import { add_rapportIncident } from "../../../redux/actions/RapportIncident.action";
 import {
   FormBottomRow,
   FormControl,
@@ -16,6 +14,7 @@ import {
 } from "../RapportIncident.styled";
 import { typeIncident } from "./dataList";
 import { addRapportIncidentAsync } from "../../../features/RapportIncident/RapportIncidentAsyncApi";
+import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
 
 const RapportIncidentForm = () => {
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ const RapportIncidentForm = () => {
   });
 
   useEffect(() => {
-    dispatch(get_allAgent());
+    dispatch(getAllAgentAsync());
   }, []);
 
   return (

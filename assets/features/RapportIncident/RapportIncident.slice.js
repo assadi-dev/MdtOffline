@@ -42,7 +42,7 @@ const RapportincidentSlice = createSlice({
       })
       .addCase(addRapportIncidentAsync.fulfilled, (state, action) => {
         const { payload } = action;
-        state.collections = [payload, ...state.collections];
+        state.collections = [...state.collections, payload];
       });
     builders.addCase(editRapportIncidentAsync.fulfilled, (state, action) => {
       const { payload } = action;
