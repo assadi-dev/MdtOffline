@@ -23,6 +23,7 @@ import { getAllCivil } from "./redux/actions/Civil.action";
 import AccesDenied from "./Pages/Permission/AccesDenied";
 import { getOwnerdAsync } from "./features/Authenticate/AuthenticateAsyncAction";
 import { getAllAgentAsync } from "./features/Agents/AgentAsyncApi";
+import ResetPassword from "./Pages/ResetPassword";
 
 const App = () => {
   const Hello = () => {
@@ -87,8 +88,9 @@ const App = () => {
           )}
         </Route>
       </Route>
-      <Route index path="/connexion" element={<Connexion />} />
-      <Route index path="/denied" element={<AccesDenied />} />
+      <Route path="/connexion" element={<Connexion />} />
+      <Route path="/denied" element={<AccesDenied />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route index path="/*" element={<NoFoundPage />} />
     </Routes>
   );
