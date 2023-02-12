@@ -4,6 +4,7 @@ import {
   ClipboadrCopy,
   ForgotenPasswordWrapper,
   ForgottenPasswordBody,
+  RowLink,
 } from "./Forgotten.styled";
 import { IsCommandStaff, getAgentNameById } from "../../../utils/userData";
 import EmptyRow from "../../../components/Shared/Table/EmptyRow";
@@ -14,6 +15,7 @@ import { FrenchFormatDateWithHour } from "../../../utils/dateFormat";
 import useListAgent from "../../../hooks/useListAgent";
 import { sleep } from "../../../utils/timer";
 import ClipboardBtn from "./ClipboardBtn";
+import GenerateLinkBtn from "./GenerateLinkBtn";
 
 const ForgottenPassword = () => {
   const { collections, status } = useSelector(
@@ -52,12 +54,16 @@ const ForgottenPassword = () => {
                   <td>{getAgentNameById(listAgent, password.userId)}</td>
                   <td>{FrenchFormatDateWithHour(password.expirateAt)}</td>
                   <td>
-                    <p> {password.link}</p>{" "}
-                    {password.link && (
-                      <ClipboardBtn textToCopy={password.link} />
-                    )}
+                    <RowLink>
+                      <p> {password.link}</p>
+                      {password.link && (
+                        <ClipboardBtn textToCopy={password.link} />
+                      )}
+                    </RowLink>
                   </td>
-                  <td></td>
+                  <td>
+                    <GenerateLinkBtn id={password.id} token={password.token} />
+                  </td>
                 </tr>
               ))
             ) : (

@@ -61,3 +61,27 @@ export const ClipboardCopy = styled.div`
     transition: all 0.45s;
   }
 `;
+
+export const GeneratLinkBtnWrapper = styled.button`
+  white-space: nowrap;
+  font-size: inherit;
+  background-color: var(--teal);
+  padding: 1rem 1.3rem;
+  width: fit-content;
+  color: var(--background-color-dark);
+  border-radius: 5px;
+  :active {
+    opacity: 0.3;
+  }
+`;
+
+export const RowLink = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    margin-right: 1.8rem;
+    max-width: 75%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+`;
