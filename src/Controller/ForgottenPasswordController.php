@@ -37,15 +37,15 @@ class ForgottenPasswordController extends AbstractController
 
 
     /**
-     * @Route("/api/forgotten_password/validation",name="api_login",methods="POST") 
+     * @Route("/api/forgotten_password/validation",name="api_updateForgottenPassword",methods="POST") 
      */
-    public function checkPassword(){
+    public function updateForgotenPassword(){
 
 
     }
 
         /**
-     * @Route("/api/forgotten_password/generate",name="api_forgotten_password",methods="POST") 
+     * @Route("/api/forgotten_password/generate",name="api_create_forgotten_password",methods="POST") 
      */
     public function gnerate_token_password( JWTTokenManagerInterface $JWTManager){
 
@@ -56,7 +56,7 @@ class ForgottenPasswordController extends AbstractController
         $username = $body['username'];
         $user = $this->userRepository->findOneBy(["username"=>$username]);
 
-        if(empty($user))  throw new Exception("Cette Utilisateur est introuvable dans notre base de donée");
+        if(empty($user))  throw new Exception("L'utilisateur $username est introuvable dans notre base de donnée");
 
         $jwtManager = new TokenGeneratorService("mdt-secret");
         $token = $jwtManager->generateToken(["username"=>$username]);

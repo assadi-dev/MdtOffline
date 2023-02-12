@@ -25,7 +25,7 @@ export const initialStateForgotten = {
   isLoading: false,
   step: "form-step-forgotten",
   result: "",
-  messsage: "",
+  message: "",
 };
 export const stepStateForgottenReducer = (state, action) => {
   const { type, payload } = action;
