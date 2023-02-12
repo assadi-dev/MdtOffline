@@ -24,6 +24,8 @@ export const initialStateForgotten = {
   username: "",
   isLoading: false,
   step: "form-step-forgotten",
+  result: "",
+  messsage: "",
 };
 export const stepStateForgottenReducer = (state, action) => {
   const { type, payload } = action;
@@ -40,10 +42,10 @@ export const stepStateForgottenReducer = (state, action) => {
     case "result-forgotten":
       return {
         ...state,
-        username: payload.username,
         isLoading: false,
         step: "result",
-        result: payload,
+        result: payload.status,
+        message: payload.message,
       };
 
     default:

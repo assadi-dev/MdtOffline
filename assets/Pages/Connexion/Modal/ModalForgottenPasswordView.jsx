@@ -8,6 +8,7 @@ import SendUsernameForm from "./SendUsernameForm";
 import SendResultUsername from "./SendResultUsername";
 import { initialStateForgotten, stepStateForgottenReducer } from "../reducer";
 import { useReducer } from "react";
+import LoadingForgottenRequest from "./LoadingForgottenRequest";
 
 const ModalForgottenPasswordView = ({ username, closeModal }) => {
   const [stepState, dispatchStepState] = useReducer(
@@ -31,10 +32,16 @@ const ModalForgottenPasswordView = ({ username, closeModal }) => {
       {stepState.step == "form-step-forgotten" && (
         <SendUsernameForm dispatchStep={dispatchStepState} />
       )}
-      {stepState.step == "result-forgotten" && (
+      {stepState.step == "loading" && (
+        <LoadingForgottenRequest
+          dispatchStep={dispatchStepState}
+          username={stepState.username}
+        />
+      )}
+      {stepState.step == "result" && (
         <SendResultUsername
-          result={"error"}
-          message="Cette utilisateur est introuvable dans la base de donnée"
+          result={stepState.result}
+          message={stepState.message}
         />
       )}
     </ForgottenPasswordViewContainer>

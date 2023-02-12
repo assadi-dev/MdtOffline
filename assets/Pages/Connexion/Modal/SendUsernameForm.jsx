@@ -34,7 +34,6 @@ const SendUsernameForm = ({ dispatchStep }) => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
       let payload = { username: values.username };
       dispatchStep({ type: "loading-forgotten", payload });
     },

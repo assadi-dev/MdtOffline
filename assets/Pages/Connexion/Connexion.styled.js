@@ -399,3 +399,15 @@ export const IconResult = styled.span`
 export const SendResultUsernameContainer = styled.div`
   padding: 18px;
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+/**Loader */
+export const Spinner = styled.div`
+  width: 10rem;
+  height: 10rem;
+`;
