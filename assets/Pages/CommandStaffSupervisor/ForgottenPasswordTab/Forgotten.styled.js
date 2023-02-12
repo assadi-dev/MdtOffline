@@ -17,6 +17,7 @@ export const ForgottenPasswordBody = styled.div`
         visibility: visible;
         z-index: 25;
         padding: 1rem 1.3rem;
+        transform: translateX(70px);
       }
     }
   }
@@ -30,6 +31,7 @@ export const ClipboardCopy = styled.div`
   place-items: center;
   border: 1px solid var(--color-white);
   border-radius: 5px;
+  z-index: 28;
   svg {
     width: 16px;
     height: 20px;
@@ -43,7 +45,7 @@ export const ClipboardCopy = styled.div`
     background-color: transparent;
   }
   :after {
-    content: "liens copié";
+    content: "Copié !";
     position: absolute;
     bottom: 0;
     top: 0;

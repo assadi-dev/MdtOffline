@@ -6,6 +6,7 @@ import {
 } from "../../components/SVG/Connexion.svg";
 import {
   CardFooterConnexion,
+  ForgottenPasswordSection,
   InputAnimation,
   Loadericon,
   ShowpasswordToggle,
@@ -30,12 +31,17 @@ import AlertSuccess from "../../components/Shared/Alert/AlertSuccess";
 import { useerLogged } from "../../features/Authenticate/Authenticate.slice";
 import ShowpasswordBtn from "../../components/Shared/Input/ShowpasswordBtn";
 import { useRef } from "react";
+import Modal from "../../components/Shared/Modal";
 
 const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [error, setError] = useState("");
   const inputPasseRef = useRef();
+
+  const [showModalForgotten, setShowModalForgotten] = useState(false);
+  const toogleModalForgotten = () =>
+    setShowModalForgotten((current = !current));
 
   const formik = useFormik({
     initialValues: {
@@ -115,6 +121,9 @@ const SingIn = ({ processStep, dispatchStep }) => {
                 inputRefElement={inputPasseRef}
               />
             </InputConnexion>
+            <ForgottenPasswordSection onClick={toogleModalForgotten}>
+              <p>Mot de passe oublié</p>
+            </ForgottenPasswordSection>
           </InputAnimation>
         </div>
         <CardFooterConnexion>
@@ -148,6 +157,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
           </div>
         </CardFooterConnexion>
       </form>
+      <Modal isOpen={false}></Modal>
     </>
   );
 };

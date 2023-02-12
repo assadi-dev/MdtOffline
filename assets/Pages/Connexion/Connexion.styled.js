@@ -233,3 +233,17 @@ export const Slogan = styled.div`
     font-size: 55px;
   }
 `;
+
+/**Forgotten Section */
+
+export const ForgottenPasswordSection = styled.div`
+  margin: 2.2rem 0;
+  p {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    :hover {
+      color: var(--color-blue-primary);
+    }
+  }
+`;

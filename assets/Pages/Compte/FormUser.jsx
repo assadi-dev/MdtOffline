@@ -88,7 +88,6 @@ const FormUser = ({
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormRow>
-        {" "}
         <FormContainer>
           <label htmlFor="username">Prénom Nom: </label>
           <Input
