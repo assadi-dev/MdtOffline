@@ -128,6 +128,7 @@ const Register = ({ processStep, dispatchStep }) => {
                 onChange={formik.handleChange}
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
+                ref={inputPasseRef}
               />
               <ShowpasswordToggle
                 className="password-icon"
@@ -153,7 +154,6 @@ const Register = ({ processStep, dispatchStep }) => {
                 onChange={formik.handleChange}
                 value={formik.values.telephone}
                 onBlur={formik.handleBlur}
-                ref={inputPasseRef}
               />
             </InputConnexion>
 
