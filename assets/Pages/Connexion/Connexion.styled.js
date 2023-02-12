@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import backgroundImage from "../../ressources/img/backgroundConnexion.jpg";
 import ShowpasswordBtn from "../../components/Shared/Input/ShowpasswordBtn";
+import CloseModalBtn from "../../components/Shared/Modal/CloseModal";
 
 const colorDefault = "rgba(255, 255, 255, 0.3)";
 const errorColor = "var(--red)";
@@ -246,4 +247,155 @@ export const ForgottenPasswordSection = styled.div`
       color: var(--color-blue-primary);
     }
   }
+`;
+
+/**Forgotten Modal View */
+
+export const ForgottenPasswordViewContainer = styled.div`
+  width: 35rem;
+  min-height: 200px;
+  background: var(--background-color-dark);
+  padding: 13px;
+  border: 0.5px solid #2b7de950;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 5px #2b7de920;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  @media (min-width: 992px) {
+    width: 690px;
+  }
+  .form-control {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    option {
+      color: #444;
+    }
+  }
+
+  .btn {
+    background-color: #2b7de9;
+    padding: 15px 22px;
+    width: fit-content;
+  }
+`;
+
+export const HeaderModal = styled.div`
+  width: 100%;
+  padding: 10px 10px 10px 48px;
+  position: relative;
+  .formTitle {
+    font-size: 18px;
+    font-family: var(--font-title);
+    font-weight: normal;
+  }
+`;
+
+export const CloseModal = styled(CloseModalBtn)`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+`;
+
+export const FormBodyContainer = styled.div`
+  padding: 2rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+`;
+
+export const FormLabel = styled.label`
+  display: block;
+  margin-bottom: 1rem;
+`;
+
+export const FormControl = styled.div`
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 2.3rem;
+  :last-of-type {
+    margin-bottom: 0;
+  }
+
+  input {
+    :disabled {
+      cursor: not-allowed;
+    }
+  }
+`;
+
+export const FormBottomRow = styled.div`
+  margin-top: 1.2rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+export const SubmitButton = styled.button`
+  background-color: #2b7de9;
+  padding: 15px 22px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  margin: auto;
+  font-family: var(--font-title);
+  :active {
+    opacity: 0.3;
+  }
+`;
+
+export const RowInput = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  justify-content: flex-end;
+  grid-template-areas: "b" "a";
+  margin-bottom: 2.3rem;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    justify-content: flex-start;
+    grid-template-areas: "a b";
+  }
+`;
+
+export const HelpMessage = styled.div`
+  padding: 1.8rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  line-height: 2.5rem;
+  font-weight: 300;
+`;
+
+export const ErrorMessage = styled.div`
+  margin: 1rem 0;
+  padding-left: 1rem;
+  p {
+    color: var(--red);
+  }
+`;
+
+/**SendResult View */
+
+export const IconResult = styled.span`
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const SendResultUsernameContainer = styled.div`
+  padding: 18px;
 `;

@@ -19,3 +19,34 @@ export const processReducer = (state, action) => {
       break;
   }
 };
+
+export const initialStateForgotten = {
+  username: "",
+  isLoading: false,
+  step: "form-step-forgotten",
+};
+export const stepStateForgottenReducer = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "form-step-forgotten":
+      return initialStateForgotten;
+    case "loading-forgotten":
+      return {
+        ...state,
+        username: payload.username,
+        isLoading: true,
+        step: "loading",
+      };
+    case "result-forgotten":
+      return {
+        ...state,
+        username: payload.username,
+        isLoading: false,
+        step: "result",
+        result: payload,
+      };
+
+    default:
+      return state;
+  }
+};

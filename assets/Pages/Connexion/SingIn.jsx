@@ -32,6 +32,7 @@ import { useerLogged } from "../../features/Authenticate/Authenticate.slice";
 import ShowpasswordBtn from "../../components/Shared/Input/ShowpasswordBtn";
 import { useRef } from "react";
 import Modal from "../../components/Shared/Modal";
+import ModalForgottenPasswordView from "./Modal/ModalForgottenPasswordView";
 
 const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const SingIn = ({ processStep, dispatchStep }) => {
 
   const [showModalForgotten, setShowModalForgotten] = useState(false);
   const toogleModalForgotten = () =>
-    setShowModalForgotten((current = !current));
+    setShowModalForgotten((current) => !current);
 
   const formik = useFormik({
     initialValues: {
@@ -121,8 +122,8 @@ const SingIn = ({ processStep, dispatchStep }) => {
                 inputRefElement={inputPasseRef}
               />
             </InputConnexion>
-            <ForgottenPasswordSection onClick={toogleModalForgotten}>
-              <p>Mot de passe oublié</p>
+            <ForgottenPasswordSection>
+              <p onClick={toogleModalForgotten}>Mot de passe oublié</p>
             </ForgottenPasswordSection>
           </InputAnimation>
         </div>
@@ -157,7 +158,9 @@ const SingIn = ({ processStep, dispatchStep }) => {
           </div>
         </CardFooterConnexion>
       </form>
-      <Modal isOpen={false}></Modal>
+      <Modal isOpen={showModalForgotten} closeModal={toogleModalForgotten}>
+        <ModalForgottenPasswordView closeModal={toogleModalForgotten} />
+      </Modal>
     </>
   );
 };
