@@ -3,6 +3,10 @@ import styled from "styled-components";
 import userImg from "../../ressources/img/user.jpg";
 import AlertError from "../../components/Shared/Alert/AlertError";
 import AlertSuccess from "../../components/Shared/Alert/AlertSuccess";
+import ShowpasswordBtn from "../../components/Shared/Input/ShowpasswordBtn";
+
+const colorDefault = "rgba(255, 255, 255, 0.3)";
+const errorColor = "var(--red)";
 
 export const Container = styled.div`
   width: 100%;
@@ -128,6 +132,11 @@ export const FormContainer = styled.div`
   }
 `;
 
+export const InputPasswordContainer = styled.div`
+  position: relative;
+  height: fit-content;
+`;
+
 export const FormMatricule = styled.div`
   min-width: 80px;
   margin-bottom: 1.5rem;
@@ -209,4 +218,16 @@ export const CustomAlertSuccess = styled(AlertSuccess)`
 export const CustomAlertError = styled(AlertError)`
   min-height: 35px;
   align-items: center;
+`;
+
+export const ShowpasswordToggle = styled(ShowpasswordBtn)`
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: ${colorDefault};
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;

@@ -1,5 +1,5 @@
 import { Formik, useFormik } from "formik";
-import React, { useReducer } from "react";
+import React, { useReducer, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { editAccount } from "../../redux/actions/Authentication.action";
 import { sleep } from "../../utils/timer";
@@ -16,12 +16,15 @@ import {
   FormRow,
   HeaderContainer,
   InfoAgent,
+  InputPasswordContainer,
   Photo,
   ResultMessage,
+  ShowpasswordToggle,
   SubmitButton,
 } from "./Compte.styled";
 import Loading from "./Loading";
 import { updatePassword } from "./function";
+import { useEffect } from "react";
 
 const FormUserPassword = ({ idUser }) => {
   const dispatch = useDispatch();
@@ -31,6 +34,9 @@ const FormUserPassword = ({ idUser }) => {
     message: "",
     error: false,
   });
+
+  const inputPassRef = useRef(null);
+  const inputConfirmPassRef = useRef(null);
 
   const closeAlert = () => {
     return stepDispatch({ type: IDLE, payload: null });
@@ -76,27 +82,41 @@ const FormUserPassword = ({ idUser }) => {
         {" "}
         <FormContainer>
           <label htmlFor="password">Nouveau mot de passe </label>
-          <Input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Nouveau mot de passe "
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
+          <InputPasswordContainer>
+            <Input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Nouveau mot de passe "
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              inputRef={inputPassRef}
+            />
+            <ShowpasswordToggle
+              className="password-icon"
+              inputRefElement={inputPassRef}
+            />
+          </InputPasswordContainer>
         </FormContainer>{" "}
       </FormRow>
       <FormRow>
         <FormMatricule>
           <label htmlFor="matricule">Confirmer votre mot de passe: </label>
-          <Input
-            id="confirm"
-            name="confirm"
-            placeholder="Confirmer votre mot de passe"
-            type="password"
-            value={formik.values.confirm}
-            onChange={formik.handleChange}
-          />
+          <InputPasswordContainer>
+            <Input
+              id="confirm"
+              name="confirm"
+              placeholder="Confirmer votre mot de passe"
+              type="password"
+              value={formik.values.confirm}
+              onChange={formik.handleChange}
+              inputRef={inputConfirmPassRef}
+            />
+            <ShowpasswordToggle
+              className="password-icon"
+              inputRefElement={inputConfirmPassRef}
+            />
+          </InputPasswordContainer>
         </FormMatricule>{" "}
       </FormRow>
       {step.status != "sending" && (

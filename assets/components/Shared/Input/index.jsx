@@ -9,6 +9,7 @@ const Input = ({
   inputClass,
   inputValue,
   inputName,
+  inputRef,
   ...props
 }) => {
   return (
@@ -18,6 +19,7 @@ const Input = ({
         className={inputClass}
         value={inputValue}
         name={inputName}
+        ref={inputRef}
         {...props}
       />
     </InputWrapper>
