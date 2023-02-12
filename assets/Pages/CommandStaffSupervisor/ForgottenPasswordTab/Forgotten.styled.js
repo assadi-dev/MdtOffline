@@ -85,5 +85,6 @@ export const RowLink = styled.div`
     max-width: 75%;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
 `;
