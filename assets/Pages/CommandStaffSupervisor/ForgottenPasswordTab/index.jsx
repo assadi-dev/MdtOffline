@@ -41,7 +41,7 @@ const ForgottenPassword = () => {
             <tr>
               <th>Compte</th>
               <th>Date d'expiration</th>
-              <th>liens</th>
+              <th className="td-center">liens de reinitialisation</th>
               {IsCommandStaff() && (
                 <th className="td-center">Générer le liens</th>
               )}
