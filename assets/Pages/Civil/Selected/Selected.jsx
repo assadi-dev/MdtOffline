@@ -130,8 +130,13 @@ const CivilSelected = () => {
 
   useEffect(() => {
     if (id) {
-      dispatchCivilData(getOneCivilsAsync({ id }));
-      dispatch(getAllAgentAsync());
+      const promiseCivil = dispatchCivilData(getOneCivilsAsync({ id }));
+      const promiseAgent = dispatch(getAllAgentAsync());
+
+      return () => {
+        promiseCivil.abort();
+        promiseAgent.abort();
+      };
     }
   }, [id]);
 

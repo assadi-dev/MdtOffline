@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import backgroundImage from "../../ressources/img/backgroundConnexion.jpg";
+import ShowpasswordBtn from "../../components/Shared/Input/ShowpasswordBtn";
 
 const colorDefault = "rgba(255, 255, 255, 0.3)";
 const errorColor = "var(--red)";
@@ -90,7 +91,7 @@ export const CardConnexionBody = styled.div`
 
 export const InputContainer = styled.div`
   position: relative;
-  & span {
+  & span:first-of-type {
     display: inline-block;
     position: absolute;
     width: 20px;
@@ -124,6 +125,18 @@ export const InputContainer = styled.div`
     @media screen and (min-width: 992px) {
       min-width: 280px;
     }
+  }
+`;
+
+export const ShowpasswordToggle = styled(ShowpasswordBtn)`
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: ${colorDefault};
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 

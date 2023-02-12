@@ -8,7 +8,7 @@ export const ForgottenPasswordBody = styled.div`
   margin-top: 1.5rem;
   .isCopy {
     :after {
-      animation: 0.45s showTooltipCopy ease-in-out forwards;
+      animation: 0.3s showTooltipCopy ease-in-out forwards;
     }
     @keyframes showTooltipCopy {
       to {
@@ -31,8 +31,8 @@ export const ClipboardCopy = styled.div`
   border: 1px solid var(--color-white);
   border-radius: 5px;
   svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 20px;
   }
   cursor: pointer;
   :hover {

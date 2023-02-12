@@ -8,6 +8,7 @@ import {
   CardFooterConnexion,
   InputAnimation,
   Loadericon,
+  ShowpasswordToggle,
   TextError,
 } from "./Connexion.styled";
 import InputConnexion from "./InputConnexion";
@@ -27,11 +28,14 @@ import {
 import Cookies from "js-cookie";
 import AlertSuccess from "../../components/Shared/Alert/AlertSuccess";
 import { useerLogged } from "../../features/Authenticate/Authenticate.slice";
+import ShowpasswordBtn from "../../components/Shared/Input/ShowpasswordBtn";
+import { useRef } from "react";
 
 const SingIn = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [error, setError] = useState("");
+  const inputPasseRef = useRef();
 
   const formik = useFormik({
     initialValues: {
@@ -104,6 +108,11 @@ const SingIn = ({ processStep, dispatchStep }) => {
                 placeholder="Mot de passe"
                 onChange={formik.handleChange}
                 value={formik.values.password}
+                ref={inputPasseRef}
+              />
+              <ShowpasswordToggle
+                className="password-icon"
+                inputRefElement={inputPasseRef}
               />
             </InputConnexion>
           </InputAnimation>

@@ -46,9 +46,8 @@ export const editForgottenPasswordAsync = createAsyncThunk(
   async (payload) => {
     try {
       const { id, data } = payload;
-      //const res = await edit_ForgottenPassword(id, data);
-      console.log(data);
-      return { id, ...data };
+      const res = await edit_ForgottenPassword(id, data);
+      return res.data;
     } catch (error) {
       let message = "";
       if (error.response) {

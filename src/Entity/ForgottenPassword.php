@@ -56,7 +56,7 @@ class ForgottenPassword
     {
         $dt =  new DateTimeImmutable();
         $this->createdAt =  $dt;
-        $this->expirateAt =   $dt->add(new DateInterval("PT1H"));
+        $this->expirateAt =   $dt->add(new DateInterval("P1D"));
     } 
 
 

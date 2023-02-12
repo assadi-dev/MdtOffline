@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ButtonStyled } from "../../components/Shared/Buttons/Button.styled";
 import {
   LockIconOutLined,
@@ -9,6 +9,7 @@ import {
   CardFooterConnexion,
   InputAnimation,
   Loadericon,
+  ShowpasswordToggle,
   TextError,
 } from "./Connexion.styled";
 import InputConnexion from "./InputConnexion";
@@ -27,6 +28,7 @@ const Register = ({ processStep, dispatchStep }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [error, setError] = useState("");
+  const inputPasseRef = useRef();
 
   const validate = (values) => {
     const errors = {};
@@ -127,6 +129,10 @@ const Register = ({ processStep, dispatchStep }) => {
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
               />
+              <ShowpasswordToggle
+                className="password-icon"
+                inputRefElement={inputPasseRef}
+              />
             </InputConnexion>
 
             <TextError>
@@ -147,6 +153,7 @@ const Register = ({ processStep, dispatchStep }) => {
                 onChange={formik.handleChange}
                 value={formik.values.telephone}
                 onBlur={formik.handleBlur}
+                ref={inputPasseRef}
               />
             </InputConnexion>
 

@@ -9,7 +9,7 @@ export const add_ForgottenPassword = (data) => {
 };
 
 export const edit_ForgottenPassword = (id, data) => {
-  return Api.get(`/forgotten_passwords/${id}`, data);
+  return Api.put(`/forgotten_passwords/${id}`, data);
 };
 
 export const delete_ForgottenPassword = (id) => {

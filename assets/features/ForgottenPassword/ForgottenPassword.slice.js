@@ -33,7 +33,7 @@ const ForgottenPasswordSlice = createSlice({
       const { payload } = action;
       let updateCollection = state.collections.map((password) => {
         if (password.id == payload.id) {
-          return { ...password, ...payload };
+          return { ...payload };
         }
         return password;
       });

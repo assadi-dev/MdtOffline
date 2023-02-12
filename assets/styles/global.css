@@ -72,3 +72,12 @@ html {
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
+
+.password-icon {
+    position: absolute;
+    right: 0;
+    right: 1.3rem;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+}

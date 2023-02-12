@@ -1,9 +1,12 @@
 import { useEffect, useRef } from "react";
 
 const useTimeout = (callback, delay) => {
+  const savedCallback = useRef(callback);
   useEffect(() => {
     savedCallback.current = callback;
-  }, [callback]).useEffect(() => {
+  }, [callback]);
+
+  useEffect(() => {
     const tick = () => {
       savedCallback.current();
     };
