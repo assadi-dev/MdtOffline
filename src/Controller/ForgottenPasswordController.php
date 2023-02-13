@@ -59,15 +59,18 @@ class ForgottenPasswordController extends AbstractController
 
        $payload =get_object_vars($decode);
        $userId = $payload["userId"];
+     
 
        $user = $this->userRepository->findOneBy(["id"=>$userId]);
-       if(empty( $user)){
+
+       if(empty($user)){
         throw new Exception("Demande introuvable veuillez renouveller votre demande");
 
        }
 
-        $forgottenPass = $this->forgottenPasswordRepository->findOneBy(["userId"=>$userId]) ;
-        if(empty( $forgottenPas)){
+        $forgottenPass = $this->forgottenPasswordRepository->findOneBy(["userId"=>$userId]);
+   
+        if(empty($forgottenPass)){
           throw new Exception("Demande introuvable veuillez renouveller votre demande");
   
          }
@@ -84,11 +87,6 @@ class ForgottenPasswordController extends AbstractController
       $this->entityManager->remove($forgottenPass);
       $this->entityManager->flush();
     
-
-
-
-
-    // dd($user );
      $message = "Votre mot de passe à bien été mise à jour";
      $response = new Response();
      $response->setStatusCode(201);
