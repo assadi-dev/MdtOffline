@@ -10,6 +10,7 @@ const Input = ({
   inputValue,
   inputName,
   inputRef,
+  inputBlur,
   ...props
 }) => {
   return (
@@ -20,6 +21,7 @@ const Input = ({
         value={inputValue}
         name={inputName}
         ref={inputRef}
+        onBlur={inputBlur}
         {...props}
       />
     </InputWrapper>

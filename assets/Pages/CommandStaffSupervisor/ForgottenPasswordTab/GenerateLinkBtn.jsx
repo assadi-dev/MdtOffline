@@ -6,7 +6,7 @@ import { DOMAIN } from "../../../constants/localStorage";
 
 const GenerateLinkBtn = ({ id, token }) => {
   const dispatch = useDispatch();
-  const link = `${DOMAIN}/${token}`;
+  const link = `${DOMAIN}/reset-password/${token}`;
 
   const handleGenerateLink = () => {
     const payload = { id, data: { link } };
