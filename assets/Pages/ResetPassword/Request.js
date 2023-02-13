@@ -1,4 +1,5 @@
 import { AuthenticateInstance } from "../../service/Api/Api";
-export const resetpassword = (userId, password, confirm) => {
-  return AuthenticateInstance.post("/rest-password", data);
+export const resetpassword = (token, password) => {
+  const data = { token, password };
+  return AuthenticateInstance.post("/reset_password", data);
 };

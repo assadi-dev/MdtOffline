@@ -87,3 +87,28 @@ export const ErrorSection = styled.div`
     color: var(--danger-color);
   }
 `;
+
+export const ResultSection = styled.div`
+  text-align: center;
+  margin: 1.8rem auto;
+`;
+
+export const ActionResult = styled.div`
+  text-align: center;
+  margin: 8rem auto;
+  small {
+    font-style: italic;
+  }
+  :hover {
+    color: var(--color-blue-primary);
+  }
+`;
+
+export const IconResult = styled.span`
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+`;

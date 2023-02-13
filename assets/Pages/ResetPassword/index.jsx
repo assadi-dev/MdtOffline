@@ -1,26 +1,39 @@
 import React, { useState } from "react";
 import {
+  ActionResult,
   ErrorSection,
   FormBottomRow,
   FormContainer,
   FormControl,
   FormLabel,
   HeaderTitle,
+  IconResult,
   LoaderContainer,
   ResetPasswordBody,
   ResetPasswordContainer,
+  ResultSection,
   Spinner,
   SubmitButton,
 } from "./ResetPassword.styled";
 import { useFormik } from "formik";
 import Input from "../../components/Shared/Input";
+import { resetpassword } from "./Request";
+import { Link, useParams } from "react-router-dom";
+import { sleep } from "../../utils/timer";
+import {
+  CkeckErrorIconOutline,
+  CkeckValidateIconOutline,
+} from "../../components/SVG/Loader.svg";
 
 const ResetPassword = () => {
   const [state, setState] = useState({
     loading: false,
     result: "",
     step: "form",
+    status: "",
   });
+
+  const { token } = useParams();
 
   const validate = (values) => {
     const errors = {};
@@ -43,6 +56,34 @@ const ResetPassword = () => {
     return errors;
   };
 
+  const handleSubmitRequest = async (password) => {
+    try {
+      const res = await resetpassword(token, password);
+      const data = res.data;
+
+      setState((prevState) => ({
+        ...prevState,
+        loading: false,
+        step: "result",
+        result: data.message,
+        status: "success",
+      }));
+    } catch (error) {
+      let message = error.message;
+
+      if (error.response) {
+        message = error.response.data.message;
+      }
+      setState((prevState) => ({
+        ...prevState,
+        loading: false,
+        step: "result",
+        result: message,
+        status: "error",
+      }));
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -50,7 +91,9 @@ const ResetPassword = () => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      const password = values.password;
+      setState((prevState) => ({ ...prevState, loading: true }));
+      sleep(3000).then(() => handleSubmitRequest(password));
     },
   });
 
@@ -76,6 +119,7 @@ const ResetPassword = () => {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 inputBlur={formik.handleBlur}
+                type="password"
               />
               <ErrorSection>
                 {formik.errors.password && formik.touched.password && (
@@ -92,6 +136,7 @@ const ResetPassword = () => {
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
                 inputBlur={formik.handleBlur}
+                type="password"
               />
               <ErrorSection>
                 {formik.errors.confirmPassword &&
@@ -107,7 +152,22 @@ const ResetPassword = () => {
           </FormContainer>
         )}
         {!state.loading && state.step == "result" && (
-          <ResultSection>{state.result}</ResultSection>
+          <ResultSection>
+            <IconResult className="animate-check">
+              {state.status == "success" ? (
+                <CkeckValidateIconOutline />
+              ) : (
+                <CkeckErrorIconOutline />
+              )}
+            </IconResult>
+
+            <p>{state.result}</p>
+            <ActionResult>
+              <Link to={"/connexion"}>
+                <small>Retour à la page de connexion</small>
+              </Link>
+            </ActionResult>
+          </ResultSection>
         )}
       </ResetPasswordBody>
     </ResetPasswordContainer>
