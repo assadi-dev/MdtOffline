@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Exception;
+
 
 class TokenGeneratorService{
 
@@ -41,21 +43,44 @@ class TokenGeneratorService{
         return $jwt;
     }
 
-    public function decodeToken($token){
+    public function verifTocken($token){
 
 
 try {
-    $tokenParts = explode(".", $token);  
-    $tokenHeader = base64_decode($tokenParts[0]);
-    $tokenPayload = base64_decode($tokenParts[1]);
-    $jwtHeader = json_decode($tokenHeader);
-    $jwtPayload = json_decode($tokenPayload);
-    return   $jwtPayload;
+    $jwtHeader = $this->getHeaderToken($token);
+    $jwtPayload = $this->getPayloadToken($token);
+
+    //Regenerate token
+    $verifToken = $this->generateToken($jwtPayload);
+    return  $verifToken == $token;
 } catch (\Throwable $th) {
-   return "Ivalid JWT Token ";
+   return "Invalid JWT Token ";
 }
 
 
+
+    }
+
+    public function getHeaderToken($token){
+
+        $tokenParts = explode(".", $token);  
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $jwtHeader = json_decode($tokenHeader,true);
+        return  $jwtHeader;
+
+    }
+
+    public function getPayloadToken($token){
+
+        $tokenParts = explode(".", $token);  
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtPayload = json_decode($tokenPayload,true);
+        return  $jwtPayload;
+
+    }
+
+    public function rgenerateToken($header,$payload,$secret)
+    {
 
     }
 

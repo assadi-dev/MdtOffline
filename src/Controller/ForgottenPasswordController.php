@@ -51,28 +51,22 @@ class ForgottenPasswordController extends AbstractController
         $password =  $body["password"]; 
         $token =  $body["token"];
         $JWTManager = new TokenGeneratorService("mdt-secret");
-        $decode = $JWTManager->decodeToken($token);
-
-        if( is_string($decode) && str_contains($decode,"Ivalid")){
+        $decode = $JWTManager->verifTocken($token);
+        if(!$decode){
           throw new Exception("Token JWT invalid");
         }
 
-       $payload =get_object_vars($decode);
+       $payload =$JWTManager->getPayloadToken($token);
        $userId = $payload["userId"];
-     
-
        $user = $this->userRepository->findOneBy(["id"=>$userId]);
 
        if(empty($user)){
         throw new Exception("Demande introuvable veuillez renouveller votre demande");
-
        }
-
         $forgottenPass = $this->forgottenPasswordRepository->findOneBy(["userId"=>$userId]);
    
         if(empty($forgottenPass)){
           throw new Exception("Demande introuvable veuillez renouveller votre demande");
-  
          }
 
         $hashedPassword = $passwordHasher->hashPassword(
@@ -81,11 +75,11 @@ class ForgottenPasswordController extends AbstractController
       );
 
       /**Persist Data */
-      $user->setPassword( $hashedPassword);
-      $this->entityManager->persist($user);
+       $user->setPassword( $hashedPassword);
+      $this->entityManager->persist($user); 
       /**Remove ForgottenPass */
       $this->entityManager->remove($forgottenPass);
-      $this->entityManager->flush();
+      $this->entityManager->flush(); 
     
      $message = "Votre mot de passe à bien été mise à jour";
      $response = new Response();
