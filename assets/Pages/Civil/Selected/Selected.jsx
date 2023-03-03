@@ -134,8 +134,8 @@ const CivilSelected = () => {
       const promiseAgent = dispatch(getAllAgentAsync());
 
       return () => {
-        promiseCivil.abort();
-        promiseAgent.abort();
+        promiseCivil && promiseCivil.abort();
+        promiseAgent && promiseAgent.abort();
       };
     }
   }, [id]);
