@@ -10,25 +10,34 @@ import {
 import Input from "../../../../components/Shared/Input";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import Select from "../../../../components/Shared/Select";
-import { dateNowFrenchFormat } from "../../../../utils/dateFormat";
+import {
+  dateNowFrenchFormat,
+  inputDateTimeFormat,
+} from "../../../../utils/dateFormat";
 import { useSelector, useDispatch } from "react-redux";
-import { addSaisiesAsync } from "../../../../features/Saisie/SaisieAsyncApi";
+import { editSaisiesAsync } from "../../../../features/Saisie/SaisieAsyncApi";
+import useListAgent from "../../../../hooks/useListAgent";
+import { getAgentNameById } from "../../../../utils/userData";
 
-const AddFormView = ({ saisieData, onClose }) => {
+const EditFormView = ({ saisieData, onClose }) => {
   const dispatch = useDispatch();
+
+  const listAgent = useListAgent();
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   let initialValues = {
+    id: "",
     agent: `${agent.matricule}-${agent.username}`,
     depositAt: dateNowFrenchFormat(),
     poste: "Mission Row",
     depot: "",
   };
   if (saisieData != undefined) {
-    const { id, agent, depotAt, poste, depot } = saisieData;
+    const { id, idAgent, depositAt, poste, depot } = saisieData;
     initialValues = {
-      agent: agent ? agent : "",
-      depositAt: depotAt ? depotAt : "",
+      id: id ? id : "",
+      agent: idAgent ? getAgentNameById(listAgent, idAgent) : "",
+      depositAt: depositAt ? inputDateTimeFormat(depositAt) : "",
       poste: poste ? poste : "",
       depot: depot ? depot : "",
     };
@@ -39,11 +48,10 @@ const AddFormView = ({ saisieData, onClose }) => {
     initialValues,
     onSubmit: (values) => {
       const payload = {
-        idAgent: agent.id,
-        depot: values.depot,
-        poste: values.poste,
+        id: values.id,
+        data: { depot: values.depot, poste: values.poste },
       };
-      dispatch(addSaisiesAsync(payload))
+      dispatch(editSaisiesAsync(payload))
         .unwrap()
         .then((res) => {
           onClose();
@@ -61,6 +69,7 @@ const AddFormView = ({ saisieData, onClose }) => {
             placeholder="Ex: 00-Jhon Doe"
             onChange={formik.handleChange}
             value={formik.values.agent}
+            readOnly={true}
           />
         </FormControl>
 
@@ -101,11 +110,11 @@ const AddFormView = ({ saisieData, onClose }) => {
         </FormControl>
 
         <FormBottomRow>
-          <SubmitButton type="submit">Ajouter</SubmitButton>
+          <SubmitButton type="submit">Modifier</SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>
   );
 };
 
-export default AddFormView;
+export default EditFormView;

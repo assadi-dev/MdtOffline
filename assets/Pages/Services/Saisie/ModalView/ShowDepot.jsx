@@ -3,19 +3,24 @@ import {
   CloseModal,
   HeadTitleView,
   ShowDocumentWrapper,
+  TextContent,
+  TextFormat,
 } from "../../../../components/Shared/Table/Table.styled";
-import AddFormView from "./AddFormView";
 
-const AddSaisieView = ({ closeModal }) => {
+const ShowDepot = ({ title, textContent, closeModal }) => {
   return (
     <ShowDocumentWrapper>
       <HeadTitleView>
-        <h2 className="titleView">Ajouter une saisie</h2>
+        {title && <h2 className="titleView">{title}</h2>}
         <CloseModal className="closeBtn" onClick={closeModal} />
       </HeadTitleView>
-      <AddFormView onClose={closeModal} />
+      <TextContent>
+        <TextFormat>
+          <p>{textContent}</p>
+        </TextFormat>
+      </TextContent>
     </ShowDocumentWrapper>
   );
 };
 
-export default AddSaisieView;
+export default ShowDepot;

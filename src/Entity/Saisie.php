@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\SaisieRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SaisieRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ORM\Entity(repositoryClass=SaisieRepository::class)
+ * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')")
+ * @ApiFilter(OrderFilter::class, properties= {"createdAt":"DESC"})
  */
 class Saisie
 {

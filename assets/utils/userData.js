@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import { COMMAND_STAFF_ACCESS } from "../constants/acces";
 import { TOKEN_STORAGE_NAME } from "../constants/localStorage";
+import { sleep } from "./timer";
 
 export const getUserRole = (role) => {
   if (Array.isArray(role)) {
@@ -27,7 +28,9 @@ export const getAgentNameById = (listOfAgents, id) => {
       }
       return "Cet agent n'est plus dans l'effectif";
     } else {
-      return "Cet agent n'est plus dans l'effectif";
+      sleep(3000).then(() => {
+        return "Cet agent n'est plus dans l'effectif";
+      });
     }
   }
 };

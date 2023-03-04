@@ -24,13 +24,13 @@ const useTabAction = (modalState, dispatchModalState) => {
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
 
-  const handleDelete = (id, raison) => {
-    let payload = { view: "delete-saisie", data: { id, raison } };
+  const handleDelete = (id, depot) => {
+    let payload = { view: "delete-saisie", data: { id, depot } };
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
 
-  const handleShowDepot = (raison) => {
-    let payload = { view: "show-depot", data: raison };
+  const handleShowDepot = (depot) => {
+    let payload = { view: "show-depot", data: depot };
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
 
