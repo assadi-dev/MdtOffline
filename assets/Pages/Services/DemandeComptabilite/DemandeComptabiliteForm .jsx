@@ -9,6 +9,7 @@ import InputTextArea from "../../../components/Shared/InputTextArea";
 import AlertError from "../../../components/Shared/Alert/AlertError";
 import AlertSuccess from "../../../components/Shared/Alert/AlertSuccess";
 import { sleep } from "../../../utils/timer";
+import { addDemandeComptabiliteAsync } from "../../../features/DemandeComptabilite/DemandeComptabiliteAsyncApi";
 
 const DemandeComptabiliteForm = () => {
   const agent = useSelector((state) => state.AuthenticateReducer);
@@ -23,7 +24,7 @@ const DemandeComptabiliteForm = () => {
   const initialValues = {
     agent: `${agent.matricule}-${agent.username}`,
     date: dateNowFrenchFormat(),
-    montant: "0$",
+    montant: "",
     raison: "",
   };
 
@@ -40,22 +41,38 @@ const DemandeComptabiliteForm = () => {
     enableReinitialize: true,
     initialValues,
     onSubmit: (values) => {
-      console.log(values);
       resetState();
       if (values.montant && values.raison) {
-        setAlertState((current) => ({
-          ...current,
-          success: "votre demande à bien été reçus",
-          show: true,
-        }));
-        formik.handleReset();
-        sleep(5000).then(() => {
-          resetState();
-        });
+        const payload = {
+          idAgent: agent.id,
+          montant: values.montant,
+          raison: values.raison,
+        };
+
+        dispatch(addDemandeComptabiliteAsync(payload))
+          .unwrap()
+          .then(() => {
+            setAlertState((current) => ({
+              ...current,
+              success: "votre demande à bien été reçus",
+              show: true,
+            }));
+            formik.handleReset();
+            sleep(5000).then(() => {
+              resetState();
+            });
+          })
+          .catch((error) => {
+            setAlertState((current) => ({
+              ...current,
+              error: error.message,
+              show: true,
+            }));
+          });
       } else {
         setAlertState((current) => ({
           ...current,
-          error: "Tout les champs doivent etre remplis",
+          error: "Tout les champs doivent être remplie",
           show: true,
         }));
       }
