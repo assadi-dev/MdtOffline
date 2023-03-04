@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderRapportIncident = styled.div`
+export const HeaderDemandeComptabilite = styled.div`
   width: 100%;
   text-align: center;
   margin-bottom: 2.5rem;
@@ -8,20 +8,22 @@ export const HeaderRapportIncident = styled.div`
   font-weight: normal;
   font-size: 1.3rem;
   @media screen and (min-width: 992px) {
-    font-size: 2rem;
+    font-size: 2.3rem;
+    margin-bottom: 4.8rem;
   }
 `;
 
 export const WrapperContent = styled.div`
   width: 100%;
-
+  padding-top: 5rem;
   @media screen and (min-width: 992px) {
+    padding-top: 10rem;
     max-width: 960px;
     margin: 10px auto;
   }
 `;
 
-export const RapportIncidentFormContent = styled.form`
+export const DemandeComptabiliteFormContent = styled.form`
   padding: 35px 22px;
   color: #fff;
   border: 1px solid var(--color-blue-primary);

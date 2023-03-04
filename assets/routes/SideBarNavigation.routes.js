@@ -67,14 +67,6 @@ export default [
         submenu: [],
       },
       {
-        path: "/feuille-de-calcul",
-        label: "Feuille de calcul",
-        selected: false,
-        openDropdown: false,
-        end: false,
-        submenu: [],
-      },
-      {
         path: "/demande-de-compatibilite",
         label: "Demande de comptabilité",
         selected: false,

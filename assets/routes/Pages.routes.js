@@ -31,6 +31,7 @@ import PlaintesTab from "../Pages/Services/PlaintesTab";
 import ForgottenPassword from "../Pages/CommandStaffSupervisor/ForgottenPasswordTab";
 import Saisie from "../Pages/Services/Saisie";
 import ComptabiliteHeures from "../Pages/CommandStaffSupervisor/Comptabilite";
+import DemandeComptabilite from "../Pages/Services/DemandeComptabilite";
 
 export default [
   {
@@ -63,6 +64,13 @@ export default [
         label: "Services",
         path: "plaintes",
         element: <PlaintesTab />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Demande de comptabilité",
+        path: "demande-de-compatibilite",
+        element: <DemandeComptabilite />,
         index: false,
         subNavigation: [],
       },
