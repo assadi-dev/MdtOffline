@@ -151,3 +151,9 @@ export const inputDateTimeFormat = (date) => {
   const result = format(dt, "yyyy-MM-dd HH:mm", { locale: fr });
   return result;
 };
+
+export const dateNowFrenchFormat = () => {
+  const dt = new Date();
+  const result = format(dt, "yyyy-MM-dd HH:mm", { locale: fr });
+  return result;
+};

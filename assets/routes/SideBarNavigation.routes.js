@@ -136,8 +136,15 @@ export default [
         end: false,
       },
       {
-        path: "/comptabilites",
-        label: "Comptabilités",
+        path: "/comptabilites-prise-de-services",
+        label: "Comptabilités - Prise de services",
+        selected: false,
+        openDropdown: false,
+        submenu: [],
+      },
+      {
+        path: "/comptabilites-sercices",
+        label: "Comptabilités - Services",
         selected: false,
         openDropdown: false,
         submenu: [],

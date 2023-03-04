@@ -17,10 +17,30 @@ export const HeaderPageRowAction = styled.div`
   height: 80px;
   align-items: center;
   width: 90%;
-  margin: 1rem auto;
+  margin: 3rem auto;
 
   .addBtn {
     justify-self: end;
+  }
+`;
+
+export const Button = styled.button`
+  background-color: #2b7de9;
+  padding: 15px 22px;
+  min-width: fit-content;
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  font-family: var(--font-title);
+  :active {
+    opacity: 0.5;
+  }
+  :disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;
 

@@ -25,7 +25,7 @@ import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
 import { getAllGradesAsync } from "../../../features/Grades/GradeAsyncApi";
 import { updateisPaidService } from "../../../features/Agents/AgentApi";
 
-const Comptabilite = () => {
+const ComptabiliteHeures = () => {
   const dispatch = useDispatch();
   const AgentsSelector = useSelector((state) => state.AgentsReducer);
   const [week, setWeek] = useState(parseInt(getCurrentWeekNumber()));
@@ -146,4 +146,4 @@ const Comptabilite = () => {
   );
 };
 
-export default Comptabilite;
+export default ComptabiliteHeures;

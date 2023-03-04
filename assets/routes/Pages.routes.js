@@ -29,6 +29,8 @@ import RapportIncidentTab from "../Pages/CommandStaffSupervisor/RapportIncidentT
 import RapportRookieTab from "../Pages/PoliceAcademy/RapportRookie";
 import PlaintesTab from "../Pages/Services/PlaintesTab";
 import ForgottenPassword from "../Pages/CommandStaffSupervisor/ForgottenPasswordTab";
+import Saisie from "../Pages/Services/Saisie";
+import ComptabiliteHeures from "../Pages/CommandStaffSupervisor/Comptabilite";
 
 export default [
   {
@@ -47,6 +49,13 @@ export default [
         label: "Services",
         path: "feuilles-d-heures",
         element: <Services />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Services",
+        path: "saisies",
+        element: <Saisie />,
         index: false,
         subNavigation: [],
       },
@@ -173,9 +182,9 @@ export default [
         subNavigation: [],
       },
       {
-        label: "Comptabilités",
-        path: "comptabilites",
-        element: <Comptabilite />,
+        label: "Comptabilités - Prise de service",
+        path: "comptabilites-prise-de-services",
+        element: <ComptabiliteHeures />,
         index: false,
         subNavigation: [],
       },
