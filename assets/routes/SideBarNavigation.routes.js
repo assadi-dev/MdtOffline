@@ -101,33 +101,6 @@ export default [
     submenu: [],
     allowed: EFFECTIF_ACCESS,
   },
-
-  {
-    path: "senior-lead-officier",
-    label: "Senior Lead Officier",
-    selected: false,
-    openDropdown: false,
-    end: false,
-    allowed: SUPERVISOR_ACCESS,
-    submenu: [
-      {
-        path: "/outil-slo",
-        label: "Outil SLO",
-        selected: false,
-        openDropdown: false,
-        end: false,
-        submenu: [],
-      },
-      {
-        path: "/avis-senior-leading-officier",
-        label: "Avis Senior Leading Officier",
-        selected: false,
-        openDropdown: false,
-        end: false,
-        submenu: [],
-      },
-    ],
-  },
   {
     path: "police-academy",
     label: "Police Academy",
@@ -180,14 +153,6 @@ export default [
       {
         path: "/gestion-des-comptes",
         label: "Gestion des comptes",
-        selected: false,
-        openDropdown: false,
-        end: false,
-        submenu: [],
-      },
-      {
-        path: "/avis-promotions",
-        label: "Avis promotions",
         selected: false,
         openDropdown: false,
         end: false,
