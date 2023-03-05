@@ -10,13 +10,13 @@ import {
 import ButtonDefault from "../../../../components/Shared/Buttons/ButtonDefault";
 
 import { useDispatch } from "react-redux";
-import { deleteSaisieAsync } from "../../../../features/Saisie/SaisieAsyncApi";
+import { deleteDemandeComptabiliteAsync } from "../../../../features/DemandeComptabilite/DemandeComptabiliteAsyncApi";
 
-const ConfirmDelete = ({ id, depot, closeModal }) => {
+const ConfirmDelete = ({ id, raison, closeModal }) => {
   const dispatch = useDispatch();
   const handleDeletePlainte = (e) => {
     e.preventDefault();
-    dispatch(deleteSaisieAsync({ id }))
+    dispatch(deleteDemandeComptabiliteAsync({ id }))
       .unwrap()
       .then(() => {
         closeModal();
@@ -33,7 +33,7 @@ const ConfirmDelete = ({ id, depot, closeModal }) => {
         <TextContent>
           <TextFormat>
             {" "}
-            <p>{depot}</p>
+            <p>{raison}</p>
           </TextFormat>
         </TextContent>
         <ActionRowbtn>

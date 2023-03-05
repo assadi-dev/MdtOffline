@@ -19,8 +19,8 @@ const useTabAction = (modalState, dispatchModalState) => {
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
 
-  const handleDelete = (id, depot) => {
-    let payload = { view: "delete-demande", data: { id, depot } };
+  const handleDelete = (id, raison) => {
+    let payload = { view: "delete-demande", data: { id, raison } };
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
 

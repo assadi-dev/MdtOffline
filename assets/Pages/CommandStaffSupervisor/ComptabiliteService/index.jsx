@@ -31,6 +31,7 @@ import EmptyRow from "../../../components/Shared/Table/EmptyRow";
 import useTabAction from "./Hooks/useTabAction";
 import ShowRaison from "./ModalView/ShowRaison";
 import EditDemandView from "./ModalView/EditDemandView";
+import ConfirmDelete from "./ModalView/ConfirmDelete";
 
 const ComptabiliteServices = () => {
   const dispatch = useDispatch();
@@ -85,14 +86,11 @@ const ComptabiliteServices = () => {
           />
         );
 
-      case "add-sdemande":
-        return <AddSaisieView closeModal={actionTabBtn.closeModal} />;
-
-      case "delete-saisie":
+      case "delete-demande":
         return (
           <ConfirmDelete
             id={modalState.data.id}
-            depot={modalState.data.depot}
+            raison={modalState.data.raison}
             closeModal={actionTabBtn.closeModal}
           />
         );
