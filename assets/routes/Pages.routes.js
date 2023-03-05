@@ -24,14 +24,13 @@ import {
   DOJ_ACCESS,
   POLICE_ACADEMY_ACCESS,
 } from "../constants/acces";
-import Comptabilite from "../Pages/CommandStaffSupervisor/Comptabilite";
 import RapportIncidentTab from "../Pages/CommandStaffSupervisor/RapportIncidentTab";
 import RapportRookieTab from "../Pages/PoliceAcademy/RapportRookie";
 import PlaintesTab from "../Pages/Services/PlaintesTab";
 import ForgottenPassword from "../Pages/CommandStaffSupervisor/ForgottenPasswordTab";
 import Saisie from "../Pages/Services/Saisie";
-import ComptabiliteHeures from "../Pages/CommandStaffSupervisor/Comptabilite";
 import DemandeComptabilite from "../Pages/Services/DemandeComptabilite";
+import ComptabilitePriseDeService from "../Pages/CommandStaffSupervisor/ComptabilitePriseDeService";
 
 export default [
   {
@@ -192,7 +191,7 @@ export default [
       {
         label: "Comptabilités - Prise de service",
         path: "comptabilites-prise-de-services",
-        element: <ComptabiliteHeures />,
+        element: <ComptabilitePriseDeService />,
         index: false,
         subNavigation: [],
       },
