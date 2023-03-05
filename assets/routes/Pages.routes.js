@@ -31,6 +31,7 @@ import ForgottenPassword from "../Pages/CommandStaffSupervisor/ForgottenPassword
 import Saisie from "../Pages/Services/Saisie";
 import DemandeComptabilite from "../Pages/Services/DemandeComptabilite";
 import ComptabilitePriseDeService from "../Pages/CommandStaffSupervisor/ComptabilitePriseDeService";
+import ComptabiliteServices from "../Pages/CommandStaffSupervisor/ComptabiliteService";
 
 export default [
   {
@@ -192,6 +193,13 @@ export default [
         label: "Comptabilités - Prise de service",
         path: "comptabilites-prise-de-services",
         element: <ComptabilitePriseDeService />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Comptabilités - Service",
+        path: "comptabilites-sercices",
+        element: <ComptabiliteServices />,
         index: false,
         subNavigation: [],
       },
