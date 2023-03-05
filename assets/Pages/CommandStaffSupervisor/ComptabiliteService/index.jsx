@@ -9,16 +9,28 @@ import {
   ShowDocumentBtn,
 } from "./Comptabilite.styled";
 import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
-import { getAllDemandeComptabiliteAsync } from "../../../features/DemandeComptabilite/DemandeComptabiliteAsyncApi";
-import { getAgentNameById } from "../../../utils/userData";
+import {
+  getAllDemandeComptabiliteAsync,
+  getOneDemandeComptabiliteAsync,
+} from "../../../features/DemandeComptabilite/DemandeComptabiliteAsyncApi";
+import { IsCommandStaff, getAgentNameById } from "../../../utils/userData";
 import useListAgent from "../../../hooks/useListAgent";
 import ModalStateReducer from "./reducer/ModalStateReducer";
-import { Table } from "../../../components/Shared/Table/Table.styled";
-import { SearchDocumentIcon } from "../../../components/SVG";
+import {
+  OutlineBtnAction,
+  Table,
+  TableAction,
+} from "../../../components/Shared/Table/Table.styled";
+import {
+  EditPencilIcon,
+  SearchDocumentIcon,
+  TrashIcon,
+} from "../../../components/SVG";
 import Modal from "../../../components/Shared/Modal";
 import EmptyRow from "../../../components/Shared/Table/EmptyRow";
 import useTabAction from "./Hooks/useTabAction";
 import ShowRaison from "./ModalView/ShowRaison";
+import EditDemandView from "./ModalView/EditDemandView";
 
 const ComptabiliteServices = () => {
   const dispatch = useDispatch();
@@ -57,6 +69,11 @@ const ComptabiliteServices = () => {
     return [];
   }, [collections]);
 
+  const editDemand = (id) => {
+    dispatch(getOneDemandeComptabiliteAsync({ id }));
+    actionTabBtn.handleEdit(id);
+  };
+
   const Render = ({ view }) => {
     switch (view) {
       case "show-raison":
@@ -82,7 +99,7 @@ const ComptabiliteServices = () => {
 
       case "edit-demande":
         return (
-          <EditSaisieView
+          <EditDemandView
             closeModal={actionTabBtn.closeModal}
             id={modalState.data.id}
           />
@@ -104,6 +121,7 @@ const ComptabiliteServices = () => {
               <th className="td-center">Date de la demande</th>
               <th className="td-center">Raison</th>
               <th className="td-center">Montant</th>
+              {IsCommandStaff() && <th className="td-center">Action</th>}
             </tr>
           </thead>
           {status == "complete" && (
@@ -126,6 +144,31 @@ const ComptabiliteServices = () => {
                       </ShowDocumentBtn>
                     </td>
                     <td className="td-center">{demande.montant}</td>
+                    {IsCommandStaff && (
+                      <td>
+                        <TableAction>
+                          <OutlineBtnAction
+                            className="edit"
+                            onClick={() => {
+                              editDemand(demande.id);
+                            }}
+                          >
+                            <EditPencilIcon />
+                          </OutlineBtnAction>
+                          <OutlineBtnAction
+                            className="delete"
+                            onClick={() =>
+                              actionTabBtn.handleDelete(
+                                demande.id,
+                                demande.raison
+                              )
+                            }
+                          >
+                            <TrashIcon />
+                          </OutlineBtnAction>
+                        </TableAction>
+                      </td>
+                    )}
                   </tr>
                 ))
               ) : (

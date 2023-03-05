@@ -1,15 +1,6 @@
 import { useFormik } from "formik";
-import React from "react";
-import {
-  FormBodyContainer,
-  FormBottomRow,
-  FormControl,
-  FormLabel,
-  SubmitButton,
-} from "../../Service.styled";
-import Input from "../../../../components/Shared/Input";
-import InputTextArea from "../../../../components/Shared/InputTextArea";
-import Select from "../../../../components/Shared/Select";
+import React, { useState } from "react";
+
 import {
   dateNowFrenchFormat,
   inputDateTimeFormat,
@@ -18,44 +9,88 @@ import { useSelector, useDispatch } from "react-redux";
 import { editSaisiesAsync } from "../../../../features/Saisie/SaisieAsyncApi";
 import useListAgent from "../../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../../utils/userData";
+import {
+  FormBodyContainer,
+  FormControl,
+  FormLabel,
+  SubmitButton,
+} from "../Comptabilite.styled";
+import Input from "../../../../components/Shared/Input";
+import { editDemandeComptabiliteAsync } from "../../../../features/DemandeComptabilite/DemandeComptabiliteAsyncApi";
+import InputTextArea from "../../../../components/Shared/InputTextArea";
+import AlertError from "../../../../components/Shared/Alert/AlertError";
+import AlertSuccess from "../../../../components/Shared/Alert/AlertSuccess";
 
-const EditFormView = ({ saisieData, onClose }) => {
+const EditFormView = ({ demandeData, onClose }) => {
   const dispatch = useDispatch();
-
   const listAgent = useListAgent();
 
-  const agent = useSelector((state) => state.AuthenticateReducer);
-  let initialValues = {
-    id: "",
-    agent: `${agent.matricule}-${agent.username}`,
-    depositAt: dateNowFrenchFormat(),
-    poste: "Mission Row",
-    depot: "",
+  const { id, idAgent, raison, montant, date } = demandeData;
+
+  const [alertState, setAlertState] = useState({
+    success: "",
+    error: "",
+    show: false,
+  });
+
+  const initialValues = {
+    agent: idAgent ? getAgentNameById(listAgent, idAgent) : "",
+    date: date ? inputDateTimeFormat(date) : "",
+    montant: montant ? montant : "",
+    raison: raison ? raison : "",
   };
-  if (saisieData != undefined) {
-    const { id, idAgent, depositAt, poste, depot } = saisieData;
-    initialValues = {
-      id: id ? id : "",
-      agent: idAgent ? getAgentNameById(listAgent, idAgent) : "",
-      depositAt: depositAt ? inputDateTimeFormat(depositAt) : "",
-      poste: poste ? poste : "",
-      depot: depot ? depot : "",
-    };
-  }
+
+  const resetState = () => {
+    setAlertState((current) => ({
+      ...current,
+      error: "",
+      success: "",
+      show: false,
+    }));
+  };
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
     onSubmit: (values) => {
-      const payload = {
-        id: values.id,
-        data: { depot: values.depot, poste: values.poste },
-      };
-      dispatch(editSaisiesAsync(payload))
-        .unwrap()
-        .then((res) => {
-          onClose();
-        });
+      resetState();
+      if (values.montant && values.raison) {
+        const payload = {
+          id: id,
+          data: {
+            montant: values.montant,
+            raison: values.raison,
+          },
+        };
+
+        dispatch(editDemandeComptabiliteAsync(payload))
+          .unwrap()
+          .then(() => {
+            setAlertState((current) => ({
+              ...current,
+              success: "votre demande à bien été mise à jour",
+              show: true,
+            }));
+            formik.handleReset();
+            sleep(1000).then(() => {
+              resetState();
+              onClose();
+            });
+          })
+          .catch((error) => {
+            setAlertState((current) => ({
+              ...current,
+              error: error.message,
+              show: true,
+            }));
+          });
+      } else {
+        setAlertState((current) => ({
+          ...current,
+          error: "Tout les champs doivent être remplie",
+          show: true,
+        }));
+      }
     },
   });
 
@@ -63,7 +98,7 @@ const EditFormView = ({ saisieData, onClose }) => {
     <form onSubmit={formik.handleSubmit}>
       <FormBodyContainer>
         <FormControl>
-          <FormLabel>Agent</FormLabel>
+          <FormLabel>Agent:</FormLabel>
           <Input
             inputName={"agent"}
             placeholder="Ex: 00-Jhon Doe"
@@ -72,46 +107,46 @@ const EditFormView = ({ saisieData, onClose }) => {
             readOnly={true}
           />
         </FormControl>
-
         <FormControl>
           <FormLabel>Date et heure:</FormLabel>
           <Input
-            inputName={"depositAt"}
-            placeholder="04-03-2023 17:15"
+            inputName={"date"}
+            placeholder="Ex: 00-Jhon Doe"
             onChange={formik.handleChange}
-            value={formik.values.depositAt}
+            value={formik.values.date}
             readOnly={true}
           />
         </FormControl>
-
         <FormControl>
-          <FormLabel>Poste :</FormLabel>
-          <Select
+          <FormLabel>Montant:</FormLabel>
+          <Input
+            inputName={"montant"}
+            placeholder="10 000$"
             onChange={formik.handleChange}
-            inputName={"poste"}
-            value={formik.values.poste}
-          >
-            <option value={"Mission Row"}>Mission Row</option>
-            <option value={"Vespucci"}>Vespucci</option>
-            <option value={"Paleto Bay"}>Paleto Bay</option>
-            <option value={"Sandy Shores"}>Sandy Shores</option>
-          </Select>
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>Dépôt:</FormLabel>
-          <InputTextArea
-            rows={3}
-            placeholder="depot"
-            name="depot"
-            value={formik.values.depot}
-            onChange={formik.handleChange}
+            value={formik.values.montant}
           />
         </FormControl>
-
-        <FormBottomRow>
-          <SubmitButton type="submit">Modifier</SubmitButton>
-        </FormBottomRow>
+        <FormControl>
+          <FormLabel>Raison:</FormLabel>
+          <InputTextArea
+            inputName={"raison"}
+            placeholder=""
+            onChange={formik.handleChange}
+            value={formik.values.raison}
+            rows={4}
+          />
+        </FormControl>
+        <FormControl>
+          {alertState.show && alertState.error && (
+            <AlertError message={alertState.error} />
+          )}
+          {alertState.show && alertState.success && (
+            <AlertSuccess message={alertState.success} />
+          )}
+        </FormControl>
+        <FormControl>
+          <SubmitButton>Mettre à jour</SubmitButton>
+        </FormControl>
       </FormBodyContainer>
     </form>
   );
