@@ -18,12 +18,10 @@ const useTabAction = (modalState, dispatchModalState) => {
     let payload = { view: "edit-demande", data: { id } };
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
-
   const handleDelete = (id, raison) => {
     let payload = { view: "delete-demande", data: { id, raison } };
     dispatchModalState({ type: "TOOGLE_MODAL", payload });
   };
-
   const handleShowRaison = (raison) => {
     let payload = { view: "show-raison", data: raison };
     dispatchModalState({ type: "TOOGLE_MODAL", payload });

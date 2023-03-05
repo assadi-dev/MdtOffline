@@ -13,6 +13,7 @@ import Select from "../../../../components/Shared/Select";
 import { dateNowFrenchFormat } from "../../../../utils/dateFormat";
 import { useSelector, useDispatch } from "react-redux";
 import { addSaisiesAsync } from "../../../../features/Saisie/SaisieAsyncApi";
+import { sendSaisieToDiscord } from "./sendDiscord";
 
 const AddFormView = ({ saisieData, onClose }) => {
   const dispatch = useDispatch();
@@ -43,9 +44,16 @@ const AddFormView = ({ saisieData, onClose }) => {
         depot: values.depot,
         poste: values.poste,
       };
+
       dispatch(addSaisiesAsync(payload))
         .unwrap()
         .then((res) => {
+          const payload = {
+            agent: values.agent,
+            depot: values.depot,
+            poste: values.poste,
+          };
+          sendSaisieToDiscord(payload);
           onClose();
         });
     },
@@ -90,7 +98,7 @@ const AddFormView = ({ saisieData, onClose }) => {
         </FormControl>
 
         <FormControl>
-          <FormLabel>Dépôt:</FormLabel>
+          <FormLabel>Objets saisie:</FormLabel>
           <InputTextArea
             rows={3}
             placeholder="depot"

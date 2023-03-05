@@ -99,7 +99,7 @@ const EditFormView = ({ saisieData, onClose }) => {
         </FormControl>
 
         <FormControl>
-          <FormLabel>Dépôt:</FormLabel>
+          <FormLabel>Objets saisie:</FormLabel>
           <InputTextArea
             rows={3}
             placeholder="depot"
