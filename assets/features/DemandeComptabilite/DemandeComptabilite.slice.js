@@ -59,11 +59,12 @@ export const DemandeComptabiliteSlice = createSlice({
         const { payload } = action;
         let updateDemandCollections = state.collections.map((demand) => {
           if (demand.id == payload.id) {
-            return { ...payload.data };
+            return { ...payload };
           }
           return demand;
         });
         state.collections = updateDemandCollections;
+        state.selected = payload;
       })
       .addCase(editDemandeComptabiliteAsync.rejected, (state, action) => {
         const { error } = action;

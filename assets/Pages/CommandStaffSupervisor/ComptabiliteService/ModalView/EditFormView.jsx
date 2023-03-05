@@ -66,16 +66,7 @@ const EditFormView = ({ demandeData, onClose }) => {
         dispatch(editDemandeComptabiliteAsync(payload))
           .unwrap()
           .then(() => {
-            setAlertState((current) => ({
-              ...current,
-              success: "votre demande à bien été mise à jour",
-              show: true,
-            }));
-            formik.handleReset();
-            sleep(1000).then(() => {
-              resetState();
-              onClose();
-            });
+            onClose();
           })
           .catch((error) => {
             setAlertState((current) => ({

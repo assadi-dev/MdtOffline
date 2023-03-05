@@ -8,7 +8,7 @@ import {
   ShowDocumentWrapper,
 } from "../../../../components/Shared/Table/Table.styled";
 
-const EditDemandView = ({ id, closeModal }) => {
+const EditDemandView = ({ closeModal }) => {
   const dispatch = useDispatch();
   const { selected, status, error } = useSelector(
     (state) => state.DemandeComptabiliteReducer

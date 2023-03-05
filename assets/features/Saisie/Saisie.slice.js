@@ -56,6 +56,7 @@ const SaisieSlice = createSlice({
         });
 
         state.collections = updateCollections;
+        state.selected = payload;
       })
       .addCase(editSaisiesAsync.rejected, (state, action) => {
         const { error } = action;

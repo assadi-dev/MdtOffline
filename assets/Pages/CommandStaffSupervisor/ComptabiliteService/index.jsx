@@ -98,12 +98,7 @@ const ComptabiliteServices = () => {
         );
 
       case "edit-demande":
-        return (
-          <EditDemandView
-            closeModal={actionTabBtn.closeModal}
-            id={modalState.data.id}
-          />
-        );
+        return <EditDemandView closeModal={actionTabBtn.closeModal} />;
 
       default:
         return null;
