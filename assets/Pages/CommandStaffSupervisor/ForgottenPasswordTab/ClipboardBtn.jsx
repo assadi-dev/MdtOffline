@@ -8,7 +8,11 @@ const ClipboardBtn = ({ textToCopy }) => {
   const [showCopyBoard, setShowCopyBoard] = useState(false);
 
   const handleCopyText = (text) => {
-    navigator.clipboard.writeText(text);
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText(text);
+    } else {
+      document.execCommand("copy", true, text);
+    }
     setShowCopyBoard(true);
     sleep(3000).then(() => {
       setShowCopyBoard((current) => (current = false));
