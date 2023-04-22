@@ -26,7 +26,7 @@ export const HeaderSection = styled.div`
   margin-bottom: 3.5rem;
   .title {
     @media screen and (min-width: 992px) {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       letter-spacing: 2px;
     }
   }
