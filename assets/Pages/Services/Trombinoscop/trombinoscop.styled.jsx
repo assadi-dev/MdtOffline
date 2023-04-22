@@ -89,7 +89,7 @@ export const CardDescription = styled.div`
     font-family: var(--font-special);
     font-size: 1rem;
     @media screen and (min-height: 768px) {
-      font-size: 2rem;
+      font-size: 1.8rem;
       & p {
         margin: 3rem 0;
       }
