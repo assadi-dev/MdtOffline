@@ -4,19 +4,20 @@ namespace App\Entity;
 
 use DateTime;
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\AgentRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
+use App\Controller\SearchAgentController;
 use App\Controller\UploadAgentController;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -24,6 +25,23 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @Vich\Uploadable()
  * @ApiResource(security="is_granted('IS_AUTHENTICATED_FULLY')",
  * normalizationContext={"groups"={"read:agent:collections","read:agent:item"}},
+ * collectionOperations={
+ *  "post",
+ *  "get",
+ * "search_agent"={
+ * "name"="Search_agents",
+ *  "method"="GET",
+ *  "path"="/agents/search",
+ *  "controller"=SearchAgentController::class,
+ *  "read"=false,
+ * "openapi_context" = {
+ *      "summary"="Recherche Agent",
+ *      "description" = "Retourne les resultats des agents trouvé dans la base données",
+ *       "parameters" = {{"name" = "searchTerm","in" = "query","type" = "string","required" = false, "example"= "Danny"}}
+ * }
+ *  
+ * }
+ * },
  * itemOperations={
  * "put","delete","get",
  *  "upload_photo_agent"={
@@ -37,7 +55,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * )
  * @UniqueEntity(fields="matricule", message="Ce numero matricule est déjà pris")
  * @UniqueEntity(fields="name", message="Ce Prénom et Nom est déjà pris")
- * @ApiFilter(SearchFilter::class, properties={"grade.nom" : "exact","name":"partial"})
+ * @ApiFilter(SearchFilter::class, properties={"grade.nom" : "exact","name":"partial","matricule":"partial" })
  * 
  */
 class Agent

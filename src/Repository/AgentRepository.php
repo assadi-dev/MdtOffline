@@ -63,4 +63,21 @@ class AgentRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function search($searchTerm)
+{
+    $qb =  $this->createQueryBuilder("a");
+    $qb->where($qb->expr()->like("a.name", ":searchTerm"))
+        ->leftJoin("a.grade","g")
+        ->orWhere($qb->expr()->like("a.telephone", ":searchTerm"))
+        ->orWhere($qb->expr()->like("a.matricule", ":searchTerm"))
+        ->orWhere($qb->expr()->like("g.nom", ":searchTerm"))
+        ->setParameter("searchTerm", "%$searchTerm%");
+    $result = $qb->getQuery()->getResult();
+    return $result;
+}
+
+
+
+
 }

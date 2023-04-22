@@ -68,8 +68,8 @@ export const AvatarCardItem = styled.div`
   }
   @media screen and (min-width: 1200px) {
     border-radius: 250px;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
   }
 `;
 

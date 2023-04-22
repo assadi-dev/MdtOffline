@@ -6,7 +6,11 @@ export const fetchAllAgents = (signal) => {
 };
 
 export const fetchAgentByName = (searchTerm) => {
-  return Api.get("/agents", { params: { name: searchTerm } });
+  return Api.get("/agents/search", {
+    params: {
+      searchTerm,
+    },
+  });
 };
 
 export const fetch_one = (idAgent, signal) => {
