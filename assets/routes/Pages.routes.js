@@ -33,6 +33,7 @@ import DemandeComptabilite from "../Pages/Services/DemandeComptabilite";
 import ComptabilitePriseDeService from "../Pages/CommandStaffSupervisor/ComptabilitePriseDeService";
 import ComptabiliteServices from "../Pages/CommandStaffSupervisor/ComptabiliteService";
 import Trombinoscop from "../Pages/Services/Trombinoscop";
+import Dispatch from "../Pages/Services/Dispatch";
 
 export default [
   {
@@ -79,6 +80,13 @@ export default [
         label: "Demande de comptabilité",
         path: "demande-de-compatibilite",
         element: <DemandeComptabilite />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Dispatch",
+        path: "dispatch",
+        element: <Dispatch />,
         index: false,
         subNavigation: [],
       },

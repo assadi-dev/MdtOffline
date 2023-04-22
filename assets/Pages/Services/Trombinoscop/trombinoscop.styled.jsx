@@ -2,9 +2,12 @@ import styled from "styled-components";
 import userImg from "../../../ressources/img/user.jpg";
 
 export const TrombinoscopWrapper = styled.div`
-  padding: 1.2rem 2.3rem;
+  padding: 1.2rem 0;
   padding-top: 2.8rem;
   max-width: 100%;
+  @media screen and (min-width: 992px) {
+    padding: 1.2rem 2.3rem;
+  }
 `;
 
 export const SearchBarSection = styled.form`
@@ -88,7 +91,7 @@ export const CardDescription = styled.div`
     font-weight: bold;
     font-family: var(--font-special);
     font-size: 1rem;
-    @media screen and (min-height: 768px) {
+    @media screen and (min-width: 768px) {
       font-size: 1.8rem;
       & p {
         margin: 3rem 0;
@@ -96,8 +99,8 @@ export const CardDescription = styled.div`
     }
   }
 
-  @media screen and (min-height: 768px) {
-    line-height: 5rem;
-    font-size: 2rem;
+  @media screen and (min-width: 768px) {
+    line-height: 3rem;
+    font-size: 1.4rem;
   }
 `;

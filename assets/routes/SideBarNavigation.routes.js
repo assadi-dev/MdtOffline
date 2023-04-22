@@ -43,6 +43,14 @@ export default [
     allowed: EFFECTIF_ACCESS,
     submenu: [
       {
+        path: "/dispatch",
+        label: "Dispatch",
+        selected: false,
+        openDropdown: false,
+        end: false,
+        submenu: [],
+      },
+      {
         path: "/feuilles-d-heures",
         label: "Feuilles d'heures",
         selected: false,
