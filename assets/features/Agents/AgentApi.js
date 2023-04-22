@@ -5,6 +5,10 @@ export const fetchAllAgents = (signal) => {
   return Api.get("/agents", { signal });
 };
 
+export const fetchAgentByName = (searchTerm) => {
+  return Api.get("/agents", { params: { name: searchTerm } });
+};
+
 export const fetch_one = (idAgent, signal) => {
   return Api.get(`/agents/${idAgent}`, { signal });
 };

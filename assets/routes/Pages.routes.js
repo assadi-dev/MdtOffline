@@ -32,6 +32,7 @@ import Saisie from "../Pages/Services/Saisie";
 import DemandeComptabilite from "../Pages/Services/DemandeComptabilite";
 import ComptabilitePriseDeService from "../Pages/CommandStaffSupervisor/ComptabilitePriseDeService";
 import ComptabiliteServices from "../Pages/CommandStaffSupervisor/ComptabiliteService";
+import Trombinoscop from "../Pages/Services/Trombinoscop";
 
 export default [
   {
@@ -47,16 +48,23 @@ export default [
         subNavigation: [],
       },
       {
-        label: "Services",
+        label: "Feuilles d'heures",
         path: "feuilles-d-heures",
         element: <Services />,
         index: false,
         subNavigation: [],
       },
       {
-        label: "Services",
+        label: "Saisies",
         path: "saisies",
         element: <Saisie />,
+        index: false,
+        subNavigation: [],
+      },
+      {
+        label: "Trombinoscop",
+        path: "trombinoscop",
+        element: <Trombinoscop />,
         index: false,
         subNavigation: [],
       },

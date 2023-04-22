@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   add_agent,
   edit_agent,
+  fetchAgentByName,
   fetchAllAgents,
   fetch_allRookie,
   fetch_one,
@@ -16,6 +17,25 @@ export const getAllAgentAsync = createAsyncThunk(
   async (payload, { signal }) => {
     try {
       const res = await fetchAllAgents(signal);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const getAllAgentByNameAsync = createAsyncThunk(
+  "Agent/fetchByName",
+  async (payload, { signal }) => {
+    try {
+      const res = await fetchAgentByName(payload);
+
       return res.data;
     } catch (error) {
       let message = "";
