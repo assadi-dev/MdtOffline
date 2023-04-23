@@ -6,31 +6,30 @@ import {
   DropItemContainerCard,
 } from "./Dispatch.styled";
 import DropListCard from "./components/DropListCard";
-import {
-  horsTerrain,
-  infos,
-  operationCenter,
-  secteurNord,
-  secteurSud,
-  waitingDispatch,
-} from "./initialState";
+import { dropLists } from "./initialState";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const Dispatch = () => {
+  const handleDragEnd = () => {};
+
   return (
     <DispatchWrapper>
-      <DispatchBackgroundLayout>
-        <DropContainerlistCard>
-          <DropListCard title={"Dispatch"} listslabels={waitingDispatch} />
-          <DropListCard title={"Secteur Sud"} listslabels={secteurSud} />
-          <DropListCard title={"Secteur Nord"} listslabels={secteurNord} />
-          <DropListCard title={"Hors Terrain"} listslabels={horsTerrain} />
-          <DropListCard
-            title={"Operation center"}
-            listslabels={operationCenter}
-          />
-          <DropListCard title={"Infos"} listslabels={infos} />
-        </DropContainerlistCard>
-      </DispatchBackgroundLayout>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <DispatchBackgroundLayout>
+          <DropContainerlistCard>
+            {dropLists.length > 0
+              ? dropLists.map((list) => (
+                  <DropListCard
+                    key={list.id}
+                    id={list.id}
+                    title={list.title}
+                    listslabels={list.categories}
+                  />
+                ))
+              : null}
+          </DropContainerlistCard>
+        </DispatchBackgroundLayout>
+      </DragDropContext>
     </DispatchWrapper>
   );
 };

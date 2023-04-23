@@ -62,4 +62,35 @@ export const LabeLSectionHeader = styled.div`
 export const LabeLSectionBody = styled.div`
   width: 100%;
   background: transparent;
+  padding: 0 0.3rem;
+`;
+
+export const AgentCardItemContainer = styled.div`
+  margin: 0.3rem 0;
+  width: 100%;
+`;
+export const AgentCardItemBody = styled.div`
+  border-radius: 3px;
+  padding: 1rem;
+  width: 100%;
+  background: ${({ background }) =>
+    background ? background : "var(--color-blue-dark)"};
+  color: ${({ color }) => (color ? color : "var(--text-color-primary)")};
+  font-weight: bold;
+  font-size: 1.2rem;
+`;
+
+export const AgentCardItemGrade = styled.div`
+  padding: 1rem 1.3rem;
+  width: fit-content;
+  color: #fff;
+  border-radius: 5px;
+  background-color: var(--color-blue-dark);
+`;
+
+export const AgentCardItemName = styled.p`
+  margin-top: 1rem;
+  color: var(--color-blue-dark);
+  font-weight: bold;
+  font-size: 1.4rem;
 `;
