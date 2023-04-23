@@ -11,6 +11,7 @@ import PlainteReducer from "./Plaintes/Plaintes.slice";
 import ForgottenPasswordReducer from "./ForgottenPassword/ForgottenPassword.slice";
 import SaisieReducer from "./Saisie/Saisie.slice";
 import DemandeComptabiliteReducer from "./DemandeComptabilite/DemandeComptabilite.slice";
+import DispatchReducer from "./Dispatch/Dispatch.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -27,6 +28,7 @@ const RootReducers = {
   ForgottenPasswordReducer,
   SaisieReducer,
   DemandeComptabiliteReducer,
+  DispatchReducer,
 };
 
 export default RootReducers;
