@@ -11,6 +11,7 @@ export const DispatchSlice = createSlice({
     drop: (state, action) => {
       const list = state.dropLists;
       sortDropList(list, action.payload);
+      return state;
     },
   },
   /*  extraReducers: (builders) => {

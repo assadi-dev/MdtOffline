@@ -28,8 +28,6 @@ const Dispatch = () => {
       droppableIndexEnd: destination.index,
       draggableId: draggableId,
     };
-    let copy = dropLists;
-    //sortDropList(copy, data);
 
     dispatch(drop(data));
   };

@@ -40,9 +40,7 @@ export const sortDropList = (state, results) => {
     let card = categorieStart.cards.splice(droppableIndexStart, 1);
 
     //Identifier la list et categorie de destination
-    console.log(droppableIdEnd);
     let categorieEnd = allCategories.find((cat) => droppableIdEnd == cat.id);
-
     categorieEnd.cards.splice(droppableIndexEnd, 0, ...card);
   }
 };
