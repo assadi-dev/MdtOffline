@@ -28,8 +28,8 @@ const LabeLSection = ({ lists, index }) => {
                   <AgentCardItem key={card.id} card={card} index={index} />
                 ))
               : null}
-            {provided.placeholder}
           </LabeLSectionBody>
+          {provided.placeholder}
         </LabeLSectionContainer>
       )}
     </Droppable>
