@@ -13,26 +13,29 @@ const LabeLSection = ({ lists, index }) => {
   const { id, title, cards, background, color } = lists;
 
   return (
-    <Droppable droppableId={String(id)}>
-      {(provided) => (
-        <LabeLSectionContainer
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-        >
-          <LabeLSectionHeader background={background} color={color}>
-            {title}
-          </LabeLSectionHeader>
-          <LabeLSectionBody>
-            {cards.length > 0
-              ? cards.map((card, index) => (
-                  <AgentCardItem key={card.id} card={card} index={index} />
-                ))
-              : null}
-          </LabeLSectionBody>
-          {provided.placeholder}
-        </LabeLSectionContainer>
-      )}
-    </Droppable>
+    <>
+      <LabeLSectionContainer>
+        <LabeLSectionHeader background={background} color={color}>
+          {title}
+        </LabeLSectionHeader>
+
+        <Droppable droppableId={String(id)}>
+          {(provided) => (
+            <LabeLSectionBody
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {cards.length > 0
+                ? cards.map((card, index) => (
+                    <AgentCardItem key={card.id} card={card} index={index} />
+                  ))
+                : null}
+              {provided.placeholder}
+            </LabeLSectionBody>
+          )}
+        </Droppable>
+      </LabeLSectionContainer>
+    </>
   );
 };
 

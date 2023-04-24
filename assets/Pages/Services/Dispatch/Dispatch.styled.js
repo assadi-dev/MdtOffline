@@ -63,6 +63,7 @@ export const LabeLSectionBody = styled.div`
   width: 100%;
   background: transparent;
   padding: 0 0.3rem;
+  min-height: 3px;
 `;
 
 export const AgentCardItemContainer = styled.div`
