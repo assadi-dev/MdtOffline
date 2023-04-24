@@ -1,3 +1,5 @@
+import slugify from "slugify";
+
 /**
  * Repositionne les element dans le tableau à partir de l'index en parametre
  * @param {Array} array Tableau
@@ -38,4 +40,12 @@ export const move = (
   result[droppableDestination.droppableId] = destClone;
 
   return result;
+};
+
+export const clean_name = (name) => {
+  return slugify(name, {
+    replacement: "-",
+    trim: true,
+    lower: true,
+  });
 };
