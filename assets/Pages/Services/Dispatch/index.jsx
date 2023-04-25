@@ -34,9 +34,9 @@ const Dispatch = () => {
 
   return (
     <DispatchWrapper>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <DispatchBackgroundLayout>
-          <DropContainerlistCard>
+      <DispatchBackgroundLayout>
+        <DropContainerlistCard>
+          <DragDropContext onDragEnd={handleDragEnd}>
             {dropLists.length > 0
               ? dropLists.map((list) => (
                   <DropListCard
@@ -47,9 +47,9 @@ const Dispatch = () => {
                   />
                 ))
               : null}
-          </DropContainerlistCard>
-        </DispatchBackgroundLayout>
-      </DragDropContext>
+          </DragDropContext>
+        </DropContainerlistCard>
+      </DispatchBackgroundLayout>
     </DispatchWrapper>
   );
 };

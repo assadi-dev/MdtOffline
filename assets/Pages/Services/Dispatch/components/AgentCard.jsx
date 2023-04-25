@@ -16,6 +16,7 @@ const AgentCardItem = ({ card, index }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          className="body-item-scrollable"
         >
           <AgentCardItemContainer>
             <AgentCardItemBody background={background} color={color}>

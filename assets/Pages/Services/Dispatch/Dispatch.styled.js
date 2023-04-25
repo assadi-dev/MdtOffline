@@ -7,7 +7,8 @@ export const DispatchWrapper = styled.div`
 `;
 
 export const DispatchBackgroundLayout = styled.div`
-  width: 100%;
+  width: 75vw;
+  overflow-x: auto;
   border-radius: 8px;
   background-color: var(--color-lightBlue-secondary-opacity-50);
   min-height: 75vh;
