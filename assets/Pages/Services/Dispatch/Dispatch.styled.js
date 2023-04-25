@@ -27,6 +27,12 @@ export const HeaderSection = styled.div`
   margin-bottom: 3.5rem;
   position: relative;
   .title {
+    width: 88%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 2rem;
+
     @media screen and (min-width: 992px) {
       font-size: 2.2rem;
       letter-spacing: 2px;
@@ -49,7 +55,7 @@ export const DropItemContainerCard = styled.li`
 `;
 
 export const LabeLSectionContainer = styled.div`
-  margin: 1rem 0;
+  margin: 0.3rem 0;
   width: 100%;
 `;
 
