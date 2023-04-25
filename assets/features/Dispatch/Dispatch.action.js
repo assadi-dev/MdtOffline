@@ -44,3 +44,21 @@ export const sortDropList = (state, results) => {
     categorieEnd.cards.splice(droppableIndexEnd, 0, ...card);
   }
 };
+
+export const addCategoryDrop = (state, payload) => {
+  const { title, background, color } = payload;
+
+  const init_card_category = {
+    id: `categories-${clean_name(title)}`,
+    title: title,
+    cards: [],
+    background: background,
+    color: color,
+  };
+
+  state.map((list) => {
+    if (list.id == "list-dispatch") {
+      list.categories.push(init_card_category);
+    }
+  });
+};

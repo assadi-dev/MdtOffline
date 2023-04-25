@@ -3,10 +3,10 @@ import {
   LabeLSectionBody,
   LabeLSectionContainer,
   LabeLSectionHeader,
-} from "../Dispatch.styled";
+} from "../../Dispatch.styled";
 
-import CardsItems from "./dragNdrop/CardsItems";
-import AgentCardItem from "./AgentCard";
+import CardsItems from "./CardsItems";
+import AgentCardItem from "../AgentCard";
 import { Droppable } from "react-beautiful-dnd";
 
 const LabeLSection = ({ lists, index }) => {

@@ -2,7 +2,7 @@ import uniqid from "uniqid";
 
 export const waitingDispatch = [
   {
-    id: "categories-attente-dispatch",
+    id: "categories-en-attente-dispatch",
     title: "⌛ En Attente Dispatch",
     cards: [
       {

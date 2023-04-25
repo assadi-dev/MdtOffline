@@ -5,7 +5,7 @@ import {
   DropContainerlistCard,
   DropItemContainerCard,
 } from "./Dispatch.styled";
-import DropListCard from "./components/DropListCard";
+import DropListCard from "./components/dragNdrop/DropListCard";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { drop } from "../../../features/Dispatch/Dispatch.slice";

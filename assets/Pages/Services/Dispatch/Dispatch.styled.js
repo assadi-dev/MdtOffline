@@ -25,6 +25,7 @@ export const DropContainerlistCard = styled.ul`
 export const HeaderSection = styled.div`
   margin: 1rem;
   margin-bottom: 3.5rem;
+  position: relative;
   .title {
     @media screen and (min-width: 992px) {
       font-size: 2.2rem;
@@ -95,4 +96,24 @@ export const AgentCardItemName = styled.p`
   color: var(--color-blue-dark);
   font-weight: bold;
   font-size: 1.4rem;
+`;
+
+export const AddCateegoriebutton = styled.button`
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: var(--color-blue-primary);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  opacity: 0.5;
+  transform: translateY(-50%);
+  transition: all 0.35s ease-in;
+  :hover {
+    transform: translateY(-50%) scale(1.2);
+    opacity: 1;
+  }
+  :active {
+    opacity: 0.3;
+  }
 `;
