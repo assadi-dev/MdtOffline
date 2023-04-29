@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MenuAddContainer = styled.div`
+  opacity: 0;
   position: absolute;
   width: 100%;
   background-color: #fff;
@@ -9,9 +10,11 @@ export const MenuAddContainer = styled.div`
   padding: 0.3rem 1rem;
   min-height: 45px;
   right: 0;
-  transform: translateX(50%);
+  transform: translateX(50%) translateY(-105px);
   margin-top: 5px;
   box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s ease-in-out;
+  z-index: -1;
 `;
 
 export const TitleMenu = styled.p`

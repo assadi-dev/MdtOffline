@@ -4,6 +4,13 @@ export const DispatchWrapper = styled.div`
   padding: 1.8rem 1rem;
   margin-top: 2rem;
   width: 100%;
+
+  .show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
+    z-index: 25;
+  }
 `;
 
 export const DispatchBackgroundLayout = styled.div`
@@ -105,16 +112,21 @@ export const AgentCardItemName = styled.p`
 `;
 
 export const AddCateegoriebutton = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 100px;
-  background-color: var(--color-blue-primary);
+  color: var(--color-blue-primary);
   position: absolute;
   right: 0;
   top: 50%;
   opacity: 0.5;
   transform: translateY(-50%);
   transition: all 0.35s ease-in;
+  svg {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
   :hover {
     transform: translateY(-50%) scale(1.2);
     opacity: 1;

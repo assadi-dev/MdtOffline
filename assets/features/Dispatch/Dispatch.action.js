@@ -1,4 +1,5 @@
 import { clean_name } from "./helper";
+import uniqid from "uniqid";
 
 export const sortDropList = (state, results) => {
   const {
@@ -49,7 +50,7 @@ export const addCategoryDrop = (state, payload) => {
   const { title, background, color } = payload;
 
   const init_card_category = {
-    id: `categories-${clean_name(title)}`,
+    id: `categories-${clean_name(title)}-${uniqid()}`,
     title: title,
     cards: [],
     background: background,

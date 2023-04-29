@@ -8,8 +8,12 @@ import {
   TitleMenu,
 } from "./View.styled";
 
-const MenuAdd = ({ title }) => {
+const MenuAdd = ({ title, isShow, onCloseModal }) => {
   const dispatch = useDispatch();
+
+  const SWOW_CLASS_MODAL = ["dropDownForm"];
+
+  isShow ? SWOW_CLASS_MODAL.push("show") : SWOW_CLASS_MODAL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,12 +29,17 @@ const MenuAdd = ({ title }) => {
       color: target.color.value,
     };
     dispatch(addCategory(payload));
+    onCloseModal();
+
     target.reset();
   };
 
   return (
     <>
-      <MenuAddContainer>
+      <MenuAddContainer
+        className={SWOW_CLASS_MODAL.join(" ")}
+        onClick={(e) => e.stopPropagation()}
+      >
         {title ? <TitleMenu>{title}</TitleMenu> : ""}
         <DispatchFormContainer onSubmit={handleSubmit}>
           <div className="form-control">
