@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { dropLists } from "./initialState";
-import { addCategoryDrop, sortDropList } from "./Dispatch.action";
+import {
+  addCategoryDrop,
+  creatCardAgent,
+  sortDropList,
+} from "./Dispatch.action";
 
 const initialState = { dropLists: dropLists, status: "", errors: "" };
 
@@ -19,12 +23,20 @@ export const DispatchSlice = createSlice({
       addCategoryDrop(list, payload);
       return state;
     },
+    generateAgentCard: (state, action) => {
+      const { payload } = action;
+      creatCardAgent(state, payload);
+      return state;
+    },
+    deleteCardItem: (state, action) => {
+      return state;
+    },
   },
   /*  extraReducers: (builders) => {
     //builders.addCase()
   }, */
 });
 
-export const { drop, addCategory } = DispatchSlice.actions;
+export const { drop, addCategory, generateAgentCard } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;

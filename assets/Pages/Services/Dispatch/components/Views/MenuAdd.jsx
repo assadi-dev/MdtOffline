@@ -8,7 +8,7 @@ import {
   TitleMenu,
 } from "./View.styled";
 
-const MenuAdd = ({ title, isShow, onCloseModal }) => {
+const MenuAdd = ({ id, title, isShow, onCloseModal }) => {
   const dispatch = useDispatch();
 
   const SWOW_CLASS_MODAL = ["dropDownForm"];
@@ -24,13 +24,13 @@ const MenuAdd = ({ title, isShow, onCloseModal }) => {
     }
 
     const payload = {
+      id: id,
       title: target.title.value,
       background: target.background.value,
       color: target.color.value,
     };
     dispatch(addCategory(payload));
     onCloseModal();
-
     target.reset();
   };
 

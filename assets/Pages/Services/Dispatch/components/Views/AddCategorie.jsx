@@ -4,10 +4,12 @@ import MenuAdd from "./MenuAdd";
 import { useState } from "react";
 import { AddCircleIconFill } from "../../../../../components/SVG";
 
-const AddCategorie = () => {
+const AddCategorie = ({ id }) => {
+  console.log(id);
   const [show, setShow] = useState(false);
   const addButtonRef = useRef(null);
   const togglShow = (e) => {
+    e.stopPropagation();
     setShow((current) => (current = !current));
   };
 
@@ -28,22 +30,19 @@ const AddCategorie = () => {
       }
     };
 
-    let removeClass = () => {
-      setCloseModal();
-    };
-
     document.body.addEventListener("click", closeModal);
     let allCategorie = document.querySelectorAll(".add-categorie-btn");
     allCategorie.forEach((element) => {
-      element.addEventListener("click", removeClass);
+      element.addEventListener("click", setCloseModal);
     });
 
     return () => {
       document.body.removeEventListener("click", closeModal);
 
-      document
-        .querySelectorAll(".add-categorie-btn")
-        .addEventListener("click", removeClass);
+      let allCategorie = document.querySelectorAll(".add-categorie-btn");
+      allCategorie.forEach((element) => {
+        element.removeEventListener("click", setCloseModal);
+      });
     };
   }, [addButtonRef]);
 
@@ -57,6 +56,7 @@ const AddCategorie = () => {
         <AddCircleIconFill />
       </AddCateegoriebutton>
       <MenuAdd
+        id={id}
         title={"Ajouter une categorie"}
         isShow={show}
         onCloseModal={setCloseModal}

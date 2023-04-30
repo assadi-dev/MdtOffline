@@ -47,7 +47,7 @@ export const sortDropList = (state, results) => {
 };
 
 export const addCategoryDrop = (state, payload) => {
-  const { title, background, color } = payload;
+  const { id, title, background, color } = payload;
 
   const init_card_category = {
     id: `categories-${clean_name(title)}-${uniqid()}`,
@@ -58,8 +58,27 @@ export const addCategoryDrop = (state, payload) => {
   };
 
   state.map((list) => {
-    if (list.id == "list-dispatch") {
+    if (list.id == id) {
       list.categories.push(init_card_category);
     }
   });
+};
+
+export const creatCardAgent = (state, payload) => {
+  const { matricule, username, grade } = payload;
+
+  const init_card_agent = {
+    id: "cards-" + uniqid(),
+    grade: grade,
+    agent: `${matricule}-${username}`,
+    background: "var(--grey-color)",
+    color: "var(--background-color-dark)",
+  };
+
+  const dispatchList =
+    state.droplist[0].categorises["categories-en-attente-dispatch"].cards;
+
+  dispatchList.push(init_card_agent);
+
+  console.log(dispatchList);
 };

@@ -23,7 +23,7 @@ const AgentCardItem = ({ card, index }) => {
               <AgentCardItemGrade>{grade}</AgentCardItemGrade>
               <AgentCardItemName>{agent}</AgentCardItemName>
             </AgentCardItemBody>
-          </AgentCardItemContainer>{" "}
+          </AgentCardItemContainer>
         </div>
       )}
     </Draggable>

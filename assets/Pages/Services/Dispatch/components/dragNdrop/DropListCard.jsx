@@ -15,7 +15,7 @@ const DropListCard = ({ id, title, listslabels }) => {
     <DropItemContainerCard>
       <HeaderSection>
         <h2 className="title">{title} </h2>
-        <AddCategorie />
+        <AddCategorie id={id} />
       </HeaderSection>
       {listslabels
         ? listslabels.map((label, index) => (

@@ -8,6 +8,7 @@ import {
 import CardsItems from "./CardsItems";
 import AgentCardItem from "../AgentCard";
 import { Droppable } from "react-beautiful-dnd";
+import OptionButtonAction from "./OptionButtonAction";
 
 const LabeLSection = ({ lists, index }) => {
   const { id, title, cards, background, color } = lists;
@@ -17,6 +18,7 @@ const LabeLSection = ({ lists, index }) => {
       <LabeLSectionContainer>
         <LabeLSectionHeader background={background} color={color}>
           {title}
+          <OptionButtonAction id={id} bacgroundColor={background} />
         </LabeLSectionHeader>
 
         <Droppable droppableId={String(id)}>

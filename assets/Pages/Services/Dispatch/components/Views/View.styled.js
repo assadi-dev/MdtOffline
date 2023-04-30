@@ -64,3 +64,48 @@ export const DispatchSubmitButton = styled.button`
   color: #fff;
   padding: 8px;
 `;
+
+export const ModalSelectContainer = styled.div`
+  position: absolute;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  align-items: center;
+
+  width: fit-content;
+  background-color: #fff;
+  color: var(--color-blue-dark);
+  border-radius: 5px;
+  padding: 1rem 1rem;
+  min-height: 45px;
+  right: 0;
+  transform: translateX(50%) translateY(-28px);
+  margin-top: 5px;
+  box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s ease-in-out;
+  z-index: -1;
+  opacity: 0;
+  .edit {
+    color: var(--color-blue-primary);
+  }
+  .delete {
+    color: #ba5a3c;
+  }
+`;
+
+export const MenuSelectBtn = styled.button`
+  margin-bottom: 0.5rem;
+  display: flex;
+  margin-left: 1rem;
+  align-items: center;
+  svg {
+    margin-right: 0.8rem;
+    width: 15px;
+    height: 15px;
+  }
+  :last-of-type {
+    margin-bottom: 0;
+  }
+  :active {
+    opacity: 0.3;
+  }
+`;

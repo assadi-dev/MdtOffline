@@ -11,6 +11,13 @@ export const DispatchWrapper = styled.div`
     transform: translateX(50%) translateY(0);
     z-index: 25;
   }
+  .show-option {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(50%) translateY(0);
+    z-index: 25;
+    margin-top: 5px;
+  }
 `;
 
 export const DispatchBackgroundLayout = styled.div`
@@ -67,6 +74,7 @@ export const LabeLSectionContainer = styled.div`
 `;
 
 export const LabeLSectionHeader = styled.div`
+  position: relative;
   padding: 2rem 1rem;
   width: 100%;
   background: ${({ background }) =>
@@ -130,6 +138,37 @@ export const AddCateegoriebutton = styled.button`
   :hover {
     transform: translateY(-50%) scale(1.2);
     opacity: 1;
+  }
+  :active {
+    opacity: 0.3;
+  }
+`;
+export const OptionBtnDropList = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  color: var(--color-blue-primary);
+  position: absolute;
+  right: 5px;
+  top: 50%;
+
+  transform: translateY(-50%);
+  transition: all 0.35s ease-in;
+  color: ${({ isDark }) => (isDark ? "#fff" : "var(--background-color-dark)")};
+  svg {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+  :hover {
+    background-color: ${({ isDark }) =>
+      isDark
+        ? "var(--color-lightBlue-secondary)"
+        : "var(--background-color-dark)"};
+    color: #fff;
   }
   :active {
     opacity: 0.3;
