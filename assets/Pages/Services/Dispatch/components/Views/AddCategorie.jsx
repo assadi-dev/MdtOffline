@@ -5,7 +5,6 @@ import { useState } from "react";
 import { AddCircleIconFill } from "../../../../../components/SVG";
 
 const AddCategorie = ({ id }) => {
-  console.log(id);
   const [show, setShow] = useState(false);
   const addButtonRef = useRef(null);
   const togglShow = (e) => {

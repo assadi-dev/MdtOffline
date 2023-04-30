@@ -75,8 +75,7 @@ export const creatCardAgent = (state, payload) => {
     color: "var(--background-color-dark)",
   };
 
-  const dispatchList =
-    state.droplist[0].categorises["categories-en-attente-dispatch"].cards;
+  const dispatchList = state.dropLists[0].categories[0].cards;
 
   dispatchList.push(init_card_agent);
 

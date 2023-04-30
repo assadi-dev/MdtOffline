@@ -25,6 +25,7 @@ export const DispatchSlice = createSlice({
     },
     generateAgentCard: (state, action) => {
       const { payload } = action;
+
       creatCardAgent(state, payload);
       return state;
     },
