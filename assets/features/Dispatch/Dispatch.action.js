@@ -65,10 +65,10 @@ export const addCategoryDrop = (state, payload) => {
 };
 
 export const creatCardAgent = (state, payload) => {
-  const { matricule, username, grade } = payload;
+  const { matricule, username, grade, agentId } = payload;
 
   const init_card_agent = {
-    id: "cards-" + uniqid(),
+    id: "cards-" + agentId,
     grade: grade,
     agent: `${matricule}-${username}`,
     background: "var(--grey-color)",
@@ -78,6 +78,14 @@ export const creatCardAgent = (state, payload) => {
   const dispatchList = state.dropLists[0].categories[0].cards;
 
   dispatchList.push(init_card_agent);
+};
 
-  console.log(dispatchList);
+export const removeCardAgent = (state, payload) => {
+  const { agentId } = payload;
+  let dispatchList = state.dropLists[0].categories[0].cards;
+
+  const cardId = "cards-" + agentId;
+  let cardsRemoved = dispatchList.filter((agentCard) => agentCard.id != cardId);
+
+  state.dropLists[0].categories[0].cards = cardsRemoved;
 };

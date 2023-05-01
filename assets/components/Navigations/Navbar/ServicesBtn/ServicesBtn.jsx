@@ -18,7 +18,10 @@ import {
   getLastActiveServiceAsync,
 } from "../../../../features/PriseDeService/PriseDeserviceAsyncApi";
 import { addSeeviceBtn } from "../../../../features/PriseDeService/PriseDeService.slice";
-import { generateAgentCard } from "../../../../features/Dispatch/Dispatch.slice";
+import {
+  deleteAgentCard,
+  generateAgentCard,
+} from "../../../../features/Dispatch/Dispatch.slice";
 
 const ServicesBtn = () => {
   const agent = useSelector((state) => state.AuthenticateReducer);
@@ -50,10 +53,11 @@ const ServicesBtn = () => {
     };
 
     dispatch(addServiceAsync(servicesValues));
-    console.log(agent);
+
     let currentGrade = agent.grade.nom;
     let currentmatricule = agent.matricule ? agent.matricule : "N/A";
     let agentCard = {
+      agentId: agent.idAgent,
       grade: currentGrade,
       username: agent.username,
       matricule: currentmatricule,
@@ -72,6 +76,10 @@ const ServicesBtn = () => {
     let payload = { id: currentService.id, data: servicesValues };
 
     dispatch(editServiceAsync(payload));
+
+    const agentCard = { agentId: agent.idAgent };
+
+    dispatch(deleteAgentCard(agentCard));
   };
 
   const toggleOnService = () => {

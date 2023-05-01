@@ -3,6 +3,7 @@ import { dropLists } from "./initialState";
 import {
   addCategoryDrop,
   creatCardAgent,
+  removeCardAgent,
   sortDropList,
 } from "./Dispatch.action";
 
@@ -25,10 +26,15 @@ export const DispatchSlice = createSlice({
     },
     generateAgentCard: (state, action) => {
       const { payload } = action;
-
       creatCardAgent(state, payload);
       return state;
     },
+
+    deleteAgentCard: (state, action) => {
+      const { payload } = action;
+      return removeCardAgent(state, payload);
+    },
+
     deleteCardItem: (state, action) => {
       return state;
     },
@@ -38,6 +44,7 @@ export const DispatchSlice = createSlice({
   }, */
 });
 
-export const { drop, addCategory, generateAgentCard } = DispatchSlice.actions;
+export const { drop, addCategory, generateAgentCard, deleteAgentCard } =
+  DispatchSlice.actions;
 
 export default DispatchSlice.reducer;
