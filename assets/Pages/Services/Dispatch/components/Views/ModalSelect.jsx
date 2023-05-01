@@ -3,6 +3,8 @@ import { MenuSelectBtn, ModalSelectContainer } from "./View.styled";
 import { EditPencilIcon, TrashIcon } from "../../../../../components/SVG";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { deleteCardItem } from "../../../../../features/Dispatch/Dispatch.slice";
 
 const ModalSelect = ({ id, isShow, onCloseModal }) => {
   const SHOW_CLASS_MODAL = ["dropDownSelectOption"];
@@ -10,6 +12,7 @@ const ModalSelect = ({ id, isShow, onCloseModal }) => {
   isShow ? SHOW_CLASS_MODAL.push("show-option") : SHOW_CLASS_MODAL;
 
   const modalRef = useRef(null);
+  const dispatch = useDispatch();
 
   const setCloseModal = (e) => {
     const target = e.target;
@@ -31,9 +34,11 @@ const ModalSelect = ({ id, isShow, onCloseModal }) => {
   }, [modalRef]);
 
   const handleEdit = () => {
+    console.log(id);
     onCloseModal();
   };
   const handleDelete = () => {
+    dispatch(deleteCardItem({ id }));
     onCloseModal();
   };
 

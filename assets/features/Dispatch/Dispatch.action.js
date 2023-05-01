@@ -76,23 +76,23 @@ export const creatCardAgent = (state, payload) => {
   };
 
   const dispatchList = state.dropLists[0].categories[0].cards;
-
   dispatchList.push(init_card_agent);
 };
 
 export const removeCardAgent = (state, payload, current) => {
   const { agentId } = payload;
-  let dispatchList = state.dropLists[0].categories[0].cards;
-
   const cardId = "cards-" + agentId;
-  //  let cardsRemoved = dispatchList.filter((agentCard) => agentCard.id != cardId);
   checkAgentCards(agentId, state, current);
-  //state.dropLists[0].categories[0].cards = cardsRemoved;
 };
 
+/**
+ * Verifie dans chaques tableau cards de la categorie, l'existence de la carte de l'agent à supprimer
+ * @param {*} agentId id de la carte de l'agent
+ * @param {*} state
+ * @param {*} current la categorie courrante
+ */
 const checkAgentCards = (agentId, state, current) => {
   let cloneState = current(state);
-  let dropListSize = cloneState.dropLists;
   const cardId = "cards-" + agentId;
   let dropLists = cloneState.dropLists;
 
@@ -119,6 +119,23 @@ const removeAgent_recursive = (cardId, categories) => {
       let cardRemoved = currentCat.cards.filter((item) => item.id != cardId);
       currentCat.cards = cardRemoved;
       return currentCat;
+    }
+  }
+};
+
+export const remove_categorie = (state, payload, current) => {
+  const { id } = payload;
+  let cloneState = current(state);
+  let currentList = [];
+  let dropLists = [...cloneState.dropLists];
+  for (const list in dropLists) {
+    let drop = { ...dropLists[list] };
+    currentList = drop.categories.find((item) => item.id == id);
+    if (currentList) {
+      let categorieRemoved = drop.categories.filter((cat) => cat.id != id);
+      drop.categories = categorieRemoved;
+      state.dropLists[list] = drop;
+      break;
     }
   }
 };
