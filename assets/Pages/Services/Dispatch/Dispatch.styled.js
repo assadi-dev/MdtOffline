@@ -141,7 +141,7 @@ export const AgentCardItemBody = styled.div`
 `;
 
 export const AgentCardItemGrade = styled.div`
-  padding: 0.8rem 1.3rem;
+  padding: 0.8rem 1rem;
   width: fit-content;
   color: #fff;
   border-radius: 5px;
