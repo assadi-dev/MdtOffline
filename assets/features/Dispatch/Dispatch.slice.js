@@ -32,7 +32,8 @@ export const DispatchSlice = createSlice({
 
     deleteAgentCard: (state, action) => {
       const { payload } = action;
-      return removeCardAgent(state, payload);
+      removeCardAgent(state, payload);
+      return state;
     },
 
     deleteCardItem: (state, action) => {
