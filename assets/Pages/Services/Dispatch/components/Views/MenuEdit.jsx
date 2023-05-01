@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import {
   clearCategorieSelected,
+  editSelectedCategorie,
   getSelectedCategorie,
 } from "../../../../../features/Dispatch/Dispatch.slice";
 import { useEffect } from "react";
@@ -47,19 +48,20 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const target = e.target;
-    /*     
-        if (!target.title.value) {
-          return;
-        }
-    
-        const payload = {
-          id: id,
-          title: target.title.value,
-          background: target.background.value,
-          color: target.color.value,
-        }; */
-    // dispatch(addCategory(payload));
-    dispatch(clearCategorieSelected());
+
+    if (!target.title.value) {
+      return;
+    }
+
+    const payload = {
+      id: id,
+      title: target.title.value,
+      background: target.background.value,
+      color: target.color.value,
+    };
+
+    dispatch(editSelectedCategorie(payload));
+
     onCloseModal();
     target.reset();
   };
@@ -105,7 +107,7 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
               </div>
             </fieldset>
 
-            <DispatchSubmitButton type="submit">Ajouter</DispatchSubmitButton>
+            <DispatchSubmitButton type="submit">Valider</DispatchSubmitButton>
           </DispatchFormContainer>
         ) : null}
       </MenuAddContainer>

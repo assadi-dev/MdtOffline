@@ -5,8 +5,8 @@ export const waitingDispatch = [
     id: "categories-en-attente-dispatch",
     title: "⌛ En Attente Dispatch",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
 ];
 
@@ -15,8 +15,8 @@ export const secteurSud = [
     id: "categories-secteur-3",
     title: "Secteur 3",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
 ];
 
@@ -26,7 +26,7 @@ export const secteurNord = [
     title: "Secteur 2",
     cards: [],
     background: "#FFBB33",
-    color: "var(--background-color-dark)",
+    color: "#131B26",
   },
 ];
 
@@ -36,14 +36,14 @@ export const horsTerrain = [
     title: "Police Academy",
     cards: [],
     background: "#33B5E5",
-    color: "var(--background-color-dark)",
+    color: "#131B26",
   },
   {
     id: "categories-tribunal",
     title: "Tribunal",
     cards: [],
     background: "#33B5E5",
-    color: "var(--background-color-dark)",
+    color: "#131B26",
   },
 ];
 
@@ -52,29 +52,29 @@ export const operationCenter = [
     id: "categories-dispatcher",
     title: "Dispatcher",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
   {
     id: "categories-co-dispatcher",
     title: "Co-Dispatcher",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
   {
     id: "categories-operator",
     title: "Operator",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
   {
     id: "categories-supervisor",
     title: "Supervisor",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
 ];
 
@@ -83,8 +83,8 @@ export const infos = [
     id: "categories-code",
     title: "Code",
     cards: [],
-    background: "var(--background-color-dark)",
-    color: "#fff",
+    background: "#131B26",
+    color: "#FFFFFF",
   },
 ];
 

@@ -160,3 +160,23 @@ export const find_categorie = (state, payload, current) => {
 
   return currentList;
 };
+
+export const update_categorie = (state, payload, current) => {
+  let cloneState = { ...state };
+  let dropLists = [...cloneState.dropLists];
+  let updateList = [];
+
+  updateList = dropLists.map((list) => {
+    list.categories.map((c) => {
+      if (c.id == payload.id) {
+        c.title = payload.title;
+        c.background = payload.background;
+        c.color = payload.color;
+      }
+      return c;
+    });
+    return list;
+  });
+
+  return updateList;
+};

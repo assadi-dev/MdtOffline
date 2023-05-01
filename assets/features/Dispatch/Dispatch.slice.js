@@ -7,6 +7,7 @@ import {
   removeCardAgent,
   remove_categorie,
   sortDropList,
+  update_categorie,
 } from "./Dispatch.action";
 
 const initialState = {
@@ -56,6 +57,11 @@ export const DispatchSlice = createSlice({
     },
 
     editSelectedCategorie: (state, action) => {
+      const { payload } = action;
+
+      update_categorie(state, payload, current);
+
+      state.selected = null;
       return state;
     },
 
@@ -76,6 +82,7 @@ export const {
   deleteCardItem,
   getSelectedCategorie,
   clearCategorieSelected,
+  editSelectedCategorie,
 } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;
