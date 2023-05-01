@@ -108,5 +108,3 @@ export const dropLists = [
   },
   { id: `list-info`, title: "Infos", categories: [] },
 ];
-
-console.log(JSON.stringify(dropLists));

@@ -96,7 +96,7 @@ export const DispatchSlice = createSlice({
       })
       .addCase(getDispatchDataAsync.fulfilled, (state, action) => {
         const { payload } = action;
-        console.log(payload);
+
         state.dropLists = payload.currentState.dropLists;
         state.status = "complete";
         state.errors = "";
