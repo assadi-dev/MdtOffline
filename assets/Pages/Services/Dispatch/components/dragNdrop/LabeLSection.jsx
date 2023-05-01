@@ -36,6 +36,7 @@ const LabeLSection = ({ lists, index }) => {
             id={id}
             bacgroundColor={background}
             toggleModal={toggle_modal}
+            closeEditModal={closeModal}
           />
           {showMenuEdit && <MenuEdit id={id} onCloseModal={closeModal} />}
         </LabeLSectionHeader>

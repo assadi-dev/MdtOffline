@@ -5,7 +5,12 @@ import tinycolor from "tinycolor2";
 import ModalSelect from "../Views/ModalSelect";
 import { useState } from "react";
 
-const OptionButtonAction = ({ id, bacgroundColor, toggleModal }) => {
+const OptionButtonAction = ({
+  id,
+  bacgroundColor,
+  toggleModal,
+  closeEditModal,
+}) => {
   const optionDrop = useRef(null);
   bacgroundColor = bacgroundColor ? bacgroundColor : "#000";
   const color = tinycolor(bacgroundColor);
@@ -14,6 +19,7 @@ const OptionButtonAction = ({ id, bacgroundColor, toggleModal }) => {
   const [show, setShow] = useState(false);
 
   const toggleBtn = () => {
+    closeEditModal();
     setShow((current) => (current = !current));
   };
   const closeModal = () => {

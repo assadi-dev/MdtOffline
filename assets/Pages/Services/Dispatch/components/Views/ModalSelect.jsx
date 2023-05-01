@@ -16,6 +16,7 @@ const ModalSelect = ({ id, isShow, onCloseModal, toggleModal }) => {
 
   const setCloseModal = (e) => {
     const target = e.target;
+
     if (target.contains(modalRef.current)) {
       onCloseModal();
     }
