@@ -11,6 +11,8 @@
 /var/
 /vendor/
 migrations/*
+src/DataFixtures/*
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
