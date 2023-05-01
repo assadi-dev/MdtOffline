@@ -10,8 +10,8 @@
 /public/bundles/
 /var/
 /vendor/
-migrations/*
-src/DataFixtures/*
+/migrations/*
+/src/DataFixtures/*
 
 ###< symfony/framework-bundle ###
 
