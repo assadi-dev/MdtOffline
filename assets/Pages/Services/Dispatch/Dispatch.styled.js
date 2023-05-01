@@ -146,6 +146,7 @@ export const AgentCardItemGrade = styled.div`
   color: #fff;
   border-radius: 5px;
   background-color: var(--color-blue-dark);
+  font-size: 1rem;
 `;
 
 export const AgentCardItemName = styled.p`
