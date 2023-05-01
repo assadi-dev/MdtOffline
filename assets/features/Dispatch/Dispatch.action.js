@@ -1,7 +1,8 @@
 import { clean_name } from "./helper";
 import uniqid from "uniqid";
+import Api from "../../service/Api/Api";
 
-export const sortDropList = (state, results) => {
+export const sortDropList = (state, results, current) => {
   const {
     droppableIdStart,
     droppableIdEnd,
@@ -179,4 +180,12 @@ export const update_categorie = (state, payload, current) => {
   });
 
   return updateList;
+};
+
+export const persist_dispatch_api = (data) => {
+  Api.put(`/dispatch_managers/1`, data);
+};
+
+export const load_dispatch_data = async () => {
+  return Api.get(`/dispatch_managers/1`);
 };

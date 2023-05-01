@@ -89,22 +89,24 @@ export const infos = [
 ];
 
 export const dropLists = [
-  { id: `list-dispatch`, title: "Dispatch", categories: waitingDispatch },
-  { id: `list-secteur-sud`, title: "Secteur Sud", categories: secteurSud },
+  { id: `list-dispatch`, title: "Dispatch", categories: [] },
+  { id: `list-secteur-sud`, title: "Secteur Sud", categories: [] },
   {
     id: `list-secteur-nord`,
     title: "Secteur Nord",
-    categories: secteurNord,
+    categories: [],
   },
   {
     id: `list-hors-terrain`,
     title: "Hors Terrain",
-    categories: horsTerrain,
+    categories: [],
   },
   {
     id: `list-operation-center`,
     title: "Operation center",
-    categories: operationCenter,
+    categories: [],
   },
-  { id: `list-info`, title: "Infos", categories: infos },
+  { id: `list-info`, title: "Infos", categories: [] },
 ];
+
+console.log(JSON.stringify(dropLists));

@@ -10,10 +10,16 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { drop } from "../../../features/Dispatch/Dispatch.slice";
 import { sortDropList } from "../../../features/Dispatch/Dispatch.action";
+import { useEffect } from "react";
+import { getDispatchDataAsync } from "../../../features/Dispatch/DispatchAsyncApi";
 
 const Dispatch = () => {
   const { dropLists, status } = useSelector((state) => state.DispatchReducer);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDispatchDataAsync());
+  }, []);
 
   const handleDragEnd = (result) => {
     const { destination, source, draggableId } = result;
