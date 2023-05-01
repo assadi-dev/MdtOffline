@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { AddCateegoriebutton } from "../../Dispatch.styled";
+import { AddCategoriebutton } from "../../Dispatch.styled";
 import MenuAdd from "./MenuAdd";
 import { useState } from "react";
 import { AddCircleIconFill } from "../../../../../components/SVG";
@@ -47,13 +47,13 @@ const AddCategorie = ({ id }) => {
 
   return (
     <>
-      <AddCateegoriebutton
+      <AddCategoriebutton
         className="add-categorie-btn"
         ref={addButtonRef}
         onClick={togglShow}
       >
         <AddCircleIconFill />
-      </AddCateegoriebutton>
+      </AddCategoriebutton>
       <MenuAdd
         id={id}
         title={"Ajouter une categorie"}

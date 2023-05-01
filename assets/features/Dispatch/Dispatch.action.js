@@ -85,7 +85,25 @@ export const removeCardAgent = (state, payload) => {
   let dispatchList = state.dropLists[0].categories[0].cards;
 
   const cardId = "cards-" + agentId;
-  let cardsRemoved = dispatchList.filter((agentCard) => agentCard.id != cardId);
+  //  let cardsRemoved = dispatchList.filter((agentCard) => agentCard.id != cardId);
+  checkAgentCards(agentId, state);
+  //state.dropLists[0].categories[0].cards = cardsRemoved;
+};
 
-  state.dropLists[0].categories[0].cards = cardsRemoved;
+const checkAgentCards = (agentId, state) => {
+  let cloneState = { ...state };
+  let dropListSize = cloneState.dropLists;
+  const cardId = "cards-" + agentId;
+  let dropLists = cloneState.dropLists;
+
+  for (const listIndex in dropLists) {
+    let card = cloneState.dropLists[listIndex].categories[listIndex].cards;
+    let findCard = card.find((item) => item.id == cardId);
+
+    if (findCard) {
+      // let cardsRemoved = findCard.filter((agentCard) => agentCard.id != cardId);
+      console.log(findCard);
+      break;
+    }
+  }
 };

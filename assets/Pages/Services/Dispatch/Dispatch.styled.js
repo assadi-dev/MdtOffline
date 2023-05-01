@@ -31,6 +31,16 @@ export const DispatchBackgroundLayout = styled.div`
   @media screen and (min-width: 992px) {
     font-size: 1.2rem;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  :hover {
+    ::-webkit-scrollbar {
+      display: initial;
+    }
+  }
 `;
 
 export const DropContainerlistCard = styled.ul`
@@ -61,7 +71,8 @@ export const HeaderSection = styled.div`
 export const DropItemContainerCard = styled.li`
   border-radius: 10px;
   background: rgba(19, 27, 38, 0.5);
-  width: 250px;
+  min-width: 200px;
+  max-width: 260px;
   height: fit-content;
   flex: 1 0;
   margin-right: 1rem;
@@ -70,8 +81,8 @@ export const DropItemContainerCard = styled.li`
     margin-right: 0;
   }
 
-  @media screen and (min-width: 100%) {
-    width: 100%;
+  @media screen and (min-width: 992px) {
+    max-width: 100%;
   }
 `;
 
@@ -129,7 +140,7 @@ export const AgentCardItemName = styled.p`
   font-weight: bold;
 `;
 
-export const AddCateegoriebutton = styled.button`
+export const AddCategoriebutton = styled.button`
   width: 28px;
   height: 28px;
   border-radius: 100px;
