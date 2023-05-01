@@ -3,12 +3,18 @@ import { dropLists } from "./initialState";
 import {
   addCategoryDrop,
   creatCardAgent,
+  find_categorie,
   removeCardAgent,
   remove_categorie,
   sortDropList,
 } from "./Dispatch.action";
 
-const initialState = { dropLists: dropLists, status: "", errors: "" };
+const initialState = {
+  dropLists: dropLists,
+  status: "",
+  errors: "",
+  selected: null,
+};
 
 export const DispatchSlice = createSlice({
   name: "Dispatch",
@@ -43,6 +49,19 @@ export const DispatchSlice = createSlice({
       remove_categorie(state, payload, current);
       return state;
     },
+
+    getSelectedCategorie: (state, action) => {
+      const { payload } = action;
+      state.selected = find_categorie(state, payload, current);
+    },
+
+    editSelectedCategorie: (state, action) => {
+      return state;
+    },
+
+    clearCategorieSelected: (state) => {
+      state.selected = null;
+    },
   },
   /*  extraReducers: (builders) => {
     //builders.addCase()
@@ -55,6 +74,8 @@ export const {
   generateAgentCard,
   deleteAgentCard,
   deleteCardItem,
+  getSelectedCategorie,
+  clearCategorieSelected,
 } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;

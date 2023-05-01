@@ -139,3 +139,24 @@ export const remove_categorie = (state, payload, current) => {
     }
   }
 };
+
+/**
+ * Récuperation de la categorie selection par id
+ * @param {*} state
+ * @param {*} payload
+ * @param {*} current
+ */
+export const find_categorie = (state, payload, current) => {
+  let cloneState = current(state);
+  let dropLists = [...cloneState.dropLists];
+  let currentList = [];
+  for (const list of dropLists) {
+    let drop = { ...list };
+    currentList = drop.categories.find((item) => item.id == payload.id);
+    if (currentList) {
+      break;
+    }
+  }
+
+  return currentList;
+};

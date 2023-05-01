@@ -5,7 +5,7 @@ import tinycolor from "tinycolor2";
 import ModalSelect from "../Views/ModalSelect";
 import { useState } from "react";
 
-const OptionButtonAction = ({ id, bacgroundColor }) => {
+const OptionButtonAction = ({ id, bacgroundColor, toggleModal }) => {
   const optionDrop = useRef(null);
   bacgroundColor = bacgroundColor ? bacgroundColor : "#000";
   const color = tinycolor(bacgroundColor);
@@ -24,7 +24,12 @@ const OptionButtonAction = ({ id, bacgroundColor }) => {
       <OptionBtnDropList isDark={isDark} onClick={toggleBtn}>
         <OptionVertical />
       </OptionBtnDropList>
-      <ModalSelect id={id} isShow={show} onCloseModal={closeModal} />
+      <ModalSelect
+        id={id}
+        isShow={show}
+        onCloseModal={closeModal}
+        toggleModal={toggleModal}
+      />
     </>
   );
 };

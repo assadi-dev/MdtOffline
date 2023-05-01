@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { deleteCardItem } from "../../../../../features/Dispatch/Dispatch.slice";
 
-const ModalSelect = ({ id, isShow, onCloseModal }) => {
+const ModalSelect = ({ id, isShow, onCloseModal, toggleModal }) => {
   const SHOW_CLASS_MODAL = ["dropDownSelectOption"];
 
   isShow ? SHOW_CLASS_MODAL.push("show-option") : SHOW_CLASS_MODAL;
@@ -34,7 +34,7 @@ const ModalSelect = ({ id, isShow, onCloseModal }) => {
   }, [modalRef]);
 
   const handleEdit = () => {
-    console.log(id);
+    toggleModal(id);
     onCloseModal();
   };
   const handleDelete = () => {
