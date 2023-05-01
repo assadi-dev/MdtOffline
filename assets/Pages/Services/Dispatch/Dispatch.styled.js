@@ -18,6 +18,19 @@ export const DispatchWrapper = styled.div`
     z-index: 25;
     margin-top: 5px;
   }
+
+  .isDragging {
+    border: 0.5px solid #2b7de950;
+    box-shadow: 1px 1px 8px 5px #2b7de920;
+    transform: rotate(5deg);
+  }
+
+  .dragOver {
+    width: 90%;
+    margin: 1rem auto;
+    border-radius: 5px;
+    background-color: #2b7de915;
+  }
 `;
 
 export const DispatchBackgroundLayout = styled.div`

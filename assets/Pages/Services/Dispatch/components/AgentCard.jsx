@@ -11,14 +11,16 @@ const AgentCardItem = ({ card, index }) => {
   const { id, agent, grade, color, background } = card;
   return (
     <Draggable draggableId={String(id)} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className="body-item-scrollable"
         >
-          <AgentCardItemContainer>
+          <AgentCardItemContainer
+            className={snapshot.isDragging ? "isDragging" : ""}
+          >
             <AgentCardItemBody background={background} color={color}>
               <AgentCardItemGrade>{grade}</AgentCardItemGrade>
               <AgentCardItemName>{agent}</AgentCardItemName>

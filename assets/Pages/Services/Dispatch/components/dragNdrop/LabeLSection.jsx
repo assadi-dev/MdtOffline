@@ -42,10 +42,11 @@ const LabeLSection = ({ lists, index }) => {
         </LabeLSectionHeader>
 
         <Droppable droppableId={String(id)}>
-          {(provided) => (
+          {(provided, snapshot) => (
             <LabeLSectionBody
               {...provided.droppableProps}
               ref={provided.innerRef}
+              className={snapshot.isDraggingOver ? "dragOver" : ""}
             >
               {cards.length > 0
                 ? cards.map((card, index) => (
