@@ -4,22 +4,7 @@ export const waitingDispatch = [
   {
     id: "categories-en-attente-dispatch",
     title: "⌛ En Attente Dispatch",
-    cards: [
-      {
-        id: "cards-" + uniqid(),
-        grade: "rookie",
-        agent: "25-Aaron Smith",
-        background: "var(--grey-color)",
-        color: "var(--background-color-dark)",
-      },
-      {
-        id: "cards-" + uniqid(),
-        grade: "rookie",
-        agent: "28-Sarah Smith",
-        background: "var(--grey-color)",
-        color: "var(--background-color-dark)",
-      },
-    ],
+    cards: [],
     background: "var(--background-color-dark)",
     color: "#fff",
   },
