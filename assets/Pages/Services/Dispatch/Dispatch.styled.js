@@ -21,7 +21,7 @@ export const DispatchWrapper = styled.div`
 
   .isDragging {
     border: 0.5px solid #2b7de950;
-    box-shadow: 1px 1px 8px 5px #2b7de920;
+    box-shadow: 1px 1px 5px 3px #11111120;
     transform: rotate(5deg);
   }
 
@@ -29,7 +29,8 @@ export const DispatchWrapper = styled.div`
     width: 90%;
     margin: 1rem auto;
     border-radius: 5px;
-    background-color: #2b7de915;
+    background-color: #2b7de925;
+    //box-shadow: 1px 1px 3px 2px #2b7de920;
   }
 `;
 
