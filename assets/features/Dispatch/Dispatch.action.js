@@ -80,30 +80,45 @@ export const creatCardAgent = (state, payload) => {
   dispatchList.push(init_card_agent);
 };
 
-export const removeCardAgent = (state, payload) => {
+export const removeCardAgent = (state, payload, current) => {
   const { agentId } = payload;
   let dispatchList = state.dropLists[0].categories[0].cards;
 
   const cardId = "cards-" + agentId;
   //  let cardsRemoved = dispatchList.filter((agentCard) => agentCard.id != cardId);
-  checkAgentCards(agentId, state);
+  checkAgentCards(agentId, state, current);
   //state.dropLists[0].categories[0].cards = cardsRemoved;
 };
 
-const checkAgentCards = (agentId, state) => {
-  let cloneState = { ...state };
+const checkAgentCards = (agentId, state, current) => {
+  let cloneState = current(state);
   let dropListSize = cloneState.dropLists;
   const cardId = "cards-" + agentId;
   let dropLists = cloneState.dropLists;
 
   for (const listIndex in dropLists) {
-    let card = cloneState.dropLists[listIndex].categories[listIndex].cards;
-    let findCard = card.find((item) => item.id == cardId);
+    let categories = cloneState.dropLists[listIndex].categories;
 
+    let cardsRemoved = removeAgent_recursive(cardId, categories);
+    if (cardsRemoved) {
+      state.dropLists[listIndex].categories.map((cat) => {
+        if (cat.id == cardsRemoved.id) {
+          cat.cards = cardsRemoved.cards;
+        }
+        return cat;
+      });
+    }
+  }
+};
+
+const removeAgent_recursive = (cardId, categories) => {
+  for (const categorieItems of categories) {
+    let currentCat = { ...categorieItems };
+    let findCard = categorieItems.cards.find((item) => item.id == cardId);
     if (findCard) {
-      // let cardsRemoved = findCard.filter((agentCard) => agentCard.id != cardId);
-      console.log(findCard);
-      break;
+      let cardRemoved = currentCat.cards.filter((item) => item.id != cardId);
+      currentCat.cards = cardRemoved;
+      return currentCat;
     }
   }
 };

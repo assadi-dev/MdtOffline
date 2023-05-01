@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { dropLists } from "./initialState";
 import {
   addCategoryDrop,
@@ -32,7 +32,8 @@ export const DispatchSlice = createSlice({
 
     deleteAgentCard: (state, action) => {
       const { payload } = action;
-      removeCardAgent(state, payload);
+
+      removeCardAgent(state, payload, current);
       return state;
     },
 
