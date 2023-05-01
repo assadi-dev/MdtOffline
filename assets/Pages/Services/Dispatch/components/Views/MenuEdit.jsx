@@ -91,7 +91,7 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
                   id="background"
                   type="color"
                   name="background"
-                  defaultValue={"#131B26"}
+                  defaultValue={selected.background}
                 />
               </div>
               <div className="form-control">
@@ -100,7 +100,7 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
                   id="color"
                   name="color"
                   type="color"
-                  defaultValue={"#ffffff"}
+                  defaultValue={selected.color}
                 />
               </div>
             </fieldset>
