@@ -3,7 +3,7 @@
 /.vscode
 /.github
 /.env.local
-/.env.local.php
+/.env.*
 /.env.*.local
 /.env
 /config/secrets/prod/prod.decrypt.private.php
@@ -11,6 +11,7 @@
 /var/
 /vendor/
 migrations/*
+public/.htaccess*
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
@@ -39,3 +40,4 @@ yarn.lock
 ###< lexik/jwt-authentication-bundle ###
 /uploads
 /conf-template.conf
+/docker-compose.yml

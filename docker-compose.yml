@@ -1,53 +1,29 @@
-version: "3" 
+version: "3"
 services:
 
-  database:
-    image: mysql
-    container_name: db-mdt-offline
-    restart: always
+  ###> symfony/mercure-bundle ###
+  mercure:
+    image: dunglas/mercure
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ':80'
+      MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+      MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+      # Set the URL of your Symfony project (without trailing slash!) as value of the cors_origins directive
+      MERCURE_EXTRA_DIRECTIVES: |
+        cors_origins http://mdt911-offline.ovh
+    # Comment the following line to disable the development mode
+    command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev
+    ports:
+      - "1337:80"
     volumes:
-      - db-mdt-offline:/var/lib/mysql
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    networks:
-      - dev   
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: phpmyadmin_mdt-offline
-    restart: always
-    depends_on:
-      - database
-    ports:
-      - 3301:80
-    environment:
-      PMA_HOST: database
-    networks:
-      - dev
-      
-  maildev:
-    image: maildev/maildev
+      - mercure_data:/data
+      - mercure_config:/config
+###< symfony/mercure-bundle ###
 
-    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
-    ports:
-      - "5500:80"
-    restart: always
-    networks:
-      - dev   
-  app:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    image: mdt_offline
-    ports:
-      - "3000:80"
 
-    environment: 
-      DATABASE_URL: mysql://root:@db-mdt-offline:3306/mdt-offline
-      APP_ENV: prod
-      APP_SECRET: 8f76b5aa095e32129b33d3fdd33691b7
-   
-networks:
-  dev:    
 volumes:
-  db-mdt-offline:
 
+  ###> symfony/mercure-bundle ###
+  mercure_data:
+  mercure_config: ###< symfony/mercure-bundle ###
