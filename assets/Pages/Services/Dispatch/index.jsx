@@ -8,7 +8,7 @@ import {
 import DropListCard from "./components/dragNdrop/DropListCard";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
-import { drop } from "../../../features/Dispatch/Dispatch.slice";
+import { drop, instanceState } from "../../../features/Dispatch/Dispatch.slice";
 import { sortDropList } from "../../../features/Dispatch/Dispatch.action";
 import { useEffect } from "react";
 import { getDispatchDataAsync } from "../../../features/Dispatch/DispatchAsyncApi";
@@ -19,7 +19,11 @@ const Dispatch = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDispatchDataAsync());
+    const promise = dispatch(getDispatchDataAsync());
+
+    return () => {
+      promise.abort();
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -28,7 +32,12 @@ const Dispatch = () => {
     url.searchParams.append("topic", topic);
     let eventSource = new EventSource(url);
     eventSource.onmessage = (e) => {
-      console.log(e.data);
+      let data = JSON.parse(e.data);
+      dispatch(instanceState(data));
+    };
+
+    return () => {
+      eventSource.close();
     };
   }, []);
 

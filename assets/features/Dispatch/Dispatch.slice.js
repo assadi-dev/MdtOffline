@@ -23,6 +23,13 @@ export const DispatchSlice = createSlice({
   name: "Dispatch",
   initialState,
   reducers: {
+    instanceState: (state, action) => {
+      const { payload } = action;
+      let newDropLists = payload.dropLists;
+      state.dropLists = newDropLists;
+      return state;
+    },
+
     drop: (state, action) => {
       const list = state.dropLists;
       sortDropList(list, action.payload, current);
@@ -105,6 +112,7 @@ export const DispatchSlice = createSlice({
 });
 
 export const {
+  instanceState,
   drop,
   addCategory,
   generateAgentCard,
