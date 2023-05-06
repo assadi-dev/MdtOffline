@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import {
   DispatchBackgroundLayout,
   DispatchWrapper,
@@ -12,6 +12,7 @@ import { drop } from "../../../features/Dispatch/Dispatch.slice";
 import { sortDropList } from "../../../features/Dispatch/Dispatch.action";
 import { useEffect } from "react";
 import { getDispatchDataAsync } from "../../../features/Dispatch/DispatchAsyncApi";
+import { MERCURE_HUB_URL, TOPIC_URL } from "../../../constants/localStorage";
 
 const Dispatch = () => {
   const { dropLists, status } = useSelector((state) => state.DispatchReducer);
@@ -19,6 +20,16 @@ const Dispatch = () => {
 
   useEffect(() => {
     dispatch(getDispatchDataAsync());
+  }, []);
+
+  useLayoutEffect(() => {
+    const topic = `${TOPIC_URL}dispatch/update`;
+    const url = new URL(MERCURE_HUB_URL);
+    url.searchParams.append("topic", topic);
+    let eventSource = new EventSource(url);
+    eventSource.onmessage = (e) => {
+      console.log(e.data);
+    };
   }, []);
 
   const handleDragEnd = (result) => {
