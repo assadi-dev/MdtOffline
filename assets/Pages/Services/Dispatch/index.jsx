@@ -36,6 +36,9 @@ const Dispatch = () => {
       dispatch(instanceState(data));
     };
 
+    eventSource.onerror = () => {
+      eventSource.close();
+    };
     return () => {
       eventSource.close();
     };
