@@ -80,9 +80,10 @@ export const GeneratLinkBtnWrapper = styled.button`
 export const RowLink = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   p {
     margin-right: 1.8rem;
-    max-width: 75%;
+    max-width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
