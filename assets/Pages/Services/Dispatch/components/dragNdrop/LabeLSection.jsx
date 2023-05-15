@@ -16,11 +16,17 @@ import { getSelectedCategorie } from "../../../../../features/Dispatch/Dispatch.
 const LabeLSection = ({ lists, index }) => {
   const { id, title, cards, background, color } = lists;
   const [showMenuEdit, setShowMenuEdit] = useState(false);
+  const [showMenuAddSquad, setShowMenuAddSquad] = useState(false);
   const dispatch = useDispatch();
 
   const toggle_modal = (id) => {
     id && dispatch(getSelectedCategorie({ id }));
     setShowMenuEdit((current) => (current = !current));
+  };
+
+  const toggle_squadModal = (id) => {
+    id && dispatch(getSelectedCategorie({ id }));
+    setShowMenuAddSquad((current) => (current = !current));
   };
 
   const closeModal = () => {
@@ -37,6 +43,7 @@ const LabeLSection = ({ lists, index }) => {
             bacgroundColor={background}
             toggleModal={toggle_modal}
             closeEditModal={closeModal}
+            toggleSquadModal={toggle_squadModal}
           />
           {showMenuEdit && <MenuEdit id={id} onCloseModal={closeModal} />}
         </LabeLSectionHeader>

@@ -84,6 +84,10 @@ export const ModalSelectContainer = styled.div`
   transition: all 0.35s ease-in-out;
   z-index: -1;
   opacity: 0;
+  .add {
+    color: var(--green);
+  }
+
   .edit {
     color: var(--color-blue-primary);
   }
