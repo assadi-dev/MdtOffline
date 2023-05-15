@@ -25,6 +25,7 @@ const LabeLSection = ({ lists, index }) => {
   };
 
   const toggle_squadModal = (id) => {
+    console.log("id: ", id);
     id && dispatch(getSelectedCategorie({ id }));
     setShowMenuAddSquad((current) => (current = !current));
   };
