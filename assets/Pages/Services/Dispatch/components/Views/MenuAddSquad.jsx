@@ -81,13 +81,8 @@ const MenuAddSquad = ({ id, isShow, onCloseModal, closeAddSquadModal }) => {
         {selected ? (
           <DispatchAddSquadFormContainer onSubmit={handleSubmit}>
             <div className="form-control">
-              <label htmlFor="title">Titre</label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                defaultValue={selected.title}
-              />
+              <label htmlFor="title">Agents</label>
+              <input id="title" name="title" type="text" />
             </div>
             <fieldset>
               <legend>Carte</legend>
