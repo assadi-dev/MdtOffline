@@ -12,8 +12,10 @@ import OptionButtonAction from "./OptionButtonAction";
 import MenuEdit from "../Views/MenuEdit";
 import { useDispatch } from "react-redux";
 import { getSelectedCategorie } from "../../../../../features/Dispatch/Dispatch.slice";
+import MenuAddSquad from "../Views/MenuAddSquad";
+import AgentsCardSquad from "../AgentsCardSquad";
 
-const LabeLSection = ({ lists, index }) => {
+const LabeLSection = ({ lists, index, dropListIndex }) => {
   const { id, title, cards, background, color } = lists;
   const [showMenuEdit, setShowMenuEdit] = useState(false);
   const [showMenuAddSquad, setShowMenuAddSquad] = useState(false);
@@ -25,9 +27,12 @@ const LabeLSection = ({ lists, index }) => {
   };
 
   const toggle_squadModal = (id) => {
-    console.log("id: ", id);
     id && dispatch(getSelectedCategorie({ id }));
     setShowMenuAddSquad((current) => (current = !current));
+  };
+
+  const closeAddSquadModal = () => {
+    setShowMenuAddSquad((current) => (current = false));
   };
 
   const closeModal = () => {
@@ -45,8 +50,12 @@ const LabeLSection = ({ lists, index }) => {
             toggleModal={toggle_modal}
             closeEditModal={closeModal}
             toggleSquadModal={toggle_squadModal}
+            closeAddSquadModal={closeAddSquadModal}
           />
           {showMenuEdit && <MenuEdit id={id} onCloseModal={closeModal} />}
+          {showMenuAddSquad && (
+            <MenuAddSquad id={id} onCloseModal={closeAddSquadModal} />
+          )}
         </LabeLSectionHeader>
 
         <Droppable droppableId={String(id)}>
@@ -56,11 +65,18 @@ const LabeLSection = ({ lists, index }) => {
               ref={provided.innerRef}
               className={snapshot.isDraggingOver ? "dragOver" : ""}
             >
-              {cards.length > 0
+              {dropListIndex == 0 && cards.length > 0
                 ? cards.map((card, index) => (
                     <AgentCardItem key={card.id} card={card} index={index} />
                   ))
                 : null}
+
+              {dropListIndex != 0 && cards.length > 0
+                ? cards.map((card, index) => (
+                    <AgentsCardSquad key={card.id} card={card} index={index} />
+                  ))
+                : null}
+
               {provided.placeholder}
             </LabeLSectionBody>
           )}

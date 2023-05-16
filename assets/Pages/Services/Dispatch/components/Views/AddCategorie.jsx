@@ -37,7 +37,6 @@ const AddCategorie = ({ id }) => {
 
     return () => {
       document.body.removeEventListener("click", closeModal);
-
       let allCategorie = document.querySelectorAll(".add-categorie-btn");
       allCategorie.forEach((element) => {
         element.removeEventListener("click", setCloseModal);

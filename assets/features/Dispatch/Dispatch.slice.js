@@ -3,6 +3,7 @@ import { dropLists } from "./initialState";
 import {
   addCategoryDrop,
   creatCardAgent,
+  creatdAgentSquadCard,
   find_categorie,
   persist_dispatch_api,
   removeCardAgent,
@@ -92,6 +93,15 @@ export const DispatchSlice = createSlice({
       return state;
     },
 
+    generateAgentsSquadCard: (state, action) => {
+      const { payload } = action;
+      console.log(payload);
+      creatdAgentSquadCard(state, payload, current);
+      // let body = { currentState: cleanState, lastState: cleanState };
+      // persist_dispatch_api(body);
+      return state;
+    },
+
     clearCategorieSelected: (state) => {
       state.selected = null;
     },
@@ -121,6 +131,7 @@ export const {
   getSelectedCategorie,
   clearCategorieSelected,
   editSelectedCategorie,
+  generateAgentsSquadCard,
 } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;

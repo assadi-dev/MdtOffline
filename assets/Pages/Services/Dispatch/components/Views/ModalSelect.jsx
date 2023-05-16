@@ -16,6 +16,7 @@ const ModalSelect = ({
   onCloseModal,
   toggleModal,
   toggleSquadModal,
+  closeAddSquadModal,
 }) => {
   const SHOW_CLASS_MODAL = ["dropDownSelectOption"];
 

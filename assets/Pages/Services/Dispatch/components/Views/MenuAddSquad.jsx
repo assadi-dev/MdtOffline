@@ -1,8 +1,10 @@
 import React from "react";
 import {
+  DispatchAddSquadFormContainer,
   DispatchFormContainer,
   DispatchSubmitButton,
   MenuAddContainer,
+  MenuAddSquadContainer,
   TitleMenu,
 } from "./View.styled";
 
@@ -11,12 +13,15 @@ import { useState } from "react";
 import {
   clearCategorieSelected,
   editSelectedCategorie,
+  generateAgentsSquadCard,
   getSelectedCategorie,
 } from "../../../../../features/Dispatch/Dispatch.slice";
 import { useEffect } from "react";
 import { useRef } from "react";
+import statusData from "./statusData";
+import SelectStatus from "../SelectStatus";
 
-const MenuEdit = ({ id, isShow, onCloseModal }) => {
+const MenuAddSquad = ({ id, isShow, onCloseModal, closeAddSquadModal }) => {
   const dispatch = useDispatch();
   const { selected } = useSelector((state) => state.DispatchReducer);
 
@@ -24,7 +29,12 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
 
   isShow = true ? SWOW_CLASS_MODAL.push("show") : SWOW_CLASS_MODAL;
 
-  const editFormRef = useRef();
+  const addFormRef = useRef();
+
+  const getColor = (statusName) => {
+    let res = statusData.find((status) => status.code == statusName);
+    return res.color.toString();
+  };
 
   useEffect(() => {
     if (!id && !editFormRef.current) {
@@ -33,7 +43,7 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
 
     const setClose = (e) => {
       const target = e.target;
-      if (target.contains(editFormRef.current)) {
+      if (target.contains(addFormRef.current)) {
         onCloseModal();
       }
     };
@@ -43,38 +53,38 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
     return () => {
       dispatch(clearCategorieSelected());
     };
-  }, [editFormRef]);
+  }, [addFormRef]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const target = e.target;
 
-    if (!target.title.value) {
+    /* if (!target.title.value) {
       return;
-    }
+    } */
 
     const payload = {
       id: id,
       title: target.title.value,
-      background: target.background.value,
-      color: target.color.value,
+      status: target.status.value,
+      note: target.note.value,
     };
 
-    dispatch(editSelectedCategorie(payload));
+    dispatch(generateAgentsSquadCard(payload));
     target.reset();
     onCloseModal();
   };
 
   return (
     <>
-      <MenuAddContainer
+      <MenuAddSquadContainer
         className={SWOW_CLASS_MODAL.join(" ")}
         onClick={(e) => e.stopPropagation()}
-        ref={editFormRef}
+        ref={addFormRef}
       >
-        <TitleMenu>Editer</TitleMenu>
+        <TitleMenu>Créer un dispatch</TitleMenu>
         {selected ? (
-          <DispatchFormContainer onSubmit={handleSubmit}>
+          <DispatchAddSquadFormContainer onSubmit={handleSubmit}>
             <div className="form-control">
               <label htmlFor="title">Titre</label>
               <input
@@ -85,33 +95,23 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
               />
             </div>
             <fieldset>
-              <legend>Couleur</legend>
+              <legend>Carte</legend>
               <div className="form-control">
-                <label htmlFor="background">Carte</label>
-                <input
-                  id="background"
-                  type="color"
-                  name="background"
-                  defaultValue={selected.background}
-                />
+                <label htmlFor="status">Statut</label>
+                <SelectStatus name={"status"} id="status" />
               </div>
               <div className="form-control">
-                <label htmlFor="color">Text</label>
-                <input
-                  id="color"
-                  name="color"
-                  type="color"
-                  defaultValue={selected.color}
-                />
+                <label htmlFor="note">Note</label>
+                <textarea name="note" id="" rows="5"></textarea>
               </div>
             </fieldset>
 
-            <DispatchSubmitButton type="submit">Valider</DispatchSubmitButton>
-          </DispatchFormContainer>
+            <DispatchSubmitButton type="submit">Ajouter</DispatchSubmitButton>
+          </DispatchAddSquadFormContainer>
         ) : null}
-      </MenuAddContainer>
+      </MenuAddSquadContainer>
     </>
   );
 };
 
-export default MenuEdit;
+export default MenuAddSquad;

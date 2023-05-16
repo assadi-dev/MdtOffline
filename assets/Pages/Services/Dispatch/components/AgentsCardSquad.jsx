@@ -1,14 +1,18 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import {
+  AgenSquadtCardItemBody,
   AgentCardItemBody,
   AgentCardItemContainer,
   AgentCardItemGrade,
   AgentCardItemName,
+  AgentCardItemRow,
+  AgentCardStatus,
 } from "../Dispatch.styled";
 
 const AgentsCardSquad = ({ card, index }) => {
-  const { id, agent, grade, color, background } = card;
+  const { id, label, title, status, color, note } = card;
+  console.log(color);
   return (
     <Draggable draggableId={String(id)} index={index}>
       {(provided, snapshot) => (
@@ -21,10 +25,13 @@ const AgentsCardSquad = ({ card, index }) => {
           <AgentCardItemContainer
             className={snapshot.isDragging ? "isDragging" : ""}
           >
-            <AgentCardItemBody background={background} color={color}>
-              <AgentCardItemGrade>{grade}</AgentCardItemGrade>
-              <AgentCardItemName>{agent}</AgentCardItemName>
-            </AgentCardItemBody>
+            <AgenSquadtCardItemBody>
+              <AgentCardItemRow>
+                <AgentCardItemGrade>{label}</AgentCardItemGrade>
+                <AgentCardStatus>{status}</AgentCardStatus>
+              </AgentCardItemRow>
+              <AgentCardItemName>{title}</AgentCardItemName>
+            </AgenSquadtCardItemBody>
           </AgentCardItemContainer>
         </div>
       )}

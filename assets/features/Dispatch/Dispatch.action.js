@@ -74,6 +74,7 @@ export const creatCardAgent = (state, payload) => {
     agent: `${matricule}-${username}`,
     background: "var(--grey-color)",
     color: "var(--background-color-dark)",
+    status: "",
   };
 
   const dispatchList = state.dropLists[0].categories[0].cards;
@@ -182,10 +183,55 @@ export const update_categorie = (state, payload, current) => {
   return updateList;
 };
 
+export const creatdAgentSquadCard = (state, payload, current) => {
+  let cloneState = { ...state };
+  let dropLists = [...cloneState.dropLists];
+
+  let categorie = find_categorie(state, payload, current);
+  categorie = { ...categorie };
+  const { title, status, note } = payload;
+  let card = generateSquadCard({ title, status, note });
+  card.label = categorie.title;
+  categorie = { ...categorie, cards: [...categorie.cards, card] };
+
+  let currentDropList = dropLists.find((dp) =>
+    dp.categories.find((cat) => cat.id == categorie.id)
+  );
+
+  let updateCurrentDropList = {
+    ...currentDropList,
+    categories: currentDropList.categories.map((cat) => {
+      if (cat.id == categorie.id) {
+        return { ...categorie };
+      }
+      return cat;
+    }),
+  };
+
+  let dropListsUpdated = dropLists.map((dp) => {
+    if (dp.id == updateCurrentDropList.id) {
+      return { ...updateCurrentDropList };
+    }
+    return dp;
+  });
+  state.dropLists = dropListsUpdated;
+};
+
 export const persist_dispatch_api = (data) => {
   Api.put(`/dispatch_managers/1`, data);
 };
 
 export const load_dispatch_data = async () => {
   return Api.get(`/dispatch_managers/1`);
+};
+
+const generateSquadCard = (data) => {
+  const { title, status, note } = data;
+  return {
+    id: uniqid(),
+    title,
+    status,
+    note,
+    color,
+  };
 };

@@ -67,12 +67,13 @@ const Dispatch = () => {
         <DropContainerlistCard>
           <DragDropContext onDragEnd={handleDragEnd}>
             {dropLists.length > 0
-              ? dropLists.map((list) => (
+              ? dropLists.map((list, index) => (
                   <DropListCard
                     key={list.id}
                     id={list.id}
                     title={list.title}
                     listslabels={list.categories}
+                    dropListIndex={index}
                   />
                 ))
               : null}

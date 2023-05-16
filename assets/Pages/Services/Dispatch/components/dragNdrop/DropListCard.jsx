@@ -10,7 +10,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 import AddCategorie from "../Views/AddCategorie";
 
-const DropListCard = ({ id, title, listslabels }) => {
+const DropListCard = ({ id, title, listslabels, dropListIndex }) => {
   return (
     <DropItemContainerCard>
       <HeaderSection>
@@ -24,6 +24,7 @@ const DropListCard = ({ id, title, listslabels }) => {
               lists={label}
               id={label.id}
               index={index}
+              dropListIndex={dropListIndex}
             />
           ))
         : null}

@@ -141,7 +141,7 @@ export const AgentCardItemBody = styled.div`
 `;
 
 export const AgentCardItemGrade = styled.div`
-  padding: 0.8rem 1rem;
+  padding: 0.4rem 1rem;
   width: fit-content;
   color: #fff;
   border-radius: 5px;
@@ -149,10 +149,35 @@ export const AgentCardItemGrade = styled.div`
   font-size: 1rem;
 `;
 
+export const AgenSquadtCardItemBody = styled.div`
+  border-radius: 3px;
+  padding: 1rem;
+  width: 100%;
+  font-weight: bold;
+  background: var(--grey-color);
+  color: var(--background-color-dark);
+  min-height: 100px;
+`;
+
 export const AgentCardItemName = styled.p`
   margin-top: 1rem;
   color: var(--color-blue-dark);
   font-weight: bold;
+`;
+
+export const AgentCardItemRow = styled.div`
+  display: flex;
+  gap: 3px;
+`;
+
+export const AgentCardStatus = styled.div`
+  padding: 0.4rem 1rem;
+  width: fit-content;
+  color: #fff;
+  border-radius: 5px;
+  background-color: var(--color-blue-dark);
+  font-size: 1rem;
+  background: ${({ background }) => (background ? background : "var(--green)")};
 `;
 
 export const AddCategoriebutton = styled.button`
