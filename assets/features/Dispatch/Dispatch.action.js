@@ -1,6 +1,7 @@
 import { clean_name } from "./helper";
 import uniqid from "uniqid";
 import Api from "../../service/Api/Api";
+import statusData from "../../Pages/Services/Dispatch/components/Views/statusData";
 
 export const sortDropList = (state, results, current) => {
   const {
@@ -232,6 +233,11 @@ const generateSquadCard = (data) => {
     title,
     status,
     note,
-    color,
+    color: getColor(status),
   };
+};
+
+const getColor = (statusName) => {
+  let res = statusData.find((status) => status.code == statusName);
+  return res.color.toString();
 };

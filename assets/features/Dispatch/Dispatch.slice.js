@@ -95,7 +95,6 @@ export const DispatchSlice = createSlice({
 
     generateAgentsSquadCard: (state, action) => {
       const { payload } = action;
-      console.log(payload);
       creatdAgentSquadCard(state, payload, current);
       // let body = { currentState: cleanState, lastState: cleanState };
       // persist_dispatch_api(body);

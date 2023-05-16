@@ -11,8 +11,7 @@ import {
 } from "../Dispatch.styled";
 
 const AgentsCardSquad = ({ card, index }) => {
-  const { id, label, title, status, color, note } = card;
-  console.log(color);
+  const { id, label, title, status, note, color } = card;
   return (
     <Draggable draggableId={String(id)} index={index}>
       {(provided, snapshot) => (
@@ -28,7 +27,7 @@ const AgentsCardSquad = ({ card, index }) => {
             <AgenSquadtCardItemBody>
               <AgentCardItemRow>
                 <AgentCardItemGrade>{label}</AgentCardItemGrade>
-                <AgentCardStatus>{status}</AgentCardStatus>
+                <AgentCardStatus background={color}>{status}</AgentCardStatus>
               </AgentCardItemRow>
               <AgentCardItemName>{title}</AgentCardItemName>
             </AgenSquadtCardItemBody>

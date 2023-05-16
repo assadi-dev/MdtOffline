@@ -31,11 +31,6 @@ const MenuAddSquad = ({ id, isShow, onCloseModal, closeAddSquadModal }) => {
 
   const addFormRef = useRef();
 
-  const getColor = (statusName) => {
-    let res = statusData.find((status) => status.code == statusName);
-    return res.color.toString();
-  };
-
   useEffect(() => {
     if (!id && !editFormRef.current) {
       return;
