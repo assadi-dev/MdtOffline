@@ -35,6 +35,7 @@ export const DispatchWrapper = styled.div`
 `;
 
 export const DispatchBackgroundLayout = styled.div`
+  resize: vertical;
   width: 75vw;
   overflow-x: auto;
   border-radius: 8px;
@@ -150,6 +151,7 @@ export const AgentCardItemGrade = styled.div`
 `;
 
 export const AgenSquadtCardItemBody = styled.div`
+  position: relative;
   border-radius: 3px;
   padding: 1rem;
   width: 100%;
@@ -157,6 +159,35 @@ export const AgenSquadtCardItemBody = styled.div`
   background: var(--grey-color);
   color: var(--background-color-dark);
   min-height: 100px;
+`;
+
+export const AgenSquadtCardItemBottom = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  position: absolute;
+  bottom: 3px;
+  right: 5px;
+`;
+
+export const AgentSquadCardBtn = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  padding: 5px;
+  background-color: rgba(111, 111, 111, 0.4);
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  :hover {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-primary);
+  }
+  :active {
+    opacity: 0.3;
+  }
 `;
 
 export const AgentCardItemName = styled.p`

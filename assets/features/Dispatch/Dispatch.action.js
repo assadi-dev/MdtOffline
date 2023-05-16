@@ -241,3 +241,24 @@ const getColor = (statusName) => {
   let res = statusData.find((status) => status.code == statusName);
   return res.color.toString();
 };
+
+export const removeAgentSquadCard = (state, payload, current) => {
+  let currentState = { ...current(state) };
+  const cardID = payload.id;
+
+  let drpoListUpdate = currentState.dropLists.map((dl) => {
+    return {
+      ...dl,
+      categories: [
+        ...dl.categories.map((cat) => {
+          return {
+            ...cat,
+            cards: cat.cards.filter((c) => c.id != cardID),
+          };
+        }),
+      ],
+    };
+  });
+
+  state.dropLists = drpoListUpdate;
+};

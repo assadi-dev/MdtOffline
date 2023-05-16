@@ -6,6 +6,7 @@ import {
   creatdAgentSquadCard,
   find_categorie,
   persist_dispatch_api,
+  removeAgentSquadCard,
   removeCardAgent,
   remove_categorie,
   sortDropList,
@@ -60,6 +61,15 @@ export const DispatchSlice = createSlice({
     deleteAgentCard: (state, action) => {
       const { payload } = action;
       removeCardAgent(state, payload, current);
+      let cleanState = current(state);
+      let body = { currentState: cleanState, lastState: cleanState };
+      persist_dispatch_api(body);
+      return state;
+    },
+
+    deleteAgentSquadCard: (state, action) => {
+      const { payload } = action;
+      removeAgentSquadCard(state, payload, current);
       let cleanState = current(state);
       let body = { currentState: cleanState, lastState: cleanState };
       persist_dispatch_api(body);
@@ -131,6 +141,7 @@ export const {
   clearCategorieSelected,
   editSelectedCategorie,
   generateAgentsSquadCard,
+  deleteAgentSquadCard,
 } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;
