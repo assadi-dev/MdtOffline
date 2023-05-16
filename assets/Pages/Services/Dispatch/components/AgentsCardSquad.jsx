@@ -16,6 +16,7 @@ import AgentsCardSquadBottom from "./AgentsCardSquadBottom";
 
 const AgentsCardSquad = ({ card, index }) => {
   const { id, label, title, status, note, color } = card;
+
   return (
     <Draggable draggableId={String(id)} index={index}>
       {(provided, snapshot) => (

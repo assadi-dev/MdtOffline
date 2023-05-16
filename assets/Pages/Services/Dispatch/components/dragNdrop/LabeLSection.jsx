@@ -65,16 +65,30 @@ const LabeLSection = ({ lists, index, dropListIndex }) => {
               ref={provided.innerRef}
               className={snapshot.isDraggingOver ? "dragOver" : ""}
             >
-              {dropListIndex == 0 && cards.length > 0
-                ? cards.map((card, index) => (
-                    <AgentCardItem key={card.id} card={card} index={index} />
-                  ))
+              {cards.length > 0
+                ? cards.map((card, index) => {
+                    if (card.hasOwnProperty("grade"))
+                      return (
+                        <AgentCardItem
+                          key={card.id}
+                          card={card}
+                          index={index}
+                        />
+                      );
+                  })
                 : null}
 
-              {dropListIndex != 0 && cards.length > 0
-                ? cards.map((card, index) => (
-                    <AgentsCardSquad key={card.id} card={card} index={index} />
-                  ))
+              {cards.length > 0
+                ? cards.map((card, index) => {
+                    if (card.hasOwnProperty("note"))
+                      return (
+                        <AgentsCardSquad
+                          key={card.id}
+                          card={card}
+                          index={index}
+                        />
+                      );
+                  })
                 : null}
 
               {provided.placeholder}

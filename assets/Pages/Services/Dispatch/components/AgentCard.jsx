@@ -9,6 +9,7 @@ import {
 
 const AgentCardItem = ({ card, index }) => {
   const { id, agent, grade, color, background } = card;
+
   return (
     <Draggable draggableId={String(id)} index={index}>
       {(provided, snapshot) => (
