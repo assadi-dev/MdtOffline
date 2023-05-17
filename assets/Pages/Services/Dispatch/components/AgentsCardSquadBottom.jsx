@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AgenSquadtCardItemBottom,
   AgentSquadCardBtn,
@@ -8,25 +8,41 @@ import { useDispatch } from "react-redux";
 import {
   deleteAgentCard,
   deleteAgentSquadCard,
+  getSelectedSquadCard,
 } from "../../../../features/Dispatch/Dispatch.slice";
+import MenuEditSquad from "./Views/MenuEditSquad";
 
 const AgentsCardSquadBottom = ({ id }) => {
+  const [show, setShow] = useState(false);
+
   const dispatch = useDispatch();
+
+  const onCloseEdit = () => {
+    setShow(false);
+  };
 
   const handleDelete = () => {
     dispatch(deleteAgentSquadCard({ id }));
   };
 
-  return (
-    <AgenSquadtCardItemBottom>
-      <AgentSquadCardBtn title="Modifier">
-        <EditPencilIcon />
-      </AgentSquadCardBtn>
+  const handleEdit = () => {
+    dispatch(getSelectedSquadCard({ id }));
+    setShow((current) => (current = !current));
+  };
 
-      <AgentSquadCardBtn title="Supprimer" onClick={handleDelete}>
-        <TrashIcon />
-      </AgentSquadCardBtn>
-    </AgenSquadtCardItemBottom>
+  return (
+    <>
+      <AgenSquadtCardItemBottom onClick={handleEdit}>
+        <AgentSquadCardBtn title="Modifier">
+          <EditPencilIcon />
+        </AgentSquadCardBtn>
+
+        <AgentSquadCardBtn title="Supprimer" onClick={handleDelete}>
+          <TrashIcon />
+        </AgentSquadCardBtn>
+      </AgenSquadtCardItemBottom>
+      {show && <MenuEditSquad id={id} onCloseModal={onCloseEdit} />}
+    </>
   );
 };
 

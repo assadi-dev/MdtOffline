@@ -4,6 +4,8 @@ import {
   addCategoryDrop,
   creatCardAgent,
   creatdAgentSquadCard,
+  editAgentSquadCard,
+  find_agentSquadCard,
   find_categorie,
   persist_dispatch_api,
   removeAgentSquadCard,
@@ -91,6 +93,11 @@ export const DispatchSlice = createSlice({
       state.selected = find_categorie(state, payload, current);
     },
 
+    getSelectedSquadCard: (state, action) => {
+      const { payload } = action;
+      state.selected = find_agentSquadCard(state, payload, current);
+    },
+
     editSelectedCategorie: (state, action) => {
       const { payload } = action;
 
@@ -106,8 +113,19 @@ export const DispatchSlice = createSlice({
     generateAgentsSquadCard: (state, action) => {
       const { payload } = action;
       creatdAgentSquadCard(state, payload, current);
-      // let body = { currentState: cleanState, lastState: cleanState };
-      // persist_dispatch_api(body);
+      let cleanState = current(state);
+      let body = { currentState: cleanState, lastState: cleanState };
+      persist_dispatch_api(body);
+      return state;
+    },
+
+    updateAgentsSquadCard: (state, action) => {
+      const { payload } = action;
+
+      editAgentSquadCard(state, payload, current);
+      let cleanState = current(state);
+      let body = { currentState: cleanState, lastState: cleanState };
+      persist_dispatch_api(body);
       return state;
     },
 
@@ -142,6 +160,8 @@ export const {
   editSelectedCategorie,
   generateAgentsSquadCard,
   deleteAgentSquadCard,
+  getSelectedSquadCard,
+  updateAgentsSquadCard,
 } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;

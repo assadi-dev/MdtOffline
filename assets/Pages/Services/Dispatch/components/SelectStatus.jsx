@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import statusData from "./Views/statusData";
 
-const SelectStatus = ({ id, name, className, onChange }) => {
+const SelectStatus = ({ id, name, className, onChange, defaultInputValue }) => {
   const statusOption = statusData.map((s) => {
     return { label: s.code, value: s.code, color: s.color };
   });
@@ -13,7 +13,7 @@ const SelectStatus = ({ id, name, className, onChange }) => {
         id={id}
         className={className}
         classNamePrefix="statusSelect"
-        defaultValue={statusOption[0]}
+        defaultValue={defaultInputValue ? defaultInputValue : statusOption[0]}
         isClearable={false}
         isSearchable={true}
         name={name}

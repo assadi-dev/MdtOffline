@@ -164,6 +164,24 @@ export const find_categorie = (state, payload, current) => {
   return currentList;
 };
 
+export const find_agentSquadCard = (state, payload, current) => {
+  let cloneState = current(state);
+  let dropLists = [...cloneState.dropLists];
+  let currentList = [];
+  const cardId = payload.id;
+  for (const list of dropLists) {
+    let drop = { ...list };
+    currentList = drop.categories.find((item) =>
+      item.cards.find((c) => c.id == cardId)
+    );
+    if (currentList) {
+      break;
+    }
+  }
+
+  return currentList;
+};
+
 export const update_categorie = (state, payload, current) => {
   let cloneState = { ...state };
   let dropLists = [...cloneState.dropLists];
@@ -215,6 +233,39 @@ export const creatdAgentSquadCard = (state, payload, current) => {
     }
     return dp;
   });
+  state.dropLists = dropListsUpdated;
+};
+
+export const editAgentSquadCard = (state, payload, current) => {
+  let cloneState = { ...current(state) };
+  let dropLists = [...cloneState.dropLists];
+
+  const cardId = payload.id;
+
+  let dropListsUpdated = dropLists.map((dl) => {
+    return {
+      ...dl,
+      categories: [
+        ...dl.categories.map((cat) => {
+          return {
+            ...cat,
+            cards: cat.cards.map((card) => {
+              if (card.id == cardId) {
+                return {
+                  ...card,
+                  title: payload.title,
+                  status: payload.status,
+                  note: payload.note,
+                };
+              }
+              return card;
+            }),
+          };
+        }),
+      ],
+    };
+  });
+
   state.dropLists = dropListsUpdated;
 };
 
