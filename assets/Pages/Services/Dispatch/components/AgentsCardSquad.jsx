@@ -7,6 +7,7 @@ import {
   AgentCardItemContainer,
   AgentCardItemGrade,
   AgentCardItemName,
+  AgentCardItemNote,
   AgentCardItemRow,
   AgentCardStatus,
   AgentSquadCardBtn,
@@ -35,7 +36,7 @@ const AgentsCardSquad = ({ card, index }) => {
                 <AgentCardStatus background={color}>{status}</AgentCardStatus>
               </AgentCardItemRow>
               <AgentCardItemName>{title}</AgentCardItemName>
-
+              <AgentCardItemNote>{note}</AgentCardItemNote>
               <AgentsCardSquadBottom id={id} />
             </AgenSquadtCardItemBody>
           </AgentCardItemContainer>

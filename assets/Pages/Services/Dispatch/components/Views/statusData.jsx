@@ -11,4 +11,6 @@ export default [
   { id: "10-91", code: "10-91", color: "#C89E31" },
   { id: "code-5", code: "Code 5", color: "#0BA257" },
   { id: "code-99", code: "Code 99", color: "#A20B0B" },
+  { id: "hopital", code: "Hopital", color: "#57C5CC" },
+  { id: "procedure", code: "Procédure", color: "#57C5CC" },
 ];

@@ -14,6 +14,8 @@ export const sortDropList = (state, results, current) => {
 
   let allCategories = [];
 
+  let cloneState = current(state);
+
   for (const lists of state) {
     const { categories } = lists;
 
@@ -44,6 +46,8 @@ export const sortDropList = (state, results, current) => {
 
     //Identifier la list et categorie de destination
     let categorieEnd = allCategories.find((cat) => droppableIdEnd == cat.id);
+    let categorieTitle = categorieEnd.title;
+    card[0].label = categorieTitle;
     categorieEnd.cards.splice(droppableIndexEnd, 0, ...card);
   }
 };
@@ -253,6 +257,7 @@ export const editAgentSquadCard = (state, payload, current) => {
               if (card.id == cardId) {
                 return {
                   ...card,
+
                   title: payload.title,
                   status: payload.status,
                   note: payload.note,

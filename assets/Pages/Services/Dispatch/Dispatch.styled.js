@@ -153,21 +153,24 @@ export const AgentCardItemGrade = styled.div`
 export const AgenSquadtCardItemBody = styled.div`
   position: relative;
   border-radius: 3px;
-  padding: 1rem;
+  padding: 0.5rem;
   width: 100%;
   font-weight: bold;
   background: var(--grey-color);
   color: var(--background-color-dark);
   min-height: 100px;
+  max-height: 150px;
 `;
 
 export const AgenSquadtCardItemBottom = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
-  position: absolute;
+  //position: absolute;
   bottom: 3px;
   right: 5px;
+  justify-content: flex-end;
+  margin-top: 8px;
 `;
 
 export const AgentSquadCardBtn = styled.button`
@@ -194,6 +197,10 @@ export const AgentCardItemName = styled.p`
   margin-top: 1rem;
   color: var(--color-blue-dark);
   font-weight: bold;
+`;
+
+export const AgentCardItemNote = styled.p`
+  color: var(--color-blue-dark);
 `;
 
 export const AgentCardItemRow = styled.div`

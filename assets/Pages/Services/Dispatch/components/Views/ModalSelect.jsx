@@ -67,9 +67,9 @@ const ModalSelect = ({
       <MenuSelectBtn className="edit" onClick={handleEdit}>
         <EditPencilIcon /> Editer
       </MenuSelectBtn>
-      <MenuSelectBtn className="delete" onClick={handleDelete}>
+      {/*    <MenuSelectBtn className="delete" onClick={handleDelete}>
         <TrashIcon /> Supprimer
-      </MenuSelectBtn>
+      </MenuSelectBtn> */}
     </ModalSelectContainer>
   );
 };
