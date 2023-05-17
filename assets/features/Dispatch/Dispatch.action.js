@@ -1,6 +1,7 @@
 import { clean_name } from "./helper";
 import uniqid from "uniqid";
 import Api from "../../service/Api/Api";
+import statusData from "../../Pages/Services/Dispatch/components/Views/statusData";
 
 export const sortDropList = (state, results, current) => {
   const {
@@ -12,6 +13,8 @@ export const sortDropList = (state, results, current) => {
   } = results;
 
   let allCategories = [];
+
+  let cloneState = current(state);
 
   for (const lists of state) {
     const { categories } = lists;
@@ -43,6 +46,8 @@ export const sortDropList = (state, results, current) => {
 
     //Identifier la list et categorie de destination
     let categorieEnd = allCategories.find((cat) => droppableIdEnd == cat.id);
+    let categorieTitle = categorieEnd.title;
+    card[0].label = categorieTitle;
     categorieEnd.cards.splice(droppableIndexEnd, 0, ...card);
   }
 };
@@ -74,6 +79,7 @@ export const creatCardAgent = (state, payload) => {
     agent: `${matricule}-${username}`,
     background: "var(--grey-color)",
     color: "var(--background-color-dark)",
+    status: "",
   };
 
   const dispatchList = state.dropLists[0].categories[0].cards;
@@ -162,6 +168,24 @@ export const find_categorie = (state, payload, current) => {
   return currentList;
 };
 
+export const find_agentSquadCard = (state, payload, current) => {
+  let cloneState = current(state);
+  let dropLists = [...cloneState.dropLists];
+  let currentList = [];
+  const cardId = payload.id;
+  for (const list of dropLists) {
+    let drop = { ...list };
+    currentList = drop.categories.find((item) =>
+      item.cards.find((c) => c.id == cardId)
+    );
+    if (currentList) {
+      break;
+    }
+  }
+
+  return currentList;
+};
+
 export const update_categorie = (state, payload, current) => {
   let cloneState = { ...state };
   let dropLists = [...cloneState.dropLists];
@@ -182,10 +206,115 @@ export const update_categorie = (state, payload, current) => {
   return updateList;
 };
 
+export const creatdAgentSquadCard = (state, payload, current) => {
+  let cloneState = { ...state };
+  let dropLists = [...cloneState.dropLists];
+
+  let categorie = find_categorie(state, payload, current);
+  categorie = { ...categorie };
+  const { title, status, note } = payload;
+  let card = generateSquadCard({ title, status, note });
+  card.label = categorie.title;
+  categorie = { ...categorie, cards: [...categorie.cards, card] };
+
+  let currentDropList = dropLists.find((dp) =>
+    dp.categories.find((cat) => cat.id == categorie.id)
+  );
+
+  let updateCurrentDropList = {
+    ...currentDropList,
+    categories: currentDropList.categories.map((cat) => {
+      if (cat.id == categorie.id) {
+        return { ...categorie };
+      }
+      return cat;
+    }),
+  };
+
+  let dropListsUpdated = dropLists.map((dp) => {
+    if (dp.id == updateCurrentDropList.id) {
+      return { ...updateCurrentDropList };
+    }
+    return dp;
+  });
+  state.dropLists = dropListsUpdated;
+};
+
+export const editAgentSquadCard = (state, payload, current) => {
+  let cloneState = { ...current(state) };
+  let dropLists = [...cloneState.dropLists];
+
+  const cardId = payload.id;
+
+  let dropListsUpdated = dropLists.map((dl) => {
+    return {
+      ...dl,
+      categories: [
+        ...dl.categories.map((cat) => {
+          return {
+            ...cat,
+            cards: cat.cards.map((card) => {
+              if (card.id == cardId) {
+                return {
+                  ...card,
+
+                  title: payload.title,
+                  status: payload.status,
+                  note: payload.note,
+                };
+              }
+              return card;
+            }),
+          };
+        }),
+      ],
+    };
+  });
+
+  state.dropLists = dropListsUpdated;
+};
+
 export const persist_dispatch_api = (data) => {
   Api.put(`/dispatch_managers/1`, data);
 };
 
 export const load_dispatch_data = async () => {
   return Api.get(`/dispatch_managers/1`);
+};
+
+const generateSquadCard = (data) => {
+  const { title, status, note } = data;
+  return {
+    id: uniqid(),
+    title,
+    status,
+    note,
+    color: getColor(status),
+  };
+};
+
+const getColor = (statusName) => {
+  let res = statusData.find((status) => status.code == statusName);
+  return res.color.toString();
+};
+
+export const removeAgentSquadCard = (state, payload, current) => {
+  let currentState = { ...current(state) };
+  const cardID = payload.id;
+
+  let drpoListUpdate = currentState.dropLists.map((dl) => {
+    return {
+      ...dl,
+      categories: [
+        ...dl.categories.map((cat) => {
+          return {
+            ...cat,
+            cards: cat.cards.filter((c) => c.id != cardID),
+          };
+        }),
+      ],
+    };
+  });
+
+  state.dropLists = drpoListUpdate;
 };

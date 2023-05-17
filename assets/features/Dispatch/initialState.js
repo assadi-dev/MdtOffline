@@ -90,21 +90,23 @@ export const infos = [
 
 export const dropLists = [
   { id: `list-dispatch`, title: "Dispatch", categories: [] },
-  { id: `list-secteur-sud`, title: "Secteur Sud", categories: [] },
-  {
-    id: `list-secteur-nord`,
-    title: "Secteur Nord",
-    categories: [],
-  },
-  {
-    id: `list-hors-terrain`,
-    title: "Hors Terrain",
-    categories: [],
-  },
   {
     id: `list-operation-center`,
     title: "Operation center",
     categories: [],
   },
+  {
+    id: `list-secteur-nord`,
+    title: "Secteur Nord",
+    categories: [],
+  },
+  { id: `list-secteur-sud`, title: "Secteur Sud", categories: [] },
+
+  {
+    id: `list-hors-terrain`,
+    title: "Hors Terrain",
+    categories: [],
+  },
+
   { id: `list-info`, title: "Infos", categories: [] },
 ];

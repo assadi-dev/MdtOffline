@@ -10,6 +10,8 @@ const OptionButtonAction = ({
   bacgroundColor,
   toggleModal,
   closeEditModal,
+  toggleSquadModal,
+  closeAddSquadModal,
 }) => {
   const optionDrop = useRef(null);
   bacgroundColor = bacgroundColor ? bacgroundColor : "#000";
@@ -25,6 +27,7 @@ const OptionButtonAction = ({
   const closeModal = () => {
     setShow((current) => (current = false));
   };
+
   return (
     <>
       <OptionBtnDropList isDark={isDark} onClick={toggleBtn}>
@@ -35,6 +38,8 @@ const OptionButtonAction = ({
         isShow={show}
         onCloseModal={closeModal}
         toggleModal={toggleModal}
+        toggleSquadModal={toggleSquadModal}
+        closeAddSquadModal={closeAddSquadModal}
       />
     </>
   );

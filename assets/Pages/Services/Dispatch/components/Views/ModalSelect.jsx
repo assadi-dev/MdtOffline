@@ -1,12 +1,23 @@
 import React from "react";
 import { MenuSelectBtn, ModalSelectContainer } from "./View.styled";
-import { EditPencilIcon, TrashIcon } from "../../../../../components/SVG";
+import {
+  EditPencilIcon,
+  TrashIcon,
+  UsersAddIcon,
+} from "../../../../../components/SVG";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { deleteCardItem } from "../../../../../features/Dispatch/Dispatch.slice";
 
-const ModalSelect = ({ id, isShow, onCloseModal, toggleModal }) => {
+const ModalSelect = ({
+  id,
+  isShow,
+  onCloseModal,
+  toggleModal,
+  toggleSquadModal,
+  closeAddSquadModal,
+}) => {
   const SHOW_CLASS_MODAL = ["dropDownSelectOption"];
 
   isShow ? SHOW_CLASS_MODAL.push("show-option") : SHOW_CLASS_MODAL;
@@ -34,6 +45,11 @@ const ModalSelect = ({ id, isShow, onCloseModal, toggleModal }) => {
     };
   }, [modalRef]);
 
+  const handleAddSquad = () => {
+    toggleSquadModal(id);
+    onCloseModal();
+  };
+
   const handleEdit = () => {
     toggleModal(id);
     onCloseModal();
@@ -45,12 +61,15 @@ const ModalSelect = ({ id, isShow, onCloseModal, toggleModal }) => {
 
   return (
     <ModalSelectContainer className={SHOW_CLASS_MODAL.join(" ")} ref={modalRef}>
+      <MenuSelectBtn className="add" onClick={handleAddSquad}>
+        <UsersAddIcon /> Ajouter
+      </MenuSelectBtn>
       <MenuSelectBtn className="edit" onClick={handleEdit}>
         <EditPencilIcon /> Editer
       </MenuSelectBtn>
-      <MenuSelectBtn className="delete" onClick={handleDelete}>
+      {/*    <MenuSelectBtn className="delete" onClick={handleDelete}>
         <TrashIcon /> Supprimer
-      </MenuSelectBtn>
+      </MenuSelectBtn> */}
     </ModalSelectContainer>
   );
 };

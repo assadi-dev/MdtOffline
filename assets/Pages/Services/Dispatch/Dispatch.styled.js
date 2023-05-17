@@ -35,6 +35,7 @@ export const DispatchWrapper = styled.div`
 `;
 
 export const DispatchBackgroundLayout = styled.div`
+  resize: vertical;
   width: 75vw;
   overflow-x: auto;
   border-radius: 8px;
@@ -141,7 +142,7 @@ export const AgentCardItemBody = styled.div`
 `;
 
 export const AgentCardItemGrade = styled.div`
-  padding: 0.8rem 1rem;
+  padding: 0.4rem 1rem;
   width: fit-content;
   color: #fff;
   border-radius: 5px;
@@ -149,10 +150,72 @@ export const AgentCardItemGrade = styled.div`
   font-size: 1rem;
 `;
 
+export const AgenSquadtCardItemBody = styled.div`
+  position: relative;
+  border-radius: 3px;
+  padding: 0.5rem;
+  width: 100%;
+  font-weight: bold;
+  background: var(--grey-color);
+  color: var(--background-color-dark);
+  min-height: 100px;
+  max-height: 150px;
+`;
+
+export const AgenSquadtCardItemBottom = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  //position: absolute;
+  bottom: 3px;
+  right: 5px;
+  justify-content: flex-end;
+  margin-top: 8px;
+`;
+
+export const AgentSquadCardBtn = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  padding: 5px;
+  background-color: rgba(111, 111, 111, 0.4);
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  :hover {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-primary);
+  }
+  :active {
+    opacity: 0.3;
+  }
+`;
+
 export const AgentCardItemName = styled.p`
   margin-top: 1rem;
   color: var(--color-blue-dark);
   font-weight: bold;
+`;
+
+export const AgentCardItemNote = styled.p`
+  color: var(--color-blue-dark);
+`;
+
+export const AgentCardItemRow = styled.div`
+  display: flex;
+  gap: 3px;
+`;
+
+export const AgentCardStatus = styled.div`
+  padding: 0.4rem 1rem;
+  width: fit-content;
+  color: #fff;
+  border-radius: 5px;
+  background-color: var(--color-blue-dark);
+  font-size: 1rem;
+  background: ${({ background }) => (background ? background : "var(--green)")};
 `;
 
 export const AddCategoriebutton = styled.button`
