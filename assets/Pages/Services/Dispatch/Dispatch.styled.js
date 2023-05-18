@@ -170,7 +170,7 @@ export const AgenSquadtCardItemBottom = styled.div`
   bottom: 3px;
   right: 5px;
   justify-content: flex-end;
-  margin-top: 8px;
+  margin-top: 12px;
 `;
 
 export const AgentSquadCardBtn = styled.button`
@@ -201,6 +201,11 @@ export const AgentCardItemName = styled.p`
 
 export const AgentCardItemNote = styled.p`
   color: var(--color-blue-dark);
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 `;
 
 export const AgentCardItemRow = styled.div`
