@@ -196,7 +196,7 @@ export const CallRadioViewBody = styled.div`
   margin: 0 auto;
   z-index: 55;
   transform: translateY(135px);
-  min-height: 45vh;
+  min-height: 55vh;
 
   background-color: var(--color-blue-dark);
   padding: 15px;
