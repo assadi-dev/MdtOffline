@@ -172,17 +172,22 @@ export const AgenSquadtCardItemBottom = styled.div`
   bottom: 3px;
   right: 5px;
   margin-top: 12px;
-  grid-template-columns: repeat(3, 30px);
+  grid-template-columns: repeat(3, minmax(20px, 26px));
   grid-auto-rows: auto;
-  grid-template-areas: "a a a b c";
+  grid-template-areas: "a . . . . b c";
   .grid-a {
     grid-area: a;
+    justify-self: center;
   }
   .grid-b {
     grid-area: b;
+    justify-self: flex-end;
+    max-width: 25px;
   }
   .grid-c {
     grid-area: c;
+    justify-self: flex-end;
+    max-width: 25px;
   }
 `;
 
