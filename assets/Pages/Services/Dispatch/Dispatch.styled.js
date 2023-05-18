@@ -127,6 +127,7 @@ export const AgentCardItemContainer = styled.div`
   margin: 0.3rem 0;
   width: 100%;
   font-size: 1rem;
+  user-select: none;
   @media screen and (min-width: 992px) {
     font-size: 1.2rem;
   }
@@ -163,14 +164,38 @@ export const AgenSquadtCardItemBody = styled.div`
 `;
 
 export const AgenSquadtCardItemBottom = styled.div`
-  display: flex;
+  display: grid;
+  width: 100%;
   gap: 1rem;
   align-items: center;
   //position: absolute;
   bottom: 3px;
   right: 5px;
-  justify-content: flex-end;
   margin-top: 12px;
+  grid-template-columns: repeat(3, 30px);
+  grid-auto-rows: auto;
+  grid-template-areas: "a a a b c";
+  .grid-a {
+    grid-area: a;
+  }
+  .grid-b {
+    grid-area: b;
+  }
+  .grid-c {
+    grid-area: c;
+  }
+`;
+
+export const AgentSquadCardTypingContainer = styled.span`
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  padding: 5px;
+  background-color: rgba(111, 111, 111, 0.15);
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const AgentSquadCardBtn = styled.button`

@@ -16,10 +16,16 @@ import { EditPencilIcon, TrashIcon } from "../../../../components/SVG";
 import AgentsCardSquadBottom from "./AgentsCardSquadBottom";
 
 const AgentsCardSquad = ({ card, index }) => {
-  const { id, label, title, status, note, color } = card;
+  const { id, label, title, status, note, color, isEdit } = card;
+
+  const canDragable = isEdit ? isEdit : false;
 
   return (
-    <Draggable draggableId={String(id)} index={index}>
+    <Draggable
+      draggableId={String(id)}
+      index={index}
+      isDragDisabled={canDragable}
+    >
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
@@ -37,7 +43,7 @@ const AgentsCardSquad = ({ card, index }) => {
               </AgentCardItemRow>
               <AgentCardItemName>{title}</AgentCardItemName>
               <AgentCardItemNote>{note}</AgentCardItemNote>
-              <AgentsCardSquadBottom id={id} />
+              <AgentsCardSquadBottom id={id} canDragable={isEdit} />
             </AgenSquadtCardItemBody>
           </AgentCardItemContainer>
         </div>

@@ -240,6 +240,36 @@ export const creatdAgentSquadCard = (state, payload, current) => {
   state.dropLists = dropListsUpdated;
 };
 
+export const upDragCard = (state, payload, current) => {
+  let cloneState = { ...current(state) };
+  let dropLists = [...cloneState.dropLists];
+  const cardId = payload.id;
+
+  let dropListsUpdated = dropLists.map((dl) => {
+    return {
+      ...dl,
+      categories: [
+        ...dl.categories.map((cat) => {
+          return {
+            ...cat,
+            cards: cat.cards.map((card) => {
+              if (card.id == cardId) {
+                return {
+                  ...card,
+                  isEdit: payload.isEdit,
+                };
+              }
+              return card;
+            }),
+          };
+        }),
+      ],
+    };
+  });
+
+  state.dropLists = dropListsUpdated;
+};
+
 export const editAgentSquadCard = (state, payload, current) => {
   let cloneState = { ...current(state) };
   let dropLists = [...cloneState.dropLists];
@@ -261,6 +291,7 @@ export const editAgentSquadCard = (state, payload, current) => {
                   title: payload.title,
                   status: payload.status,
                   note: payload.note,
+                  isEdit: false,
                 };
               }
               return card;
@@ -290,6 +321,7 @@ const generateSquadCard = (data) => {
     status,
     note,
     color: getColor(status),
+    isEdit: false,
   };
 };
 

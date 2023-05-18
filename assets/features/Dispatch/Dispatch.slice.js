@@ -12,6 +12,7 @@ import {
   removeCardAgent,
   remove_categorie,
   sortDropList,
+  upDragCard,
   update_categorie,
 } from "./Dispatch.action";
 import { getDispatchDataAsync } from "./DispatchAsyncApi";
@@ -119,6 +120,16 @@ export const DispatchSlice = createSlice({
       return state;
     },
 
+    toggleDragAgentsSquadCard: (state, action) => {
+      const { payload } = action;
+
+      upDragCard(state, payload, current);
+      let cleanState = current(state);
+      let body = { currentState: cleanState, lastState: cleanState };
+      persist_dispatch_api(body);
+      return state;
+    },
+
     updateAgentsSquadCard: (state, action) => {
       const { payload } = action;
 
@@ -162,6 +173,7 @@ export const {
   deleteAgentSquadCard,
   getSelectedSquadCard,
   updateAgentsSquadCard,
+  toggleDragAgentsSquadCard,
 } = DispatchSlice.actions;
 
 export default DispatchSlice.reducer;
