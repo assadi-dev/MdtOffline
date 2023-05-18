@@ -1,9 +1,12 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   DispatchBackgroundLayout,
   DispatchWrapper,
   DropContainerlistCard,
   DropItemContainerCard,
+  RowHeaderButton,
+  RowHeaderButtonContainer,
 } from "./Dispatch.styled";
 import DropListCard from "./components/dragNdrop/DropListCard";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -13,10 +16,18 @@ import { sortDropList } from "../../../features/Dispatch/Dispatch.action";
 import { useEffect } from "react";
 import { getDispatchDataAsync } from "../../../features/Dispatch/DispatchAsyncApi";
 import { MERCURE_HUB_URL, TOPIC_URL } from "../../../constants/localStorage";
+import { TalkieWalkie } from "../../../components/SVG";
+import CallRadioViewModal from "./components/Views/CallRadioViewContent";
 
 const Dispatch = () => {
   const { dropLists, status } = useSelector((state) => state.DispatchReducer);
   const dispatch = useDispatch();
+
+  const [showCall, setShowCall] = useState(false);
+
+  const handleShowCallRadio = () => {
+    setShowCall((current) => (current = !current));
+  };
 
   useEffect(() => {
     const promise = dispatch(getDispatchDataAsync());
@@ -62,25 +73,41 @@ const Dispatch = () => {
   };
 
   return (
-    <DispatchWrapper>
-      <DispatchBackgroundLayout>
-        <DropContainerlistCard>
-          <DragDropContext onDragEnd={handleDragEnd}>
-            {dropLists.length > 0
-              ? dropLists.map((list, index) => (
-                  <DropListCard
-                    key={list.id}
-                    id={list.id}
-                    title={list.title}
-                    listslabels={list.categories}
-                    dropListIndex={index}
-                  />
-                ))
-              : null}
-          </DragDropContext>
-        </DropContainerlistCard>
-      </DispatchBackgroundLayout>
-    </DispatchWrapper>
+    <>
+      <DispatchWrapper>
+        <RowHeaderButtonContainer>
+          <RowHeaderButton onClick={handleShowCallRadio}>
+            <TalkieWalkie />
+          </RowHeaderButton>
+        </RowHeaderButtonContainer>
+        <DispatchBackgroundLayout>
+          <DropContainerlistCard>
+            <DragDropContext onDragEnd={handleDragEnd}>
+              {dropLists.length > 0
+                ? dropLists.map((list, index) => (
+                    <DropListCard
+                      key={list.id}
+                      id={list.id}
+                      title={list.title}
+                      listslabels={list.categories}
+                      dropListIndex={index}
+                    />
+                  ))
+                : null}
+            </DragDropContext>
+          </DropContainerlistCard>
+        </DispatchBackgroundLayout>
+      </DispatchWrapper>
+
+      {showCall &&
+        createPortal(
+          <CallRadioViewModal
+            stateModal={showCall}
+            onClose={handleShowCallRadio}
+          />,
+          document.body
+        )}
+    </>
   );
 };
 

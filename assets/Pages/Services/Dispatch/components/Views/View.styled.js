@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CloseModalBtn from "../../../../../components/Shared/Modal/CloseModal";
 
 export const MenuAddContainer = styled.div`
   opacity: 0;
@@ -168,4 +169,93 @@ export const MenuSelectBtn = styled.button`
   :active {
     opacity: 0.3;
   }
+`;
+
+export const CallRadioViewOverlay = styled.div`
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  bottom: 0;
+  z-index: 78;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @keyframes fadeUp {
+    100% {
+      transform: translateY(-55px);
+    }
+  }
+`;
+export const CallRadioViewBody = styled.div`
+  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+  border-radius: 5px;
+  width: calc(95vw);
+  box-shadow: 0px 0px 10px 3px #2b7de9;
+  margin: 0 auto;
+  z-index: 55;
+  transform: translateY(135px);
+  min-height: 45vh;
+
+  background-color: var(--color-blue-dark);
+  padding: 15px;
+  animation: fadeUp 0.25 ease-in 1s forwards;
+`;
+export const HeaderModalRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const CloseBtn = styled(CloseModalBtn)`
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  color: rgba(255, 255, 255, 0.4);
+
+  :hover {
+    color: rgba(255, 255, 255, 1);
+  }
+`;
+
+export const CallListWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  width: 100%;
+`;
+
+export const ColList = styled.ul`
+  width: 100%;
+  font-size: 14px;
+
+  li {
+    transition: all 0.25s ease-in-out;
+    position: relative;
+    padding: 0.5rem;
+    overflow: hidden;
+    :before {
+      content: "";
+      position: absolute;
+      background-color: var(--color-blue-opacity-50);
+      color: #fff;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      transition: all 0.25s ease-in-out;
+      z-index: -1;
+    }
+    :hover {
+      font-size: 15px;
+      :before {
+        width: 100%;
+      }
+    }
+  }
+`;
+
+export const Codetext = styled.span`
+  font-weight: bold;
+  margin-right: 0.5rem;
 `;

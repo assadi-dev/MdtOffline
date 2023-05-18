@@ -38,6 +38,37 @@ export const DispatchWrapper = styled.div`
   }
 `;
 
+export const RowHeaderButtonContainer = styled.div`
+  margin: 16px 0;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  grid-gap: 1rem;
+`;
+
+export const RowHeaderButton = styled.button`
+  padding: 5px;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  background: #2b7de950;
+  color: #fff;
+  transition: 0.25s all ease-in;
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  :hover {
+    box-shadow: 0px 0px 10px 3px #2b7de9;
+    background: #2b7de9;
+    color: var(--color-blue-dark);
+  }
+  :active {
+    opacity: 0;
+  }
+`;
+
 export const DispatchBackgroundLayout = styled.div`
   resize: vertical;
   width: 75vw;
@@ -178,7 +209,7 @@ export const AgenSquadtCardItemBottom = styled.div`
   margin-top: 12px;
   grid-template-columns: repeat(3, minmax(20px, 26px));
   grid-auto-rows: auto;
-  grid-template-areas: "a . . . . b c";
+  grid-template-areas: "a . . . . . . b c";
   .grid-a {
     grid-area: a;
     justify-self: center;
