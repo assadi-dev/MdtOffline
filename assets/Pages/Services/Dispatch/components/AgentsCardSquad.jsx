@@ -20,6 +20,10 @@ const AgentsCardSquad = ({ card, index }) => {
 
   const canDragable = isEdit ? isEdit : false;
 
+  const CLASS_DRAGABLE = [];
+
+  isEdit ? CLASS_DRAGABLE.push("cursor-disabled") : [];
+
   return (
     <Draggable
       draggableId={String(id)}
@@ -34,7 +38,9 @@ const AgentsCardSquad = ({ card, index }) => {
           className="body-item-scrollable"
         >
           <AgentCardItemContainer
-            className={snapshot.isDragging ? "isDragging" : ""}
+            className={
+              snapshot.isDragging ? "isDragging" : CLASS_DRAGABLE.join(" ")
+            }
           >
             <AgenSquadtCardItemBody>
               <AgentCardItemRow>

@@ -32,6 +32,10 @@ export const DispatchWrapper = styled.div`
     background-color: #2b7de925;
     //box-shadow: 1px 1px 3px 2px #2b7de920;
   }
+
+  .cursor-disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export const DispatchBackgroundLayout = styled.div`

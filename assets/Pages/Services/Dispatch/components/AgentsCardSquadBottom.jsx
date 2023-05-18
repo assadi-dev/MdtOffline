@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AgenSquadtCardItemBottom,
   AgentSquadCardBtn,
@@ -18,13 +18,14 @@ import { DotTyping } from "../../../../components/SVG/Loader.svg";
 const AgentsCardSquadBottom = ({ id, canDragable }) => {
   const [show, setShow] = useState(false);
 
-  console.log(canDragable);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(toggleDragAgentsSquadCard({ id, isEdit: show }));
+  }, [show]);
 
   const onCloseEdit = () => {
     setShow(false);
-    dispatch(toggleDragAgentsSquadCard({ id, isEdit: false }));
   };
 
   const handleDelete = () => {
@@ -35,7 +36,6 @@ const AgentsCardSquadBottom = ({ id, canDragable }) => {
     dispatch(getSelectedSquadCard({ id }));
 
     setShow((current) => (current = !current));
-    dispatch(toggleDragAgentsSquadCard({ id, isEdit: !show }));
   };
 
   return (
