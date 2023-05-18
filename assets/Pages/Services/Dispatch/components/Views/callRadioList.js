@@ -97,18 +97,18 @@ export default {
       description: "Aucune autre assistance nécessaire,situation stable",
     },
     {
-      code: "Code 4",
+      code: "Code 4 Adam",
       description:
-        "Adam:Idem,mais suspect toujours en fuite, des unités sont mobilisées",
+        "Idem,mais suspect toujours en fuite, des unités sont mobilisées",
     },
     {
       code: "Code 5",
       description: "En surveillance, les autres unités doivent éviter le lieu",
     },
     {
-      code: "Code 5",
+      code: "Code 5 Edward",
       description:
-        "Edward: Utilisé pour notifier aux unités qu'un explosif est présent sur la zone",
+        "Utilisé pour notifier aux unités qu'un explosif est présent sur la zone",
     },
     {
       code: "Code 6",
@@ -116,14 +116,13 @@ export default {
         "Arrivé sur scene ou déja occupé en intervention / investigation",
     },
     {
-      code: "Code 6",
-      description:
-        "Adam: Arrivé, peut avoir besoin de l'assistance d'unités proches",
+      code: "Code 6 Adam",
+      description: "Arrivé, peut avoir besoin de l'assistance d'unités proches",
     },
     {
-      code: "Code 6",
+      code: "Code 6 Charles",
       description:
-        "Charles: Idem, suspect dangereux (mandat), attente confirmation assistance",
+        "Idem, suspect dangereux (mandat), attente confirmation assistance",
     },
     {
       code: "Code 7",
