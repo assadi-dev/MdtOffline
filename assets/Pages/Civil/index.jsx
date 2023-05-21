@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getAllCivil, searchCivil } from "../../redux/actions/Civil.action";
-import { toSlugFormat, ucFirst } from "../../utils/textFormat";
 import ButtonWithIcon from "../../components/Shared/Buttons/ButtonWithIcon";
 import SearchInput from "../../components/Shared/SearchInput";
 import { AddUser } from "../../components/SVG";
-import { ActionRow, Card, CivilWrapper, RowCard } from "./Civil.styled";
-import CivilCard from "./CivilCard";
+import { ActionRow, CivilWrapper } from "./Civil.styled";
+
 import EncodeCivil from "./Modal/EncodeCivil";
-import { get_allChefAccusations } from "../../redux/actions/ChefAccusation.action";
+
 import {
   getAllCivilsAsync,
   searchCivilAsync,
 } from "../../features/Civil/CivilAsyncApi";
 import { sleep } from "../../utils/timer";
+import CivilList from "./CivilList";
+import LoadinCivilList from "./Loading/LoadinCivilList";
 
 const Civil = () => {
   const [search, setSearch] = useState();
@@ -22,8 +21,8 @@ const Civil = () => {
   const [timer, setTimer] = useState(null);
 
   const dispatch = useDispatch();
-  const civilSelector = useSelector((state) => state.CivilReducer);
   const userAuth = useSelector((state) => state.AuthenticateReducer);
+  const { status } = useSelector((state) => state.CivilReducer);
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +49,6 @@ const Civil = () => {
       promise.abort();
     };
   }, []);
-
   return (
     <>
       <CivilWrapper>
@@ -71,32 +69,8 @@ const Civil = () => {
           />
         </ActionRow>
 
-        <RowCard>
-          {civilSelector.collection.length > 0 &&
-            civilSelector.collection.map((civil) => (
-              <Link
-                key={civil.id}
-                to={`../../../civil/${toSlugFormat(
-                  `${civil && civil.nom} ${civil && civil.prenom}`
-                )}/${civil.id}`}
-                state={{
-                  name: `${civil && civil.nom.toUpperCase()} ${
-                    civil && ucFirst(civil.prenom)
-                  }`,
-                  id: civil && civil.id,
-                }}
-              >
-                {civil && (
-                  <CivilCard
-                    nom={civil.nom}
-                    prenom={ucFirst(civil.prenom)}
-                    telephone={civil.telephone}
-                    photo={civil.photo}
-                  />
-                )}
-              </Link>
-            ))}
-        </RowCard>
+        {status != "complete" ? <LoadinCivilList /> : <CivilList />}
+
         <EncodeCivil
           isOpen={modal.encodeCivil}
           onClose={toggleModal}

@@ -6,6 +6,7 @@ import "./styles/fonts.css";
 import "./styles/layout.css";
 import "./styles/tickAnimation.css";
 import "./styles/spinnerAnimation.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import MainLayout from "./components/Layout/MainLayout";
 import PagesRoutes from "./routes/Pages.routes";
 import uniqid from "uniqid";

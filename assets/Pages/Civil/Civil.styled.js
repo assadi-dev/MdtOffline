@@ -60,6 +60,7 @@ export const CardContainer = styled.div`
   grid-template-columns: 110px 1fr;
   grid-column-gap: 1rem;
   padding-top: 12px;
+  overflow-x: hidden;
 `;
 
 export const CivilPhoto = styled.div`
