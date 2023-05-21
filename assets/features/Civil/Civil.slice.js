@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addCivilAsync,
   editCivilAsync,
+  fetchAllCivilsNextPageAsync,
   getAllCivilsAsync,
   getOneCivilsAsync,
   searchCivilAsync,
@@ -32,13 +33,18 @@ import {
 import { addCelluleAsync } from "../Cellules/CellulesAsyncApi";
 import { addPrisonAsync } from "../Prison/PrisonAsyncApi";
 import { addConvocationAsync } from "../Convocation/ConvocationAsyncApi";
+import { fetchAllCivilsNextPage } from "./CivilApi";
 
 const initialState = {
+  complete: [],
   collection: [],
   selected: [],
   filter: [],
   error: "",
   status: "",
+  totatItems: 0,
+  currentPage: 1,
+  lastPage: 2,
 };
 
 export const CivilSlice = createSlice({
@@ -46,7 +52,7 @@ export const CivilSlice = createSlice({
   initialState,
   reducers: {
     setError: (state, action) => {
-      state.errors = action.payload;
+      state.error = action.payload;
     },
     uploadPhoto: (state, { payload }) => {
       let newStateCollection = state.collection;
@@ -68,11 +74,30 @@ export const CivilSlice = createSlice({
       .addCase(getAllCivilsAsync.fulfilled, (state, action) => {
         const { payload } = action;
         state.status = "complete";
-        state.collection = payload;
+        state.collection = payload["hydra:member"];
+        state.totatItems = payload["hydra:totalItems"];
+        state.currentPage = 2;
+        state.lastPage = Number(
+          payload["hydra:view"]["hydra:last"].match(/\d/g).join("")
+        );
       })
       .addCase(getAllCivilsAsync.rejected, (state, { error }) => {
         state.error = error.message;
       });
+
+    //add Civil to collection
+    builders
+      .addCase(fetchAllCivilsNextPageAsync.pending, (state) => {})
+      .addCase(fetchAllCivilsNextPageAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.status = "complete";
+        state.collection = [...state.collection, ...payload["hydra:member"]];
+        state.currentPage = state.currentPage += 1;
+        state.lastPage = Number(
+          payload["hydra:view"]["hydra:last"].match(/\d/g).join("")
+        );
+      });
+
     //Get One Civil
     builders
       .addCase(getOneCivilsAsync.pending, (state) => {

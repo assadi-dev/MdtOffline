@@ -1,8 +1,18 @@
 import Api from "../../service/Api/Api";
 import { uploadPhoto } from "./Civil.slice";
 
+const jsonldheader = {
+  accept: "application/ld+json",
+  "Content-Type": "application/ld+json",
+};
+
 export const fetchAllCivils = () => {
-  return Api.get("/civils");
+  return Api.get("/civils", { headers: jsonldheader });
+};
+
+export const fetchAllCivilsNextPage = (page) => {
+  page ? page : 1;
+  return Api.get("/civils", { headers: jsonldheader, params: { page } });
 };
 
 export const searchCivils = (searchTerm) => {

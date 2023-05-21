@@ -3,6 +3,7 @@ import {
   addCivil,
   editCivil,
   fetchAllCivils,
+  fetchAllCivilsNextPage,
   fetchOneCivil,
   searchCivil,
   uploadPhotoCivil,
@@ -37,6 +38,26 @@ export const getOneCivilsAsync = createAsyncThunk(
       let message = "";
       if (error.response) {
         message = error.response.data.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const fetchAllCivilsNextPageAsync = createAsyncThunk(
+  "Civil/nextpage",
+  async (payload) => {
+    try {
+      let page = payload;
+
+      const res = await fetchAllCivilsNextPage(page);
+      return res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.detail;
       } else {
         message = error.message;
       }

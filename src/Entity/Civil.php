@@ -22,6 +22,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @Vich\Uploadable()
  * @ApiFilter(SearchFilter::class,properties={"sexe":"start","ethnie":"exact","nationalite":"exact"})
  * @ApiResource(
+ * paginationEnabled=true,
+ * paginationItemsPerPage=25,
  * security="is_granted('IS_AUTHENTICATED_FULLY')",
  * normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
  * collectionOperations={
@@ -38,10 +40,12 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      "description" = "Retourne les resultats des civils trouvé dans la base données",
  *       "parameters" = {{"name" = "searchTerm","in" = "query","type" = "string","required" = false, "example"= "Danny"}}
  * }
- *  
+ *
  * }
  * },
- * 
+ *
+ *
+ *
  * itemOperations={
  *       "delete",
  *       "put",
@@ -54,11 +58,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      "path"="/civils/{id}/photo",
  *      "deserialize"=false,
  *      "controller"=UploadCivilController::class,
- *      
+ *
  *  }
- * 
+ *
  * }
- * 
+ *
  * )
  * @ORM\Entity(repositoryClass=CivilRepository::class)
  */

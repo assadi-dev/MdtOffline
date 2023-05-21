@@ -8,6 +8,7 @@ import { ActionRow, CivilWrapper } from "./Civil.styled";
 import EncodeCivil from "./Modal/EncodeCivil";
 
 import {
+  fetchAllCivilsNextPageAsync,
   getAllCivilsAsync,
   searchCivilAsync,
 } from "../../features/Civil/CivilAsyncApi";
@@ -22,7 +23,7 @@ const Civil = () => {
 
   const dispatch = useDispatch();
   const userAuth = useSelector((state) => state.AuthenticateReducer);
-  const { status } = useSelector((state) => state.CivilReducer);
+  const { status, currentPage } = useSelector((state) => state.CivilReducer);
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -44,11 +45,12 @@ const Civil = () => {
   };
 
   useEffect(() => {
-    const promise = dispatch(getAllCivilsAsync());
+    const promise = currentPage == 1 && dispatch(getAllCivilsAsync());
+
     return () => {
-      promise.abort();
+      promise && promise.abort();
     };
-  }, []);
+  }, [currentPage]);
   return (
     <>
       <CivilWrapper>

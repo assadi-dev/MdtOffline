@@ -4,50 +4,62 @@ import CivilCard from "./CivilCard";
 import { RowCard } from "./Civil.styled";
 import { Link } from "react-router-dom";
 import { toSlugFormat, ucFirst } from "../../utils/textFormat";
-import { animate, stagger } from "framer-motion";
+import { motion, animate, stagger } from "framer-motion";
+import { fetchAllCivilsNextPageAsync } from "../../features/Civil/CivilAsyncApi";
 
 const CivilList = () => {
   const civilSelector = useSelector((state) => state.CivilReducer);
 
   const ready = civilSelector.status == "complete" ? true : false;
+  const dispatch = useDispatch();
 
-  const staggerMenuItems = stagger(0.2);
+  const handleScroll = () => {
+    const endOfPage =
+      window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+
+    if (endOfPage) {
+      if (civilSelector.currentPage >= civilSelector.lastPage) return;
+      dispatch(fetchAllCivilsNextPageAsync(civilSelector.currentPage));
+    }
+  };
 
   useEffect(() => {
-    animate(
-      ".test",
-      { x: ready ? 0 : -100, opacity: ready ? 1 : 0 },
-      { type: "tween", duration: 0.35, delay: ready ? staggerMenuItems : 0 }
-    );
-  }, [civilSelector.status]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [civilSelector.currentPage]);
 
   return (
     <RowCard>
       {civilSelector.collection.length > 0 &&
         civilSelector.collection.map((civil, index) => (
-          <Link
-            className="test"
+          <motion.div
+            initial={{ x: -15, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.25, type: "tween", delay: index * 0.15 }}
             key={civil.id}
-            to={`../../../civil/${toSlugFormat(
-              `${civil && civil.nom} ${civil && civil.prenom}`
-            )}/${civil.id}`}
-            state={{
-              name: `${civil && civil.nom.toUpperCase()} ${
-                civil && ucFirst(civil.prenom)
-              }`,
-              id: civil && civil.id,
-            }}
           >
-            {civil && (
-              <CivilCard
-                nom={civil.nom}
-                prenom={ucFirst(civil.prenom)}
-                telephone={civil.telephone}
-                photo={civil.photo}
-                index={index}
-              />
-            )}
-          </Link>
+            <Link
+              to={`../../../civil/${toSlugFormat(
+                `${civil && civil.nom} ${civil && civil.prenom}`
+              )}/${civil.id}`}
+              state={{
+                name: `${civil && civil.nom.toUpperCase()} ${
+                  civil && ucFirst(civil.prenom)
+                }`,
+                id: civil && civil.id,
+              }}
+            >
+              {civil && (
+                <CivilCard
+                  nom={civil.nom}
+                  prenom={ucFirst(civil.prenom)}
+                  telephone={civil.telephone}
+                  photo={civil.photo}
+                  index={index}
+                />
+              )}
+            </Link>
+          </motion.div>
         ))}
     </RowCard>
   );
