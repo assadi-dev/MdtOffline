@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { toSlugFormat, ucFirst } from "../../utils/textFormat";
 import { motion, animate, stagger } from "framer-motion";
 import { fetchAllCivilsNextPageAsync } from "../../features/Civil/CivilAsyncApi";
+import NoFoundCivil from "./Loading/NoFoundCivil";
 
 const CivilList = () => {
   const civilSelector = useSelector((state) => state.CivilReducer);
@@ -30,7 +31,7 @@ const CivilList = () => {
 
   return (
     <RowCard>
-      {civilSelector.collection.length > 0 &&
+      {civilSelector.collection.length > 0 ? (
         civilSelector.collection.map((civil, index) => (
           <motion.div
             initial={{ x: -15, opacity: 0 }}
@@ -60,7 +61,10 @@ const CivilList = () => {
               )}
             </Link>
           </motion.div>
-        ))}
+        ))
+      ) : (
+        <NoFoundCivil />
+      )}
     </RowCard>
   );
 };

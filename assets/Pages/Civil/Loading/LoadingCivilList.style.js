@@ -16,3 +16,14 @@ export const Spinner = styled.div`
   width: 8rem;
   height: 8rem;
 `;
+
+export const NoFoundCivilSearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  p {
+    line-height: 2.5rem;
+    @media screen and (min-width: 768px) {
+      white-space: nowrap;
+    }
+  }
+`;
