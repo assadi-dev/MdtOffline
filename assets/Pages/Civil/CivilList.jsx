@@ -35,7 +35,7 @@ const CivilList = () => {
           <motion.div
             initial={{ x: -15, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.25, type: "tween", delay: index * 0.15 }}
+            transition={{ duration: 0.25, type: "tween", delay: 0.25 }}
             key={civil.id}
           >
             <Link
