@@ -2,13 +2,13 @@ import React, { Suspense } from "react";
 import { CardContainer, CivilInfo } from "./Civil.styled";
 import LoadingCivilPhoto from "./Loading/LoadingCivilPhoto";
 
-const CivilCard = ({ nom, prenom, telephone, photo }) => {
+const CivilCard = ({ nom, prenom, telephone, photo, index }) => {
   const CivilPhotoLazy = React.lazy(() => import("./CivilCardPhoto"));
 
   return (
     <CardContainer>
       <Suspense fallback={<LoadingCivilPhoto />}>
-        <CivilPhotoLazy src={photo} />
+        <CivilPhotoLazy src={photo} index={index} />
       </Suspense>
       <CivilInfo>
         <p className="text">{nom.toUpperCase()}</p>

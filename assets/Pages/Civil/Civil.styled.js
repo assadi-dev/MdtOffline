@@ -46,6 +46,9 @@ export const RowCard = styled.div`
   grid-gap: 22px;
   justify-content: center;
   width: 100%;
+  .test {
+    opacity: 0;
+  }
 `;
 
 export const CardContainer = styled.div`
