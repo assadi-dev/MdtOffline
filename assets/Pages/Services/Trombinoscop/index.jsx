@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
   CardContainer,
   SearchBarSection,
@@ -8,6 +8,7 @@ import SearchInput from "../../../components/Shared/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
 import { CardItems } from "./CardItems";
 import { getAllAgentByNameAsync } from "../../../features/Agents/AgentAsyncApi";
+import LoadingTrobinoscop from "./LoadingTrobinoscop";
 
 const Trombinoscop = () => {
   const { status, trombinoscop } = useSelector((state) => state.AgentsReducer);
@@ -37,15 +38,17 @@ const Trombinoscop = () => {
       <SearchBarSection onSubmit={handleSubmit}>
         <SearchInput onChange={handeleSearchInput} />
       </SearchBarSection>
-      <CardContainer>
-        {status == "complete" ? (
-          trombinoscop.length > 0 ? (
+      {status == "complete" ? (
+        <CardContainer>
+          {status == "complete" && trombinoscop.length > 0 ? (
             trombinoscop.map((item) => <CardItems key={item.id} agent={item} />)
           ) : (
             <p>Aucun agents trouvé</p>
-          )
-        ) : null}
-      </CardContainer>
+          )}
+        </CardContainer>
+      ) : (
+        <LoadingTrobinoscop />
+      )}
     </TrombinoscopWrapper>
   );
 };

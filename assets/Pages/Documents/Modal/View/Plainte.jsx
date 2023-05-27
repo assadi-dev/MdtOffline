@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import {
   CloseModal,
   FormBodyContainer,
@@ -16,10 +16,15 @@ import InputTextArea from "../../../../components/Shared/InputTextArea";
 import { useDispatch, useSelector } from "react-redux";
 import { add_plainte } from "../../../../redux/actions/Plainte.action";
 import { addPlaintesAsync } from "../../../../features/Plaintes/PlaintesAsyncApi";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const PlainteView = ({ onClose }) => {
   const agent = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
+
+  const [process, setProcess] = useState(false);
+
+  const textButton = process ? "Envoie en cours..." : "Envoyer";
 
   const formik = useFormik({
     initialValues: {
@@ -34,10 +39,14 @@ const PlainteView = ({ onClose }) => {
     onSubmit: (values) => {
       let plainteData = { ...values, idAgent: agent.idAgent };
 
-      dispatch(addPlaintesAsync(plainteData)).then(() => {
-        formik.resetForm();
-        onClose();
-      });
+      setProcess((current) => (current = !current));
+
+      dispatch(addPlaintesAsync(plainteData))
+        .then(() => {
+          formik.resetForm();
+          onClose();
+        })
+        .finally(() => setProcess((current) => (current = !current)));
     },
   });
 
@@ -109,7 +118,20 @@ const PlainteView = ({ onClose }) => {
           </FormControl>
 
           <FormBottomRow>
-            <SubmitButton>Envoyer</SubmitButton>
+            <SubmitButton>
+              {textButton}{" "}
+              {process ? (
+                <SpinnerCircularFixed
+                  size={18}
+                  color="#fff"
+                  secondaryColor="#FFFFFF50"
+                  speed={250}
+                  style={{ marginLeft: 8 }}
+                />
+              ) : (
+                ""
+              )}{" "}
+            </SubmitButton>
           </FormBottomRow>
         </FormBodyContainer>
       </FormContainer>

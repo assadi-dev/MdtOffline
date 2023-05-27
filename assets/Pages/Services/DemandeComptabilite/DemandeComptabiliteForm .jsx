@@ -10,10 +10,15 @@ import AlertError from "../../../components/Shared/Alert/AlertError";
 import AlertSuccess from "../../../components/Shared/Alert/AlertSuccess";
 import { sleep } from "../../../utils/timer";
 import { addDemandeComptabiliteAsync } from "../../../features/DemandeComptabilite/DemandeComptabiliteAsyncApi";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const DemandeComptabiliteForm = () => {
   const agent = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
+
+  const [process, setProcess] = useState(false);
+
+  const textButton = process ? "Envoie en cours..." : "Envoyer";
 
   const [alertState, setAlertState] = useState({
     success: "",
@@ -49,6 +54,8 @@ const DemandeComptabiliteForm = () => {
           raison: values.raison,
         };
 
+        setProcess((current) => (current = !current));
+
         dispatch(addDemandeComptabiliteAsync(payload))
           .unwrap()
           .then(() => {
@@ -68,7 +75,8 @@ const DemandeComptabiliteForm = () => {
               error: error.message,
               show: true,
             }));
-          });
+          })
+          .finally(() => setProcess((current) => (current = !current)));
       } else {
         setAlertState((current) => ({
           ...current,
@@ -129,7 +137,19 @@ const DemandeComptabiliteForm = () => {
         )}
       </FormControl>
       <FormControl>
-        <SubmitButton>Envoyer</SubmitButton>
+        <SubmitButton>
+          {textButton}
+
+          {process ? (
+            <SpinnerCircularFixed
+              size={18}
+              color="#fff"
+              secondaryColor="#FFFFFF50"
+              speed={250}
+              style={{ marginLeft: 8 }}
+            />
+          ) : null}
+        </SubmitButton>
       </FormControl>
     </DemandeComptabiliteFormContent>
   );

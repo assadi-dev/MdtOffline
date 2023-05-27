@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import {
   FormBodyContainer,
   FormBottomRow,
@@ -14,9 +14,14 @@ import { dateNowFrenchFormat } from "../../../../utils/dateFormat";
 import { useSelector, useDispatch } from "react-redux";
 import { addSaisiesAsync } from "../../../../features/Saisie/SaisieAsyncApi";
 import { sendSaisieToDiscord } from "./sendDiscord";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const AddFormView = ({ saisieData, onClose }) => {
   const dispatch = useDispatch();
+
+  const [process, setProcess] = useState(false);
+
+  const textButton = process ? "envoie en cours..." : "Ajouter";
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   let initialValues = {
@@ -45,6 +50,8 @@ const AddFormView = ({ saisieData, onClose }) => {
         poste: values.poste,
       };
 
+      setProcess((current) => (current = !current));
+
       dispatch(addSaisiesAsync(payload))
         .unwrap()
         .then((res) => {
@@ -54,8 +61,10 @@ const AddFormView = ({ saisieData, onClose }) => {
             poste: values.poste,
           };
           sendSaisieToDiscord(payload);
+
           onClose();
-        });
+        })
+        .finally(() => setProcess((current) => (current = !current)));
     },
   });
 
@@ -109,7 +118,20 @@ const AddFormView = ({ saisieData, onClose }) => {
         </FormControl>
 
         <FormBottomRow>
-          <SubmitButton type="submit">Ajouter</SubmitButton>
+          <SubmitButton type="submit">
+            {textButton}{" "}
+            {process ? (
+              <SpinnerCircularFixed
+                size={18}
+                color="#fff"
+                secondaryColor="#FFFFFF50"
+                speed={250}
+                style={{ marginLeft: 8 }}
+              />
+            ) : (
+              ""
+            )}
+          </SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>

@@ -104,3 +104,22 @@ export const CardDescription = styled.div`
     font-size: 1.4rem;
   }
 `;
+
+export const LoadingTrombinoscop = styled.div`
+  margin-top: 100px;
+  width: 100%;
+  min-height: 100px;
+  max-height: 220px;
+  display: grid;
+  place-items: center;
+`;
+export const LoadingTrombinoscopBody = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+  p {
+    margin-top: 18px;
+  }
+`;

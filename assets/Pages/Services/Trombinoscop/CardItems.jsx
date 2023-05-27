@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   AvatarCardItem,
   CardDescription,
   CardItemsContainer,
 } from "./trombinoscop.styled";
+import AvatarCard from "./AvatarCard";
 
 export const CardItems = ({ agent }) => {
   const { id, photo, name, matricule, telephone } = agent;
@@ -11,7 +12,9 @@ export const CardItems = ({ agent }) => {
 
   return (
     <CardItemsContainer>
-      <AvatarCardItem src={agent.photo} />
+      <Suspense>
+        <AvatarCard src={agent.photo} />
+      </Suspense>
       <CardDescription>
         <h2 className="name">{`${matricule}-${name}`} </h2>
         <p>{grade} </p>

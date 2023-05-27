@@ -10,3 +10,19 @@ export const sleep = (delay) => {
     }
   });
 };
+
+/**
+ *
+ * @param {void} callback
+ * @param {*} delay
+ * @returns
+ */
+export const delayExecution = (callback, delay) => {
+  return new Promise((resoleve) => {
+    const idTimeout = setTimeout(() => {
+      callback();
+      resoleve("done");
+      clearTimeout(idTimeout);
+    }, delay);
+  });
+};

@@ -32,6 +32,8 @@ import useListAgent from "../../../hooks/useListAgent";
 import ShowDepot from "./ModalView/ShowDepot";
 import ConfirmDelete from "./ModalView/ConfirmDelete";
 import EditSaisieView from "./ModalView/EditSaisieView";
+import HoursTabLoading from "../HoursSheet/Loading/HoursTabLoading";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
 
 const Saisie = () => {
   const dispatch = useDispatch();
@@ -110,7 +112,7 @@ const Saisie = () => {
         </div>
       </HeaderRowAction>
       <SaisieTabBody>
-        {status == "complete" && (
+        {status == "complete" ? (
           <Table>
             <thead>
               <tr>
@@ -121,7 +123,7 @@ const Saisie = () => {
                 {IsCommandStaff() && <th className="td-center">Action</th>}
               </tr>
             </thead>
-            <tbody>
+            <TbodyAnimate>
               {collections.length == 0 ? (
                 <EmptyRow message={"Aucun saisie déposé"} colSpan={6} />
               ) : (
@@ -168,8 +170,10 @@ const Saisie = () => {
                   </tr>
                 ))
               )}
-            </tbody>
+            </TbodyAnimate>
           </Table>
+        ) : (
+          <HoursTabLoading />
         )}
       </SaisieTabBody>
       <Modal isOpen={modalState.isOpen} onClose={actionTabBtn.closeModal}>

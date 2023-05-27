@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Input from "../../../../components/Shared/Input";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import Select from "../../../../components/Shared/Select";
@@ -21,11 +21,16 @@ import { getAgentNameById } from "../../../../utils/userData";
 import { get_allRookie } from "../../../../redux/actions/Agents.action";
 import { addRapportRookieAsync } from "../../../../features/RapportRookie/RapportRookieAsyncApi";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const RapportDeputyTrainyView = ({ onClose }) => {
   const { error, collections, status } = useSelector(
     (state) => state.AgentsReducer
   );
+
+  const [process, setProcess] = useState(false);
+
+  const textButton = process ? "Envoie en cours..." : "Envoyer";
 
   const listOfRookies = useFecthDataWithParams("/agents", {
     "grade.nom": "Rookie",
@@ -50,6 +55,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
       const findAgent = listOfRookies.find(
         (rookie) => rookie.id == values.deputyTrainyConcerned
       );
+      setProcess((current) => (current = !current));
 
       let sendDiscordData = {
         deputyTrainyConcerned: `${
@@ -70,7 +76,8 @@ const RapportDeputyTrainyView = ({ onClose }) => {
           formik.resetForm();
           onClose();
           sendDeputyTrainy(sendDiscordData);
-        });
+        })
+        .finally(() => setProcess((current) => (current = !current)));
     },
   });
 
@@ -134,7 +141,21 @@ const RapportDeputyTrainyView = ({ onClose }) => {
           </FormControl>
 
           <FormBottomRow>
-            <SubmitButton>Envoyer</SubmitButton>
+            <SubmitButton>
+              {" "}
+              {textButton}{" "}
+              {process ? (
+                <SpinnerCircularFixed
+                  size={18}
+                  color="#fff"
+                  secondaryColor="#FFFFFF50"
+                  speed={250}
+                  style={{ marginLeft: 8 }}
+                />
+              ) : (
+                ""
+              )}{" "}
+            </SubmitButton>
           </FormBottomRow>
         </FormBodyContainer>
       </FormContainer>

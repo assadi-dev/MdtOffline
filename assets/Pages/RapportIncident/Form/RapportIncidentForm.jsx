@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "../../../components/Shared/Input";
 import InputTextArea from "../../../components/Shared/InputTextArea";
@@ -15,11 +15,20 @@ import {
 import { typeIncident } from "./dataList";
 import { addRapportIncidentAsync } from "../../../features/RapportIncident/RapportIncidentAsyncApi";
 import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
+import { SpinnerCircularFixed } from "spinners-react";
+import AlertSuccess from "../../../components/Shared/Alert/AlertSuccess";
+import SuccsessAlert from "./SuccsessAlert";
 
 const RapportIncidentForm = () => {
   const dispatch = useDispatch();
   const agents = useSelector((state) => state.AgentsReducer);
   const agent = useSelector((state) => state.AuthenticateReducer);
+
+  const [process, setProcess] = useState(false);
+
+  const textButton = process ? "Envoie en cours..." : "Envoyer";
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +38,10 @@ const RapportIncidentForm = () => {
       lieuxIncident: "",
       idAgent: agent.idAgent,
     },
+
     onSubmit: (values) => {
+      setProcess((current) => (current = !current));
+
       let formData = {
         ...values,
         idAgentConcerned: parseInt(values.idAgentConcerned),
@@ -38,8 +50,10 @@ const RapportIncidentForm = () => {
       dispatch(addRapportIncidentAsync({ data: formData }))
         .unwrap()
         .then(() => {
+          setShowAlert(true);
           formik.resetForm();
-        });
+        })
+        .finally(() => setProcess((current) => (current = !current)));
     },
   });
 
@@ -104,9 +118,24 @@ const RapportIncidentForm = () => {
             ))}
         </Select>
       </FormControl>
+
+      <FormControl>{showAlert && <SuccsessAlert />}</FormControl>
       <FormBottomRow>
         <FormControl>
-          <SubmitButton style={{ margin: "auto" }}>Envoyer</SubmitButton>
+          <SubmitButton style={{ margin: "auto" }}>
+            {textButton}
+            {process ? (
+              <SpinnerCircularFixed
+                size={18}
+                color="#fff"
+                secondaryColor="#FFFFFF50"
+                speed={250}
+                style={{ marginLeft: 8 }}
+              />
+            ) : (
+              ""
+            )}
+          </SubmitButton>
         </FormControl>
       </FormBottomRow>
     </RapportIncidentFormContent>

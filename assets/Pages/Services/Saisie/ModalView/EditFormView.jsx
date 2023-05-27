@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import {
   FormBodyContainer,
   FormBottomRow,
@@ -18,11 +18,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { editSaisiesAsync } from "../../../../features/Saisie/SaisieAsyncApi";
 import useListAgent from "../../../../hooks/useListAgent";
 import { getAgentNameById } from "../../../../utils/userData";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const EditFormView = ({ saisieData, onClose }) => {
   const dispatch = useDispatch();
 
   const listAgent = useListAgent();
+
+  const [process, setProcess] = useState(false);
+
+  const textButton = process ? "envoie en cours..." : "Modifier";
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   let initialValues = {
@@ -47,6 +52,8 @@ const EditFormView = ({ saisieData, onClose }) => {
     enableReinitialize: true,
     initialValues,
     onSubmit: (values) => {
+      setProcess((current) => (current = !current));
+
       const payload = {
         id: values.id,
         data: { depot: values.depot, poste: values.poste },
@@ -55,7 +62,8 @@ const EditFormView = ({ saisieData, onClose }) => {
         .unwrap()
         .then((res) => {
           onClose();
-        });
+        })
+        .finally(() => setProcess((current) => (current = !current)));
     },
   });
 
@@ -110,7 +118,20 @@ const EditFormView = ({ saisieData, onClose }) => {
         </FormControl>
 
         <FormBottomRow>
-          <SubmitButton type="submit">Modifier</SubmitButton>
+          <SubmitButton type="submit">
+            {textButton}{" "}
+            {process ? (
+              <SpinnerCircularFixed
+                size={18}
+                color="#fff"
+                secondaryColor="#FFFFFF50"
+                speed={250}
+                style={{ marginLeft: 8 }}
+              />
+            ) : (
+              ""
+            )}{" "}
+          </SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>

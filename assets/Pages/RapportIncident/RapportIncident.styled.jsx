@@ -64,6 +64,6 @@ export const SubmitButton = styled.button`
   justify-content: center;
   border-radius: 5px;
   color: #fff;
-  display: block;
   margin: auto;
+  align-items: center;
 `;

@@ -41,6 +41,9 @@ import {
   deleteServiceAsync,
   getUserPriseServiceByWeekAsync,
 } from "../../../features/PriseDeService/PriseDeserviceAsyncApi";
+import HoursTabLoading from "./Loading/HoursTabLoading";
+import { motion } from "framer-motion";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
 
 const HoursSheet = () => {
   const [week, setWeek] = useState(parseInt(getCurrentWeekNumber()));
@@ -49,7 +52,7 @@ const HoursSheet = () => {
     view: "",
   });
   const dispatch = useDispatch();
-  const priseServiceByWeek = useSelector(
+  const { collections, selected, status } = useSelector(
     (state) => state.PriseDeServiceReducer
   );
 
@@ -72,8 +75,8 @@ const HoursSheet = () => {
   }, [week, agent.idAgent]);
 
   const listeServices = useMemo(() => {
-    if (priseServiceByWeek.collections) {
-      return priseServiceByWeek.collections.map((service) => {
+    if (collections) {
+      return collections.map((service) => {
         return {
           ...service,
           start: dateFrenchFormatWithSecond(service.start),
@@ -86,31 +89,28 @@ const HoursSheet = () => {
     }
 
     return [];
-  }, [priseServiceByWeek.collections]);
+  }, [collections]);
 
   const totalhours = useMemo(() => {
     let totalhoursArray = [];
 
-    if (priseServiceByWeek.collections.length > 0) {
-      totalhoursArray = priseServiceByWeek.collections.map((service) => {
+    if (collections.length > 0) {
+      totalhoursArray = collections.map((service) => {
         return Number(service.duration);
       });
       return totalhoursArray.reduce((a, b) => a + b);
     }
 
     return 0;
-  }, [priseServiceByWeek.collections]);
+  }, [collections]);
 
   const currentService = useMemo(() => {
-    if (
-      priseServiceByWeek.selected !== undefined ||
-      priseServiceByWeek.selected != null
-    ) {
-      if (priseServiceByWeek.selected.isActive) return true;
+    if (selected !== undefined || selected != null) {
+      if (selected.isActive) return true;
     }
 
     return false;
-  }, [priseServiceByWeek.selected]);
+  }, [selected]);
 
   const Render = ({ view }) => {
     switch (view) {
@@ -162,7 +162,11 @@ const HoursSheet = () => {
             </button>
           </HoursSheetHeaderRowBtn>
 
-          <p className="totalHour">Total: {FormatDuration(totalhours)}</p>
+          <p className="totalHour">
+            {status == "complete"
+              ? "Total: " + FormatDuration(totalhours)
+              : "Calcul en cours..."}
+          </p>
         </HoursSheetpageHeader>
 
         <HoursSheetBody>
@@ -176,51 +180,57 @@ const HoursSheet = () => {
               {currentService ? "Service en cours" : "Ajouter"}
             </Button>
           </HoursSheetRowAction>
-          <HoursSheetTable>
-            <thead>
-              <tr>
-                <th>Prise de service</th>
-                <th>Fin de service</th>
-                <th>Durée</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listeServices.length > 0 ? (
-                listeServices.map((service) => (
-                  <tr key={service.id}>
-                    <td>{service.start}</td>
-                    <td
-                      className={`${service.isActive ? "serviceActive" : null}`}
-                    >
-                      {service.end}
-                    </td>
-                    <td>{service.duration}</td>
-                    <td>
-                      <HoursSheetTableAction>
-                        <OutlineBtnAction className="edit">
-                          {" "}
-                          <EditPencilIcon />
-                        </OutlineBtnAction>
-                        <OutlineBtnAction
-                          className="delete"
-                          onClick={() => handleDeletService(service.id)}
-                        >
-                          {" "}
-                          <TrashIcon />
-                        </OutlineBtnAction>
-                      </HoursSheetTableAction>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <EmptyRow
-                  text={"Vous n'etiez pas en service durant cette semaine"}
-                  colSpan={5}
-                />
-              )}
-            </tbody>
-          </HoursSheetTable>
+          {status == "complete" ? (
+            <HoursSheetTable>
+              <thead>
+                <tr>
+                  <th>Prise de service</th>
+                  <th>Fin de service</th>
+                  <th>Durée</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <TbodyAnimate>
+                {listeServices.length > 0 ? (
+                  listeServices.map((service) => (
+                    <tr key={service.id}>
+                      <td>{service.start}</td>
+                      <td
+                        className={`${
+                          service.isActive ? "serviceActive" : null
+                        }`}
+                      >
+                        {service.end}
+                      </td>
+                      <td>{service.duration}</td>
+                      <td>
+                        <HoursSheetTableAction>
+                          <OutlineBtnAction className="edit">
+                            {" "}
+                            <EditPencilIcon />
+                          </OutlineBtnAction>
+                          <OutlineBtnAction
+                            className="delete"
+                            onClick={() => handleDeletService(service.id)}
+                          >
+                            {" "}
+                            <TrashIcon />
+                          </OutlineBtnAction>
+                        </HoursSheetTableAction>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <EmptyRow
+                    text={"Vous n'etiez pas en service durant cette semaine"}
+                    colSpan={5}
+                  />
+                )}
+              </TbodyAnimate>
+            </HoursSheetTable>
+          ) : (
+            <HoursTabLoading />
+          )}
         </HoursSheetBody>
       </HoursSheetWrapper>
       <Modal isOpen={modalState.isOpen}>
