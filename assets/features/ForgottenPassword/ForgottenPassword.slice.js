@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addForgottenPasswordAsync,
+  deleteForgottenpasswordAsync,
   editForgottenPasswordAsync,
   getAllForgottenPasswordAsync,
 } from "./ForgottenPasswordAsyncApi";
@@ -31,13 +32,23 @@ const ForgottenPasswordSlice = createSlice({
     });
     builder.addCase(editForgottenPasswordAsync.fulfilled, (state, action) => {
       const { payload } = action;
-      let updateCollection = state.collections.map((password) => {
+
+      let updateCollection = [...state.collections].map((password) => {
         if (password.id == payload.id) {
           return { ...payload };
         }
-        return password;
       });
       state.collections = updateCollection;
+    });
+
+    builder.addCase(deleteForgottenpasswordAsync.fulfilled, (state, action) => {
+      const { payload } = action;
+
+      let removeitem = [...state.collections].filter(
+        (item) => item.id != payload.id
+      );
+
+      state.collections = removeitem;
     });
   },
 });

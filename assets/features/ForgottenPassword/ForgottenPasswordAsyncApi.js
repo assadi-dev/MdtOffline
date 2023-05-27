@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   add_ForgottenPassword,
+  delete_ForgottenPassword,
   edit_ForgottenPassword,
   fetAllForgottenPassword,
 } from "./ForgottenPasswordApi";
@@ -47,7 +48,26 @@ export const editForgottenPasswordAsync = createAsyncThunk(
     try {
       const { id, data } = payload;
       const res = await edit_ForgottenPassword(id, data);
-      return res.data;
+      return await res.data;
+    } catch (error) {
+      let message = "";
+      if (error.response) {
+        message = error.response.detail;
+      } else {
+        message = error.message;
+      }
+      throw new Error(message);
+    }
+  }
+);
+
+export const deleteForgottenpasswordAsync = createAsyncThunk(
+  "ForgottenPassword/delete",
+  async (payload) => {
+    try {
+      const { id } = payload;
+      await delete_ForgottenPassword(id);
+      return { id };
     } catch (error) {
       let message = "";
       if (error.response) {

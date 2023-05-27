@@ -66,7 +66,7 @@ export const ClipboardCopy = styled.div`
 
 export const GeneratLinkBtnWrapper = styled.button`
   white-space: nowrap;
-  font-size: inherit;
+  font-size: 1.2rem;
   background-color: var(--teal);
   padding: 1rem 1.3rem;
   width: fit-content;
@@ -87,5 +87,24 @@ export const RowLink = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+`;
+
+export const DeleteBtnAction = styled.button`
+  color: var(--danger-color);
+
+  :active {
+    opacity: 0.5;
+  }
+
+  width: 20px;
+  height: 20px;
+  margin-right: 0.8rem;
+  :last-of-type {
+    margin-right: 0;
+  }
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `;
