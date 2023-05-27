@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { PoliceV1 } from "../../SVG";
 import {
   SidebarContainer,
@@ -23,7 +23,7 @@ const Sidebar = () => {
   const agentConnect = useSelector((state) => state.AuthenticateReducer);
   const grade = agentConnect.grade.nom;
 
-  const activeRoute = (label) => {
+  const activeRoute = useCallback((label) => {
     let reset = routes.map((r) => {
       if (r.label != label) {
         r.selected = false;
@@ -34,8 +34,8 @@ const Sidebar = () => {
       }
       return r;
     });
-    setRoute(reset);
-  };
+    setRoute((current) => (current = reset));
+  }, []);
 
   const tokenStorage = Cookies.get(TOKEN_STORAGE_NAME);
   const navigate = useNavigate();
