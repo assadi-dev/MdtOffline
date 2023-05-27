@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CardItems } from "./CardItems";
 import { getAllAgentByNameAsync } from "../../../features/Agents/AgentAsyncApi";
 import LoadingTrobinoscop from "./LoadingTrobinoscop";
+import { motion } from "framer-motion";
 
 const Trombinoscop = () => {
   const { status, trombinoscop } = useSelector((state) => state.AgentsReducer);
@@ -41,7 +42,16 @@ const Trombinoscop = () => {
       {status == "complete" ? (
         <CardContainer>
           {status == "complete" && trombinoscop.length > 0 ? (
-            trombinoscop.map((item) => <CardItems key={item.id} agent={item} />)
+            trombinoscop.map((item) => (
+              <motion.div
+                initial={{ x: -15, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.35, type: "tween", delay: 0.25 }}
+                key={item.id}
+              >
+                <CardItems agent={item} />{" "}
+              </motion.div>
+            ))
           ) : (
             <p>Aucun agents trouvé</p>
           )}
