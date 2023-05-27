@@ -75,8 +75,9 @@ const RapportDeputyTrainyView = ({ onClose }) => {
         .then(() => {
           formik.resetForm();
           onClose();
-          sendDeputyTrainy(sendDiscordData);
+          sendDeputyTrainy(sendDiscordData).catch;
         })
+
         .finally(() => setProcess((current) => (current = !current)));
     },
   });
@@ -141,7 +142,7 @@ const RapportDeputyTrainyView = ({ onClose }) => {
           </FormControl>
 
           <FormBottomRow>
-            <SubmitButton>
+            <SubmitButton type="submit">
               {" "}
               {textButton}{" "}
               {process ? (

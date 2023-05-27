@@ -137,7 +137,7 @@ const DemandeComptabiliteForm = () => {
         )}
       </FormControl>
       <FormControl>
-        <SubmitButton>
+        <SubmitButton type="submit">
           {textButton}
 
           {process ? (

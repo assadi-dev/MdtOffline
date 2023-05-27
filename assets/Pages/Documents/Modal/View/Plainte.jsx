@@ -118,7 +118,7 @@ const PlainteView = ({ onClose }) => {
           </FormControl>
 
           <FormBottomRow>
-            <SubmitButton>
+            <SubmitButton type="submit">
               {textButton}{" "}
               {process ? (
                 <SpinnerCircularFixed

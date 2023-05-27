@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getAgentNameById } from "../../../../utils/userData";
 import {
   dateFrenchFormat,
@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import Input from "../../../../components/Shared/Input";
 import { editRapportRookieAsync } from "../../../../features/RapportRookie/RapportRookieAsyncApi";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const EditForm = ({ rapportData, onClose }) => {
   const { collections, filtered, status } = useSelector(
@@ -30,6 +31,8 @@ const EditForm = ({ rapportData, onClose }) => {
 
   const agent = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
+
+  const [process, setProcess] = useState(false);
 
   useEffect(() => {
     //console.log(deputyTrainyConcerned);
@@ -54,6 +57,8 @@ const EditForm = ({ rapportData, onClose }) => {
       idAgent: idAgent ? idAgent : "",
     },
     onSubmit: (values) => {
+      setProcess((current) => (current = !current));
+
       const findAgent = listOfRookies.find(
         (rookie) => rookie.id == values.deputyTrainyConcerned
       );
@@ -77,6 +82,9 @@ const EditForm = ({ rapportData, onClose }) => {
         .then(() => {
           onClose();
           //sendDeputyTrainy(sendDiscordData);
+        })
+        .finally(() => {
+          setProcess((current) => (current = !current));
         });
     },
   });
@@ -134,7 +142,20 @@ const EditForm = ({ rapportData, onClose }) => {
         </FormControl>
 
         <FormBottomRow>
-          <SubmitButton>Modifier</SubmitButton>
+          <SubmitButton type="submit">
+            Modifier
+            {process ? (
+              <SpinnerCircularFixed
+                size={18}
+                color="#fff"
+                secondaryColor="#FFFFFF50"
+                speed={250}
+                style={{ marginLeft: 8 }}
+              />
+            ) : (
+              ""
+            )}{" "}
+          </SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>

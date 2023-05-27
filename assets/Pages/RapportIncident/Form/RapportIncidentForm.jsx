@@ -124,7 +124,7 @@ const RapportIncidentForm = () => {
       </FormControl>
       <FormBottomRow>
         <FormControl>
-          <SubmitButton style={{ margin: "auto" }}>
+          <SubmitButton type="submit" style={{ margin: "auto" }}>
             {textButton}
             {process ? (
               <SpinnerCircularFixed

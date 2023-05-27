@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useFecthDataWithParams from "../../../../hooks/useFecthDataWithParams";
 import { useDispatch, useSelector } from "react-redux";
 import { editRapportIncidentAsync } from "../../../../features/RapportIncident/RapportIncidentAsyncApi";
@@ -14,6 +14,7 @@ import InputTextArea from "../../../../components/Shared/InputTextArea";
 import Select from "../../../../components/Shared/Select";
 import { typeIncidents } from "../../../../Data/TypesIncidents";
 import Input from "../../../../components/Shared/Input";
+import SpinnerButton from "../../../../components/Shared/Loading/SpinnerButton";
 
 const EditForm = ({ rapportData, onClose }) => {
   const { collections, filtered, status } = useSelector(
@@ -21,6 +22,8 @@ const EditForm = ({ rapportData, onClose }) => {
   );
   const agent = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
+
+  const [process, setProcess] = useState(false);
 
   const {
     id,
@@ -41,6 +44,8 @@ const EditForm = ({ rapportData, onClose }) => {
       idAgent: idAgent ? idAgent : "",
     },
     onSubmit: (values) => {
+      setProcess((current) => (current = !current));
+
       let rapportIncidentData = {
         ...values,
         idAgentConcerned: parseInt(values.idAgentConcerned),
@@ -51,6 +56,9 @@ const EditForm = ({ rapportData, onClose }) => {
         .unwrap()
         .then(() => {
           onClose();
+        })
+        .finally(() => {
+          setProcess((current) => (current = !current));
         });
     },
   });
@@ -111,7 +119,9 @@ const EditForm = ({ rapportData, onClose }) => {
           </Select>
         </FormControl>
         <FormBottomRow>
-          <SubmitButton type="submit">Modifier</SubmitButton>
+          <SubmitButton type="submit">
+            Modifier {process ? <SpinnerButton /> : ""}
+          </SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>

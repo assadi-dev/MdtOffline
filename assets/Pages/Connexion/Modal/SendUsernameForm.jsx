@@ -57,7 +57,7 @@ const SendUsernameForm = ({ dispatchStep }) => {
           )}
         </ErrorMessage>
         <FormBottomRow>
-          <SubmitButton>Envoyer la demande</SubmitButton>
+          <SubmitButton type="submit">Envoyer la demande</SubmitButton>
         </FormBottomRow>
       </FormBodyContainer>
     </form>

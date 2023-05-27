@@ -32,6 +32,8 @@ import EditRapportRokie from "../../PoliceAcademy/RapportRookie/Modal/EditRappor
 import DeleteRapportIncident from "./Modal/DeleteRapportIncident";
 import EditRapportIncident from "./Modal/EditRapportIncident";
 import EmptyRow from "../../../components/Shared/Table/EmptyRow";
+import LoadingTab from "../Loading/LoadingTab";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
 
 const RapportIncidentTab = () => {
   const dispatch = useDispatch();
@@ -104,7 +106,7 @@ const RapportIncidentTab = () => {
                   {IsCommandStaff() && <th>Action</th>}
                 </tr>
               </thead>
-              <tbody>
+              <TbodyAnimate>
                 {rapportIncidentSelector.collections.length > 0 ? (
                   rapportIncidentSelector.collections.map((rapport) => (
                     <tr key={rapport.id}>
@@ -155,10 +157,10 @@ const RapportIncidentTab = () => {
                 ) : (
                   <EmptyRow message={"Rapport Incient vide"} colSpan={7} />
                 )}
-              </tbody>
+              </TbodyAnimate>
             </Table>
           ) : (
-            "loading  "
+            <LoadingTab />
           )}
         </RapportIncidentBody>
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>

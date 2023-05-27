@@ -20,10 +20,13 @@ import { editDemandeComptabiliteAsync } from "../../../../features/DemandeCompta
 import InputTextArea from "../../../../components/Shared/InputTextArea";
 import AlertError from "../../../../components/Shared/Alert/AlertError";
 import AlertSuccess from "../../../../components/Shared/Alert/AlertSuccess";
+import SpinnerButton from "../../../../components/Shared/Loading/SpinnerButton";
 
 const EditFormView = ({ demandeData, onClose }) => {
   const dispatch = useDispatch();
   const listAgent = useListAgent();
+
+  const [process, setprocess] = useState(false);
 
   const { id, idAgent, raison, montant, date } = demandeData;
 
@@ -53,6 +56,8 @@ const EditFormView = ({ demandeData, onClose }) => {
     enableReinitialize: true,
     initialValues,
     onSubmit: (values) => {
+      setprocess((current) => (current = !current));
+
       resetState();
       if (values.montant && values.raison) {
         const payload = {
@@ -74,6 +79,9 @@ const EditFormView = ({ demandeData, onClose }) => {
               error: error.message,
               show: true,
             }));
+          })
+          .finally(() => {
+            setprocess((current) => (current = !current));
           });
       } else {
         setAlertState((current) => ({
@@ -136,7 +144,9 @@ const EditFormView = ({ demandeData, onClose }) => {
           )}
         </FormControl>
         <FormControl>
-          <SubmitButton>Mettre à jour</SubmitButton>
+          <SubmitButton type="submit">
+            Mettre à jour {process ? <SpinnerButton /> : ""}
+          </SubmitButton>
         </FormControl>
       </FormBodyContainer>
     </form>

@@ -29,6 +29,7 @@ import {
   getOneAgentAsync,
 } from "../../../../features/Agents/AgentAsyncApi";
 import { isEmpty } from "../../../../utils/userData";
+import SpinnerButton from "../../../../components/Shared/Loading/SpinnerButton";
 
 const EditView = ({ agentId, onClose }) => {
   const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const EditView = ({ agentId, onClose }) => {
 
   const handleChange = () => {};
 
+  const [process, setProcess] = useState(false);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -57,6 +60,8 @@ const EditView = ({ agentId, onClose }) => {
       telephone: telephone ? telephone : "",
     },
     onSubmit: (values) => {
+      setProcess((current) => (current = !current));
+
       let agentsValues = {
         ...values,
         grade: `api/grades/${values.grade}`,
@@ -75,6 +80,9 @@ const EditView = ({ agentId, onClose }) => {
         .catch((error) => {
           let message = error.message;
           setRequestState({ success: "", error: message });
+        })
+        .finally(() => {
+          setProcess((current) => (current = !current));
         });
     },
   });
@@ -152,7 +160,7 @@ const EditView = ({ agentId, onClose }) => {
 
           <FormControl>
             <SubmitButton type="submit" style={{ margin: "auto" }}>
-              Mettre à jour
+              Mettre à jour {process ? <SpinnerButton /> : ""}
             </SubmitButton>
           </FormControl>
         </FormBottomRow>

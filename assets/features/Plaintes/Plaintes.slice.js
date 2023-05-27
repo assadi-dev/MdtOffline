@@ -23,7 +23,9 @@ const PlaintesSlice = createSlice({
       })
       .addCase(getAllPlaintesAsync.fulfilled, (state, action) => {
         const { payload } = action;
+        state.status = "complete";
         state.collections = payload;
+        state.error = "";
       });
     builder
       .addCase(addPlaintesAsync.rejected, (state, action) => {

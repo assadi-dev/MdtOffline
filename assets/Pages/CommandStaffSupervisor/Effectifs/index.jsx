@@ -23,10 +23,12 @@ import { EffectifBody, EffectifWrapper } from "./Effectifs.styled";
 import Render from "./ModalView/Render";
 import { getAllGradesAsync } from "../../../features/Grades/GradeAsyncApi";
 import { getAllAgentAsync } from "../../../features/Agents/AgentAsyncApi";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
+import LoadingTab from "../Loading/LoadingTab";
 
 const Effectifs = () => {
   const dispatch = useDispatch();
-  const AgentsSelector = useSelector((state) => state.AgentsReducer);
+  const { collections, status } = useSelector((state) => state.AgentsReducer);
   const [modalState, modalStateDispatch] = useReducer(ModalStateReducer, {
     isOpen: false,
     view: "",
@@ -64,19 +66,19 @@ const Effectifs = () => {
           {/* <Button className="addBtn">Ajouter</Button> */}
         </HeaderRowAction>
         <EffectifBody>
-          <Table>
-            <thead>
-              <tr>
-                <th>Matricule</th>
-                <th>identité</th>
-                <th>Téléphone</th>
-                <th className="td-center">Grade</th>
-                <th className="td-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {AgentsSelector.status == "complete" &&
-                AgentsSelector.collections.map((agent) => (
+          {status == "complete" ? (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Matricule</th>
+                  <th>identité</th>
+                  <th>Téléphone</th>
+                  <th className="td-center">Grade</th>
+                  <th className="td-center">Action</th>
+                </tr>
+              </thead>
+              <TbodyAnimate>
+                {collections.map((agent) => (
                   <tr key={agent.id}>
                     <td scope="col">{agent.matricule}</td>
                     <td>{agent.name}</td>
@@ -98,8 +100,11 @@ const Effectifs = () => {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </Table>
+              </TbodyAnimate>
+            </Table>
+          ) : (
+            <LoadingTab />
+          )}
         </EffectifBody>
       </EffectifWrapper>
       <Modal isOpen={modalState.isOpen}>

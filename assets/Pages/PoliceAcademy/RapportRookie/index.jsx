@@ -24,6 +24,8 @@ import Modal from "../../../components/Shared/Modal";
 import EditRapportRokie from "./Modal/EditRapportRokie";
 import DeleteRapportRookie from "./Modal/DeleteRapportRookie";
 import EmptyRow from "../../../components/Shared/Table/EmptyRow";
+import TabLoading from "../Loading/TabLoading";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
 
 const RapportRookieTab = () => {
   const dispatch = useDispatch();
@@ -94,7 +96,7 @@ const RapportRookieTab = () => {
                   {IsCommandStaff() && <th>Action</th>}
                 </tr>
               </thead>
-              <tbody>
+              <TbodyAnimate>
                 {rapportRookie.collections.length > 0 ? (
                   rapportRookie.collections.map((rapport) => (
                     <tr key={rapport.id}>
@@ -149,10 +151,10 @@ const RapportRookieTab = () => {
                 ) : (
                   <EmptyRow message={"Rapport Rookie vide"} colSpan={10} />
                 )}
-              </tbody>
+              </TbodyAnimate>
             </Table>
           ) : (
-            "Loading"
+            <TabLoading />
           )}
         </RapportRookieBody>
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>

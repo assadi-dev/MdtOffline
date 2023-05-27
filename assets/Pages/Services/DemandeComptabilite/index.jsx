@@ -4,6 +4,7 @@ import {
   WrapperContent,
 } from "./DemandeComptabilite.styled";
 import DemandeComptabiliteForm from "./DemandeComptabiliteForm ";
+import { motion } from "framer-motion";
 
 const DemandeComptabilite = () => {
   return (
@@ -11,7 +12,13 @@ const DemandeComptabilite = () => {
       <HeaderDemandeComptabilite>
         Faire une demande de comptabilité
       </HeaderDemandeComptabilite>
-      <DemandeComptabiliteForm />
+      <motion.div
+        initial={{ x: -5, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.25, duration: 0.35 }}
+      >
+        <DemandeComptabiliteForm />
+      </motion.div>
     </WrapperContent>
   );
 };

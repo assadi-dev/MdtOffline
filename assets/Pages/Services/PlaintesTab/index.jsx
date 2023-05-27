@@ -26,6 +26,8 @@ import useTabAction from "./Hooks/useTabAction";
 import ShowBodyDocument from "../Modal/ShowBodyDocument";
 import DeletePlainteView from "./ModalView/DeletePlainteView";
 import EditPlainteView from "./ModalView/EditPlainteView";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
+import PlaintTabLoading from "./PlaintLoading/PlaintTabLoading";
 
 const PlaintesTab = () => {
   const dispatch = useDispatch();
@@ -92,78 +94,82 @@ const PlaintesTab = () => {
         <div></div>
       </HeaderRowAction>
       <PlainteTabBody>
-        <Table>
-          <thead>
-            <tr>
-              <th>Dépositaire</th>
-              <th>Incriminé</th>
-              <th className="td-center">Raison du dépot</th>
-              <th className="td-center">Corps de la plainte</th>
-              <th className="td-center">Date</th>
-              {IsCommandStaff() && <th>Action</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {collections.length > 0 ? (
-              collections.map((plainte) => (
-                <tr key={plainte.id}>
-                  <td>{plainte.nomDepositaire}</td>
-                  <td>{plainte.nomIncrimine}</td>
-                  <td className="td-center">
-                    <ShowDocumentBtn
-                      title="Afficher la raisont du depot"
-                      onClick={() =>
-                        actionTabBtn.handleShowRaison(plainte.raisonDepot)
-                      }
-                    >
-                      <SearchDocumentIcon />
-                    </ShowDocumentBtn>
-                  </td>
-                  <td className="td-center">
-                    <ShowDocumentBtn
-                      title="Afficher le corp de la plainte"
-                      onClick={() =>
-                        actionTabBtn.handleShowCorpsPlaintes(
-                          plainte.corpsPlainte
-                        )
-                      }
-                    >
-                      <SearchDocumentIcon />
-                    </ShowDocumentBtn>
-                  </td>
-                  <td className="td-center">
-                    {FrenchFormatDateWithHour(plainte.createdAt)}
-                  </td>
-                  {IsCommandStaff && (
-                    <td>
-                      <TableAction>
-                        <OutlineBtnAction
-                          className="edit"
-                          onClick={() => actionTabBtn.handleEdit(plainte.id)}
-                        >
-                          <EditPencilIcon />
-                        </OutlineBtnAction>
-                        <OutlineBtnAction
-                          className="delete"
-                          onClick={() =>
-                            actionTabBtn.handleDelete(
-                              plainte.id,
-                              plainte.corpsPlainte
-                            )
-                          }
-                        >
-                          <TrashIcon />
-                        </OutlineBtnAction>
-                      </TableAction>
+        {status == "complete" ? (
+          <Table>
+            <thead>
+              <tr>
+                <th>Dépositaire</th>
+                <th>Incriminé</th>
+                <th className="td-center">Raison du dépot</th>
+                <th className="td-center">Corps de la plainte</th>
+                <th className="td-center">Date</th>
+                {IsCommandStaff() && <th>Action</th>}
+              </tr>
+            </thead>
+            <TbodyAnimate>
+              {collections.length > 0 ? (
+                collections.map((plainte) => (
+                  <tr key={plainte.id}>
+                    <td>{plainte.nomDepositaire}</td>
+                    <td>{plainte.nomIncrimine}</td>
+                    <td className="td-center">
+                      <ShowDocumentBtn
+                        title="Afficher la raisont du depot"
+                        onClick={() =>
+                          actionTabBtn.handleShowRaison(plainte.raisonDepot)
+                        }
+                      >
+                        <SearchDocumentIcon />
+                      </ShowDocumentBtn>
                     </td>
-                  )}
-                </tr>
-              ))
-            ) : (
-              <EmptyRow message={"Aucune plainte deposé"} colSpan={7} />
-            )}
-          </tbody>
-        </Table>
+                    <td className="td-center">
+                      <ShowDocumentBtn
+                        title="Afficher le corp de la plainte"
+                        onClick={() =>
+                          actionTabBtn.handleShowCorpsPlaintes(
+                            plainte.corpsPlainte
+                          )
+                        }
+                      >
+                        <SearchDocumentIcon />
+                      </ShowDocumentBtn>
+                    </td>
+                    <td className="td-center">
+                      {FrenchFormatDateWithHour(plainte.createdAt)}
+                    </td>
+                    {IsCommandStaff && (
+                      <td>
+                        <TableAction>
+                          <OutlineBtnAction
+                            className="edit"
+                            onClick={() => actionTabBtn.handleEdit(plainte.id)}
+                          >
+                            <EditPencilIcon />
+                          </OutlineBtnAction>
+                          <OutlineBtnAction
+                            className="delete"
+                            onClick={() =>
+                              actionTabBtn.handleDelete(
+                                plainte.id,
+                                plainte.corpsPlainte
+                              )
+                            }
+                          >
+                            <TrashIcon />
+                          </OutlineBtnAction>
+                        </TableAction>
+                      </td>
+                    )}
+                  </tr>
+                ))
+              ) : (
+                <EmptyRow message={"Aucune plainte deposé"} colSpan={7} />
+              )}
+            </TbodyAnimate>
+          </Table>
+        ) : (
+          <PlaintTabLoading />
+        )}
       </PlainteTabBody>
       <Modal isOpen={modalState.isOpen} onClose={actionTabBtn.closeModal}>
         <Render view={modalState.view} />

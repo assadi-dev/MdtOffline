@@ -31,10 +31,12 @@ import {
   validateUsersAsync,
 } from "../../../features/Users/UserAsyncApi";
 import { accountValidate } from "../../../features/Users/User.slice";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
+import LoadingTab from "../Loading/LoadingTab";
 
 const AccountManager = () => {
   const dispatch = useDispatch();
-  const userSelector = useSelector((state) => state.UserReducer);
+  const { collection, status } = useSelector((state) => state.UserReducer);
   const agent = useSelector((state) => state.AuthenticateReducer);
   const [modalState, dispatchModalState] = useReducer(ModalStateReducer, {
     view: "",
@@ -101,19 +103,19 @@ const AccountManager = () => {
           <Button className="addBtn">Ajouter</Button>
         </HeaderRowAction>
         <AccountManagerBody>
-          <Table>
-            <thead>
-              <tr>
-                <th>Identifiant</th>
-                <th>Role</th>
-                <th className="td-center">Date de création</th>
-                <th className="td-center">Validation</th>
-                {IsCommandStaff() && <th>Action</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {userSelector.status == "complete" &&
-                userSelector.collection.map((user) => (
+          {status == "complete" ? (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Identifiant</th>
+                  <th>Role</th>
+                  <th className="td-center">Date de création</th>
+                  <th className="td-center">Validation</th>
+                  {IsCommandStaff() && <th>Action</th>}
+                </tr>
+              </thead>
+              <TbodyAnimate>
+                {collection.map((user) => (
                   <tr key={user.id}>
                     <td>{user.username}</td>
                     <td>{getUserRole(user.roles)}</td>
@@ -146,8 +148,11 @@ const AccountManager = () => {
                     )}
                   </tr>
                 ))}
-            </tbody>
-          </Table>
+              </TbodyAnimate>
+            </Table>
+          ) : (
+            <LoadingTab />
+          )}
         </AccountManagerBody>
         <Modal isOpen={modalState.isOpen}>
           <Render view={modalState.view} data={modalState.data} />

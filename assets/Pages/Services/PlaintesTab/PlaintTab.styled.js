@@ -26,3 +26,18 @@ export const HeaderRowAction = styled.div`
 export const PlainteTabBody = styled.div`
   padding-top: 1.2rem;
 `;
+
+export const PlaintTabLoadingContainer = styled.div`
+  width: 100%;
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  margin-top: 18px;
+`;
+export const PlaintTabLoadingBody = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 18px;
+`;

@@ -32,6 +32,8 @@ import useTabAction from "./Hooks/useTabAction";
 import ShowRaison from "./ModalView/ShowRaison";
 import EditDemandView from "./ModalView/EditDemandView";
 import ConfirmDelete from "./ModalView/ConfirmDelete";
+import LoadingTab from "../Loading/LoadingTab";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
 
 const ComptabiliteServices = () => {
   const dispatch = useDispatch();
@@ -107,18 +109,19 @@ const ComptabiliteServices = () => {
     <ComptabiliteServiceTabWrapper>
       <HeaderRowAction></HeaderRowAction>
       <ComptabiliteServiceTabBody>
-        <Table>
-          <thead>
-            <tr>
-              <th className="td-start">Agent</th>
-              <th className="td-center">Date de la demande</th>
-              <th className="td-center">Raison</th>
-              <th className="td-center">Montant</th>
-              {IsCommandStaff() && <th className="td-center">Action</th>}
-            </tr>
-          </thead>
-          {status == "complete" && (
-            <tbody>
+        {status == "complete" ? (
+          <Table>
+            <thead>
+              <tr>
+                <th className="td-start">Agent</th>
+                <th className="td-center">Date de la demande</th>
+                <th className="td-center">Raison</th>
+                <th className="td-center">Montant</th>
+                {IsCommandStaff() && <th className="td-center">Action</th>}
+              </tr>
+            </thead>
+
+            <TbodyAnimate>
               {demandeComptabilite.length > 0 ? (
                 demandeComptabilite.map((demande) => (
                   <tr key={demande.id}>
@@ -170,9 +173,11 @@ const ComptabiliteServices = () => {
                   colSpan={6}
                 />
               )}
-            </tbody>
-          )}
-        </Table>
+            </TbodyAnimate>
+          </Table>
+        ) : (
+          <LoadingTab />
+        )}
       </ComptabiliteServiceTabBody>
 
       <Modal isOpen={modalState.isOpen} onClose={actionTabBtn.closeModal}>
