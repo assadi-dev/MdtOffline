@@ -119,7 +119,9 @@ const RapportIncidentForm = () => {
         </Select>
       </FormControl>
 
-      <FormControl>{showAlert && <SuccsessAlert />}</FormControl>
+      <FormControl>
+        {showAlert && <SuccsessAlert setShowAlert={setShowAlert} />}
+      </FormControl>
       <FormBottomRow>
         <FormControl>
           <SubmitButton style={{ margin: "auto" }}>

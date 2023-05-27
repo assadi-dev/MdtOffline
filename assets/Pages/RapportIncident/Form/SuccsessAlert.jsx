@@ -3,7 +3,7 @@ import AlertSuccess from "../../../components/Shared/Alert/AlertSuccess";
 import { AnimatePresence, motion } from "framer-motion";
 import { delayExecution, sleep } from "../../../utils/timer";
 
-const SuccsessAlert = () => {
+const SuccsessAlert = ({ setShowAlert }) => {
   const [apparition, setAparition] = useState(true);
 
   const closeAlert = () => {
@@ -11,7 +11,9 @@ const SuccsessAlert = () => {
   };
 
   useEffect(() => {
-    delayExecution(closeAlert, 3000);
+    delayExecution(closeAlert, 3000).finally(() => {
+      setShowAlert(false);
+    });
   }, []);
 
   return (
