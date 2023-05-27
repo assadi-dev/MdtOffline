@@ -15,10 +15,14 @@ import DeleteModal from "./Modal/DeleteModal";
 import EditModal from "./Modal/EditModal";
 import ModalReducer from "./reducer/ModalReducer";
 import { getAllGradesAsync } from "../../../features/Grades/GradeAsyncApi";
+import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
+import LoadingTab from "../../CommandStaffSupervisor/Loading/LoadingTab";
 
 const Grades = () => {
-  const GradesSelectors = useSelector((state) => state.GradesReducer);
-  const { collections, filtered } = GradesSelectors;
+  const { collections, filtered, status } = useSelector(
+    (state) => state.GradesReducer
+  );
+
   const dispatch = useDispatch();
   useEffect(() => {
     const promise = dispatch(getAllGradesAsync());
@@ -86,71 +90,75 @@ const Grades = () => {
         </HeaderRowAction>
 
         <GradeBody>
-          <Table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Categorie</th>
-                <th className="td-center">Niveau</th>
-                <th className="td-center">Effectifs</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {collections.length > 0 &&
-                collections.map((grade) => (
-                  <tr key={grade.id}>
-                    <td>{grade.nom}</td>
-                    <td>{grade.categorie}</td>
-                    <td className="td-center">{grade.rang}</td>
-                    <td className="td-center">
-                      {grade.agents ? grade.agents.length : 0}
-                    </td>
+          {status == "complete" ? (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Categorie</th>
+                  <th className="td-center">Niveau</th>
+                  <th className="td-center">Effectifs</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <TbodyAnimate>
+                {collections.length > 0 &&
+                  collections.map((grade) => (
+                    <tr key={grade.id}>
+                      <td>{grade.nom}</td>
+                      <td>{grade.categorie}</td>
+                      <td className="td-center">{grade.rang}</td>
+                      <td className="td-center">
+                        {grade.agents ? grade.agents.length : 0}
+                      </td>
 
-                    <td>
-                      <TableAction>
-                        <OutlineBtnAction
-                          className="edit"
-                          onClick={() =>
-                            dispatchModalState({
-                              type: "TOOGLE_MODAL",
-                              payload: {
-                                view: "edit",
-                                gradeData: {
-                                  id: grade.id,
-                                  nom: grade.nom,
-                                  categorie: grade.categorie,
-                                  rang: grade.rang,
+                      <td>
+                        <TableAction>
+                          <OutlineBtnAction
+                            className="edit"
+                            onClick={() =>
+                              dispatchModalState({
+                                type: "TOOGLE_MODAL",
+                                payload: {
+                                  view: "edit",
+                                  gradeData: {
+                                    id: grade.id,
+                                    nom: grade.nom,
+                                    categorie: grade.categorie,
+                                    rang: grade.rang,
+                                  },
                                 },
-                              },
-                            })
-                          }
-                        >
-                          <EditPencilIcon />
-                        </OutlineBtnAction>
-                        <OutlineBtnAction
-                          className="delete"
-                          onClick={() =>
-                            dispatchModalState({
-                              type: "TOOGLE_MODAL",
-                              payload: {
-                                view: "delete",
-                                gradeData: {
-                                  id: grade.id,
-                                  nom: grade.nom,
+                              })
+                            }
+                          >
+                            <EditPencilIcon />
+                          </OutlineBtnAction>
+                          <OutlineBtnAction
+                            className="delete"
+                            onClick={() =>
+                              dispatchModalState({
+                                type: "TOOGLE_MODAL",
+                                payload: {
+                                  view: "delete",
+                                  gradeData: {
+                                    id: grade.id,
+                                    nom: grade.nom,
+                                  },
                                 },
-                              },
-                            })
-                          }
-                        >
-                          <TrashIcon />
-                        </OutlineBtnAction>
-                      </TableAction>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
+                              })
+                            }
+                          >
+                            <TrashIcon />
+                          </OutlineBtnAction>
+                        </TableAction>
+                      </td>
+                    </tr>
+                  ))}
+              </TbodyAnimate>
+            </Table>
+          ) : (
+            <LoadingTab />
+          )}
         </GradeBody>
       </GradeWrapper>
       <Modal isOpen={modalState.isOpen}>
