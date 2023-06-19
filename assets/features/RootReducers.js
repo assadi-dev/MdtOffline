@@ -12,6 +12,7 @@ import ForgottenPasswordReducer from "./ForgottenPassword/ForgottenPassword.slic
 import SaisieReducer from "./Saisie/Saisie.slice";
 import DemandeComptabiliteReducer from "./DemandeComptabilite/DemandeComptabilite.slice";
 import DispatchReducer from "./Dispatch/Dispatch.slice";
+import PanicButtonReducer from "./PanicButton/Panicbutton.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -29,6 +30,7 @@ const RootReducers = {
   SaisieReducer,
   DemandeComptabiliteReducer,
   DispatchReducer,
+  PanicButtonReducer,
 };
 
 export default RootReducers;
