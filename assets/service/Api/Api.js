@@ -44,7 +44,7 @@ instance.interceptors.response.use(
 
       if (
         !urlRequest.includes("/token/refresh") &&
-        status === 401 &&
+        status == 401 &&
         originalRequest._retry !== true
       ) {
         originalRequest._retry = true;
@@ -52,15 +52,15 @@ instance.interceptors.response.use(
           let data = {
             refresh_token: refresh_token,
           };
-          //console.log("Refresh token");
+          console.log("Refresh token");
           instance.defaults.headers["Authorization"] = "";
-          await instance
+          instance
             .post(`/token/refresh`, data)
             .then((res) => {
               const newToken = res.data.token;
               instance.defaults.headers["Authorization"] = `Bearer ${newToken}`;
               originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
-              // localStorage.setItem(TOKEN_STORAGE_NAME, newToken);
+              //localStorage.setItem(TOKEN_STORAGE_NAME, newToken);
               Cookies.set(TOKEN_STORAGE_NAME, newToken, {
                 path: "/",
                 sameSite: "Lax",
