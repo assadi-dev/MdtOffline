@@ -41,7 +41,7 @@ const MenuEdit = ({ id, isShow, onCloseModal }) => {
     document.body.addEventListener("click", setClose);
 
     return () => {
-      dispatch(clearCategorieSelected());
+      //dispatch(clearCategorieSelected());
     };
   }, [editFormRef]);
 

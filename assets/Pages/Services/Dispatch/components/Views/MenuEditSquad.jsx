@@ -62,7 +62,7 @@ const MenuEditSquad = ({ id, isShow, onCloseModal, closeAddSquadModal }) => {
     }
 
     return () => {
-      dispatch(clearCategorieSelected());
+      // dispatch(clearCategorieSelected());
     };
   }, [editFormRef, selected]);
 
@@ -74,15 +74,20 @@ const MenuEditSquad = ({ id, isShow, onCloseModal, closeAddSquadModal }) => {
       return;
     } */
 
+    let findStatus = statusOption.find(
+      (item) => item.label == target.status.value
+    );
+
     const payload = {
       id: id,
       title: target.title.value,
       status: target.status.value,
+      color: findStatus ? findStatus.color : "#0BA257",
       note: target.note.value,
     };
 
     dispatch(updateAgentsSquadCard(payload));
-    target.reset();
+
     onCloseModal();
   };
 
