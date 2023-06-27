@@ -135,6 +135,7 @@ export const DispatchSlice = createSlice({
 
       editAgentSquadCard(state, payload, current);
       let cleanState = current(state);
+
       let body = { currentState: cleanState, lastState: cleanState };
       persist_dispatch_api(body);
       return state;

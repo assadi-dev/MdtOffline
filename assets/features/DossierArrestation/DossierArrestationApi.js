@@ -14,7 +14,7 @@ export const delete_dossierArrestation = (id) => {
 
 export const enCloseArrestFolder = (id) => {
   return Api.put(`/arrest_folders/${id}`, {
-    isEnclose: false,
+    isEnclose: true,
     enclosedAt: new Date(),
   });
 };

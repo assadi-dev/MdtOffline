@@ -58,6 +58,7 @@ const ListItemDossierArrestaion = ({
   const moreIconBtnRef = useRef();
 
   useEffect(() => {
+    if (!id) return;
     const closeDropDown = (e) => {
       const target = e.target;
       const moreIconDropdown = document.querySelector(".fluentMoreDopDown");
@@ -71,7 +72,7 @@ const ListItemDossierArrestaion = ({
     document.addEventListener("mousedown", closeDropDown);
 
     return () => document.removeEventListener("mousedown", closeDropDown);
-  }, []);
+  }, [id]);
 
   const onEnclose = () => {
     dispatch(encloseAresstFolderAsync({ id }))

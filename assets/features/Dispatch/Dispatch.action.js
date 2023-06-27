@@ -287,7 +287,7 @@ export const editAgentSquadCard = (state, payload, current) => {
               if (card.id == cardId) {
                 return {
                   ...card,
-
+                  color: payload.color,
                   title: payload.title,
                   status: payload.status,
                   note: payload.note,
