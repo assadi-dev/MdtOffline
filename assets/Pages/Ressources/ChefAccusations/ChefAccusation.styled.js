@@ -15,7 +15,7 @@ export const ChefAccusationBody = styled.div`
   padding-top: 1.2rem;
 `;
 
-export const ModalViewContainer = styled.form`
+export const ModalViewContainer = styled.div`
   width: 35rem;
   min-height: 200px;
   background: var(--background-color-dark);
@@ -65,7 +65,7 @@ export const CloseModal = styled(CloseModalBtn)`
   cursor: pointer;
 `;
 
-export const FormBodyContainer = styled.div`
+export const FormBodyContainer = styled.form`
   padding: 2rem;
   padding-bottom: 2rem;
   overflow-y: auto;
@@ -92,7 +92,7 @@ export const FormControl = styled.div`
 `;
 
 export const FormBottomRow = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.3rem;
   height: 80px;
 `;
 

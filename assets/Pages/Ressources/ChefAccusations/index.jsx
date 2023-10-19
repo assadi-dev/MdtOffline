@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditPencilIcon, TrashIcon } from "../../../components/SVG";
 import { get_allChefAccusations } from "../../../redux/actions/ChefAccusation.action";
@@ -16,6 +16,11 @@ import {
 import { getAllChefAccusationAsync } from "../../../features/ChefAccusation/ChefAccusationAsyncApi";
 import LoadingTab from "../../CommandStaffSupervisor/Loading/LoadingTab";
 import TbodyAnimate from "../../../components/Shared/Table/TbodyAnimate";
+import Modal from "../../../components/Shared/Modal";
+import ModalReducer from "./reducer/ModalReducer";
+import AddCheffAcusation from "./View/AddCheffAcusation";
+import EditChefAccusation from "./View/EditChefAccusation";
+import DeleteChefAccusation from "./View/DeleteChefAccusation";
 
 const ChefAccusation = () => {
   const { collections, filtered, status } = useSelector(
@@ -31,13 +36,75 @@ const ChefAccusation = () => {
     };
   }, []);
 
+  const [modalState, dispatchModalState] = useReducer(ModalReducer, {
+    isOpen: false,
+    view: "",
+    chefAccusation: "",
+  });
+
+  const toogleModal = (view) => {
+    dispatchModalState({
+      type: "TOOGLE_MODAL",
+      payload: { view, chefAccusation: modalState.chefAccusation },
+    });
+  };
+
+  const Render = ({ view, cheffAccusation }) => {
+    switch (view) {
+      case "add":
+        return <AddCheffAcusation onClose={() => toogleModal(view)} />;
+
+      case "edit":
+        return (
+          <EditChefAccusation
+            payload={cheffAccusation}
+            onClose={() => toogleModal(view)}
+          />
+        );
+
+      case "delete":
+        return (
+          <DeleteChefAccusation
+            payload={cheffAccusation}
+            onClose={() => toogleModal(view)}
+          />
+        );
+
+      default:
+        break;
+    }
+  };
+
+  const handleEdit = (chefAccusation) => {
+    dispatchModalState({
+      type: "TOOGLE_MODAL",
+      payload: { view: "edit", chefAccusation: chefAccusation },
+    });
+  };
+  const handleDelete = (chefAccusation) => {
+    dispatchModalState({
+      type: "TOOGLE_MODAL",
+      payload: { view: "delete", chefAccusation: chefAccusation },
+    });
+  };
+
   return (
     <>
       <ChefAccusationWrapper>
         <HeaderRowAction>
           {" "}
           <div></div>
-          <Button className="addBtn">Ajouter</Button>{" "}
+          <Button
+            className="addBtn"
+            onClick={() =>
+              dispatchModalState({
+                type: "TOOGLE_MODAL",
+                payload: { view: "add", chefAccusation: null },
+              })
+            }
+          >
+            Ajouter
+          </Button>{" "}
         </HeaderRowAction>
         <ChefAccusationBody>
           {status == "complete" ? (
@@ -62,10 +129,16 @@ const ChefAccusation = () => {
 
                       <td>
                         <TableAction>
-                          <OutlineBtnAction className="edit">
+                          <OutlineBtnAction
+                            className="edit"
+                            onClick={() => handleEdit(chef)}
+                          >
                             <EditPencilIcon />
                           </OutlineBtnAction>
-                          <OutlineBtnAction className="delete">
+                          <OutlineBtnAction
+                            className="delete"
+                            onClick={() => handleDelete(chef)}
+                          >
                             <TrashIcon />
                           </OutlineBtnAction>
                         </TableAction>
@@ -79,6 +152,18 @@ const ChefAccusation = () => {
           )}
         </ChefAccusationBody>
       </ChefAccusationWrapper>
+      <Modal isOpen={modalState.isOpen}>
+        {
+          <>
+            {modalState.view && (
+              <Render
+                view={modalState.view}
+                cheffAccusation={modalState.chefAccusation}
+              />
+            )}
+          </>
+        }
+      </Modal>
     </>
   );
 };

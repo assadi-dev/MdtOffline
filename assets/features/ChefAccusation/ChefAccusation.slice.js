@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllGradesAsync } from "../Grades/GradeAsyncApi";
 import { getAllChefAccusationAsync } from "./ChefAccusationAsyncApi";
+import uniqid from "uniqid";
 
 const initialState = {
   collections: [],
@@ -16,6 +17,28 @@ export const ChefAccusationSlice = createSlice({
   reducers: {
     setError: (state, action) => {
       state.errors = action.payload;
+    },
+
+    addChefAccusation: (state, action) => {
+      const { payload } = action;
+      state.collections = [...state.collections, { ...payload, id: uniqid() }];
+    },
+    editChefAccusation: (state, action) => {
+      const { payload } = action;
+      let updateCollection = [...state.collections].map((current) => {
+        if (current.id == payload.id) {
+          return { ...current, ...payload };
+        }
+        return current;
+      });
+      state.collections = updateCollection;
+    },
+    removeChefAccusation: (state, action) => {
+      const { payload } = action;
+      let updateCollection = [...state.collections].filter(
+        (current) => current.id != payload.id
+      );
+      state.collections = updateCollection;
     },
   },
   extraReducers: (builder) => {
@@ -37,6 +60,11 @@ export const ChefAccusationSlice = createSlice({
   },
 });
 
-export const { setError } = ChefAccusationSlice.actions;
+export const {
+  setError,
+  addChefAccusation,
+  editChefAccusation,
+  removeChefAccusation,
+} = ChefAccusationSlice.actions;
 
 export default ChefAccusationSlice.reducer;
