@@ -29,6 +29,7 @@ const EditChefAccusation = ({ payload, onClose = () => {} }) => {
         <CloseModal onClick={onClose} />
       </HeaderModal>
       <FormChefAccusation
+        labelSubmitButton="Modifier"
         defaultValue={payload}
         onSave={onUpdateChefAcusation}
       />

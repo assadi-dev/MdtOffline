@@ -11,7 +11,11 @@ import Select from "../../../../components/Shared/Select";
 import { optionSelect } from "../helpers";
 import { useFormik } from "formik";
 
-const FormChefAccusation = ({ defaultValue = null, onSave = () => {} }) => {
+const FormChefAccusation = ({
+  labelSubmitButton = "Ajouter",
+  defaultValue = null,
+  onSave = () => {},
+}) => {
   const formik = useFormik({
     initialValues: {
       infraction: "",
@@ -93,7 +97,7 @@ const FormChefAccusation = ({ defaultValue = null, onSave = () => {} }) => {
         <small>la peine doit uniquement être au format numérique</small>
       </FormControl>
       <FormBottomRow>
-        <SubmitButton>Ajouter</SubmitButton>
+        <SubmitButton>{labelSubmitButton}</SubmitButton>
       </FormBottomRow>
     </FormBodyContainer>
   );
