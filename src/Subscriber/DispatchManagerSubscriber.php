@@ -42,12 +42,12 @@ class DispatchManagerSubscriber implements EventSubscriberInterface
 
             $current = $dispatch->getCurrentState();
 
-            $update = new Update(
+          /*   $update = new Update(
                 $url_topic."dispatch/update",
                 json_encode($current)
             );
 
-            $this->hub->publish($update);
+            $this->hub->publish($update); */
 
             return $dispatch;
 
