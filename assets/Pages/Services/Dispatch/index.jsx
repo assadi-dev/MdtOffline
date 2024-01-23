@@ -42,7 +42,7 @@ const Dispatch = () => {
     const url = new URL(MERCURE_HUB_URL);
     url.searchParams.append("topic", topic);
     let eventSource = new EventSource(url);
-    eventSource.onmessage = (e) => {
+    /*     eventSource.onmessage = (e) => {
       let data = JSON.parse(e.data);
       dispatch(instanceState(data));
     };
@@ -52,7 +52,7 @@ const Dispatch = () => {
     };
     return () => {
       eventSource.close();
-    };
+    }; */
   }, []);
 
   const handleDragEnd = (result) => {
