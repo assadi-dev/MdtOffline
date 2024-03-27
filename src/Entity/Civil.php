@@ -25,7 +25,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * paginationEnabled=true,
  * paginationItemsPerPage=25,
  * security="is_granted('IS_AUTHENTICATED_FULLY')",
- * normalizationContext={"groups"={"read:civil:collections","read:civil:item"}},
+ * normalizationContext={"groups"={"read:civil:collections"}},
  * collectionOperations={
  *  "post",
  *  "get",
